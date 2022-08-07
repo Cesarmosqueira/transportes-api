@@ -96,4 +96,7 @@ public class Trabajador {
 	// Relations
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private List<TrabajadorAsistencia> asistencia = new ArrayList<>();
+
+	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private List<TrabajadorImplementos> trabajadorImplementos = new ArrayList<>();
 }
