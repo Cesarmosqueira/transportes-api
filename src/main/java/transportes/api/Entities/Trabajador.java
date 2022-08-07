@@ -99,4 +99,7 @@ public class Trabajador {
 
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private List<TrabajadorImplementos> trabajadorImplementos = new ArrayList<>();
+
+	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private List<TrabajadorDescuento> trabajadorDescuento = new ArrayList<>();
 }
