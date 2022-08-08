@@ -16,10 +16,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import transportes.api.Dto.TrabajadorDto;
 
 @Data
 @Entity
 @Table(name = "trabajador")
+@NoArgsConstructor
 public class Trabajador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -102,4 +105,30 @@ public class Trabajador {
 
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private List<TrabajadorDescuento> trabajadorDescuento = new ArrayList<>();
+
+	public Trabajador(TrabajadorDto trabajadorDto) {
+		this.id = trabajadorDto.getId();
+		this.nombreCompleto = trabajadorDto.getNombreCompleto();
+		this.ubigeo = trabajadorDto.getUbigeo();
+		this.tipoDocumento = trabajadorDto.getTipoDocumento();
+		this.documento = trabajadorDto.getDocumento();
+		this.direccion = trabajadorDto.getDireccion();
+		this.telefono = trabajadorDto.getTelefono();
+		this.correo = trabajadorDto.getCorreo();
+		this.fechaIngreso = trabajadorDto.getFechaIngreso();
+		this.estado = trabajadorDto.getEstado();
+		this.fechaCese = trabajadorDto.getFechaCese();
+		this.numCuenta = trabajadorDto.getNumCuenta();
+		this.tipoContrato = trabajadorDto.getTipoContrato();
+		this.estadoCivil = trabajadorDto.getEstadoCivil();
+		this.sistemaPension = trabajadorDto.getSistemaPension();
+		this.hijos = trabajadorDto.getHijos();
+		this.nivelEstudios = trabajadorDto.getNivelEstudios();
+		this.verificacionDomicilio = trabajadorDto.getVerificacionDomicilio();
+		this.penales = trabajadorDto.getPenales();
+		this.parentesco = trabajadorDto.getParentesco();
+		this.nombreCompletoParentesco = trabajadorDto.getNombreCompleto();
+		this.telefonoParentesco = trabajadorDto.getTelefonoParentesco();
+		this.sueldo = trabajadorDto.getSueldo();
+	}
 }
