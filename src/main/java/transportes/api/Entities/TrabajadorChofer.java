@@ -31,4 +31,7 @@ public class TrabajadorChofer {
 	@JoinColumn(name = "trabajador_id", referencedColumnName = "id")
 	private Trabajador trabajador;
 
+	@OneToOne(mappedBy = "chofer", cascade = CascadeType.ALL)
+	private ClienteTrabajador clienteTrabajador;
+
 }

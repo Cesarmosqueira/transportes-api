@@ -38,4 +38,7 @@ public class Cliente {
 	@Column(nullable = false)
 	private Date fechaRegistro;
 
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private List<ClienteTrabajador> trabajadores = new ArrayList<>();
+
 }
