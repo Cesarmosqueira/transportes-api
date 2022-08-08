@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import transportes.api.Common.EntityDtoConverter;
-import transportes.api.Dto.TrabajadorDto;
+import transportes.api.Dto.Request.TrabajadorDtoRequest;
 import transportes.api.Entities.Trabajador;
 import transportes.api.Repositories.TrabajadorRepository;
 
@@ -19,8 +19,12 @@ public class TrabajadorService {
 	@Autowired
 	EntityDtoConverter entityDtoConverter;
 
-	public Trabajador registrarTrabajador(TrabajadorDto trabajadorDto) {
+	public Trabajador registrarTrabajador(TrabajadorDtoRequest trabajadorDto) {
 		Trabajador trabajador = new Trabajador(trabajadorDto);
 		return trabajadorRepository.save(trabajador);
+	}
+
+	public Trabajador obtenerTrabajador(Long id) {
+		return trabajadorRepository.getById(id);
 	}
 }

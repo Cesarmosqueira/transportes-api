@@ -1,4 +1,4 @@
-package transportes.api.Dto;
+package transportes.api.Dto.Request;
 
 import java.util.Date;
 
@@ -8,9 +8,7 @@ import transportes.api.Entities.Trabajador;
 
 @Data
 @NoArgsConstructor
-public class TrabajadorDto {
-	private Long id;
-
+public class TrabajadorDtoRequest {
 	private String nombreCompleto;
 
 	private String ubigeo;
@@ -55,8 +53,7 @@ public class TrabajadorDto {
 
 	private int sueldo;
 
-	public TrabajadorDto(Trabajador trabajador) {
-		this.id = trabajador.getId();
+	public TrabajadorDtoRequest(Trabajador trabajador) {
 		this.nombreCompleto = trabajador.getNombreCompleto();
 		this.ubigeo = trabajador.getUbigeo();
 		this.tipoDocumento = trabajador.getTipoDocumento();

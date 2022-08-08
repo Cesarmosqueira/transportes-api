@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import transportes.api.Dto.TrabajadorDto;
+import transportes.api.Dto.Request.TrabajadorDtoRequest;
 
 @Data
 @Entity
@@ -117,8 +117,7 @@ public class Trabajador {
 	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private TrabajadorAuxiliar TrabajadoraAuxiliar;
 
-	public Trabajador(TrabajadorDto trabajadorDto) {
-		this.id = trabajadorDto.getId();
+	public Trabajador(TrabajadorDtoRequest trabajadorDto) {
 		this.nombreCompleto = trabajadorDto.getNombreCompleto();
 		this.ubigeo = trabajadorDto.getUbigeo();
 		this.tipoDocumento = trabajadorDto.getTipoDocumento();

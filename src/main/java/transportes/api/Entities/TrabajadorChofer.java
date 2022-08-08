@@ -33,5 +33,4 @@ public class TrabajadorChofer {
 
 	@OneToOne(mappedBy = "chofer", cascade = CascadeType.ALL)
 	private ClienteTrabajador clienteTrabajador;
-
 }
