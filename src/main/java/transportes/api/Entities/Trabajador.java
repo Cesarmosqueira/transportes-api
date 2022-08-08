@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -105,6 +106,15 @@ public class Trabajador {
 
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private List<TrabajadorDescuento> trabajadorDescuento = new ArrayList<>();
+  
+  @OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private List<TrabajadorOficina> trabajadorOficina=new ArrayList<>();
+	
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private List<TrabajadorChofer> TrabajadorChofer=new ArrayList<>();
+	
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private List<TrabajadorAuxiliar> TrabajadoraAuxiliar=new ArrayList<>();	
 
 	public Trabajador(TrabajadorDto trabajadorDto) {
 		this.id = trabajadorDto.getId();
