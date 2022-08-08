@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -98,7 +99,7 @@ public class Trabajador {
 	private int sueldo;
 
 	// Relations
-	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<TrabajadorAsistencia> asistencia = new ArrayList<>();
 
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
@@ -106,15 +107,15 @@ public class Trabajador {
 
 	@OneToMany(mappedBy = "trabajador", cascade = CascadeType.ALL)
 	private List<TrabajadorDescuento> trabajadorDescuento = new ArrayList<>();
-  
-  @OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
-	private List<TrabajadorOficina> trabajadorOficina=new ArrayList<>();
-	
+
 	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
-	private List<TrabajadorChofer> TrabajadorChofer=new ArrayList<>();
-	
+	private TrabajadorOficina trabajadorOficina;
+
 	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
-	private List<TrabajadorAuxiliar> TrabajadoraAuxiliar=new ArrayList<>();	
+	private TrabajadorChofer TrabajadorChofer;
+
+	@OneToOne(mappedBy = "trabajador", cascade = CascadeType.ALL)
+	private TrabajadorAuxiliar TrabajadoraAuxiliar;
 
 	public Trabajador(TrabajadorDto trabajadorDto) {
 		this.id = trabajadorDto.getId();
