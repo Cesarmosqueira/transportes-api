@@ -17,26 +17,26 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "trabajador_descuento")
-public class TrabajadorDescuento {
-
+@Table(name = "cliente_Trabajador")
+public class ClienteTrabajador {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-
+	private Long id;
+	
 	@ManyToOne
-	@JoinColumn(name = "trabajador_id")
-	Trabajador trabajador;
-
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "trabajadorChofer_id")
+	private TrabajadorChofer trabajadorChofer;
+	
+	@Column(nullable = false, length = 32)
+	private String status;
+	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fecha;
-
-	@Column(nullable = true, length = 1024)
-	private String observaciones;
-	
-	@Column(nullable =true)
-	private Double monto; 
-	
+	private Date fechaRegistro;
 
 }
