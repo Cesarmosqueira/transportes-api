@@ -22,10 +22,10 @@ public class TrabajadorOficina {
 	private int id;
 
 	@Column(nullable = true, length = 32)
-	private String Dcargo;
+	private String dCargo;
 
 	@Column(nullable = true, length = 32)
-	private String Correo;
+	private String correo;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "trabajador_id", referencedColumnName = "id")

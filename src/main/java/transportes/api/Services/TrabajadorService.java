@@ -1,5 +1,7 @@
 package transportes.api.Services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,27 @@ public class TrabajadorService {
 	@Autowired
 	EntityDtoConverter entityDtoConverter;
 
-	public Trabajador registrarTrabajador(TrabajadorDtoRequest trabajadorDto) {
+	public Trabajador registrarTrabajador(TrabajadorDtoRequest trabajadorDto) throws Exception {
 		Trabajador trabajador = new Trabajador(trabajadorDto);
 		return trabajadorRepository.save(trabajador);
 	}
 
-	public Trabajador obtenerTrabajador(Long id) {
-		return trabajadorRepository.getById(id);
+	public Trabajador obtenerTrabajador(Long id) throws Exception {
+		return trabajadorRepository.findById(id)
+				.orElseThrow(() -> new Exception("trabajador '" + id + "' no existe en la base de datos"));
+	}
+
+	public List<Trabajador> listarTrabajadores() {
+		return trabajadorRepository.findAll();
+	}
+
+	public Trabajador actualizarTrabajador(Long id, TrabajadorDtoRequest trabajadorDto) throws Exception {
+		Trabajador trabajador = trabajadorRepository.findById(id)
+				.orElseThrow(() -> new Exception("trabajadir '" + id + "' no existe en la base de datos"));
+
+		trabajador = new Trabajador(trabajadorDto);
+
+		trabajador.setId(id);
+		return trabajadorRepository.save(trabajador);
 	}
 }

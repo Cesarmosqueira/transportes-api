@@ -30,7 +30,7 @@ public class Trabajador {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 256)
 	private String nombreCompleto;
 
 	@Column(nullable = false, length = 32)
