@@ -19,26 +19,25 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "client")
+public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(nullable = false, length = 16)
-	private String Ruc;
+	private String ruc;
 
 	@Column(nullable = false, length = 32)
-	private String razonSocial;
+	private String socialReason;
 
 	@Column(nullable = false, length = 32)
-	private String cuenta;
+	private String bankAccount;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fechaRegistro;
+	private Date registerDate;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private List<ClienteTrabajador> trabajadores = new ArrayList<>();
-
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<ClientEmployee> employees = new ArrayList<>();
 }

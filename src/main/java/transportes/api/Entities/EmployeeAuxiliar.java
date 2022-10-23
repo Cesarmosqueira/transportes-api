@@ -14,8 +14,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "trabajador_auxiliar")
-public class TrabajadorAuxiliar {
+@Table(name = "employee_auxiliar")
+public class EmployeeAuxiliar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public class TrabajadorAuxiliar {
 	private String Dcargo;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "trabajador_id", referencedColumnName = "id")
-	private Trabajador trabajador;
+	@JoinColumn(name = "employee_id", referencedColumnName = "id")
+	private Employee employee;
 
 }

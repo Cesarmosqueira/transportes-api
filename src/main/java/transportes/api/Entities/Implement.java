@@ -16,21 +16,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "implemento")
-public class Implemento {
+@Table(name = "implement")
+public class Implement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@Column(nullable = false, length = 32)
-	private String nombre;
+	private String name;
 
-	@Column(nullable = false)
-	private Long cantidad;
+	@Column(nullable = true, length = 512)
+	private String description;
 
-	@Column(nullable = true, length = 128)
-	private String descripcion;
-
-	@OneToMany(mappedBy = "implemento", cascade = CascadeType.ALL)
-	private List<TrabajadorImplementos> trabajadorImplementos = new ArrayList<>();
+	@OneToMany(mappedBy = "implement", cascade = CascadeType.ALL)
+	private List<EmployeeImplement> employeeImplements = new ArrayList<>();
 }

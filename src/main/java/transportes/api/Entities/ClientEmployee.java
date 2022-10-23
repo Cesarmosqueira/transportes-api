@@ -19,26 +19,28 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cliente_Trabajador")
-public class ClienteTrabajador {
-
+@Table(name = "client_employee")
+public class ClientEmployee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
 
 	@Column(nullable = false, length = 32)
 	private String status;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fechaRegistro;
+	private Date registerDate;
+
+	@Column(nullable = false, length = 1024)
+	private String observations;
+
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "chofer_id")
-	private TrabajadorChofer chofer;
+	@JoinColumn(name = "clientEmployee", referencedColumnName = "id")
+	private Employee employee;
 
 }

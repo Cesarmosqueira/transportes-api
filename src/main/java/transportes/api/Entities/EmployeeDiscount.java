@@ -13,26 +13,29 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
+@Data
 @Entity
-@Table(name = "trabajador_implementos")
-public class TrabajadorImplementos {
+@Table(name = "employee_descuento")
+public class EmployeeDiscount {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "trabajador_id")
-	Trabajador trabajador;
-
-	@ManyToOne
-	@JoinColumn(name = "implemento_id")
-	Implemento implemento;
+	@JoinColumn(name = "employee_id")
+	Employee employee;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fecha;
+	private Date date;
 
-	@Column(nullable = true, length = 1024)
-	private String observaciones;
+	@Column(nullable = true, length = 512)
+	private String observations;
 
-};
+	@Column(nullable = true)
+	private double charge;
+
+}

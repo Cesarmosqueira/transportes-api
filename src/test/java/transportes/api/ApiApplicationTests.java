@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import transportes.api.Entities.User;
-import transportes.api.Repositories.TrabajadorRepository;
+import transportes.api.Repositories.EmployeeRepository;
 import transportes.api.Repositories.UserRepository;
 
 @SpringBootTest
@@ -16,7 +16,7 @@ class ApiApplicationTests {
 	UserRepository userRepository;
 
 	@Autowired
-	TrabajadorRepository trabajadorRepository;
+	EmployeeRepository employeeRepository;
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;

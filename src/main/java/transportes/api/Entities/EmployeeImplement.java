@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,20 +14,25 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "trabajador_asistencia")
-public class TrabajadorAsistencia {
+@Table(name = "employee_implement")
+public class EmployeeImplement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
+
+	@ManyToOne
+	@JoinColumn(name = "employee_id")
+	Employee employee;
+
+	@ManyToOne
+	@JoinColumn(name = "implement_id")
+	Implement implement;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private Date fecha;
 
-	@Column(nullable = false, length = 32)
-	private String estado;
+	@Column(nullable = true, length = 1024)
+	private String observations;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "trabajador_id", nullable = false)
-	private Trabajador trabajador;
-}
+};
