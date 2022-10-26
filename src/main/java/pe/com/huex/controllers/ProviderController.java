@@ -20,7 +20,7 @@ public class ProviderController {
 		return providerService.listProviders();
 	}
 
-	@GetMapping(path ="{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<ProviderRetrieveDto> retrieveProviders(@PathVariable Long id) throws Exception {
 		return providerService.retrieveProviders(id);
 	}
@@ -30,8 +30,9 @@ public class ProviderController {
 		return providerService.registerProviders(provider);
 	}
 
-	@PutMapping(path ="{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<ProviderUpdateDto> updateProviders(@PathVariable Long id, @RequestBody Provider provider) throws Exception {
+	@PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<ProviderUpdateDto> updateProviders(@PathVariable Long id, @RequestBody Provider provider)
+			throws Exception {
 		return providerService.updateProviders(id, provider);
 	}
 

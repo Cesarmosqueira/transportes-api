@@ -48,13 +48,15 @@ public class ProviderService {
             List<Provider> providerList = providerRepository.findAll();
 
             if (providerList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(providerList.size()));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(providerList.size()));
             response.setDatos(new ProviderListDto().providerList(providerList));
 
         } catch (Exception ex) {
@@ -73,13 +75,15 @@ public class ProviderService {
             Optional<Provider> providerList = providerRepository.findById(id);
 
             if (providerList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(1));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
             response.setDatos(new ProviderRetrieveDto().provider(providerList.get()));
 
         } catch (Exception ex) {
@@ -96,7 +100,8 @@ public class ProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
             Provider providerResponse = providerRepository.save(provider);
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO,
+                    idTransaccion));
             response.setDatos(new ProviderRegisterDto().provider(providerResponse));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_SUPPLIERS_WARN + ": " + ex);
@@ -112,17 +117,19 @@ public class ProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Provider providerResponse = providerRepository.findById(id).get();
+            Optional<Provider> providerResponse = providerRepository.findById(id);
 
-            if (Objects.isNull(providerResponse)) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+            if (providerResponse.isEmpty()) {
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
             provider.setId(id);
             providerRepository.save(provider);
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderUpdateDto().provider(provider));
 
         } catch (Exception ex) {
