@@ -14,6 +14,7 @@ import pe.com.huex.repositories.EmployeeRepository;
 @Transactional
 @Service
 public class EmployeeService {
+
 	@Autowired
 	EmployeeRepository employeeRepository;
 
