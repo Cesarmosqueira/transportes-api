@@ -44,16 +44,16 @@ public class EmployeeService {
 	private static final String CODE_WARN = "1";
 
 	@Autowired
-	EmployeeRepository providerRepository;
+	EmployeeRepository employeeRepository;
 
 	public ResponseDto<EmployeeListDto> listEmployees() {
 		ResponseDto<EmployeeListDto> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<Employee> providerList = providerRepository.findAll();
+			List<Employee> employeeList = employeeRepository.findAll();
 
-			if (providerList.isEmpty()) {
+			if (employeeList.isEmpty()) {
 				response.meta(
 						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
@@ -62,8 +62,8 @@ public class EmployeeService {
 
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
-							.totalRegistros(providerList.size()));
-			response.setDatos(new EmployeeListDto().providerList(providerList));
+							.totalRegistros(employeeList.size()));
+			response.setDatos(new EmployeeListDto().employeeList(employeeList));
 
 		} catch (Exception ex) {
 			log.error("error al consultar trabajadores" + ex);
@@ -78,9 +78,9 @@ public class EmployeeService {
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Employee> providerList = providerRepository.findById(id);
+			Optional<Employee> employeeList = employeeRepository.findById(id);
 
-			if (providerList.isEmpty()) {
+			if (employeeList.isEmpty()) {
 				response.meta(
 						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
@@ -90,7 +90,7 @@ public class EmployeeService {
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(1));
-			response.setDatos(new EmployeeRetrieveDto().provider(providerList.get()));
+			response.setDatos(new EmployeeRetrieveDto().employee(employeeList.get()));
 
 		} catch (Exception ex) {
 			log.error("error al consultar trabajador" + ex);
@@ -100,16 +100,16 @@ public class EmployeeService {
 		return response;
 	}
 
-	public ResponseDto<EmployeeRegisterDto> registerEmployees(Employee provider) {
+	public ResponseDto<EmployeeRegisterDto> registerEmployees(Employee employee) {
 		ResponseDto<EmployeeRegisterDto> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 			System.out.println("bout to save");
-			Employee providerResponse = providerRepository.save(provider);
+			Employee employeeResponse = employeeRepository.save(employee);
 			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO,
 					idTransaccion));
-			response.setDatos(new EmployeeRegisterDto().provider(providerResponse));
+			response.setDatos(new EmployeeRegisterDto().employee(employeeResponse));
 		} catch (Exception ex) {
 			log.error(MESSAGE_REGISTER_SUPPLIERS_WARN + ": " + ex);
 			throw ex;
@@ -118,26 +118,26 @@ public class EmployeeService {
 		return response;
 	}
 
-	public ResponseDto<EmployeeUpdateDto> updateEmployees(Long id, Employee provider) {
+	public ResponseDto<EmployeeUpdateDto> updateEmployees(Long id, Employee employee) {
 		ResponseDto<EmployeeUpdateDto> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Employee> providerResponse = providerRepository.findById(id);
+			Optional<Employee> employeeResponse = employeeRepository.findById(id);
 
-			if (providerResponse.isEmpty()) {
+			if (employeeResponse.isEmpty()) {
 				response.meta(
 						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
-			provider.setId(id);
-			providerRepository.save(provider);
+			employee.setId(id);
+			employeeRepository.save(employee);
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
-			response.setDatos(new EmployeeUpdateDto().provider(provider));
+			response.setDatos(new EmployeeUpdateDto().employee(employee));
 
 		} catch (Exception ex) {
 			log.error("error al actualizar trabajador: " + ex);

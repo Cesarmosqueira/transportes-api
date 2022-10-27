@@ -3,22 +3,22 @@ package pe.com.huex.dto.Employee;
 import pe.com.huex.entities.Employee;
 
 public class EmployeeUpdateDto {
-    private Employee provider = null;
+    private Employee employee = null;
 
     public EmployeeUpdateDto() {
     }
 
-    public EmployeeUpdateDto provider(Employee provider) {
-        this.provider = provider;
+    public EmployeeUpdateDto employee(Employee employee) {
+        this.employee = employee;
         return this;
     }
 
     public Employee getEmployee() {
-        return provider;
+        return employee;
     }
 
-    public void setEmployee(Employee provider) {
-        this.provider = provider;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 }

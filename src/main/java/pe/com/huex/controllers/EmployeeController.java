@@ -25,26 +25,26 @@ import pe.com.huex.services.EmployeeService;
 public class EmployeeController {
 
 	@Autowired
-	EmployeeService providerService;
+	EmployeeService employeeService;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<EmployeeListDto> listEmployees() throws Exception {
-		return providerService.listEmployees();
+		return employeeService.listEmployees();
 	}
 
 	@GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<EmployeeRetrieveDto> retrieveEmployees(@PathVariable Long id) throws Exception {
-		return providerService.retrieveEmployees(id);
+		return employeeService.retrieveEmployees(id);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeRegisterDto> registerEmployees(@RequestBody Employee provider) throws Exception {
-		return providerService.registerEmployees(provider);
+	public ResponseDto<EmployeeRegisterDto> registerEmployees(@RequestBody Employee employee) throws Exception {
+		return employeeService.registerEmployees(employee);
 	}
 
 	@PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeUpdateDto> updateEmployees(@PathVariable Long id, @RequestBody Employee provider)
+	public ResponseDto<EmployeeUpdateDto> updateEmployees(@PathVariable Long id, @RequestBody Employee employee)
 			throws Exception {
-		return providerService.updateEmployees(id, provider);
+		return employeeService.updateEmployees(id, employee);
 	}
 }
