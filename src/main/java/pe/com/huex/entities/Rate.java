@@ -9,25 +9,30 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "province_estivators")
-public class ProvinceEstivators {
+public class Rate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id", nullable = false)
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rute_id", nullable = false)
     private Rute rute;
 
-    @Column(nullable = false, length =128)
-    private String name;
+    @Column(nullable = true, length =64)
+    private String leadTime;
 
-    @Column(nullable = true, length = 32)
-    private String phone;
+    @Column(nullable = true)
+    private int volume;
 
     @Column(nullable = false)
-    private double CostM3;
+    private double Cost;
 
-    @Column(nullable = true, length = 250)
-    private String Observation;
+    @Column(nullable = true, length =200)
+    private String observationRate;
+
 }

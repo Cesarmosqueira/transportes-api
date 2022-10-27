@@ -40,4 +40,7 @@ public class Client {
 
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<ClientEmployee> employees = new ArrayList<>();
+
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Rate> rates = new ArrayList<>();
 }

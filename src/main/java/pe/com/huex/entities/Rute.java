@@ -3,6 +3,8 @@ package pe.com.huex.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,4 +31,10 @@ public class Rute {
     @Column(nullable = true, length = 32)
     private double gallons;
 
+    // Relations
+    @OneToMany(mappedBy = "rute", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ProvinceEstivators> provinceEstivators = new ArrayList<>();
+
+    @OneToMany(mappedBy = "rute", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Rate> rates = new ArrayList<>();
 }
