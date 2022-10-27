@@ -13,8 +13,6 @@ import java.util.List;
 @Service
 public class RuteService {
 
-    private static final String ENTITY = "Rute";
-
     @Autowired
     RuteRepository ruteRepository;
 
