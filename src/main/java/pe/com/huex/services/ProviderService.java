@@ -50,13 +50,11 @@ public class ProviderService {
 
             if (providerList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_PROVIDERS_WARN, WARN, idTransaccion)
-                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
                                 .totalRegistros(0));
                 return response;
             }
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_PROVIDERS_SUCCESS, INFO, idTransaccion)
-                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(providerList.size()));
             response.setDatos(new ProviderListDto().providerList(providerList));
 
@@ -77,13 +75,11 @@ public class ProviderService {
 
             if (providerList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
-                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
                                 .totalRegistros(0));
                 return response;
             }
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVIDERS_SUCCESS, INFO, idTransaccion)
-                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(1));
             response.setDatos(new ProviderRetrieveDto().provider(providerList.get()));
 
@@ -102,7 +98,6 @@ public class ProviderService {
             String idTransaccion = UUID.randomUUID().toString();
             Provider providerResponse = providerRepository.save(provider);
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVIDERS_SUCCESS, INFO, idTransaccion));
-                    idTransaccion));
             response.setDatos(new ProviderRegisterDto().provider(providerResponse));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_PROVIDERS_WARN + ": " + ex);
@@ -122,7 +117,6 @@ public class ProviderService {
 
             if (providerResponse.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
-                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
                                 .totalRegistros(0));
                 return response;
             }
@@ -130,7 +124,6 @@ public class ProviderService {
             provider.setId(id);
             providerRepository.save(provider);
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVIDERS_SUCCESS, INFO, idTransaccion));
-                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderUpdateDto().provider(provider));
 
         } catch (Exception ex) {
