@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.com.huex.dto.Response.*;
+
 import pe.com.huex.entities.Provider;
 import pe.com.huex.repositories.ProviderRepository;
 import pe.com.huex.util.MetaDatosUtil;
@@ -21,17 +22,17 @@ import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
 @Service
 @Slf4j
 public class ProviderService {
-    private static final String MESSAGE_INQUIRY_SUPPLIERS_SUCCESS = "La consulta de proveedores fue exitoso";
-    private static final String MESSAGE_INQUIRY_SUPPLIERS_WARN = "No se encontró ningún proveedor registrado";
+    private static final String MESSAGE_INQUIRY_PROVIDERS_SUCCESS = "La consulta de proveedores fue exitoso";
+    private static final String MESSAGE_INQUIRY_PROVIDERS_WARN = "No se encontró ningún proveedor registrado";
 
-    private static final String MESSAGE_REGISTER_SUPPLIERS_SUCCESS = "El registro del proeveedor fue exitoso";
-    private static final String MESSAGE_REGISTER_SUPPLIERS_WARN = "Ocurrió un error al registrar al proveedor";
+    private static final String MESSAGE_REGISTER_PROVIDERS_SUCCESS = "El registro del proeveedor fue exitoso";
+    private static final String MESSAGE_REGISTER_PROVIDERS_WARN = "Ocurrió un error al registrar al proveedor";
 
-    private static final String MESSAGE_UPDATE_SUPPLIERS_SUCCESS = "La consulta de proveedores fue exitoso";
-    private static final String MESSAGE_UPDATE_SUPPLIERS_WARN = "Ocurrió un error al actualizar los datos del proveedor";
+    private static final String MESSAGE_UPDATE_PROVIDERS_SUCCESS = "La actualización de datos del proveedor fue exitoso";
+    private static final String MESSAGE_UPDATE_PROVIDERS_WARN = "Ocurrió un error al actualizar los datos del proveedor";
 
-    private static final String MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS = "La consulta del proveedor fue exitoso";
-    private static final String MESSAGE_RETRIEVE_SUPPLIERS_WARN = "No se encontró los datos del proveedor";
+    private static final String MESSAGE_RETRIEVE_PROVIDERS_SUCCESS = "La consulta del proveedor fue exitoso";
+    private static final String MESSAGE_RETRIEVE_PROVIDERS_WARN = "No se encontró los datos del proveedor";
 
     private static final String CODE_SUCCESS = "0";
 
@@ -48,13 +49,13 @@ public class ProviderService {
             List<Provider> providerList = providerRepository.findAll();
 
             if (providerList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_PROVIDERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(providerList.size()));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_PROVIDERS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(providerList.size()));
             response.setDatos(new ProviderListDto().providerList(providerList));
 
         } catch (Exception ex) {
@@ -73,13 +74,13 @@ public class ProviderService {
             Optional<Provider> providerList = providerRepository.findById(id);
 
             if (providerList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(1));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVIDERS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
             response.setDatos(new ProviderRetrieveDto().provider(providerList.get()));
 
         } catch (Exception ex) {
@@ -96,10 +97,10 @@ public class ProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
             Provider providerResponse = providerRepository.save(provider);
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVIDERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderRegisterDto().provider(providerResponse));
         } catch (Exception ex) {
-            log.error(MESSAGE_REGISTER_SUPPLIERS_WARN + ": " + ex);
+            log.error(MESSAGE_REGISTER_PROVIDERS_WARN + ": " + ex);
             throw ex;
         }
 
@@ -112,21 +113,21 @@ public class ProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Provider providerResponse = providerRepository.findById(id).get();
+            Optional<Provider> providerResponse = providerRepository.findById(id);
 
-            if (Objects.isNull(providerResponse)) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+            if (providerResponse.isEmpty()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
             provider.setId(id);
             providerRepository.save(provider);
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVIDERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderUpdateDto().provider(provider));
 
         } catch (Exception ex) {
-            log.error("error al actualizar proveedor: " + ex);
+            log.error(MESSAGE_UPDATE_PROVIDERS_WARN + ": " + ex);
             throw ex;
         }
 

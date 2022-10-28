@@ -1,14 +1,17 @@
 package pe.com.huex.entities;
 
+import pe.com.huex.dto.Response.TruckFleetListDto;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "providers")
 public class Provider {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ruc", nullable = false, length = 12)
@@ -37,6 +40,10 @@ public class Provider {
 
     @Column(name = "observation", length = 200)
     private String observation;
+
+    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
+    private List<TruckFleet> truckFleetList;
+
 
     public Long getId() {
         return id;
@@ -118,4 +125,11 @@ public class Provider {
         this.observation = observation;
     }
 
+    public List<TruckFleet> getTruckFleetList() {
+        return truckFleetList;
+    }
+
+    public void setTruckFleetList(List<TruckFleet> truckFleetList) {
+        this.truckFleetList = truckFleetList;
+    }
 }

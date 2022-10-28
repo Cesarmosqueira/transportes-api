@@ -2,18 +2,18 @@ package pe.com.huex.entities;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "truck_fleet")
 public class TruckFleet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
+    @JoinColumn(name = "id_provider", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_provider", nullable = false)
-    private Provider idProvider;
+    private Provider provider;
 
     @Column(name = "tract_plate", nullable = false, length = 6)
     private String tractPlate;
@@ -28,7 +28,7 @@ public class TruckFleet {
     private Double volume;
 
     @Column(name = "fabrication_date")
-    private Instant fabricationDate;
+    private Date fabricationDate;
 
     @Column(name = "ton_number")
     private Double tonNumber;
@@ -53,12 +53,12 @@ public class TruckFleet {
         this.id = id;
     }
 
-    public Provider getIdProvider() {
-        return idProvider;
+    public Provider getProvider() {
+        return provider;
     }
 
-    public void setIdProvider(Provider idProvider) {
-        this.idProvider = idProvider;
+    public void setProvider(Provider provider) {
+        this.provider = provider;
     }
 
     public String getTractPlate() {
@@ -93,11 +93,11 @@ public class TruckFleet {
         this.volume = volume;
     }
 
-    public Instant getFabricationDate() {
+    public Date getFabricationDate() {
         return fabricationDate;
     }
 
-    public void setFabricationDate(Instant fabricationDate) {
+    public void setFabricationDate(Date fabricationDate) {
         this.fabricationDate = fabricationDate;
     }
 
