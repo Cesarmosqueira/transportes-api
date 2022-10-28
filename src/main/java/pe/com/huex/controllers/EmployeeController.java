@@ -23,7 +23,6 @@ import pe.com.huex.services.EmployeeService;
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
-
 	@Autowired
 	EmployeeService employeeService;
 
