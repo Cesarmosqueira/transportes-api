@@ -1,4 +1,4 @@
-package pe.com.huex.entities;
+package pe.com.huex.employees.domain.entities;
 
 import java.util.Date;
 
@@ -13,9 +13,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+
+@Data
 @Entity
-@Table(name = "employee_implement")
-public class EmployeeImplement {
+@Table(name = "employee_descuento")
+public class EmployeeDiscount {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -24,15 +28,14 @@ public class EmployeeImplement {
 	@JoinColumn(name = "employee_id")
 	Employee employee;
 
-	@ManyToOne
-	@JoinColumn(name = "implement_id")
-	Implement implement;
-
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fecha;
+	private Date date;
 
-	@Column(nullable = true, length = 1024)
+	@Column(nullable = true, length = 512)
 	private String observations;
 
-};
+	@Column(nullable = true)
+	private double charge;
+
+}

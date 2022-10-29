@@ -1,14 +1,14 @@
-package pe.com.huex.dto.Employee;
+package pe.com.huex.employees.domain.dtos.employees;
 
-import pe.com.huex.entities.Employee;
+import pe.com.huex.employees.domain.entities.Employee;
 
-public class EmployeeRegisterDto {
+public class EmployeeUpdateDto {
     private EmployeeResponseDto employee = null;
 
-    public EmployeeRegisterDto() {
+    public EmployeeUpdateDto() {
     }
 
-    public EmployeeRegisterDto employee(Employee employee) {
+    public EmployeeUpdateDto employee(Employee employee) {
         this.employee = new EmployeeResponseDto(employee);
         return this;
     }

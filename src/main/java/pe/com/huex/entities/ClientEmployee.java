@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import pe.com.huex.employees.domain.entities.Employee;
 
 @Data
 @Entity

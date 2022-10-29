@@ -1,4 +1,4 @@
-package pe.com.huex.dto.Employee;
+package pe.com.huex.employees.domain.dtos.employees;
 
 public class EmployeeAttendanceRegisterDto {
     private EmployeeAttendanceResponseDto employeeAttendance = null;

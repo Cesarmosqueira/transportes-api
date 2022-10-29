@@ -1,10 +1,9 @@
-package pe.com.huex.services;
+package pe.com.huex.employees.domain.services;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,14 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.dto.Implement.ImplementDeleteDto;
-import pe.com.huex.dto.Implement.ImplementListDto;
-import pe.com.huex.dto.Implement.ImplementRegisterDto;
-import pe.com.huex.dto.Implement.ImplementRetrieveDto;
-import pe.com.huex.dto.Implement.ImplementUpdateDto;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.entities.Implement;
-import pe.com.huex.repositories.ImplementRepository;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementDeleteDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementListDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementRegisterDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementRetrieveDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementUpdateDto;
+import pe.com.huex.employees.domain.entities.Implement;
+import pe.com.huex.employees.domain.persistence.ImplementRepository;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

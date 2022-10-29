@@ -1,14 +1,14 @@
-package pe.com.huex.dto.Implement;
+package pe.com.huex.employees.domain.dtos.Implement;
 
-import pe.com.huex.entities.Implement;
+import pe.com.huex.employees.domain.entities.Implement;
 
-public class ImplementUpdateDto {
+public class ImplementRegisterDto {
     private Implement implement = null;
 
-    public ImplementUpdateDto() {
+    public ImplementRegisterDto() {
     }
 
-    public ImplementUpdateDto implement(Implement implement) {
+    public ImplementRegisterDto implement(Implement implement) {
         this.implement = implement;
         return this;
     }
