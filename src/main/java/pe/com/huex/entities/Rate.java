@@ -23,16 +23,16 @@ public class Rate {
     @JoinColumn(name = "rute_id", nullable = false)
     private Rute rute;
 
-    @Column(nullable = true, length =64)
+    @Column(nullable = true, length = 64)
     private String leadTime;
 
     @Column(nullable = true)
     private int volume;
 
     @Column(nullable = false)
-    private double Cost;
+    private double cost;
 
-    @Column(nullable = true, length =200)
+    @Column(nullable = true, length = 200)
     private String observationRate;
 
 }

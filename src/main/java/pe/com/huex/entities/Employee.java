@@ -118,10 +118,4 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<EmployeeDiscount> discounts = new ArrayList<>();
 
-	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-	private ClientEmployee clientEmployee;
-
-	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-	private EmployeeAuxiliar auxiliarEmployee;
-
 }

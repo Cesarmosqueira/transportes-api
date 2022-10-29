@@ -27,17 +27,17 @@ import pe.com.huex.util.MetaDatosUtil;
 @Service
 @Slf4j
 public class EmployeeService {
-	private static final String MESSAGE_INQUIRY_SUPPLIERS_SUCCESS = "La consulta de trabajadores fue exitoso";
-	private static final String MESSAGE_INQUIRY_SUPPLIERS_WARN = "No se encontró ningún trabajador registrado";
+	private static final String MESSAGE_INQUIRY_EMPLOYEES_SUCCESS = "La consulta de trabajadores fue exitoso";
+	private static final String MESSAGE_INQUIRY_EMPLOYEES_WARN = "No se encontró ningún trabajador registrado";
 
-	private static final String MESSAGE_REGISTER_SUPPLIERS_SUCCESS = "El registro del proeveedor fue exitoso";
-	private static final String MESSAGE_REGISTER_SUPPLIERS_WARN = "Ocurrió un error al registrar al trabajador";
+	private static final String MESSAGE_REGISTER_EMPLOYEES_SUCCESS = "El registro del proeveedor fue exitoso";
+	private static final String MESSAGE_REGISTER_EMPLOYEES_WARN = "Ocurrió un error al registrar al trabajador";
 
-	private static final String MESSAGE_UPDATE_SUPPLIERS_SUCCESS = "La consulta de trabajadores fue exitoso";
-	private static final String MESSAGE_UPDATE_SUPPLIERS_WARN = "Ocurrió un error al actualizar los datos del trabajador";
+	private static final String MESSAGE_UPDATE_EMPLOYEES_SUCCESS = "La consulta de trabajadores fue exitoso";
+	private static final String MESSAGE_UPDATE_EMPLOYEES_WARN = "Ocurrió un error al actualizar los datos del trabajador";
 
-	private static final String MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS = "La consulta del trabajador fue exitoso";
-	private static final String MESSAGE_RETRIEVE_SUPPLIERS_WARN = "No se encontró los datos del trabajador";
+	private static final String MESSAGE_RETRIEVE_EMPLOYEES_SUCCESS = "La consulta del trabajador fue exitoso";
+	private static final String MESSAGE_RETRIEVE_EMPLOYEES_WARN = "No se encontró los datos del trabajador";
 
 	private static final String CODE_SUCCESS = "0";
 
@@ -55,13 +55,13 @@ public class EmployeeService {
 
 			if (employeeList.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_EMPLOYEES_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_EMPLOYEES_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(employeeList.size()));
 			response.setDatos(new EmployeeListDto().employeeList(employeeList));
 
@@ -82,13 +82,13 @@ public class EmployeeService {
 
 			if (employeeList.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_EMPLOYEES_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_EMPLOYEES_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(1));
 			response.setDatos(new EmployeeRetrieveDto().employee(employeeList.get()));
 
@@ -105,13 +105,12 @@ public class EmployeeService {
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
-			System.out.println("bout to save");
 			Employee employeeResponse = employeeRepository.save(employee);
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO,
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_EMPLOYEES_SUCCESS, INFO,
 					idTransaccion));
 			response.setDatos(new EmployeeRegisterDto().employee(employeeResponse));
 		} catch (Exception ex) {
-			log.error(MESSAGE_REGISTER_SUPPLIERS_WARN + ": " + ex);
+			log.error(MESSAGE_REGISTER_EMPLOYEES_WARN + ": " + ex);
 			throw ex;
 		}
 
@@ -128,7 +127,7 @@ public class EmployeeService {
 
 			if (employeeResponse.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_EMPLOYEES_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
@@ -136,7 +135,7 @@ public class EmployeeService {
 			employee.setId(id);
 			employeeRepository.save(employee);
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_EMPLOYEES_SUCCESS, INFO, idTransaccion));
 			response.setDatos(new EmployeeUpdateDto().employee(employee));
 
 		} catch (Exception ex) {

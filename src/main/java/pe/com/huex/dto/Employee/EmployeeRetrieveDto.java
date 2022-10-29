@@ -7,19 +7,19 @@ public class EmployeeRetrieveDto {
     public EmployeeRetrieveDto() {
     }
 
-    private Employee employee = null;
+    private EmployeeResponseDto employee = null;
 
     public EmployeeRetrieveDto employee(Employee employee) {
-        this.employee = employee;
+        EmployeeResponseDto employeeDto = new EmployeeResponseDto(employee);
+        this.employee = employeeDto;
         return this;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeResponseDto employee) {
         this.employee = employee;
     }
 
-    public Employee getEmployee() {
+    public EmployeeResponseDto getEmployee() {
         return employee;
     }
-
 }

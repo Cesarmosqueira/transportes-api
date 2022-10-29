@@ -28,20 +28,20 @@ import pe.com.huex.util.MetaDatosUtil;
 @Service
 @Slf4j
 public class ImplementService {
-	private static final String MESSAGE_INQUIRY_SUPPLIERS_SUCCESS = "La consulta de implementos fue exitoso";
-	private static final String MESSAGE_INQUIRY_SUPPLIERS_WARN = "No se encontró ningún implemento registrado";
+	private static final String MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
+	private static final String MESSAGE_INQUIRY_IMPLEMENTS_WARN = "No se encontró ningún implemento registrado";
 
-	private static final String MESSAGE_REGISTER_SUPPLIERS_SUCCESS = "El registro del proeveedor fue exitoso";
-	private static final String MESSAGE_REGISTER_SUPPLIERS_WARN = "Ocurrió un error al registrar al implemento";
+	private static final String MESSAGE_REGISTER_IMPLEMENTS_SUCCESS = "El registro del proeveedor fue exitoso";
+	private static final String MESSAGE_REGISTER_IMPLEMENTS_WARN = "Ocurrió un error al registrar al implemento";
 
-	private static final String MESSAGE_UPDATE_SUPPLIERS_SUCCESS = "La consulta de implementos fue exitoso";
-	private static final String MESSAGE_UPDATE_SUPPLIERS_WARN = "Ocurrió un error al actualizar los datos del implemento";
+	private static final String MESSAGE_UPDATE_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
+	private static final String MESSAGE_UPDATE_IMPLEMENTS_WARN = "Ocurrió un error al actualizar los datos del implemento";
 
-	private static final String MESSAGE_DELETE_SUPPLIERS_SUCCESS = "La eliminación del implemento fue exitosa";
-	private static final String MESSAGE_DELETE_SUPPLIERS_WARN = "Ocurrió un error al eliminar el implemento";
+	private static final String MESSAGE_DELETE_IMPLEMENTS_SUCCESS = "La eliminación del implemento fue exitosa";
+	private static final String MESSAGE_DELETE_IMPLEMENTS_WARN = "Ocurrió un error al eliminar el implemento";
 
-	private static final String MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS = "La consulta del implemento fue exitoso";
-	private static final String MESSAGE_RETRIEVE_SUPPLIERS_WARN = "No se encontró los datos del implemento";
+	private static final String MESSAGE_RETRIEVE_IMPLEMENTS_SUCCESS = "La consulta del implemento fue exitoso";
+	private static final String MESSAGE_RETRIEVE_IMPLEMENTS_WARN = "No se encontró los datos del implemento";
 
 	private static final String CODE_SUCCESS = "0";
 
@@ -59,13 +59,13 @@ public class ImplementService {
 
 			if (implementList.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(implementList.size()));
 			response.setDatos(new ImplementListDto().implementList(implementList));
 
@@ -86,13 +86,13 @@ public class ImplementService {
 
 			if (implementList.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SUPPLIERS_SUCCESS, INFO, idTransaccion)
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(1));
 			response.setDatos(new ImplementRetrieveDto().implement(implementList.get()));
 
@@ -109,13 +109,12 @@ public class ImplementService {
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
-			System.out.println("bout to save");
 			Implement implementResponse = implementRepository.save(implement);
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SUPPLIERS_SUCCESS, INFO,
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_IMPLEMENTS_SUCCESS, INFO,
 					idTransaccion));
 			response.setDatos(new ImplementRegisterDto().implement(implementResponse));
 		} catch (Exception ex) {
-			log.error(MESSAGE_REGISTER_SUPPLIERS_WARN + ": " + ex);
+			log.error(MESSAGE_REGISTER_IMPLEMENTS_WARN + ": " + ex);
 			throw ex;
 		}
 
@@ -132,7 +131,7 @@ public class ImplementService {
 
 			if (implementResponse.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
@@ -140,7 +139,7 @@ public class ImplementService {
 			implement.setId(id);
 			implementRepository.save(implement);
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_IMPLEMENTS_SUCCESS, INFO, idTransaccion));
 			response.setDatos(new ImplementUpdateDto().implement(implement));
 
 		} catch (Exception ex) {
@@ -161,14 +160,14 @@ public class ImplementService {
 
 			if (implementResponse.isEmpty()) {
 				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_DELETE_SUPPLIERS_WARN, WARN, idTransaccion)
+						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_DELETE_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
 				return response;
 			}
 
 			implementRepository.deleteById(id);
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_SUPPLIERS_SUCCESS, INFO, idTransaccion));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_IMPLEMENTS_SUCCESS, INFO, idTransaccion));
 			response.setDatos(new ImplementDeleteDto().implement(id));
 
 		} catch (Exception ex) {

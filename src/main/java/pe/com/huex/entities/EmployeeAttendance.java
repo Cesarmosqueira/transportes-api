@@ -14,8 +14,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @Entity
 @Table(name = "employee_attendance")
+@NoArgsConstructor
 public class EmployeeAttendance {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
