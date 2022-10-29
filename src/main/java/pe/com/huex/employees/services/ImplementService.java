@@ -1,4 +1,4 @@
-package pe.com.huex.employees.domain.services;
+package pe.com.huex.employees.services;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;

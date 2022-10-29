@@ -17,7 +17,7 @@ import pe.com.huex.employees.domain.dtos.employees.EmployeeRegisterDto;
 import pe.com.huex.employees.domain.dtos.employees.EmployeeRetrieveDto;
 import pe.com.huex.employees.domain.dtos.employees.EmployeeUpdateDto;
 import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.employees.domain.services.EmployeeService;
+import pe.com.huex.employees.services.EmployeeService;
 
 @CrossOrigin(origins = "*")
 @RestController

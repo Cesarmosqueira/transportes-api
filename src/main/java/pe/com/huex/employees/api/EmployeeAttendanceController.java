@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.employees.domain.dtos.employees.EmployeeAttendanceRegisterDto;
 import pe.com.huex.employees.domain.dtos.employees.EmployeeAttendanceResponseDto;
-import pe.com.huex.employees.domain.services.EmployeeAttendanceService;
+import pe.com.huex.employees.services.EmployeeAttendanceService;
 
 @CrossOrigin(origins = "*")
 @RestController

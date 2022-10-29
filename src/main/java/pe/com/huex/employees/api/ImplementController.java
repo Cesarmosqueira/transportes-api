@@ -19,7 +19,7 @@ import pe.com.huex.employees.domain.dtos.Implement.ImplementRegisterDto;
 import pe.com.huex.employees.domain.dtos.Implement.ImplementRetrieveDto;
 import pe.com.huex.employees.domain.dtos.Implement.ImplementUpdateDto;
 import pe.com.huex.employees.domain.entities.Implement;
-import pe.com.huex.employees.domain.services.ImplementService;
+import pe.com.huex.employees.services.ImplementService;
 
 @CrossOrigin(origins = "*")
 @RestController

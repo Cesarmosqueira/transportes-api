@@ -1,4 +1,4 @@
-package pe.com.huex.employees.domain.services;
+package pe.com.huex.employees.services;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 
@@ -41,18 +41,22 @@ public class EmployeeAttendanceService {
 		ResponseDto<EmployeeAttendanceRegisterDto> response = new ResponseDto<>();
 
 		// save the constructed attendance
+		String idTransaccion = UUID.randomUUID().toString();
+		Employee employee = employeeRepository.findById(employeeAttendanceRequestDto.getEmployee_id())
+				.orElseThrow(() -> new Exception("El empleado indicado no existe"));
+
+		EmployeeAttendance employeeAttendance = new EmployeeAttendance();
+		employeeAttendance.setId(1L);
+		employeeAttendance.setDate(employeeAttendanceRequestDto.getDate());
+		employeeAttendance.setState(employeeAttendanceRequestDto.getState());
+		employeeAttendance.setEmployee(employee);
 		try {
-			String idTransaccion = UUID.randomUUID().toString();
-			Employee employee = employeeRepository.findById(employeeAttendanceRequestDto.getEmployee_id())
-					.orElseThrow(() -> new Exception("El empleado indicado no existe"));
 
-			EmployeeAttendance employeeAttendance = new EmployeeAttendance();
-			employeeAttendance.setId(1L);
-			employeeAttendance.setDate(employeeAttendanceRequestDto.getDate());
-			employeeAttendance.setState(employeeAttendanceRequestDto.getState());
-			employeeAttendance.setEmployee(employee);
-
-			EmployeeAttendance employeeAttendanceResponse = employeeAttendanceRepository.save(employeeAttendance);
+			System.out.println("Bout to save");
+			EmployeeAttendance employeeAttendanceResponse = employeeAttendanceRepository
+					.saveAndFlush(employeeAttendance);
+			employeeAttendanceRepository
+					.save(employeeAttendance);
 
 			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_ATTENDANCES_SUCCESS, INFO,
 					idTransaccion));
@@ -61,8 +65,16 @@ public class EmployeeAttendanceService {
 							employeeAttendanceResponse.getState(),
 							employeeAttendanceResponse.getEmployee().getId())));
 		} catch (Exception ex) {
-			log.error(MESSAGE_REGISTER_ATTENDANCES_WARN + ": " + ex);
-			throw ex;
+			String actualMessage = ex.getMessage();
+			System.out
+					.println("\n == Actual message == \n" + actualMessage + "\n\n" + ex.getLocalizedMessage() + "\n\n");
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS,
+					MESSAGE_REGISTER_ATTENDANCES_WARN + " (La fecha ya fue registrada)", INFO,
+					idTransaccion));
+			return response;
+
+			// log.error(MESSAGE_REGISTER_ATTENDANCES_WARN + ": " + ex);
+			// throw ex;
 		}
 
 		return response;
