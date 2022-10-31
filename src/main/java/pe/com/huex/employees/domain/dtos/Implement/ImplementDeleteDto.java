@@ -1,4 +1,4 @@
-package pe.com.huex.dto.Implement;
+package pe.com.huex.employees.domain.dtos.Implement;
 
 import lombok.Getter;
 import lombok.Setter;

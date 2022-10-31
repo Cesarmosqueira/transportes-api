@@ -1,4 +1,4 @@
-package pe.com.huex.controllers;
+package pe.com.huex.employees.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Implement.ImplementDeleteDto;
-import pe.com.huex.dto.Implement.ImplementListDto;
-import pe.com.huex.dto.Implement.ImplementRegisterDto;
-import pe.com.huex.dto.Implement.ImplementRetrieveDto;
-import pe.com.huex.dto.Implement.ImplementUpdateDto;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.entities.Implement;
-import pe.com.huex.services.ImplementService;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementDeleteDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementListDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementRegisterDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementRetrieveDto;
+import pe.com.huex.employees.domain.dtos.Implement.ImplementUpdateDto;
+import pe.com.huex.employees.domain.entities.Implement;
+import pe.com.huex.employees.services.ImplementService;
 
 @CrossOrigin(origins = "*")
 @RestController

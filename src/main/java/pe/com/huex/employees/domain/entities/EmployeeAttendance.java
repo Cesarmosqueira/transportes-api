@@ -1,4 +1,4 @@
-package pe.com.huex.entities;
+package pe.com.huex.employees.domain.entities;
 
 import java.util.Date;
 

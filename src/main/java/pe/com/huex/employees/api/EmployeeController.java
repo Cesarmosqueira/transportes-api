@@ -1,4 +1,4 @@
-package pe.com.huex.controllers;
+package pe.com.huex.employees.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Employee.EmployeeListDto;
-import pe.com.huex.dto.Employee.EmployeeRegisterDto;
-import pe.com.huex.dto.Employee.EmployeeRetrieveDto;
-import pe.com.huex.dto.Employee.EmployeeUpdateDto;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.entities.Employee;
-import pe.com.huex.services.EmployeeService;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeListDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeRegisterDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeRetrieveDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeUpdateDto;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.services.EmployeeService;
 
 @CrossOrigin(origins = "*")
 @RestController

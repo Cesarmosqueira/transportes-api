@@ -1,10 +1,10 @@
-package pe.com.huex.dto.Employee;
+package pe.com.huex.employees.domain.dtos.employees;
 
 import java.util.Date;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.com.huex.entities.Employee;
+import pe.com.huex.employees.domain.entities.Employee;
 
 @Data
 @NoArgsConstructor

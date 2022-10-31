@@ -1,6 +1,6 @@
-package pe.com.huex.dto.Implement;
+package pe.com.huex.employees.domain.dtos.Implement;
 
-import pe.com.huex.entities.Implement;
+import pe.com.huex.employees.domain.entities.Implement;
 
 public class ImplementRetrieveDto {
 

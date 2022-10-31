@@ -1,4 +1,4 @@
-package pe.com.huex.controllers;
+package pe.com.huex.employees.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Employee.EmployeeAttendanceRegisterDto;
-import pe.com.huex.dto.Employee.EmployeeAttendanceResponseDto;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.entities.EmployeeAttendance;
-import pe.com.huex.services.EmployeeAttendanceService;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeAttendanceRegisterDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeAttendanceResponseDto;
+import pe.com.huex.employees.services.EmployeeAttendanceService;
 
 @CrossOrigin(origins = "*")
 @RestController

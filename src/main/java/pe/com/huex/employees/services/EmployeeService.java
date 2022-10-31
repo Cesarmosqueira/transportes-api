@@ -1,4 +1,4 @@
-package pe.com.huex.services;
+package pe.com.huex.employees.services;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.dto.Employee.EmployeeListDto;
-import pe.com.huex.dto.Employee.EmployeeRegisterDto;
-import pe.com.huex.dto.Employee.EmployeeRetrieveDto;
-import pe.com.huex.dto.Employee.EmployeeUpdateDto;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.entities.Employee;
-import pe.com.huex.repositories.EmployeeRepository;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeListDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeRegisterDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeRetrieveDto;
+import pe.com.huex.employees.domain.dtos.employees.EmployeeUpdateDto;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.domain.persistence.EmployeeRepository;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

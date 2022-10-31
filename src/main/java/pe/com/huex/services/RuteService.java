@@ -1,11 +1,11 @@
 package pe.com.huex.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.com.huex.entities.Rute;
 import pe.com.huex.repositories.RuteRepository;
-
-import java.util.List;
 
 @Service
 public class RuteService {
@@ -21,6 +21,7 @@ public class RuteService {
         return ruteRepository.findById(id)
                 .orElseThrow(() -> new Exception("ruta '" + id + "' no existe en la base de datos"));
     }
+
     public List<Rute> listRute() {
 
         return ruteRepository.findAll();
