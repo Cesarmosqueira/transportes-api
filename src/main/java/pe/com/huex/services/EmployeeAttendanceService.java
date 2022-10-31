@@ -2,7 +2,6 @@ package pe.com.huex.services;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.transaction.Transactional;

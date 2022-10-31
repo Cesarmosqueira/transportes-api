@@ -3,7 +3,6 @@ package pe.com.huex.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.com.huex.entities.ExpenseType;
-import pe.com.huex.entities.Rute;
 import pe.com.huex.repositories.ExpenseTypeRepository;
 
 import java.util.List;

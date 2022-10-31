@@ -4,7 +4,6 @@ import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 

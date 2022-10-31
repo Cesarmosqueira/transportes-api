@@ -1,10 +1,7 @@
 package pe.com.huex.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.Validator;
-import pe.com.huex.entities.Employee;
 import pe.com.huex.entities.Rute;
 import pe.com.huex.repositories.RuteRepository;
 

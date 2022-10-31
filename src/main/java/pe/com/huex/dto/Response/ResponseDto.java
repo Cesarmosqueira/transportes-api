@@ -2,7 +2,9 @@ package pe.com.huex.dto.Response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import pe.com.huex.vehicles.service.resources.response.CheckListListResponse;
 
+import java.util.List;
 import java.util.Objects;
 
 public class ResponseDto<T> {
@@ -13,6 +15,9 @@ public class ResponseDto<T> {
     private T datos = null;
 
     public ResponseDto() {
+    }
+
+    public ResponseDto(T mapList) {
     }
 
     public ResponseDto meta(MetadatoServicio meta) {
