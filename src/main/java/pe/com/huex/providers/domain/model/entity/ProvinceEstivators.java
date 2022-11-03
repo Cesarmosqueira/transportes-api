@@ -1,7 +1,8 @@
-package pe.com.huex.entities;
+package pe.com.huex.providers.domain.model.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.com.huex.customers.domain.entity.Rute;
 
 import javax.persistence.*;
 

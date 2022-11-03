@@ -1,4 +1,4 @@
-package pe.com.huex.controllers;
+package pe.com.huex.customers.api;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,9 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.entities.Rate;
-import pe.com.huex.entities.Rute;
-import pe.com.huex.services.RateService;
+import pe.com.huex.customers.domain.entity.Rate;
+import pe.com.huex.customers.service.RateService;
 
 import java.util.List;
 

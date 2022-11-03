@@ -1,13 +1,12 @@
-package pe.com.huex.controllers;
+package pe.com.huex.providers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.entities.ProvinceEstivators;
-import pe.com.huex.entities.Rute;
-import pe.com.huex.services.ProvinceEstivatorService;
+import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
+import pe.com.huex.providers.service.ProvinceEstivatorService;
 
 import java.util.List;
 

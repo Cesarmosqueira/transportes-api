@@ -1,11 +1,11 @@
-package pe.com.huex.services;
+package pe.com.huex.customers.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.entities.Rute;
-import pe.com.huex.repositories.RuteRepository;
+import pe.com.huex.customers.domain.entity.Rute;
+import pe.com.huex.customers.domain.persistence.RuteRepository;
 
 @Service
 public class RuteService {

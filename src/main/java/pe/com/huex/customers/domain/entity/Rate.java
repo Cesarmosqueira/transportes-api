@@ -1,4 +1,4 @@
-package pe.com.huex.entities;
+package pe.com.huex.customers.domain.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,13 +1,12 @@
-package pe.com.huex.controllers;
+package pe.com.huex.servicetracking.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.entities.ExpenseType;
-import pe.com.huex.entities.Rute;
-import pe.com.huex.services.ExpenseTypeService;
+import pe.com.huex.servicetracking.domain.entity.ExpenseType;
+import pe.com.huex.servicetracking.service.ExpenseTypeService;
 
 import java.util.List;
 

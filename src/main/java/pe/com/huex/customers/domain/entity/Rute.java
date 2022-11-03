@@ -1,6 +1,7 @@
-package pe.com.huex.entities;
+package pe.com.huex.customers.domain.entity;
 
 import lombok.*;
+import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package pe.com.huex.controllers;
+package pe.com.huex.customers.api;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.entities.Rute;
-import pe.com.huex.services.RuteService;
+import pe.com.huex.customers.domain.entity.Rute;
+import pe.com.huex.customers.service.RuteService;
 
 @CrossOrigin(origins = "*")
 @RestController

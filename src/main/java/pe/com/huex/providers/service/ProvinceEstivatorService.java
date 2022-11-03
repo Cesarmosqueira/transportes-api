@@ -1,9 +1,9 @@
-package pe.com.huex.services;
+package pe.com.huex.providers.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.entities.ProvinceEstivators;
-import pe.com.huex.repositories.ProvinceEstivatorRepository;
+import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
+import pe.com.huex.providers.domain.persistence.ProvinceEstivatorRepository;
 
 import java.util.List;
 
