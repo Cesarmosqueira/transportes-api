@@ -1,6 +1,7 @@
-package pe.com.huex.customers.domain.entity;
+package pe.com.huex.customers.domain.model.entity;
 
 import lombok.*;
+import pe.com.huex.customers.domain.model.entity.Rate;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import java.util.List;
 public class Rute {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 64)

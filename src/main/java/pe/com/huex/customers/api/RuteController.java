@@ -1,54 +1,46 @@
 package pe.com.huex.customers.api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import pe.com.huex.customers.domain.service.IRuteService;
+import pe.com.huex.customers.service.resources.dto.RuteDto;
+import pe.com.huex.customers.service.resources.response.*;
+import pe.com.huex.dto.Response.ResponseDto;
 
-import pe.com.huex.customers.domain.entity.Rute;
-import pe.com.huex.customers.service.RuteService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("rutes")
+@RequestMapping(value = "rutes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RuteController {
 
     @Autowired
-    RuteService ruteService;
-
-    @PostMapping
-    public ResponseEntity<Rute> registerRute(@Validated @RequestBody Rute rute)
-            throws Exception {
-        rute = ruteService.createRute(rute);
-        return new ResponseEntity<>(rute, HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<Rute> retrieveRute(@PathVariable Long id) throws Exception {
-        Rute rute = ruteService.getRute(id);
-        return new ResponseEntity<>(rute, HttpStatus.OK);
-    }
+    IRuteService ruteService;
 
     @GetMapping
-    public ResponseEntity<List<Rute>> listRutes() throws Exception {
-        List<Rute> rutes = ruteService.listRute();
-        return new ResponseEntity<>(rutes, HttpStatus.OK);
+    public ResponseDto<RuteListResponse> listRute() throws Exception {
+        return ruteService.listRute();
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Rute> updateRute(@PathVariable Long id, @Validated @RequestBody Rute rute)
-            throws Exception {
-        Rute updated = ruteService.updateRute(id, rute);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    @GetMapping(path = "{id}")
+    public ResponseDto<RuteRetrieveResponse> retrieveRute(@PathVariable Long id) throws Exception {
+        return ruteService.retrieveRute(id);
     }
+
+    @PostMapping
+    public ResponseDto<RuteRegisterResponse> registerRute(@RequestBody RuteDto ruteDto) throws Exception {
+        return ruteService.registerRute(ruteDto);
+    }
+    @PutMapping
+    public ResponseDto<RuteUpdateResponse> updateRute(@RequestBody RuteDto ruteDto)
+            throws Exception {
+        return ruteService.updateRute(ruteDto);
+    }
+
+    @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseDto<RuteDeleteResponse> deleteRute(@PathVariable Long id)
+            throws Exception {
+        return ruteService.deleteRute(id);
+    }
+
 }

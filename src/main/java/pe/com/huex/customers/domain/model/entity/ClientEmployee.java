@@ -1,4 +1,4 @@
-package pe.com.huex.customers.domain.entity;
+package pe.com.huex.customers.domain.model.entity;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
-import pe.com.huex.customers.domain.entity.Client;
+import pe.com.huex.customers.domain.model.entity.Client;
 import pe.com.huex.employees.domain.entities.Employee;
 
 @Data

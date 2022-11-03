@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TruckFleetDto {
+
     private Long id;
     private Long idProvider;
     private String tractPlate;

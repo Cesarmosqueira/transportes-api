@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.customers.domain.entity.Rate;
-import pe.com.huex.customers.service.RateService;
+import pe.com.huex.customers.domain.model.entity.Rate;
+import pe.com.huex.customers.service.RateServiceImpl;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class RateController {
 
     @Autowired
-    RateService rateService;
+    RateServiceImpl rateService;
 
     @PostMapping
     public ResponseEntity<Rate> registerRate(@Validated @RequestBody Rate rate)

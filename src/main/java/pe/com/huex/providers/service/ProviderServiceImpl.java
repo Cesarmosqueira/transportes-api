@@ -60,7 +60,6 @@ public class ProviderServiceImpl implements IProviderService {
         ResponseDto<ProviderListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-
             List<Provider> providerList = providerRepository.findAll();
 
             if (providerList.isEmpty()) {

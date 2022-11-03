@@ -2,7 +2,7 @@ package pe.com.huex.servicetracking.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.servicetracking.domain.entity.ExpenseType;
+import pe.com.huex.servicetracking.domain.model.entity.ExpenseType;
 import pe.com.huex.servicetracking.domain.persistence.ExpenseTypeRepository;
 
 import java.util.List;

@@ -2,13 +2,13 @@ package pe.com.huex.customers.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.customers.domain.entity.Rate;
+import pe.com.huex.customers.domain.model.entity.Rate;
 import pe.com.huex.customers.domain.persistence.RateRepository;
 
 import java.util.List;
 
 @Service
-public class RateService {
+public class RateServiceImpl {
 
     @Autowired
     RateRepository rateRepository;
