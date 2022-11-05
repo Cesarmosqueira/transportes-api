@@ -21,7 +21,7 @@ import pe.com.huex.employees.services.EmployeeService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("employee")
+@RequestMapping("employees")
 public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;

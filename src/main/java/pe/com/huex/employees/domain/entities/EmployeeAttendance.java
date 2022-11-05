@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,7 +29,8 @@ public class EmployeeAttendance {
 	private Long id;
 
 	@Temporal(TemporalType.DATE)
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 
 	@Column(nullable = false, length = 32)

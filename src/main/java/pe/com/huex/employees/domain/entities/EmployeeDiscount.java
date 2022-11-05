@@ -13,16 +13,21 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import pe.com.huex.employees.domain.dtos.employees.DiscountResponseDto;
 
 @Data
 @Entity
-@Table(name = "employee_descuento")
+@Table(name = "employee_discount")
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDiscount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
@@ -37,5 +42,12 @@ public class EmployeeDiscount {
 
 	@Column(nullable = true)
 	private double charge;
+
+	public EmployeeDiscount(DiscountResponseDto discountRequestDto, Employee emp) {
+		this.date = discountRequestDto.getDate();
+		this.observations = discountRequestDto.getObservations();
+		this.charge = discountRequestDto.getCharge();
+		this.employee = emp;
+	}
 
 }

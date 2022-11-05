@@ -23,7 +23,7 @@ import pe.com.huex.employees.services.ImplementService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("implement")
+@RequestMapping("implements")
 public class ImplementController {
 
 	@Autowired
