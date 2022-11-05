@@ -1,14 +1,15 @@
-package pe.com.huex.employees.domain.dtos.employees;
+package pe.com.huex.employees.services.resources.dtos.discount;
 
 import pe.com.huex.employees.domain.entities.EmployeeDiscount;
+import pe.com.huex.employees.services.resources.response.DiscountResponseDto;
 
-public class DiscountDeleteDto {
+public class DiscountRegisterDto {
 	private DiscountResponseDto discount = null;
 
-	public DiscountDeleteDto() {
+	public DiscountRegisterDto() {
 	}
 
-	public DiscountDeleteDto discount(EmployeeDiscount discount) {
+	public DiscountRegisterDto discount(EmployeeDiscount discount) {
 		this.discount = new DiscountResponseDto(discount);
 		return this;
 	}
@@ -20,4 +21,5 @@ public class DiscountDeleteDto {
 	public void setDiscount(DiscountResponseDto discount) {
 		this.discount = discount;
 	}
+
 }

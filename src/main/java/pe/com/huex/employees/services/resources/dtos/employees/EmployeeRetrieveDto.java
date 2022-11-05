@@ -1,6 +1,7 @@
-package pe.com.huex.employees.domain.dtos.employees;
+package pe.com.huex.employees.services.resources.dtos.employees;
 
 import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.services.resources.response.EmployeeResponseDto;
 
 public class EmployeeRetrieveDto {
 

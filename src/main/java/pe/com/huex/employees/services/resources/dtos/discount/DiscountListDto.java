@@ -1,9 +1,10 @@
-package pe.com.huex.employees.domain.dtos.employees;
+package pe.com.huex.employees.services.resources.dtos.discount;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.huex.employees.domain.entities.EmployeeDiscount;
+import pe.com.huex.employees.services.resources.response.DiscountResponseDto;
 
 public class DiscountListDto {
 	public DiscountListDto() {

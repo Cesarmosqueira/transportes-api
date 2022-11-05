@@ -1,4 +1,5 @@
-package pe.com.huex.employees.domain.dtos.Implement;
+package pe.com.huex.employees.services.resources.dtos.implement;
+
 
 import java.util.List;
 

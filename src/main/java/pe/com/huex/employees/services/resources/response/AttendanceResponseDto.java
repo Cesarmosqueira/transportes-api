@@ -1,4 +1,4 @@
-package pe.com.huex.employees.domain.dtos.attendance;
+package pe.com.huex.employees.services.resources.response;
 
 import java.util.Date;
 

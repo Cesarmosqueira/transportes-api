@@ -1,4 +1,6 @@
-package pe.com.huex.employees.domain.dtos.attendance;
+package pe.com.huex.employees.services.resources.dtos.attendance;
+
+import pe.com.huex.employees.services.resources.response.AttendanceResponseDto;
 
 public class AttendanceRegisterDto {
 	private AttendanceResponseDto attendance = null;

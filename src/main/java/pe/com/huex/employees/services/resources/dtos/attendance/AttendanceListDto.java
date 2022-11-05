@@ -1,9 +1,10 @@
-package pe.com.huex.employees.domain.dtos.attendance;
+package pe.com.huex.employees.services.resources.dtos.attendance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.huex.employees.domain.entities.EmployeeAttendance;
+import pe.com.huex.employees.services.resources.response.AttendanceResponseDto;
 
 public class AttendanceListDto {
     public AttendanceListDto() {

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.employees.domain.dtos.attendance.AttendanceDeleteDto;
-import pe.com.huex.employees.domain.dtos.attendance.AttendanceListDto;
-import pe.com.huex.employees.domain.dtos.attendance.AttendanceRegisterDto;
-import pe.com.huex.employees.domain.dtos.attendance.AttendanceResponseDto;
-import pe.com.huex.employees.domain.dtos.attendance.AttendanceUpdateDto;
 import pe.com.huex.employees.services.AttendanceService;
+import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceDeleteDto;
+import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceListDto;
+import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceRegisterDto;
+import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceUpdateDto;
+import pe.com.huex.employees.services.resources.response.AttendanceResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController

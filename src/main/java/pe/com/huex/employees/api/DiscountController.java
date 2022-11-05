@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.employees.domain.dtos.employees.DiscountDeleteDto;
-import pe.com.huex.employees.domain.dtos.employees.DiscountListDto;
-import pe.com.huex.employees.domain.dtos.employees.DiscountRegisterDto;
-import pe.com.huex.employees.domain.dtos.employees.DiscountResponseDto;
 import pe.com.huex.employees.services.DiscountService;
+import pe.com.huex.employees.services.resources.dtos.discount.DiscountDeleteDto;
+import pe.com.huex.employees.services.resources.dtos.discount.DiscountListDto;
+import pe.com.huex.employees.services.resources.dtos.discount.DiscountRegisterDto;
+import pe.com.huex.employees.services.resources.response.DiscountResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController
