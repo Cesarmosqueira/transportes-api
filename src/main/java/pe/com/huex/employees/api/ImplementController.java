@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementDeleteDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementListDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementRegisterDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementRetrieveDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementUpdateDto;
+import pe.com.huex.employees.services.resources.dtos.implement.*;
 import pe.com.huex.employees.domain.entities.Implement;
 import pe.com.huex.employees.services.ImplementService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("implement")
+@RequestMapping("implements")
 public class ImplementController {
 
 	@Autowired

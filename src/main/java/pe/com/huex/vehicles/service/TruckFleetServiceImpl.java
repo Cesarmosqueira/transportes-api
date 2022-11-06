@@ -64,14 +64,16 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
             List<TruckFleet> truckFleetList = truckFleetRepository.findAll();
 
             if (truckFleetList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_TRUCKFLEET_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_TRUCKFLEET_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(truckFleetList.size()));
-            response.setDatos(new TruckFleetListResponse().truckFleetList(truckFleetMapping.modelList(truckFleetList) ));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(truckFleetList.size()));
+            response.setDatos(new TruckFleetListResponse().truckFleetList(truckFleetMapping.modelList(truckFleetList)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_INQUIRY_TRUCKFLEET_WARN + ": " + ex);
@@ -90,17 +92,20 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
             Optional<TruckFleet> truckFleetList = truckFleetRepository.findById(id);
 
             if (truckFleetList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TRUCKFLEET_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TRUCKFLEET_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(1));
-            response.setDatos(new TruckFleetRetrieveResponse().truckFleet(truckFleetMapping.modelDto(truckFleetList.get()) ));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+            response.setDatos(
+                    new TruckFleetRetrieveResponse().truckFleet(truckFleetMapping.modelDto(truckFleetList.get())));
 
         } catch (Exception ex) {
-            log.error(MESSAGE_RETRIEVE_TRUCKFLEET_WARN+ ": " + ex);
+            log.error(MESSAGE_RETRIEVE_TRUCKFLEET_WARN + ": " + ex);
             throw ex;
         }
 
@@ -114,7 +119,8 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
             TruckFleet truckFleet = truckFleetRepository.save(truckFleetMapping.model(truckFleetDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TRUCKFLEET_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TRUCKFLEET_SUCCESS, INFO,
+                    idTransaccion));
             response.setDatos(new TruckFleetRegisterResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_TRUCKFLEET_WARN + ": " + ex);
@@ -134,13 +140,15 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
             Optional<TruckFleet> truckFleetList = truckFleetRepository.findById(truckFleetDto.getId());
 
             if (truckFleetList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TRUCKFLEET_WARN, WARN, idTransaccion)
-                        .totalRegistros(0));
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TRUCKFLEET_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
                 return response;
             }
 
             TruckFleet truckFleet = truckFleetRepository.save(truckFleetMapping.model(truckFleetDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TRUCKFLEET_SUCCESS, INFO, idTransaccion));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TRUCKFLEET_SUCCESS, INFO, idTransaccion));
             response.setDatos(new TruckFleetUpdateResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
 
         } catch (Exception ex) {

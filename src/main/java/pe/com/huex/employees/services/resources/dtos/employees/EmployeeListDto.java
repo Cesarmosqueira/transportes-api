@@ -1,9 +1,10 @@
-package pe.com.huex.employees.domain.dtos.employees;
+package pe.com.huex.employees.services.resources.dtos.employees;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.services.resources.response.EmployeeResponseDto;
 
 public class EmployeeListDto {
 

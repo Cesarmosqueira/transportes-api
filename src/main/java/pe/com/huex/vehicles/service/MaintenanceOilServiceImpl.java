@@ -60,14 +60,17 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
             List<MaintenanceOil> maintenanceOilList = maintenanceOilRepository.findAll();
 
             if (maintenanceOilList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_MAINTENANCEOIL_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_MAINTENANCEOIL_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(maintenanceOilList.size()));
-            response.setDatos(new MaintenanceOilListResponse().maintenanceOilList(maintenanceOilMapping.modelList(maintenanceOilList)));
+            response.setDatos(new MaintenanceOilListResponse()
+                    .maintenanceOilList(maintenanceOilMapping.modelList(maintenanceOilList)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_INQUIRY_MAINTENANCEOIL_WARN + ": " + ex);
@@ -86,14 +89,17 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
             Optional<MaintenanceOil> maintenanceOilList = maintenanceOilRepository.findById(id);
 
             if (maintenanceOilList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new MaintenanceOilRetrieveResponse().maintenanceOil(maintenanceOilMapping.modelDto(maintenanceOilList.get())));
+            response.setDatos(new MaintenanceOilRetrieveResponse()
+                    .maintenanceOil(maintenanceOilMapping.modelDto(maintenanceOilList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN + ": " + ex);
@@ -109,9 +115,12 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            MaintenanceOil maintenanceOil = maintenanceOilRepository.save(maintenanceOilMapping.model(maintenanceOilDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new MaintenanceOilRegisterResponse().maintenanceOil(maintenanceOilMapping.modelDto(maintenanceOil)));
+            MaintenanceOil maintenanceOil = maintenanceOilRepository
+                    .save(maintenanceOilMapping.model(maintenanceOilDto));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_MAINTENANCEOIL_SUCCESS, INFO,
+                    idTransaccion));
+            response.setDatos(new MaintenanceOilRegisterResponse()
+                    .maintenanceOil(maintenanceOilMapping.modelDto(maintenanceOil)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_MAINTENANCEOIL_WARN + ": " + ex);
             throw ex;
@@ -130,13 +139,15 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
             MaintenanceOil maintenanceOilResponse = maintenanceOilRepository.findById(maintenanceOilDto.getId()).get();
 
             if (Objects.isNull(maintenanceOilResponse)) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
             maintenanceOilRepository.save(maintenanceOilMapping.model(maintenanceOilDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_MAINTENANCEOIL_SUCCESS, INFO,
+                    idTransaccion));
             response.setDatos(new MaintenanceOilUpdateResponse().maintenanceOil(maintenanceOilDto));
 
         } catch (Exception ex) {

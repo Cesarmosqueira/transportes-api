@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementDeleteDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementListDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementRegisterDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementRetrieveDto;
-import pe.com.huex.employees.domain.dtos.Implement.ImplementUpdateDto;
 import pe.com.huex.employees.domain.entities.Implement;
 import pe.com.huex.employees.domain.persistence.ImplementRepository;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementDeleteDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementListDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementRegisterDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementRetrieveDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementUpdateDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

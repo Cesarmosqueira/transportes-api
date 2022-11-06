@@ -25,10 +25,7 @@ public class ResponseDto<T> {
         return this;
     }
 
-    @ApiModelProperty(
-            required = true,
-            value = ""
-    )
+    @ApiModelProperty(required = true, value = "")
     public MetadatoServicio getMeta() {
         return this.meta;
     }
@@ -42,10 +39,7 @@ public class ResponseDto<T> {
         return this;
     }
 
-    @ApiModelProperty(
-            required = true,
-            value = ""
-    )
+    @ApiModelProperty(required = true, value = "")
     public T getDatos() {
         return this.datos;
     }
@@ -59,14 +53,15 @@ public class ResponseDto<T> {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
             ResponseDto postProductoResponseDto = (ResponseDto) o;
-            return Objects.equals(this.meta, postProductoResponseDto.meta) && Objects.equals(this.datos, postProductoResponseDto.datos);
+            return Objects.equals(this.meta, postProductoResponseDto.meta)
+                    && Objects.equals(this.datos, postProductoResponseDto.datos);
         } else {
             return false;
         }
     }
 
     public int hashCode() {
-        return Objects.hash(new Object[]{this.meta, this.datos});
+        return Objects.hash(new Object[] { this.meta, this.datos });
     }
 
     public String toString() {
