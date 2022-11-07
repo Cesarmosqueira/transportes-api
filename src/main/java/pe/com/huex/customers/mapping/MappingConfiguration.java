@@ -11,4 +11,9 @@ public class MappingConfiguration {
     public RuteMapping ruteMapping() {
         return new RuteMapping();
     }
+
+    @Bean
+    public RateMapping rateMapping() {
+        return new RateMapping();
+    }
 }

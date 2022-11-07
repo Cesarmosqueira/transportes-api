@@ -7,7 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.com.huex.customers.domain.model.entity.Rate;
+import pe.com.huex.customers.domain.service.IRateService;
 import pe.com.huex.customers.service.RateServiceImpl;
+import pe.com.huex.customers.service.resources.dto.RateDto;
+import pe.com.huex.customers.service.resources.dto.RuteDto;
+import pe.com.huex.customers.service.resources.response.*;
+import pe.com.huex.dto.Response.ResponseDto;
 
 import java.util.List;
 
@@ -17,32 +22,27 @@ import java.util.List;
 public class RateController {
 
     @Autowired
-    RateServiceImpl rateService;
-
-    @PostMapping
-    public ResponseEntity<Rate> registerRate(@Validated @RequestBody Rate rate)
-            throws Exception {
-        rate = rateService.createRate(rate);
-        return new ResponseEntity<>(rate, HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<Rate> retrieveRate(@PathVariable Long id) throws Exception {
-        Rate rate = rateService.getRate(id);
-        return new ResponseEntity<>(rate, HttpStatus.OK);
-    }
+    IRateService rateService;
 
     @GetMapping
-    public ResponseEntity<List<Rate>> listRates() throws Exception {
-        List<Rate> rates = rateService.listRate();
-        return new ResponseEntity<>(rates, HttpStatus.OK);
+    public ResponseDto<RateListResponse> listRate() throws Exception {
+        return rateService.listRate();
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Rate> updateRute(@PathVariable Long id, @Validated @RequestBody Rate rate)
+    @GetMapping(path = "{id}")
+    public ResponseDto<RateRetrieveResponse> retrieveRate(@PathVariable Long id) throws Exception {
+        return rateService.retrieveRate(id);
+    }
+
+    @PostMapping
+    public ResponseDto<RateRegisterResponse> registerRate(@RequestBody RateDto rateDto) throws Exception {
+        return rateService.registerRate(rateDto);
+    }
+
+    @PutMapping
+    public ResponseDto<RateUpdateResponse> updateRate(@RequestBody RateDto rateDto)
             throws Exception {
-        Rate updated = rateService.updateRate(id, rate);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+        return rateService.updateRate(rateDto);
     }
 
 }

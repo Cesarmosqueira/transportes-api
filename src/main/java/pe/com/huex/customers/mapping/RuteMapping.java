@@ -23,6 +23,7 @@ public class RuteMapping extends ModelMapper implements Serializable {
     }
 
     public Rute model(RuteDto ruteDto) {
+
         return this.map(ruteDto, Rute.class);
     }
 
