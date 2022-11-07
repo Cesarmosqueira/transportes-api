@@ -5,8 +5,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pe.com.huex.customers.service.resources.dto.RateDto;
+import pe.com.huex.customers.service.resources.response.RateListResponse;
+import pe.com.huex.customers.service.resources.response.RateRegisterResponse;
+import pe.com.huex.customers.service.resources.response.RateRetrieveResponse;
+import pe.com.huex.customers.service.resources.response.RateUpdateResponse;
+import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.servicetracking.domain.model.entity.ExpenseType;
+import pe.com.huex.servicetracking.domain.service.IExpenseTypeService;
 import pe.com.huex.servicetracking.service.ExpenseTypeService;
+import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
+import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeListResponse;
+import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeRegisterResponse;
+import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeRetrieveResponse;
+import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeUpdateResponse;
 
 import java.util.List;
 
@@ -15,25 +27,29 @@ import java.util.List;
 @RequestMapping("expense_type")
 public class ExpenseTypeController {
 
+
     @Autowired
-    ExpenseTypeService expenseTypeService;
-
-    @PostMapping
-    public ResponseEntity<ExpenseType> registerExpenseType(@Validated @RequestBody ExpenseType expenseType)
-            throws Exception {
-        expenseType = expenseTypeService.createExpenseType(expenseType);
-        return new ResponseEntity<>(expenseType, HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<ExpenseType> retrieveExpenseType(@PathVariable Long id) throws Exception {
-        ExpenseType expenseType = expenseTypeService.getExpenseType(id);
-        return new ResponseEntity<>(expenseType, HttpStatus.OK);
-    }
+    IExpenseTypeService expenseTypeService;
 
     @GetMapping
-    public ResponseEntity<List<ExpenseType>> listExpenseType() throws Exception {
-        List<ExpenseType> expenseTypes = expenseTypeService.listExpenseType();
-        return new ResponseEntity<>(expenseTypes, HttpStatus.OK);
+    public ResponseDto<ExpenseTypeListResponse> listExpenseType() throws Exception {
+        return expenseTypeService.listExpenseType();
     }
+
+    @GetMapping(path = "{id}")
+    public ResponseDto<ExpenseTypeRetrieveResponse> retrieveExpenseType(@PathVariable Long id) throws Exception {
+        return expenseTypeService.retrieveExpenseType(id);
+    }
+
+    @PostMapping
+    public ResponseDto<ExpenseTypeRegisterResponse> registerExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto) throws Exception {
+        return expenseTypeService.registerExpenseType(expenseTypeDto);
+    }
+
+    @PutMapping
+    public ResponseDto<ExpenseTypeUpdateResponse> updateExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
+            throws Exception {
+        return expenseTypeService.updateExpenseType(expenseTypeDto);
+    }
+
 }
