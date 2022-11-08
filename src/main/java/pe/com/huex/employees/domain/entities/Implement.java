@@ -31,6 +31,9 @@ public class Implement {
 	@Column(nullable = false)
 	private boolean available;
 
+	@Column(nullable = true)
+	private int stock;
+
 	@OneToMany(mappedBy = "implement", cascade = CascadeType.ALL)
 	private List<EmployeeImplement> employeeImplements = new ArrayList<>();
 }
