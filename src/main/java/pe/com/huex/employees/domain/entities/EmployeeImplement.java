@@ -13,12 +13,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @Entity
 @Table(name = "employee_implement")
+@NoArgsConstructor
 public class EmployeeImplement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
@@ -30,7 +35,7 @@ public class EmployeeImplement {
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date fecha;
+	private Date date;
 
 	@Column(nullable = true, length = 1024)
 	private String observations;
