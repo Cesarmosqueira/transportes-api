@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.providers.domain.model.entity.Provider;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 import pe.com.huex.providers.domain.persistence.ProvinceEstivatorRepository;
 import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
@@ -24,7 +23,7 @@ import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
 @Transactional
 @Service
 @Slf4j
-public class ProvinceEstivatorService implements IProvinceEstivatorService {
+public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
 
     private static final String MESSAGE_INQUIRY_PROVINCE_ESTIVATOR_SUCCESS = "La consulta de estivador provincia fue exitoso";
     private static final String MESSAGE_INQUIRY_PROVINCE_ESTIVATOR_WARN = "No se encontró ningún estivador provincia registrado";

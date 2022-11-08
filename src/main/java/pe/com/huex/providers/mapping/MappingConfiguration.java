@@ -15,4 +15,9 @@ public class MappingConfiguration {
     public ProvinceEstivatorMapping provinceEstivatorMapping() {
         return new ProvinceEstivatorMapping();
     }
+
+    @Bean
+    public TireReplacementMapping tireReplacementMapping() {
+        return new TireReplacementMapping();
+    }
 }
