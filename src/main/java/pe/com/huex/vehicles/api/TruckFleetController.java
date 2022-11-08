@@ -13,7 +13,7 @@ import pe.com.huex.vehicles.service.resources.response.TruckFleetUpdateResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "truckFleet", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "vehicle/truckFleet", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TruckFleetController {
 
     @Autowired

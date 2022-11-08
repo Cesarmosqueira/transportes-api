@@ -14,7 +14,7 @@ import pe.com.huex.vehicles.service.resources.response.CheckListUpdateResponse;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(value = "checkList", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "vehicle/checkList", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CheckListController {
 
     private final ICheckListService checkListService;

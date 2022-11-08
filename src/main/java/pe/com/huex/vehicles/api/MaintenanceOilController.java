@@ -13,7 +13,7 @@ import pe.com.huex.vehicles.service.resources.response.MaintenanceOilUpdateRespo
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "maintenanceOil", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "vehicle/maintenanceOil", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MaintenanceOilController {
     @Autowired
     IMaintenanceOilService maintenanceOilService;
