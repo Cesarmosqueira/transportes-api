@@ -10,4 +10,9 @@ public class MappingConfiguration {
     public ProviderMapping providerMapping() {
         return new ProviderMapping();
     }
+
+    @Bean
+    public ProvinceEstivatorMapping provinceEstivatorMapping() {
+        return new ProvinceEstivatorMapping();
+    }
 }

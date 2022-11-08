@@ -20,11 +20,9 @@ public class ProvinceEstivators {
     @JoinColumn(name = "rute_id", nullable = false)
     private Rute rute;
 
-    @Column(nullable = false, length =128)
-    private String name;
-
-    @Column(nullable = true, length = 32)
-    private String phone;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "provider_id", nullable = false)
+    private Provider provider;
 
     @Column(nullable = false)
     private double CostM3;

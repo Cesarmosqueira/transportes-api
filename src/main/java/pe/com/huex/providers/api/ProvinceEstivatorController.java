@@ -6,8 +6,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
+import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
 import pe.com.huex.providers.service.ProvinceEstivatorService;
+import pe.com.huex.providers.service.resouces.dto.ProviderDto;
+import pe.com.huex.providers.service.resouces.dto.ProvinceEstivatorDto;
+import pe.com.huex.providers.service.resouces.response.*;
 
 import java.util.List;
 
@@ -17,33 +22,28 @@ import java.util.List;
 public class ProvinceEstivatorController {
 
     @Autowired
-    ProvinceEstivatorService provinceEstivatorService;
-
-    @PostMapping
-    public ResponseEntity<ProvinceEstivators> registerProvinceEstivators(
-            @Validated @RequestBody ProvinceEstivators provinceEstivators)
-            throws Exception {
-        provinceEstivators = provinceEstivatorService.createProvinceEstivators(provinceEstivators);
-        return new ResponseEntity<>(provinceEstivators, HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    public ResponseEntity<ProvinceEstivators> retrieveProvinceEstivators(@PathVariable Long id) throws Exception {
-        ProvinceEstivators provinceEstivators = provinceEstivatorService.getProvinceEstivators(id);
-        return new ResponseEntity<>(provinceEstivators, HttpStatus.OK);
-    }
+    IProvinceEstivatorService provinceEstivatorService;
 
     @GetMapping
-    public ResponseEntity<List<ProvinceEstivators>> listProvinceEstivators() throws Exception {
-        List<ProvinceEstivators> provinceEstivators = provinceEstivatorService.listProvinceEstivators();
-        return new ResponseEntity<>(provinceEstivators, HttpStatus.OK);
+    public ResponseDto<ProvinceEstivatorListResponse> listProvinceEstivator() throws Exception {
+        return provinceEstivatorService.listProvinceEstivator();
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<ProvinceEstivators> updateProvinceEstivators(
-            @PathVariable Long id, @Validated @RequestBody ProvinceEstivators provinceEstivators)
-            throws Exception {
-        ProvinceEstivators updated = provinceEstivatorService.updateProvinceEstivators(id, provinceEstivators);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    @GetMapping(path = "{id}")
+    public ResponseDto<ProvinceEstivatorRetrieveResponse> retrieveProvinceEstivator(@PathVariable Long id) throws Exception {
+        return provinceEstivatorService.retrieveProvinceEstivator(id);
     }
+
+    @PostMapping
+    public ResponseDto<ProvinceEstivatorRegisterResponse> registerProvinceEstivator(@RequestBody ProvinceEstivatorDto provinceEstivatorDto) throws Exception {
+        return provinceEstivatorService.registerProvinceEstivator(provinceEstivatorDto);
+    }
+
+    @PutMapping
+    public ResponseDto<ProvinceEstivatorUpdateResponse> updateProvinceEstivator(@RequestBody ProvinceEstivatorDto provinceEstivatorDto)
+            throws Exception {
+        return provinceEstivatorService.updateProvinceEstivator(provinceEstivatorDto);
+    }
+
+
 }
