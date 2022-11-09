@@ -36,7 +36,7 @@ public class TireReplacementController {
     @PutMapping
     public ResponseDto<TireReplacementUpdateResponse> updateTireReplacement(@RequestBody TireReplacementDto tireReplacementDto)
             throws Exception {
-        return tiredReplacementService.updateTireReplacementDto(tireReplacementDto);
+        return tiredReplacementService.updateTireReplacement(tireReplacementDto);
     }
 
 

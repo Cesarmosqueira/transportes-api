@@ -12,6 +12,6 @@ public interface ITireReplacementService {
 
     ResponseDto<TireReplacementRegisterResponse> registerTireReplacement(TireReplacementDto tireReplacementDto);
 
-    ResponseDto<TireReplacementUpdateResponse> updateTireReplacementDto(TireReplacementDto tireReplacementDto);
+    ResponseDto<TireReplacementUpdateResponse> updateTireReplacement(TireReplacementDto tireReplacementDto);
 
 }

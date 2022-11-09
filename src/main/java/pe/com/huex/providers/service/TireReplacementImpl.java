@@ -68,7 +68,7 @@ public class TireReplacementImpl implements ITireReplacementService {
             response.setDatos(new TireReplacementListResponse().tireReplacementListResponse(tireReplacementMapping.modelList(tireReplacementList)));
 
         } catch (Exception ex) {
-            log.error("error al reposicion llanta provincia" + ex);
+            log.error("error al consultar reposicion llanta " + ex);
             throw ex;
         }
 
@@ -119,7 +119,7 @@ public class TireReplacementImpl implements ITireReplacementService {
     }
 
     @Override
-    public ResponseDto<TireReplacementUpdateResponse> updateTireReplacementDto(TireReplacementDto tireReplacementDto) {
+    public ResponseDto<TireReplacementUpdateResponse> updateTireReplacement(TireReplacementDto tireReplacementDto) {
         ResponseDto<TireReplacementUpdateResponse> response = new ResponseDto<>();
 
         try {
