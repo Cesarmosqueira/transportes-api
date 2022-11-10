@@ -1,4 +1,4 @@
-package pe.com.huex.entities;
+package pe.com.huex.customer.domain.entities;
 
 import java.util.Date;
 
@@ -16,12 +16,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import pe.com.huex.employees.domain.entities.Employee;
 
 @Data
 @Entity
-@Table(name = "client_employee")
-public class ClientEmployee {
+@NoArgsConstructor
+@Table(name = "customer_employee")
+public class CustomerEmployee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -37,11 +39,11 @@ public class ClientEmployee {
 	private String observations;
 
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "clientEmployee", referencedColumnName = "id")
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
 }

@@ -1,4 +1,4 @@
-package pe.com.huex.entities;
+package pe.com.huex.customer.domain.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,11 +16,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
+import pe.com.huex.entities.Rate;
 
 @Data
 @Entity
-@Table(name = "client")
-public class Client {
+@NoArgsConstructor
+@Table(name = "customer")
+public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -38,9 +42,16 @@ public class Client {
 	@Column(nullable = false)
 	private Date registerDate;
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	private List<ClientEmployee> employees = new ArrayList<>();
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<CustomerEmployee> employees = new ArrayList<>();
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();
+
+	public Customer(CustomerResponseDto customerResponseDto) {
+		this.ruc = customerResponseDto.getRuc();
+		this.socialReason = customerResponseDto.getSocialReason();
+		this.bankAccount = customerResponseDto.getBankAccount();
+		this.registerDate = customerResponseDto.getRegisterDate();
+	}
 }

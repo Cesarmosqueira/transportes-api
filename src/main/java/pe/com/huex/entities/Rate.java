@@ -2,6 +2,7 @@ package pe.com.huex.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.com.huex.customer.domain.entities.Customer;
 
 import javax.persistence.*;
 
@@ -16,8 +17,8 @@ public class Rate {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", nullable = false)
-    private Client client;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rute_id", nullable = false)
