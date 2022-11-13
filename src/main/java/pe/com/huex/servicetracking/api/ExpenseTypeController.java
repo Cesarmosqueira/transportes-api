@@ -5,11 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.customers.service.resources.dto.RateDto;
-import pe.com.huex.customers.service.resources.response.RateListResponse;
-import pe.com.huex.customers.service.resources.response.RateRegisterResponse;
-import pe.com.huex.customers.service.resources.response.RateRetrieveResponse;
-import pe.com.huex.customers.service.resources.response.RateUpdateResponse;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.servicetracking.domain.model.entity.ExpenseType;
 import pe.com.huex.servicetracking.domain.service.IExpenseTypeService;
@@ -27,7 +22,6 @@ import java.util.List;
 @RequestMapping("expense_type")
 public class ExpenseTypeController {
 
-
     @Autowired
     IExpenseTypeService expenseTypeService;
 
@@ -42,7 +36,8 @@ public class ExpenseTypeController {
     }
 
     @PostMapping
-    public ResponseDto<ExpenseTypeRegisterResponse> registerExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto) throws Exception {
+    public ResponseDto<ExpenseTypeRegisterResponse> registerExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
+            throws Exception {
         return expenseTypeService.registerExpenseType(expenseTypeDto);
     }
 

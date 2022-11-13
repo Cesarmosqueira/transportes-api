@@ -13,9 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.employees.services.resources.dtos.implement.*;
 import pe.com.huex.employees.domain.entities.Implement;
+import pe.com.huex.employees.services.EmployeeImplementService;
 import pe.com.huex.employees.services.ImplementService;
+import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementListDto;
+import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementRegisterDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementDeleteDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementListDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementRegisterDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementRetrieveDto;
+import pe.com.huex.employees.services.resources.dtos.implement.ImplementUpdateDto;
+import pe.com.huex.employees.services.resources.response.EmployeeImplementResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,6 +32,9 @@ public class ImplementController {
 
 	@Autowired
 	ImplementService implementService;
+
+	@Autowired
+	EmployeeImplementService employeeImplementService;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<ImplementListDto> listImplements() throws Exception {
@@ -40,6 +51,12 @@ public class ImplementController {
 		return implementService.registerImplements(implement);
 	}
 
+	@PostMapping(path = "assign", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<EmployeeImplementRegisterDto> assignImplement(
+			@RequestBody EmployeeImplementResponseDto employeeImplementResponseDto) throws Exception {
+		return implementService.assignImplements(employeeImplementResponseDto);
+	}
+
 	@PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<ImplementUpdateDto> updateImplements(@PathVariable Long id, @RequestBody Implement implement)
 			throws Exception {
@@ -50,6 +67,11 @@ public class ImplementController {
 	public ResponseDto<ImplementDeleteDto> deleteImplements(@PathVariable Long id)
 			throws Exception {
 		return implementService.deleteImplements(id);
+	}
+
+	@GetMapping(path = "assigned/{implementId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<EmployeeImplementListDto> listAssignments(@PathVariable Long implementId) {
+		return employeeImplementService.listImplementAssignments(implementId);
 	}
 
 }

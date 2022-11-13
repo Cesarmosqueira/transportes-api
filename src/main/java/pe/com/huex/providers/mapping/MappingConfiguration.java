@@ -20,6 +20,7 @@ public class MappingConfiguration {
     public TireReplacementMapping tireReplacementMapping() {
         return new TireReplacementMapping();
     }
+
     @Bean
     public FuelSupplyMapping fuelSupplyMapping() {
         return new FuelSupplyMapping();

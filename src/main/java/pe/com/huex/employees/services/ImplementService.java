@@ -14,13 +14,20 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.domain.entities.EmployeeImplement;
 import pe.com.huex.employees.domain.entities.Implement;
+import pe.com.huex.employees.domain.persistence.EmployeeImplementRepository;
+import pe.com.huex.employees.domain.persistence.EmployeeRepository;
 import pe.com.huex.employees.domain.persistence.ImplementRepository;
+import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementListDto;
+import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementRegisterDto;
 import pe.com.huex.employees.services.resources.dtos.implement.ImplementDeleteDto;
 import pe.com.huex.employees.services.resources.dtos.implement.ImplementListDto;
 import pe.com.huex.employees.services.resources.dtos.implement.ImplementRegisterDto;
 import pe.com.huex.employees.services.resources.dtos.implement.ImplementRetrieveDto;
 import pe.com.huex.employees.services.resources.dtos.implement.ImplementUpdateDto;
+import pe.com.huex.employees.services.resources.response.EmployeeImplementResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional
@@ -30,7 +37,7 @@ public class ImplementService {
 	private static final String MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
 	private static final String MESSAGE_INQUIRY_IMPLEMENTS_WARN = "No se encontró ningún implemento registrado";
 
-	private static final String MESSAGE_REGISTER_IMPLEMENTS_SUCCESS = "El registro del proeveedor fue exitoso";
+	private static final String MESSAGE_REGISTER_IMPLEMENTS_SUCCESS = "El registro del implemento fue exitoso";
 	private static final String MESSAGE_REGISTER_IMPLEMENTS_WARN = "Ocurrió un error al registrar al implemento";
 
 	private static final String MESSAGE_UPDATE_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
@@ -49,14 +56,20 @@ public class ImplementService {
 	@Autowired
 	ImplementRepository implementRepository;
 
+	@Autowired
+	EmployeeRepository employeeRepository;
+
+	@Autowired
+	EmployeeImplementRepository employeeImplementRepository;
+
 	public ResponseDto<ImplementListDto> listImplements() {
 		ResponseDto<ImplementListDto> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<Implement> implementList = implementRepository.findAll();
+			List<Implement> relationList = implementRepository.findAll();
 
-			if (implementList.isEmpty()) {
+			if (relationList.isEmpty()) {
 				response.meta(
 						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
@@ -65,8 +78,8 @@ public class ImplementService {
 
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
-							.totalRegistros(implementList.size()));
-			response.setDatos(new ImplementListDto().implementList(implementList));
+							.totalRegistros(relationList.size()));
+			response.setDatos(new ImplementListDto().relationList(relationList));
 
 		} catch (Exception ex) {
 			log.error("error al consultar implementos" + ex);
@@ -81,9 +94,9 @@ public class ImplementService {
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Implement> implementList = implementRepository.findById(id);
+			Optional<Implement> relationList = implementRepository.findById(id);
 
-			if (implementList.isEmpty()) {
+			if (relationList.isEmpty()) {
 				response.meta(
 						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
 								.totalRegistros(0));
@@ -93,7 +106,7 @@ public class ImplementService {
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(1));
-			response.setDatos(new ImplementRetrieveDto().implement(implementList.get()));
+			response.setDatos(new ImplementRetrieveDto().implement(relationList.get()));
 
 		} catch (Exception ex) {
 			log.error("error al consultar implemento" + ex);
@@ -175,6 +188,50 @@ public class ImplementService {
 		}
 
 		return response;
+	}
+
+	public ResponseDto<EmployeeImplementRegisterDto> assignImplements(
+			EmployeeImplementResponseDto employeeImplementResponseDto) {
+		ResponseDto<EmployeeImplementRegisterDto> response = new ResponseDto<>();
+		String idTransaccion = UUID.randomUUID().toString();
+
+		Optional<Employee> employeeResponse = employeeRepository.findById(employeeImplementResponseDto.getEmployeeId());
+		Optional<Implement> implementResponse = implementRepository
+				.findById(employeeImplementResponseDto.getImplementId());
+
+		if (employeeResponse.isEmpty()) {
+			response.meta(
+					MetaDatosUtil.buildMetadatos(CODE_WARN, "No se encontro al trabajador", WARN, idTransaccion)
+							.totalRegistros(0));
+			return response;
+		}
+		if (implementResponse.isEmpty()) {
+			response.meta(
+					MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
+							.totalRegistros(0));
+			return response;
+		}
+
+		try {
+			EmployeeImplement employeeImplement = new EmployeeImplement();
+			employeeImplement.setDate(employeeImplementResponseDto.getDate());
+			employeeImplement.setObservations(employeeImplement.getObservations());
+			employeeImplement.setEmployee(employeeResponse.get());
+			employeeImplement.setImplement(implementResponse.get());
+
+			employeeImplement = employeeImplementRepository.save(employeeImplement);
+
+			response.meta(
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, "La asignacion del implemento fue exitosa", INFO,
+							idTransaccion));
+			response.setDatos(new EmployeeImplementRegisterDto().employeeImplement(employeeImplement));
+			return response;
+
+		} catch (Exception ex) {
+			log.error("Error al asignar al implemento" + ex);
+			throw ex;
+
+		}
 	}
 
 }

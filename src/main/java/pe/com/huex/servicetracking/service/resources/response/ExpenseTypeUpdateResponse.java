@@ -1,8 +1,6 @@
 package pe.com.huex.servicetracking.service.resources.response;
 
 import lombok.*;
-import pe.com.huex.customers.service.resources.dto.RateDto;
-import pe.com.huex.customers.service.resources.response.RateUpdateResponse;
 import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
 
 @Getter

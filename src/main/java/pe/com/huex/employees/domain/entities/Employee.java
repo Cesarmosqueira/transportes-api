@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.com.huex.customer.domain.entities.CustomerEmployee;
 
 @Data
 @Entity
@@ -116,5 +117,8 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<EmployeeDiscount> discounts = new ArrayList<>();
+
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private List<CustomerEmployee> customers = new ArrayList<>();
 
 }

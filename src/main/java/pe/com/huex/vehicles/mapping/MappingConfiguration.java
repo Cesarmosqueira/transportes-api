@@ -29,4 +29,9 @@ public class MappingConfiguration {
     public TruckFleetMapping truckFleetMapping() {
         return new TruckFleetMapping();
     }
+
+    @Bean
+    public MaintenanceTireMapping maintenanceTireMapping() {
+        return new MaintenanceTireMapping();
+    }
 }

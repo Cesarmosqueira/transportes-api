@@ -13,7 +13,8 @@ public class ProvinceEstivatorRegisterResponse {
 
     private ProvinceEstivatorDto provinceEstivatorDto = null;
 
-    public ProvinceEstivatorRegisterResponse provinceEstivatorRegisterResponse(ProvinceEstivatorDto provinceEstivatorDto) {
+    public ProvinceEstivatorRegisterResponse provinceEstivatorRegisterResponse(
+            ProvinceEstivatorDto provinceEstivatorDto) {
         this.provinceEstivatorDto = provinceEstivatorDto;
         return this;
     }

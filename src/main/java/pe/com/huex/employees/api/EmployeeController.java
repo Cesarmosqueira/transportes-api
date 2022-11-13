@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.services.EmployeeImplementService;
 import pe.com.huex.employees.services.EmployeeService;
+import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementListDto;
 import pe.com.huex.employees.services.resources.dtos.employees.EmployeeListDto;
 import pe.com.huex.employees.services.resources.dtos.employees.EmployeeRegisterDto;
 import pe.com.huex.employees.services.resources.dtos.employees.EmployeeRetrieveDto;
@@ -25,6 +27,9 @@ import pe.com.huex.employees.services.resources.dtos.employees.EmployeeUpdateDto
 public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
+
+	@Autowired
+	EmployeeImplementService employeeImplementService;
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseDto<EmployeeListDto> listEmployees() throws Exception {
@@ -46,4 +51,10 @@ public class EmployeeController {
 			throws Exception {
 		return employeeService.updateEmployees(id, employee);
 	}
+
+	@GetMapping(path = "assigned/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<EmployeeImplementListDto> listImplements(@PathVariable Long employeeId) {
+		return employeeImplementService.listEmployeeAssignments(employeeId);
+	}
+
 }

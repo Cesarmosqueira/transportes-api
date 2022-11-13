@@ -14,7 +14,7 @@ import pe.com.huex.vehicles.service.resources.response.DocumentUnitUpdateRespons
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "documentUnit", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "vehicle/documentUnit", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentUnitController {
 
     @Autowired

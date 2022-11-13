@@ -13,7 +13,7 @@ import pe.com.huex.vehicles.service.resources.response.KardexFuelUpdateResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "kardexFuel", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "vehicle/kardexFuel", produces = MediaType.APPLICATION_JSON_VALUE)
 public class KardexFuelController {
 
     @Autowired

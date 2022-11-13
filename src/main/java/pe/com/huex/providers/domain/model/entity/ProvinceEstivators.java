@@ -1,10 +1,18 @@
 package pe.com.huex.providers.domain.model.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.com.huex.customers.domain.model.entity.Rute;
-
-import javax.persistence.*;
+import pe.com.huex.customer.domain.entities.Route;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +25,8 @@ public class ProvinceEstivators {
     private Long Id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "rute_id", nullable = false)
-    private Rute rute;
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = false)

@@ -44,11 +44,11 @@ public class TireReplacementImpl implements ITireReplacementService {
 
     private final TireReplacementRepository tireReplacementRepository;
 
-    public TireReplacementImpl(TireReplacementMapping tireReplacementMapping, TireReplacementRepository tireReplacementRepository) {
+    public TireReplacementImpl(TireReplacementMapping tireReplacementMapping,
+            TireReplacementRepository tireReplacementRepository) {
         this.tireReplacementMapping = tireReplacementMapping;
         this.tireReplacementRepository = tireReplacementRepository;
     }
-
 
     @Override
     public ResponseDto<TireReplacementListResponse> listTireReplacement() {
@@ -58,14 +58,17 @@ public class TireReplacementImpl implements ITireReplacementService {
             List<TireReplacement> tireReplacementList = tireReplacementRepository.findAll();
 
             if (tireReplacementList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(tireReplacementList.size()));
-            response.setDatos(new TireReplacementListResponse().tireReplacementListResponse(tireReplacementMapping.modelList(tireReplacementList)));
+            response.setDatos(new TireReplacementListResponse()
+                    .tireReplacementListResponse(tireReplacementMapping.modelList(tireReplacementList)));
 
         } catch (Exception ex) {
             log.error("error al consultar reposicion llanta " + ex);
@@ -84,14 +87,17 @@ public class TireReplacementImpl implements ITireReplacementService {
             Optional<TireReplacement> tireReplacementList = tireReplacementRepository.findById(id);
 
             if (tireReplacementList.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new TireReplacementRetrieveResponse().tireReplacementRetrieveResponse(tireReplacementMapping.modelDto(tireReplacementList.get())));
+            response.setDatos(new TireReplacementRetrieveResponse()
+                    .tireReplacementRetrieveResponse(tireReplacementMapping.modelDto(tireReplacementList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar reposicion llanta provincia" + ex);
@@ -107,9 +113,12 @@ public class TireReplacementImpl implements ITireReplacementService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            TireReplacement tireReplacementResponse = tireReplacementRepository.save(tireReplacementMapping.model(tireReplacementDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new TireReplacementRegisterResponse().tireReplacementRegisterResponse(tireReplacementMapping.modelDto(tireReplacementResponse)));
+            TireReplacement tireReplacementResponse = tireReplacementRepository
+                    .save(tireReplacementMapping.model(tireReplacementDto));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TIRE_REPLACEMENT_SUCCESS, INFO,
+                    idTransaccion));
+            response.setDatos(new TireReplacementRegisterResponse()
+                    .tireReplacementRegisterResponse(tireReplacementMapping.modelDto(tireReplacementResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_TIRE_REPLACEMENT_WARN + ": " + ex);
             throw ex;
@@ -125,16 +134,19 @@ public class TireReplacementImpl implements ITireReplacementService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<TireReplacement> tireReplacementResponse = tireReplacementRepository.findById(tireReplacementDto.getId());
+            Optional<TireReplacement> tireReplacementResponse = tireReplacementRepository
+                    .findById(tireReplacementDto.getId());
 
             if (tireReplacementResponse.isEmpty()) {
-                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
             tireReplacementRepository.save(tireReplacementMapping.model(tireReplacementDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion));
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO,
+                    idTransaccion));
             response.setDatos(new TireReplacementUpdateResponse().tireReplacementUpdateResponse(tireReplacementDto));
 
         } catch (Exception ex) {

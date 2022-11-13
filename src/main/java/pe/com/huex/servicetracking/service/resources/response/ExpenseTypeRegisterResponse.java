@@ -1,8 +1,10 @@
 package pe.com.huex.servicetracking.service.resources.response;
 
-import lombok.*;
-import pe.com.huex.customers.service.resources.dto.RateDto;
-import pe.com.huex.customers.service.resources.response.RateRegisterResponse;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.With;
 import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
 
 @Getter
