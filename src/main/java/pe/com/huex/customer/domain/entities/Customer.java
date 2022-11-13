@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
-import pe.com.huex.entities.Rate;
 
 @Data
 @Entity
