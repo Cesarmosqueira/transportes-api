@@ -1,11 +1,11 @@
-package pe.com.huex.servicetracking.service.resources.response;
+package pe.com.huex.services.service.resources.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.With;
-import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
+import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 
 @Getter
 @Setter

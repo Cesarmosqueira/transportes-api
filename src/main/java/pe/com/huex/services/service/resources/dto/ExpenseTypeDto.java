@@ -1,4 +1,4 @@
-package pe.com.huex.servicetracking.service.resources.dto;
+package pe.com.huex.services.service.resources.dto;
 
 import lombok.*;
 

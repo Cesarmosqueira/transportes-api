@@ -1,4 +1,4 @@
-package pe.com.huex.servicetracking.domain.model.entity;
+package pe.com.huex.services.domain.model.entity;
 
 
 import lombok.Data;

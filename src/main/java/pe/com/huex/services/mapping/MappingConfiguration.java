@@ -11,4 +11,9 @@ public class MappingConfiguration {
         return new TrackingServiceMapping();
     }
 
+    @Bean
+    public ExpenseTypeMapping expenseTypeMapping() {
+        return new ExpenseTypeMapping();
+    }
+
 }
