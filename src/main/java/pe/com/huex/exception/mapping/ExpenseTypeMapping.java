@@ -1,9 +1,9 @@
-package pe.com.huex.servicetracking.mapping;
+package pe.com.huex.exception.mapping;
 
 import org.modelmapper.ModelMapper;
 
-import pe.com.huex.servicetracking.domain.model.entity.ExpenseType;
-import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
+import pe.com.huex.services.domain.model.entity.ExpenseType;
+import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 
 import java.io.Serializable;
 import java.util.List;

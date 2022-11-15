@@ -14,7 +14,7 @@ public class FuelSupplyDto {
 
     private Long id;
 
-    private Provider provider;
+    private Long providerId;
 
     private Date dateFuel;
 
@@ -25,8 +25,6 @@ public class FuelSupplyDto {
     private Double totalPrice;
 
     private String observation;
-
-
 
 
 }

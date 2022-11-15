@@ -1,21 +1,14 @@
-package pe.com.huex.servicetracking.api;
+package pe.com.huex.services.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.servicetracking.domain.model.entity.ExpenseType;
-import pe.com.huex.servicetracking.domain.service.IExpenseTypeService;
-import pe.com.huex.servicetracking.service.ExpenseTypeService;
-import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
-import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeListResponse;
-import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeRegisterResponse;
-import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeRetrieveResponse;
-import pe.com.huex.servicetracking.service.resources.response.ExpenseTypeUpdateResponse;
-
-import java.util.List;
+import pe.com.huex.services.domain.service.IExpenseTypeService;
+import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
+import pe.com.huex.services.service.resources.response.ExpenseTypeListResponse;
+import pe.com.huex.services.service.resources.response.ExpenseTypeRegisterResponse;
+import pe.com.huex.services.service.resources.response.ExpenseTypeRetrieveResponse;
+import pe.com.huex.services.service.resources.response.ExpenseTypeUpdateResponse;
 
 @CrossOrigin(origins = "*")
 @RestController

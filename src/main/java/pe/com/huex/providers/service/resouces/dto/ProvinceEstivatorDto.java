@@ -16,9 +16,9 @@ import pe.com.huex.providers.domain.model.entity.Provider;
 public class ProvinceEstivatorDto {
 
     private Long id;
-    private Route route;
-    private Provider provider;
-    private double CostM3;
-    private String Observation;
+    private Long routeId;
+    private Long providerId;
+    private double costM3;
+    private String observation;
 
 }

@@ -33,8 +33,8 @@ public class ProvinceEstivators {
     private Provider provider;
 
     @Column(nullable = false)
-    private double CostM3;
+    private double costM3;
 
     @Column(nullable = true, length = 250)
-    private String Observation;
+    private String observation;
 }

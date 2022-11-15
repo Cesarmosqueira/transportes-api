@@ -1,6 +1,6 @@
-package pe.com.huex.servicetracking.service.resources.response;
+package pe.com.huex.services.service.resources.response;
 
-import pe.com.huex.servicetracking.service.resources.dto.ExpenseTypeDto;
+import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 
 import java.util.List;
 

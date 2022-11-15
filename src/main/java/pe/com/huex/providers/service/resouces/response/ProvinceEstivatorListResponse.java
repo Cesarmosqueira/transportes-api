@@ -17,7 +17,7 @@ public class ProvinceEstivatorListResponse {
 
     public ProvinceEstivatorListResponse provinceEstivatorListResponse(
             List<ProvinceEstivatorDto> provinceEstivatorDtos) {
-        this.provinceEstivatorDtoList = provinceEstivatorDtoList;
+        this.provinceEstivatorDtoList = provinceEstivatorDtos;
         return this;
     }
 }
