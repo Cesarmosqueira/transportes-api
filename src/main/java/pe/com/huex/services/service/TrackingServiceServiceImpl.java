@@ -8,7 +8,7 @@ import pe.com.huex.providers.mapping.ProviderMapping;
 import pe.com.huex.services.domain.model.entity.TrackingService;
 import pe.com.huex.services.domain.persistence.ITrackingServiceRepository;
 import pe.com.huex.services.domain.service.ITrackingServiceService;
-import pe.com.huex.services.mapping.TrackingServiceMapping;
+import pe.com.huex.exception.mapping.TrackingServiceMapping;
 import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 import pe.com.huex.services.service.resources.response.TrackingServiceListResponse;
 import pe.com.huex.services.service.resources.response.TrackingServiceRegisterResponse;

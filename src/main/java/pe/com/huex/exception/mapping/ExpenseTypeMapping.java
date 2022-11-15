@@ -1,4 +1,4 @@
-package pe.com.huex.services.mapping;
+package pe.com.huex.exception.mapping;
 
 import org.modelmapper.ModelMapper;
 

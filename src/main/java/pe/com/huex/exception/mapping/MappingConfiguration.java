@@ -1,4 +1,4 @@
-package pe.com.huex.services.mapping;
+package pe.com.huex.exception.mapping;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +14,16 @@ public class MappingConfiguration {
     @Bean
     public ExpenseTypeMapping expenseTypeMapping() {
         return new ExpenseTypeMapping();
+    }
+    @Bean
+    public SettlementSummaryMapping settlementSummaryMapping() {
+        return new SettlementSummaryMapping();
+    }
+
+
+    @Bean
+    public ServiceIncidentsMapping serviceIncidentsMapping() {
+        return new ServiceIncidentsMapping();
     }
 
 }

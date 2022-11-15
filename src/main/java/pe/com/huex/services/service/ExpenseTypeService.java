@@ -1,4 +1,4 @@
-package pe.com.huex.services.service.resources.response;
+package pe.com.huex.services.service;
 
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
@@ -17,7 +17,7 @@ import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.services.domain.model.entity.ExpenseType;
 import pe.com.huex.services.domain.persistence.ExpenseTypeRepository;
 import pe.com.huex.services.domain.service.IExpenseTypeService;
-import pe.com.huex.services.mapping.ExpenseTypeMapping;
+import pe.com.huex.exception.mapping.ExpenseTypeMapping;
 import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 import pe.com.huex.services.service.resources.response.ExpenseTypeListResponse;
 import pe.com.huex.services.service.resources.response.ExpenseTypeRegisterResponse;
