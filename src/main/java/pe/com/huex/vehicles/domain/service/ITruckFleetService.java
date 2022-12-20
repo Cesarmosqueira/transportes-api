@@ -16,4 +16,7 @@ public interface ITruckFleetService {
     ResponseDto<TruckFleetRegisterResponse> registerTruckFleet(TruckFleetDto truckFleetDto);
 
     ResponseDto<TruckFleetUpdateResponse> updateTruckFleet(TruckFleetDto truckFleetDto);
+
+    ResponseDto deleteTruckFleet(Long id);
+
 }

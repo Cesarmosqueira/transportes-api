@@ -4,15 +4,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 import pe.com.huex.vehicles.domain.service.ICheckListService;
 import pe.com.huex.vehicles.service.resources.dto.CheckListDto;
-import pe.com.huex.vehicles.service.resources.response.CheckListListResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 import java.io.IOException;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/checkList", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CheckListController {
@@ -34,14 +33,22 @@ public class CheckListController {
     }
 
     @PostMapping
-    public ResponseDto<CheckListRegisterResponse> registerCheckList(@RequestParam(name = "file", required = false) MultipartFile file,
-                                                               @RequestParam(name = "request", required = false) String request) throws Exception {
-        return checkListService.registerCheckList(file, request);
+    public ResponseDto<CheckListRegisterResponse> registerCheckList(@RequestBody CheckListDto checkListDto) throws Exception {
+        return checkListService.registerCheckList(checkListDto);
     }
 
     @PutMapping
-    public ResponseDto<CheckListUpdateResponse> updateCheckList(@RequestParam(name = "file", required = false) MultipartFile file,
-                                                                @RequestParam(name = "request", required = false) String request) throws IOException {
-        return checkListService.updateCheckList(file, request);
+    public ResponseDto<CheckListUpdateResponse> updateCheckList(@RequestBody CheckListDto checkListDto) throws IOException {
+        return checkListService.updateCheckList(checkListDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseDto<CheckListUpdateResponse> deleteCheckList(@PathVariable Long id) throws IOException {
+        return checkListService.deleteCheckList(id);
+    }
+
+    @GetMapping("truckFleet/{id}")
+    public ResponseDto<CheckListListResponse> listCheckListsByIdTruckFleet(@PathVariable Long id) {
+        return checkListService.listCheckListsByIdTruckFleet(id);
     }
 }

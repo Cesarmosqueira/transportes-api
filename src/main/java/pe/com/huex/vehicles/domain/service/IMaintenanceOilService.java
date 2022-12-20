@@ -2,10 +2,7 @@ package pe.com.huex.vehicles.domain.service;
 
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceOilDto;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilListResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 public interface IMaintenanceOilService {
 
@@ -16,4 +13,7 @@ public interface IMaintenanceOilService {
     ResponseDto<MaintenanceOilRegisterResponse> registerMaintenanceOil(MaintenanceOilDto maintenanceOilDto);
 
     ResponseDto<MaintenanceOilUpdateResponse> updateMaintenanceOil(MaintenanceOilDto maintenanceOilDto);
+    ResponseDto deleteMaintenanceOil(Long id);
+
+    ResponseDto<MaintenanceOilListResponse> listMaintenanceOilsByIdTruckFleet(Long id);
 }

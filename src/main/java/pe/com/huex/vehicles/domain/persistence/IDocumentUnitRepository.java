@@ -14,4 +14,6 @@ public interface IDocumentUnitRepository extends JpaRepository<DocumentUnit, Lon
     DocumentUnit findById(int id);
 
     DocumentUnit save(DocumentUnit documentUnit);
+
+    List<DocumentUnit> findByIdTruckFleet(Long id);
 }

@@ -2,6 +2,7 @@ package pe.com.huex.vehicles.domain.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pe.com.huex.vehicles.domain.model.entity.MaintenanceOil;
 import pe.com.huex.vehicles.domain.model.entity.MaintenanceTire;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface IMaintenanceTireRepository extends JpaRepository<MaintenanceTir
     MaintenanceTire findById(int id);
 
     MaintenanceTire save(MaintenanceTire maintenanceTire);
+
+    List<MaintenanceTire> findByIdTruckFleet(Long id);
 }

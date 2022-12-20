@@ -16,15 +16,11 @@ public interface IDocumentUnitService {
 
     ResponseDto<DocumentUnitRetrieveResponse> retrieveDocumentUnit(Long id);
 
-    ResponseDto<DocumentUnitRegisterResponse> registerDocumentUnit(MultipartFile photoTechnicalReview,
-                                                                   MultipartFile photoSoat,
-                                                                   MultipartFile photoMtc,
-                                                                   MultipartFile photoPolicy,
-                                                                   String documentUnitDto) throws IOException;
+    ResponseDto<DocumentUnitListResponse> listDocumentUnitsByIdTruckFleet(Long id);
 
-    ResponseDto<DocumentUnitUpdateResponse> updateDocumentUnit(MultipartFile photoTechnicalReview,
-                                                               MultipartFile photoSoat,
-                                                               MultipartFile photoMtc,
-                                                               MultipartFile photoPolicy,
-                                                               String documentUnitDto) throws IOException;
+    ResponseDto<DocumentUnitRegisterResponse> registerDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException;
+
+    ResponseDto<DocumentUnitUpdateResponse> updateDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException;
+
+    ResponseDto deleteDocumentUnit(Long id);
 }

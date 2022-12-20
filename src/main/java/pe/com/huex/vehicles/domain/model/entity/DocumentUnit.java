@@ -56,8 +56,8 @@ public class DocumentUnit {
     @Column(name = "photo_mtc")
     private byte[] photoMtc;
 
-    @Column(name = "policy", length = 30)
-    private String policy;
+    @Column(name = "policy")
+    private byte[] policy;
 
     @Column(name = "expiration_policy")
     private Date expirationPolicy;

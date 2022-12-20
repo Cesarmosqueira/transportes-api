@@ -38,4 +38,9 @@ public class TruckFleetController {
     public ResponseDto<TruckFleetUpdateResponse> updateTruckFleet(@RequestBody TruckFleetDto truckFleetDto) {
         return truckFleetService.updateTruckFleet(truckFleetDto);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseDto deleteTruckFleet(@PathVariable Long id) {
+        return truckFleetService.deleteTruckFleet(id);
+    }
 }

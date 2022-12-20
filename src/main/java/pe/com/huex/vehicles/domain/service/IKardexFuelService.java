@@ -2,10 +2,7 @@ package pe.com.huex.vehicles.domain.service;
 
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelListResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 public interface IKardexFuelService {
 
@@ -16,5 +13,9 @@ public interface IKardexFuelService {
     ResponseDto<KardexFuelRegisterResponse> registerKardexFuel(KardexFuelDto kardexFuelDto);
 
     ResponseDto<KardexFuelUpdateResponse> updateKardexFuel(KardexFuelDto kardexFuelDto);
+
+    ResponseDto deleteKardexFuel(Long id);
+
+    ResponseDto<KardexFuelListResponse> listKardexFuelsByIdTruckFleet(Long id);
 
 }

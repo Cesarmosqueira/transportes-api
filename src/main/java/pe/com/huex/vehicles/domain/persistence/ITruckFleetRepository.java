@@ -14,4 +14,7 @@ public interface ITruckFleetRepository extends JpaRepository<TruckFleet, Long> {
     TruckFleet findById(int id);
 
     TruckFleet save(TruckFleet truckFleet);
+
+    void deleteById(Long id);
+
 }

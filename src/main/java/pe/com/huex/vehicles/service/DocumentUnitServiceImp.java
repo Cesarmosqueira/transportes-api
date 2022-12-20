@@ -44,6 +44,9 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
     private static final String MESSAGE_RETRIEVE_DOCUMENTUNIT_SUCCESS = "La consulta del documento de la unidad fue exitoso";
     private static final String MESSAGE_RETRIEVE_DOCUMENTUNIT_WARN = "No se encontró los datos del documento de la unidad";
 
+    private static final String MESSAGE_DELETE_DOCUMENTUNIT_SUCCESS = "Se eliminó correctamente el documento";
+    private static final String MESSAGE_DELETE_DOCUMENTUNIT_WARN = "Ocurrió un error al eliminar el documento";
+
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -79,6 +82,32 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
         return response;
     }
 
+    public ResponseDto<DocumentUnitListResponse> listDocumentUnitsByIdTruckFleet(Long id){
+        ResponseDto<DocumentUnitListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<DocumentUnit> documentUnitList = documentsUnitRepository.findByIdTruckFleet(id);
+
+            if (documentUnitList.isEmpty()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_DOCUMENTUNIT_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(documentUnitList.size()));
+            response.setDatos(new DocumentUnitListResponse().documentUnitList(documentUnitMapping.modelList(documentUnitList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_DOCUMENTUNIT_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+
     @Override
     public ResponseDto<DocumentUnitRetrieveResponse> retrieveDocumentUnit(Long id) {
         ResponseDto<DocumentUnitRetrieveResponse> response = new ResponseDto<>();
@@ -106,27 +135,12 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
     }
 
     @Override
-    public ResponseDto<DocumentUnitRegisterResponse> registerDocumentUnit(MultipartFile photoTechnicalReview,
-                                                                          MultipartFile photoSoat,
-                                                                          MultipartFile photoMtc,
-                                                                          MultipartFile photoPolicy,
-                                                                          String documentUnitDto) throws IOException {
+    public ResponseDto<DocumentUnitRegisterResponse> registerDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
         ResponseDto<DocumentUnitRegisterResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            DocumentUnit request = Try.of(() -> new ObjectMapper().readValue(documentUnitDto, DocumentUnit.class))
-                    .getOrNull();
-
-            request.setNamePhotoTechnicalReview(photoTechnicalReview.getResource().getFilename());
-            request.setPhotoTechnicalReview(photoTechnicalReview.getBytes());
-            request.setNamePhotoSoat(photoSoat.getResource().getFilename());
-            request.setPhotoSoat(photoSoat.getBytes());
-            request.setNamePhotoMtc(photoMtc.getResource().getFilename());
-            request.setPhotoMtc(photoMtc.getBytes());
-            request.setNamePhotoPolicy(photoPolicy.getResource().getFilename());
-            request.setPhotoPolicy(photoPolicy.getBytes());
-            DocumentUnit documentUnit = documentsUnitRepository.save(request);
+            DocumentUnit documentUnit = documentsUnitRepository.save(documentUnitMapping.model(documentUnitDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion));
             response.setDatos(new DocumentUnitRegisterResponse().documentUnit(documentUnitMapping.modelDto(documentUnit)));
         } catch (Exception ex) {
@@ -138,19 +152,13 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
     }
 
     @Override
-    public ResponseDto<DocumentUnitUpdateResponse> updateDocumentUnit(MultipartFile photoTechnicalReview,
-                                                                      MultipartFile photoSoat,
-                                                                      MultipartFile photoMtc,
-                                                                      MultipartFile photoPolicy,
-                                                                      String documentUnitDto) throws IOException {
+    public ResponseDto<DocumentUnitUpdateResponse> updateDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
         ResponseDto<DocumentUnitUpdateResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            DocumentUnit request = Try.of(() -> new ObjectMapper().readValue(documentUnitDto, DocumentUnit.class))
-                    .getOrNull();
 
-            Optional<DocumentUnit> documentUnit = documentsUnitRepository.findById(request.getId());
+            Optional<DocumentUnit> documentUnit = documentsUnitRepository.findById(documentUnitDto.getId());
 
             if (documentUnit.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_DOCUMENTUNIT_WARN, WARN, idTransaccion)
@@ -158,20 +166,32 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
                 return response;
             }
 
-            request.setNamePhotoTechnicalReview(photoTechnicalReview.getResource().getFilename());
-            request.setPhotoTechnicalReview(photoTechnicalReview.getBytes());
-            request.setNamePhotoSoat(photoSoat.getResource().getFilename());
-            request.setPhotoSoat(photoSoat.getBytes());
-            request.setNamePhotoMtc(photoMtc.getResource().getFilename());
-            request.setPhotoMtc(photoMtc.getBytes());
-            request.setNamePhotoPolicy(photoPolicy.getResource().getFilename());
-            request.setPhotoPolicy(photoPolicy.getBytes());
-            DocumentUnit documentUnitSave = documentsUnitRepository.save(request);
+            DocumentUnit documentUnitSave = documentsUnitRepository.save(documentUnitMapping.model(documentUnitDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion));
             response.setDatos(new DocumentUnitUpdateResponse().documentUnit(documentUnitMapping.modelDto(documentUnitSave)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_DOCUMENTUNIT_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDto deleteDocumentUnit(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            documentsUnitRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_DELETE_DOCUMENTUNIT_WARN + ": " + ex);
             throw ex;
         }
 

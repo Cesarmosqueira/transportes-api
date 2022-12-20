@@ -24,7 +24,7 @@ public class DocumentUnitDto {
     private Date mtcExpiration;
     private String namePhotoMtc;
     private byte[] photoMtc;
-    private String policy;
+    private byte[] policy;
     private Date expirationPolicy;
     private String namePhotoPolicy;
     private byte[] photoPolicy;

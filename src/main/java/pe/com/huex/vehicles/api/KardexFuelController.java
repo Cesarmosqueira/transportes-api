@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.vehicles.domain.service.IKardexFuelService;
 import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelListResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,5 +34,15 @@ public class KardexFuelController {
     @PutMapping
     public ResponseDto<KardexFuelUpdateResponse> updateKardexFuel(@RequestBody KardexFuelDto kardexFuelDto) {
         return kardexFuelService.updateKardexFuel(kardexFuelDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseDto<CheckListUpdateResponse> deleteKardexFuel(@PathVariable Long id) {
+        return kardexFuelService.deleteKardexFuel(id);
+    }
+
+    @GetMapping("truckFleet/{id}")
+    public ResponseDto<KardexFuelListResponse> listKardexFuelsByIdTruckFleet(@PathVariable Long id) {
+        return kardexFuelService.listKardexFuelsByIdTruckFleet(id);
     }
 }

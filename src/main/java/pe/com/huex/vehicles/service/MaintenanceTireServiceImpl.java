@@ -157,4 +157,34 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto<MaintenanceTireListResponse> listMaintenanceTiresByIdTruckFleet(Long id) {
+        ResponseDto<MaintenanceTireListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<MaintenanceTire> maintenanceTireList = maintenanceTireRepository.findByIdTruckFleet(id);
+
+            if (maintenanceTireList.isEmpty()) {
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_MAINTENANCETIRE_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_MAINTENANCETIRE_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(maintenanceTireList.size()));
+            response.setDatos(new MaintenanceTireListResponse()
+                    .maintenanceTireList(maintenanceTireMapping.modelList(maintenanceTireList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_MAINTENANCETIRE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

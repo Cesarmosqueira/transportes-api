@@ -41,6 +41,9 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
     private static final String MESSAGE_RETRIEVE_MAINTENANCEOIL_SUCCESS = "La consulta del mantenimiento aceite fue exitoso";
     private static final String MESSAGE_RETRIEVE_MAINTENANCEOIL_WARN = "No se encontró los datos del mantenimiento aceite";
 
+    private static final String MESSAGE_DELETE_MAINTENANCEOIL_SUCCESS = "Se eliminó correctamente el mantenimiento";
+    private static final String MESSAGE_DELETE_MAINTENANCEOIL_WARN = "Ocurrió un error al eliminar el mantenimiento";
+
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -157,4 +160,54 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteMaintenanceOil(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            maintenanceOilRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_DELETE_MAINTENANCEOIL_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDto<MaintenanceOilListResponse> listMaintenanceOilsByIdTruckFleet(Long id) {
+        ResponseDto<MaintenanceOilListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<MaintenanceOil> maintenanceOilList = maintenanceOilRepository.findByIdTruckFleet(id);
+
+            if (maintenanceOilList.isEmpty()) {
+                response.meta(MetaDatosUtil
+                        .buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_MAINTENANCEOIL_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(MetaDatosUtil
+                    .buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_MAINTENANCEOIL_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(maintenanceOilList.size()));
+            response.setDatos(new MaintenanceOilListResponse()
+                    .maintenanceOilList(maintenanceOilMapping.modelList(maintenanceOilList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_MAINTENANCEOIL_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

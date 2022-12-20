@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.vehicles.domain.service.IMaintenanceOilService;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceOilDto;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilListResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceOilUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -19,22 +16,32 @@ public class MaintenanceOilController {
     IMaintenanceOilService maintenanceOilService;
 
     @GetMapping()
-    public ResponseDto<MaintenanceOilListResponse> listMaintenanceOils() throws Exception {
+    public ResponseDto<MaintenanceOilListResponse> listMaintenanceOils() {
         return maintenanceOilService.listMaintenanceOils();
     }
 
     @GetMapping(path ="{id}")
-    public ResponseDto<MaintenanceOilRetrieveResponse> retrieveMaintenanceOil(@PathVariable Long id) throws Exception {
+    public ResponseDto<MaintenanceOilRetrieveResponse> retrieveMaintenanceOil(@PathVariable Long id) {
         return maintenanceOilService.retrieveMaintenanceOil(id);
     }
 
     @PostMapping
-    public ResponseDto<MaintenanceOilRegisterResponse> registerMaintenanceOil(@RequestBody MaintenanceOilDto maintenanceOilDto) throws Exception {
+    public ResponseDto<MaintenanceOilRegisterResponse> registerMaintenanceOil(@RequestBody MaintenanceOilDto maintenanceOilDto) {
         return maintenanceOilService.registerMaintenanceOil(maintenanceOilDto);
     }
 
     @PutMapping
-    public ResponseDto<MaintenanceOilUpdateResponse> updateMaintenanceOil(@RequestBody MaintenanceOilDto maintenanceOilDto) throws Exception {
+    public ResponseDto<MaintenanceOilUpdateResponse> updateMaintenanceOil(@RequestBody MaintenanceOilDto maintenanceOilDto) {
         return maintenanceOilService.updateMaintenanceOil(maintenanceOilDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseDto<CheckListUpdateResponse> deleteMaintenanceOil(@PathVariable Long id) {
+        return maintenanceOilService.deleteMaintenanceOil(id);
+    }
+
+    @GetMapping("truckFleet/{id}")
+    public ResponseDto<MaintenanceOilListResponse> listMaintenanceOilsByIdTruckFleet(@PathVariable Long id) {
+        return maintenanceOilService.listMaintenanceOilsByIdTruckFleet(id);
     }
 }

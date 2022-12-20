@@ -11,10 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckListListResponse {
-    private List<CheckListDto> checkListDtos = null;
+    private List<CheckListDto> checkListDtoList = null;
 
-    public CheckListListResponse checkList(List<CheckListDto> checkListDtos) {
-        this.checkListDtos = checkListDtos;
+    public CheckListListResponse checkList(List<CheckListDto> checkListDtoList) {
+        this.checkListDtoList = checkListDtoList;
         return this;
     }
 }

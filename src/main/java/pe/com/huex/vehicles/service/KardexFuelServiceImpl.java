@@ -40,6 +40,8 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
     private static final String MESSAGE_RETRIEVE_KARDEXFUEL_SUCCESS = "La consulta del kardex de combustible fue exitoso";
     private static final String MESSAGE_RETRIEVE_KARDEXFUEL_WARN = "No se encontró los datos del kardex de combustible";
 
+    private static final String MESSAGE_DELETE_KARDEXFUEL_SUCCESS = "Se eliminó correctamente el registro combustible";
+    private static final String MESSAGE_DELETE_KARDEXFUEL_WARN = "Ocurrió un error al eliminar el registro de combustible";
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -148,4 +150,51 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteKardexFuel(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            kardexFuelRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_KARDEXFUEL_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_DELETE_KARDEXFUEL_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDto<KardexFuelListResponse> listKardexFuelsByIdTruckFleet(Long id) {
+        ResponseDto<KardexFuelListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<KardexFuel> kardexFuelList = kardexFuelRepository.findByIdTruckFleet(id);
+
+            if (kardexFuelList.isEmpty()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_KARDEXFUEL_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_KARDEXFUEL_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(kardexFuelList.size()));
+            response.setDatos(new KardexFuelListResponse().kardexFuelList(kardexFuelMapping.modelList(kardexFuelList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_KARDEXFUEL_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

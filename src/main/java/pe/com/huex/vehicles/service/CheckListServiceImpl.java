@@ -43,6 +43,10 @@ public class CheckListServiceImpl implements ICheckListService {
     private static final String MESSAGE_RETRIEVE_CHECKLIST_SUCCESS = "La consulta del check list fue exitoso";
     private static final String MESSAGE_RETRIEVE_CHECKLIST_WARN = "No se encontró los datos del check list";
 
+    private static final String MESSAGE_DELETE_CHECKLIST_SUCCESS = "Se eliminó correctamente el check list";
+
+    private static final String MESSAGE_DELETE_CHECKLIST_WARN = "Ocurrió un error al eliminar el check list";
+
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -107,17 +111,13 @@ public class CheckListServiceImpl implements ICheckListService {
     }
 
     @Override
-    public ResponseDto<CheckListRegisterResponse> registerCheckList(MultipartFile file, String checkListDto) throws IOException {
+    public ResponseDto<CheckListRegisterResponse> registerCheckList(CheckListDto checkListDto) throws IOException {
         ResponseDto<CheckListRegisterResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            CheckList request = Try.of(() -> new ObjectMapper().readValue(checkListDto, CheckList.class))
-                    .getOrNull();
-            request.setPhoto(file.getBytes());
-            request.setNamePhoto(file.getResource().getFilename());
 
-            CheckList checkListResponse = checkListRepository.save(request);
+            CheckList checkListResponse = checkListRepository.save(checkListMapping.model(checkListDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_CHECKLIST_SUCCESS, INFO, idTransaccion));
             response.setDatos(new CheckListRegisterResponse().checkList(checkListMapping.modelDto(checkListResponse)));
         } catch (Exception ex) {
@@ -129,16 +129,13 @@ public class CheckListServiceImpl implements ICheckListService {
     }
 
     @Override
-    public ResponseDto<CheckListUpdateResponse> updateCheckList(MultipartFile file, String checkListDto) throws IOException {
+    public ResponseDto<CheckListUpdateResponse> updateCheckList(CheckListDto checkListDto) throws IOException {
         ResponseDto<CheckListUpdateResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            CheckList request = Try.of(() -> new ObjectMapper().readValue(checkListDto, CheckList.class))
-                    .getOrNull();
 
-
-            Optional<CheckList> checkListList = checkListRepository.findById(request.getId());
+            Optional<CheckList> checkListList = checkListRepository.findById(checkListDto.getId());
 
             if (checkListList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_CHECKLIST_WARN, WARN, idTransaccion)
@@ -146,14 +143,58 @@ public class CheckListServiceImpl implements ICheckListService {
                 return response;
             }
 
-            request.setPhoto(file.getBytes());
-            request.setNamePhoto(file.getResource().getFilename());
-            CheckList checkListResponse = checkListRepository.save(request);
+            CheckList checkListResponse = checkListRepository.save(checkListMapping.model(checkListDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_CHECKLIST_SUCCESS, INFO, idTransaccion));
             response.setDatos(new CheckListUpdateResponse().checkList(checkListMapping.modelDto(checkListResponse)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_CHECKLIST_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDto deleteCheckList(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            checkListRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_CHECKLIST_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_DELETE_CHECKLIST_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    @Override
+    public ResponseDto<CheckListListResponse> listCheckListsByIdTruckFleet(Long id) {
+        ResponseDto<CheckListListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<CheckList> checkListList = checkListRepository.findByIdTruckFleet(id);
+
+            if (checkListList.isEmpty()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_CHECKLIST_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_CHECKLIST_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(checkListList.size()));
+            response.setDatos(new CheckListListResponse().checkList(checkListMapping.modelList(checkListList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_CHECKLIST_WARN + ": " + ex);
             throw ex;
         }
 

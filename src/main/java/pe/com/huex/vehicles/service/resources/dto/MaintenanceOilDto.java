@@ -15,7 +15,7 @@ import java.util.Date;
 public class MaintenanceOilDto {
     private Long id;
     private Long idTruckFleet;
-    private Double changeType;
+    private String changeType;
     private String place;
     private Date dateChange;
     private Integer kmLast;

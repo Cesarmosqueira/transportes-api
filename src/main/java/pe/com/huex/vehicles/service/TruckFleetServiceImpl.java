@@ -158,4 +158,24 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteTruckFleet(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+          truckFleetRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_TRUCKFLEET_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

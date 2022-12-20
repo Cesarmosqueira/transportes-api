@@ -22,8 +22,8 @@ public class MaintenanceOil {
     @Column(name = "id_truck_fleet")
     private Long idTruckFleet;
 
-    @Column(name = "change_type")
-    private Double changeType;
+    @Column(name = "change_type", length = 30)
+    private String changeType;
 
     @Column(name = "place", length = 30)
     private String place;

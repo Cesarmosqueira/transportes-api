@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.vehicles.domain.service.IMaintenanceTireService;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceTireDto;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireListResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -37,4 +34,10 @@ public class MaintenanceTireController {
     public ResponseDto<MaintenanceTireUpdateResponse> updateMaintenanceTire(@RequestBody MaintenanceTireDto maintenanceTireDto) throws Exception {
         return maintenanceTireService.updateMaintenanceTire(maintenanceTireDto);
     }
+
+    @GetMapping("truckFleet/{id}")
+    public ResponseDto<MaintenanceTireListResponse> listMaintenanceTiresByIdTruckFleet(@PathVariable Long id) {
+        return maintenanceTireService.listMaintenanceTiresByIdTruckFleet(id);
+    }
+
 }
