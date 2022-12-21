@@ -1,4 +1,4 @@
-package pe.com.huex.exception.mapping;
+package pe.com.huex.services.mapping;
 
 import org.modelmapper.ModelMapper;
 import pe.com.huex.services.domain.model.entity.TrackingService;

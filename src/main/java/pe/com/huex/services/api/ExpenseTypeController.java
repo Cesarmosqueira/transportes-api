@@ -1,6 +1,7 @@
 package pe.com.huex.services.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.services.domain.service.IExpenseTypeService;
@@ -12,7 +13,7 @@ import pe.com.huex.services.service.resources.response.ExpenseTypeUpdateResponse
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("expense_type")
+@RequestMapping(value = "expense_type", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ExpenseTypeController {
 
     @Autowired

@@ -7,7 +7,7 @@ import pe.com.huex.dto.Response.ResponseDto;
 import pe.com.huex.services.domain.model.entity.SettlementSummary;
 import pe.com.huex.services.domain.persistence.SettlementSummaryRepository;
 import pe.com.huex.services.domain.service.ISettlementSummaryService;
-import pe.com.huex.exception.mapping.SettlementSummaryMapping;
+import pe.com.huex.services.mapping.SettlementSummaryMapping;
 import pe.com.huex.services.service.resources.dto.SettlementSummaryDto;
 import pe.com.huex.services.service.resources.response.*;
 import pe.com.huex.util.MetaDatosUtil;

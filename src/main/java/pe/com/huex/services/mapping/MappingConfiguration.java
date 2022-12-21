@@ -1,4 +1,4 @@
-package pe.com.huex.exception.mapping;
+package pe.com.huex.services.mapping;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

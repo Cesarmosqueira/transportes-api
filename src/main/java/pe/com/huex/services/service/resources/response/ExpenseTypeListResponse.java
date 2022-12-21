@@ -1,9 +1,15 @@
 package pe.com.huex.services.service.resources.response;
 
+import lombok.*;
 import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 
 import java.util.List;
 
+@Getter
+@Setter
+@With
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExpenseTypeListResponse {
 
     private List<ExpenseTypeDto> expenseTypeDtoList=null;
