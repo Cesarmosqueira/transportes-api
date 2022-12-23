@@ -2,7 +2,7 @@ package pe.com.huex.providers.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.TireReplacement;
 import pe.com.huex.providers.domain.persistence.TireReplacementRepository;
 import pe.com.huex.providers.domain.service.ITireReplacementService;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -79,8 +79,8 @@ public class TireReplacementImpl implements ITireReplacementService {
     }
 
     @Override
-    public ResponseDto<TireReplacementRetrieveResponse> retrieveTireReplacement(Long id) {
-        ResponseDto<TireReplacementRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<TireReplacementResponse> retrieveTireReplacement(Long id) {
+        ResponseDto<TireReplacementResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -96,8 +96,8 @@ public class TireReplacementImpl implements ITireReplacementService {
             response.meta(MetaDatosUtil
                     .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new TireReplacementRetrieveResponse()
-                    .tireReplacementRetrieveResponse(tireReplacementMapping.modelDto(tireReplacementList.get())));
+            response.setDatos(new TireReplacementResponse()
+                    .tireReplacement(tireReplacementMapping.modelDto(tireReplacementList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar reposicion llanta provincia" + ex);
@@ -108,8 +108,8 @@ public class TireReplacementImpl implements ITireReplacementService {
     }
 
     @Override
-    public ResponseDto<TireReplacementRegisterResponse> registerTireReplacement(TireReplacementDto tireReplacementDto) {
-        ResponseDto<TireReplacementRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<TireReplacementResponse> registerTireReplacement(TireReplacementDto tireReplacementDto) {
+        ResponseDto<TireReplacementResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -117,8 +117,8 @@ public class TireReplacementImpl implements ITireReplacementService {
                     .save(tireReplacementMapping.model(tireReplacementDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TIRE_REPLACEMENT_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new TireReplacementRegisterResponse()
-                    .tireReplacementRegisterResponse(tireReplacementMapping.modelDto(tireReplacementResponse)));
+            response.setDatos(new TireReplacementResponse()
+                    .tireReplacement(tireReplacementMapping.modelDto(tireReplacementResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_TIRE_REPLACEMENT_WARN + ": " + ex);
             throw ex;
@@ -128,8 +128,8 @@ public class TireReplacementImpl implements ITireReplacementService {
     }
 
     @Override
-    public ResponseDto<TireReplacementUpdateResponse> updateTireReplacement(TireReplacementDto tireReplacementDto) {
-        ResponseDto<TireReplacementUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<TireReplacementResponse> updateTireReplacement(TireReplacementDto tireReplacementDto) {
+        ResponseDto<TireReplacementResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -147,7 +147,7 @@ public class TireReplacementImpl implements ITireReplacementService {
             tireReplacementRepository.save(tireReplacementMapping.model(tireReplacementDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new TireReplacementUpdateResponse().tireReplacementUpdateResponse(tireReplacementDto));
+            response.setDatos(new TireReplacementResponse().tireReplacement(tireReplacementDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_TIRE_REPLACEMENT_WARN + ": " + ex);

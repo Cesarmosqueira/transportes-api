@@ -1,7 +1,7 @@
 package pe.com.huex.employees.services;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.employees.domain.entities.Employee;
 import pe.com.huex.employees.domain.persistence.EmployeeRepository;
-import pe.com.huex.employees.services.resources.dtos.employees.EmployeeListDto;
-import pe.com.huex.employees.services.resources.dtos.employees.EmployeeRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.employees.EmployeeRetrieveDto;
-import pe.com.huex.employees.services.resources.dtos.employees.EmployeeUpdateDto;
+import pe.com.huex.employees.services.resources.response.employees.EmployeeListDto;
+import pe.com.huex.employees.services.resources.response.employees.EmployeeRegisterDto;
+import pe.com.huex.employees.services.resources.response.employees.EmployeeRetrieveDto;
+import pe.com.huex.employees.services.resources.response.employees.EmployeeUpdateDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

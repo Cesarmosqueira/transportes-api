@@ -6,17 +6,14 @@ import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class SettlementSummaryListResponse {
 
-    private List<SettlementSummaryDto> settlementSummaryDtos = null;
+    private List<SettlementSummaryDto> settlementsSummary = null;
 
     public SettlementSummaryListResponse settlementSummaryList(List<SettlementSummaryDto> settlementSummaryDtos) {
-        this.settlementSummaryDtos = settlementSummaryDtos;
+        this.settlementsSummary = settlementSummaryDtos;
         return this;
     }
 }

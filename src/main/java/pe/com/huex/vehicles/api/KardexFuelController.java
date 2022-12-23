@@ -3,7 +3,7 @@ package pe.com.huex.vehicles.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.vehicles.domain.service.IKardexFuelService;
 import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
 import pe.com.huex.vehicles.service.resources.response.*;
@@ -22,27 +22,27 @@ public class KardexFuelController {
     }
 
     @GetMapping("{id}")
-    public ResponseDto<KardexFuelRetrieveResponse> retrieveKardexFuel(@PathVariable Long id) {
+    public ResponseDto<KardexFuelResponse> retrieveKardexFuel(@PathVariable Long id) {
         return kardexFuelService.retrieveKardexFuel(id);
     }
 
     @PostMapping
-    public ResponseDto<KardexFuelRegisterResponse> registerKardexFuel(@RequestBody KardexFuelDto kardexFuelDto) {
+    public ResponseDto<KardexFuelResponse> registerKardexFuel(@RequestBody KardexFuelDto kardexFuelDto) {
         return kardexFuelService.registerKardexFuel(kardexFuelDto);
     }
 
     @PutMapping
-    public ResponseDto<KardexFuelUpdateResponse> updateKardexFuel(@RequestBody KardexFuelDto kardexFuelDto) {
+    public ResponseDto<KardexFuelResponse> updateKardexFuel(@RequestBody KardexFuelDto kardexFuelDto) {
         return kardexFuelService.updateKardexFuel(kardexFuelDto);
     }
 
     @DeleteMapping("{id}")
-    public ResponseDto<CheckListUpdateResponse> deleteKardexFuel(@PathVariable Long id) {
+    public ResponseDto<CheckListResponse> deleteKardexFuel(@PathVariable Long id) {
         return kardexFuelService.deleteKardexFuel(id);
     }
 
     @GetMapping("truckFleet/{id}")
-    public ResponseDto<KardexFuelListResponse> listKardexFuelsByIdTruckFleet(@PathVariable Long id) {
+    public ResponseDto listKardexFuelsByIdTruckFleet(@PathVariable Long id) {
         return kardexFuelService.listKardexFuelsByIdTruckFleet(id);
     }
 }

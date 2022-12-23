@@ -1,13 +1,8 @@
 package pe.com.huex.services.service.resources.dto;
 
 import lombok.*;
-import pe.com.huex.services.domain.model.entity.TrackingService;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ServiceIncidentsDto {
 
     private Long id;

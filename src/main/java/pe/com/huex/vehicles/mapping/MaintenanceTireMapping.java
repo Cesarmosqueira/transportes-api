@@ -1,7 +1,7 @@
 package pe.com.huex.vehicles.mapping;
 
 import org.modelmapper.ModelMapper;
-import pe.com.huex.vehicles.domain.model.entity.MaintenanceTire;
+import pe.com.huex.vehicles.domain.entities.MaintenanceTire;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceTireDto;
 
 import java.io.Serializable;

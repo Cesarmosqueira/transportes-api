@@ -2,9 +2,8 @@ package pe.com.huex.services.api;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.services.domain.service.ISettlementSummaryService;
-import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 import pe.com.huex.services.service.resources.dto.SettlementSummaryDto;
 import pe.com.huex.services.service.resources.response.*;
 
@@ -25,18 +24,18 @@ public class SettlementSummaryController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<SettlementSummaryRetrieveResponse> retrieveSettlementSummary(@PathVariable Long id) throws Exception {
+    public ResponseDto<SettlementSummaryResponse> retrieveSettlementSummary(@PathVariable Long id) throws Exception {
         return settlementSummaryService.retrieveSettlementSummary(id);
     }
 
     @PostMapping
-    public ResponseDto<SettlementSummaryRegisterResponse> registerSettlementSummary(@RequestBody SettlementSummaryDto settlementSummaryDto)
+    public ResponseDto<SettlementSummaryResponse> registerSettlementSummary(@RequestBody SettlementSummaryDto settlementSummaryDto)
             throws Exception {
         return settlementSummaryService.registerSettlementSummary(settlementSummaryDto);
     }
 
     @PutMapping
-    public ResponseDto<SettlementSummaryUpdateResponse> updateSettlementSummary(@RequestBody SettlementSummaryDto settlementSummaryDto)
+    public ResponseDto<SettlementSummaryResponse> updateSettlementSummary(@RequestBody SettlementSummaryDto settlementSummaryDto)
             throws Exception {
         return settlementSummaryService.updateSettlementSummary(settlementSummaryDto);
     }

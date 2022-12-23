@@ -3,17 +3,15 @@ package pe.com.huex.services.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.mapping.ProviderMapping;
-import pe.com.huex.services.domain.model.entity.TrackingService;
+import pe.com.huex.services.domain.entities.TrackingService;
 import pe.com.huex.services.domain.persistence.ITrackingServiceRepository;
 import pe.com.huex.services.domain.service.ITrackingServiceService;
-import pe.com.huex.exception.mapping.TrackingServiceMapping;
+import pe.com.huex.services.mapping.TrackingServiceMapping;
 import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 import pe.com.huex.services.service.resources.response.TrackingServiceListResponse;
-import pe.com.huex.services.service.resources.response.TrackingServiceRegisterResponse;
-import pe.com.huex.services.service.resources.response.TrackingServiceRetrieveResponse;
-import pe.com.huex.services.service.resources.response.TrackingServiceUpdateResponse;
+import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 import pe.com.huex.util.MetaDatosUtil;
 
 import javax.transaction.Transactional;
@@ -21,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -82,8 +80,8 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
     }
 
     @Override
-    public ResponseDto<TrackingServiceRetrieveResponse> retrieveTrackingService(Long id) {
-        ResponseDto<TrackingServiceRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<TrackingServiceResponse> retrieveTrackingService(Long id) {
+        ResponseDto<TrackingServiceResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -100,7 +98,7 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRACKINGSERVICE_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(1));
             response.setDatos(
-                    new TrackingServiceRetrieveResponse().trackingService(trackingServiceMapping.modelDto(trackingServiceList.get())));
+                    new TrackingServiceResponse().trackingService(trackingServiceMapping.modelDto(trackingServiceList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_TRACKINGSERVICE_WARN + ": " + ex);
@@ -111,15 +109,15 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
     }
 
     @Override
-    public ResponseDto<TrackingServiceRegisterResponse> registerTrackingService(TrackingServiceDto trackingServiceDto) {
-        ResponseDto<TrackingServiceRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<TrackingServiceResponse> registerTrackingService(TrackingServiceDto trackingServiceDto) {
+        ResponseDto<TrackingServiceResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             TrackingService trackingService = trackingServiceRepository.save(trackingServiceMapping.model(trackingServiceDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TRACKINGSERVICE_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new TrackingServiceRegisterResponse().trackingService(trackingServiceMapping.modelDto(trackingService)));
+            response.setDatos(new TrackingServiceResponse().trackingService(trackingServiceMapping.modelDto(trackingService)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_TRACKINGSERVICE_WARN + ": " + ex);
             throw ex;
@@ -129,8 +127,8 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
     }
 
     @Override
-    public ResponseDto<TrackingServiceUpdateResponse> updateTrackingService(TrackingServiceDto trackingServiceDto) {
-        ResponseDto<TrackingServiceUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<TrackingServiceResponse> updateTrackingService(TrackingServiceDto trackingServiceDto) {
+        ResponseDto<TrackingServiceResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -147,7 +145,7 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
             TrackingService trackingService = trackingServiceRepository.save(trackingServiceMapping.model(trackingServiceDto));
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TRACKINGSERVICE_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new TrackingServiceUpdateResponse().trackingService(trackingServiceMapping.modelDto(trackingService)));
+            response.setDatos(new TrackingServiceResponse().trackingService(trackingServiceMapping.modelDto(trackingService)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_TRACKINGSERVICE_WARN + ": " + ex);

@@ -1,32 +1,25 @@
 package pe.com.huex.vehicles.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.CheckList;
-import pe.com.huex.vehicles.domain.model.entity.DocumentUnit;
+import pe.com.huex.vehicles.domain.entities.DocumentUnit;
 import pe.com.huex.vehicles.domain.persistence.IDocumentUnitRepository;
 import pe.com.huex.vehicles.domain.service.IDocumentUnitService;
 import pe.com.huex.vehicles.mapping.DocumentUnitMapping;
 import pe.com.huex.vehicles.service.resources.dto.DocumentUnitDto;
 import pe.com.huex.vehicles.service.resources.response.DocumentUnitListResponse;
-import pe.com.huex.vehicles.service.resources.response.DocumentUnitRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.DocumentUnitRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.DocumentUnitUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.DocumentUnitResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Service
 @Slf4j
@@ -109,8 +102,8 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
 
 
     @Override
-    public ResponseDto<DocumentUnitRetrieveResponse> retrieveDocumentUnit(Long id) {
-        ResponseDto<DocumentUnitRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<DocumentUnitResponse> retrieveDocumentUnit(Long id) {
+        ResponseDto<DocumentUnitResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -124,7 +117,7 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new DocumentUnitRetrieveResponse().documentUnit(documentUnitMapping.modelDto(documentUnitList.get())));
+            response.setDatos(new DocumentUnitResponse().documentUnit(documentUnitMapping.modelDto(documentUnitList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_DOCUMENTUNIT_WARN+ ": " + ex);
@@ -135,14 +128,14 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
     }
 
     @Override
-    public ResponseDto<DocumentUnitRegisterResponse> registerDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
-        ResponseDto<DocumentUnitRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<DocumentUnitResponse> registerDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
+        ResponseDto<DocumentUnitResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             DocumentUnit documentUnit = documentsUnitRepository.save(documentUnitMapping.model(documentUnitDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new DocumentUnitRegisterResponse().documentUnit(documentUnitMapping.modelDto(documentUnit)));
+            response.setDatos(new DocumentUnitResponse().documentUnit(documentUnitMapping.modelDto(documentUnit)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_DOCUMENTUNIT_WARN + ": " + ex);
             throw ex;
@@ -152,8 +145,8 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
     }
 
     @Override
-    public ResponseDto<DocumentUnitUpdateResponse> updateDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
-        ResponseDto<DocumentUnitUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<DocumentUnitResponse> updateDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException {
+        ResponseDto<DocumentUnitResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -168,7 +161,7 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
 
             DocumentUnit documentUnitSave = documentsUnitRepository.save(documentUnitMapping.model(documentUnitDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new DocumentUnitUpdateResponse().documentUnit(documentUnitMapping.modelDto(documentUnitSave)));
+            response.setDatos(new DocumentUnitResponse().documentUnit(documentUnitMapping.modelDto(documentUnitSave)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_DOCUMENTUNIT_WARN + ": " + ex);

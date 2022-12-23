@@ -2,9 +2,7 @@ package pe.com.huex.providers.mapping;
 
 import org.modelmapper.ModelMapper;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
-import pe.com.huex.providers.domain.model.entity.TireReplacement;
 import pe.com.huex.providers.service.resouces.dto.FuelSupplyDto;
-import pe.com.huex.providers.service.resouces.dto.TireReplacementDto;
 
 import java.io.Serializable;
 import java.util.List;

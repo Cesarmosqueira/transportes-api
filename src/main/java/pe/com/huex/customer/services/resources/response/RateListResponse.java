@@ -2,24 +2,17 @@ package pe.com.huex.customer.services.resources.response;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.With;
+import lombok.*;
 import pe.com.huex.customer.services.resources.dto.RateDto;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class RateListResponse {
 
-    private List<RateDto> rateDtoList = null;
+    private List<RateDto> rates = null;
 
-    public RateListResponse rateListResponse(List<RateDto> rateDtoList) {
-        this.rateDtoList = rateDtoList;
+    public RateListResponse rates(List<RateDto> rateDtoList) {
+        this.rates = rateDtoList;
         return this;
     }
 }

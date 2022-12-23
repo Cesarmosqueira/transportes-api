@@ -5,16 +5,12 @@ import pe.com.huex.vehicles.service.resources.dto.MaintenanceTireDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class MaintenanceTireListResponse {
-    private List<MaintenanceTireDto> maintenanceTireDtoList = null;
+    private List<MaintenanceTireDto> maintenancesTire = null;
 
     public MaintenanceTireListResponse maintenanceTireList(List<MaintenanceTireDto> maintenanceTireDtoList) {
-        this.maintenanceTireDtoList = maintenanceTireDtoList;
+        this.maintenancesTire = maintenanceTireDtoList;
         return this;
     }
 }

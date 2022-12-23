@@ -1,7 +1,7 @@
 package pe.com.huex.vehicles.mapping;
 
 import org.modelmapper.ModelMapper;
-import pe.com.huex.vehicles.domain.model.entity.CheckList;
+import pe.com.huex.vehicles.domain.entities.CheckList;
 import pe.com.huex.vehicles.service.resources.dto.CheckListDto;
 
 import java.io.Serializable;

@@ -5,16 +5,12 @@ import pe.com.huex.vehicles.service.resources.dto.DocumentUnitDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class DocumentUnitListResponse {
-    private List<DocumentUnitDto> documentUnitDtoList = null;
+    private List<DocumentUnitDto> documentsUnitDto = null;
 
     public DocumentUnitListResponse documentUnitList(List<DocumentUnitDto> documentUnitDtoList) {
-        this.documentUnitDtoList = documentUnitDtoList;
+        this.documentsUnitDto = documentUnitDtoList;
         return this;
     }
 }

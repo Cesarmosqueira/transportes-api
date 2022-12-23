@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.employees.domain.entities.Implement;
 import pe.com.huex.employees.services.EmployeeImplementService;
 import pe.com.huex.employees.services.ImplementService;
-import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementListDto;
-import pe.com.huex.employees.services.resources.dtos.employeeImplement.EmployeeImplementRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.implement.ImplementDeleteDto;
-import pe.com.huex.employees.services.resources.dtos.implement.ImplementListDto;
-import pe.com.huex.employees.services.resources.dtos.implement.ImplementRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.implement.ImplementRetrieveDto;
-import pe.com.huex.employees.services.resources.dtos.implement.ImplementUpdateDto;
-import pe.com.huex.employees.services.resources.response.EmployeeImplementResponseDto;
+import pe.com.huex.employees.services.resources.response.employeeImplement.EmployeeImplementListDto;
+import pe.com.huex.employees.services.resources.response.employeeImplement.EmployeeImplementRegisterDto;
+import pe.com.huex.employees.services.resources.response.implement.ImplementDeleteDto;
+import pe.com.huex.employees.services.resources.response.implement.ImplementListDto;
+import pe.com.huex.employees.services.resources.response.implement.ImplementRegisterDto;
+import pe.com.huex.employees.services.resources.response.implement.ImplementRetrieveDto;
+import pe.com.huex.employees.services.resources.response.implement.ImplementUpdateDto;
+import pe.com.huex.employees.services.resources.dtos.EmployeeImplementResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController

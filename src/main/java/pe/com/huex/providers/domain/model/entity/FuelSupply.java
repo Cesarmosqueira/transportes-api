@@ -5,11 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
+@Data
 @Entity
-@Getter
-@Setter
-@With
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "fuel_supply")
 public class FuelSupply {

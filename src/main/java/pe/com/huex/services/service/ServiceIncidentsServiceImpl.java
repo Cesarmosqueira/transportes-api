@@ -3,10 +3,9 @@ package pe.com.huex.services.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.exception.mapping.ServiceIncidentsMapping;
-import pe.com.huex.services.domain.model.entity.ServiceIncidents;
-import pe.com.huex.services.domain.model.entity.SettlementSummary;
+import pe.com.huex.util.ResponseDto;
+import pe.com.huex.services.mapping.ServiceIncidentsMapping;
+import pe.com.huex.services.domain.entities.ServiceIncidents;
 import pe.com.huex.services.domain.persistence.ServiceIncidentsRepository;
 import pe.com.huex.services.domain.service.IServiceIncidentsService;
 import pe.com.huex.services.service.resources.dto.ServiceIncidentsDto;
@@ -18,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -55,8 +54,8 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
 
 
     @Override
-    public ResponseDto<ServiceIncidentsListResponse> listServiceIncidents() {
-        ResponseDto<ServiceIncidentsListResponse> response = new ResponseDto<>();
+    public ResponseDto<ServiceIncidentListResponse> listServiceIncidents() {
+        ResponseDto<ServiceIncidentListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
             List<ServiceIncidents> serviceIncidentsList = serviceIncidentsRepository.findAll();
@@ -71,7 +70,7 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SERVICE_INCIDENTS_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(serviceIncidentsList.size()));
-            response.setDatos(new ServiceIncidentsListResponse()
+            response.setDatos(new ServiceIncidentListResponse()
                     .serviceIncidentsList(serviceIncidentsMapping.modelList(serviceIncidentsList)));
 
         } catch (Exception ex) {
@@ -83,8 +82,8 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
     }
 
     @Override
-    public ResponseDto<ServiceIncidentsRetrieveResponse> retrieveServiceIncidents(Long id) {
-        ResponseDto<ServiceIncidentsRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<ServiceIncidentResponse> retrieveServiceIncidents(Long id) {
+        ResponseDto<ServiceIncidentResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -100,8 +99,8 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
             response.meta(MetaDatosUtil
                     .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SERVICE_INCIDENTS_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new ServiceIncidentsRetrieveResponse()
-                    .serviceIncidentsRetrieveResponse(serviceIncidentsMapping.modelDto(serviceIncidentsList.get())));
+            response.setDatos(new ServiceIncidentResponse()
+                    .serviceIncident(serviceIncidentsMapping.modelDto(serviceIncidentsList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar incidente servicio" + ex);
@@ -112,16 +111,16 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
     }
 
     @Override
-    public ResponseDto<ServiceIncidentsRegisterResponse> registerServiceIncidents(ServiceIncidentsDto serviceIncidentsDto) {
-        ResponseDto<ServiceIncidentsRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<ServiceIncidentResponse> registerServiceIncidents(ServiceIncidentsDto serviceIncidentsDto) {
+        ResponseDto<ServiceIncidentResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             ServiceIncidents serviceIncidentsResponse = serviceIncidentsRepository.save(serviceIncidentsMapping.model(serviceIncidentsDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SERVICE_INCIDENTS_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new ServiceIncidentsRegisterResponse()
-                    .serviceIncidentsRegisterResponse(serviceIncidentsMapping.modelDto(serviceIncidentsResponse)));
+            response.setDatos(new ServiceIncidentResponse()
+                    .serviceIncident(serviceIncidentsMapping.modelDto(serviceIncidentsResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_SERVICE_INCIDENTS_WARN + ": " + ex);
             throw ex;
@@ -131,8 +130,8 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
     }
 
     @Override
-    public ResponseDto<ServiceIncidentsUpdateResponse> updateServiceIncidents(ServiceIncidentsDto serviceIncidentsDto) {
-        ResponseDto<ServiceIncidentsUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<ServiceIncidentResponse> updateServiceIncidents(ServiceIncidentsDto serviceIncidentsDto) {
+        ResponseDto<ServiceIncidentResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -149,7 +148,7 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
             serviceIncidentsRepository.save(serviceIncidentsMapping.model(serviceIncidentsDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SERVICE_INCIDENTS_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new ServiceIncidentsUpdateResponse().serviceIncidentsUpdateResponse(serviceIncidentsDto));
+            response.setDatos(new ServiceIncidentResponse().serviceIncident(serviceIncidentsDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_SERVICE_INCIDENTS_WARN + ": " + ex);

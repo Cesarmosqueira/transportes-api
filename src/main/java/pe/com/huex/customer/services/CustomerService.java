@@ -1,7 +1,7 @@
 package pe.com.huex.customer.services;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ import pe.com.huex.customer.services.resources.customer.dtos.CustomerRegisterDto
 import pe.com.huex.customer.services.resources.customer.dtos.CustomerRetrieveDto;
 import pe.com.huex.customer.services.resources.customer.dtos.CustomerUpdateDto;
 import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

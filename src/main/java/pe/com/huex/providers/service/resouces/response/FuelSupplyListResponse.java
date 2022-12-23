@@ -5,17 +5,14 @@ import pe.com.huex.providers.service.resouces.dto.FuelSupplyDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class FuelSupplyListResponse {
 
-    private List<FuelSupplyDto> fuelSupplyDtoList = null;
+    private List<FuelSupplyDto> fuelsSupply = null;
 
     public FuelSupplyListResponse fuelSupplyListResponse(List<FuelSupplyDto> fuelSupplyDtoList) {
-        this.fuelSupplyDtoList = fuelSupplyDtoList;
+        this.fuelsSupply = fuelSupplyDtoList;
         return this;
     }
 }

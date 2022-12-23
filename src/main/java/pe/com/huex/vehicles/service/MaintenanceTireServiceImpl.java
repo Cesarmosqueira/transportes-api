@@ -3,17 +3,15 @@ package pe.com.huex.vehicles.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.MaintenanceTire;
+import pe.com.huex.vehicles.domain.entities.MaintenanceTire;
 import pe.com.huex.vehicles.domain.persistence.IMaintenanceTireRepository;
 import pe.com.huex.vehicles.domain.service.IMaintenanceTireService;
 import pe.com.huex.vehicles.mapping.MaintenanceTireMapping;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceTireDto;
 import pe.com.huex.vehicles.service.resources.response.MaintenanceTireListResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.MaintenanceTireUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.MaintenanceTireResponse;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -21,8 +19,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -81,8 +79,8 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
     }
 
     @Override
-    public ResponseDto<MaintenanceTireRetrieveResponse> retrieveMaintenanceTire(Long id) {
-        ResponseDto<MaintenanceTireRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<MaintenanceTireResponse> retrieveMaintenanceTire(Long id) {
+        ResponseDto<MaintenanceTireResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -98,7 +96,7 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
             response.meta(MetaDatosUtil
                     .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_MAINTENANCETIRE_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new MaintenanceTireRetrieveResponse()
+            response.setDatos(new MaintenanceTireResponse()
                     .maintenanceTire(maintenanceTireMapping.modelDto(maintenanceTireList.get())));
 
         } catch (Exception ex) {
@@ -110,8 +108,8 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
     }
 
     @Override
-    public ResponseDto<MaintenanceTireRegisterResponse> registerMaintenanceTire(MaintenanceTireDto maintenanceTireDto) {
-        ResponseDto<MaintenanceTireRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<MaintenanceTireResponse> registerMaintenanceTire(MaintenanceTireDto maintenanceTireDto) {
+        ResponseDto<MaintenanceTireResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -119,7 +117,7 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
                     .save(maintenanceTireMapping.model(maintenanceTireDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_MAINTENANCETIRE_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new MaintenanceTireRegisterResponse()
+            response.setDatos(new MaintenanceTireResponse()
                     .maintenanceTire(maintenanceTireMapping.modelDto(maintenanceTire)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_MAINTENANCETIRE_WARN + ": " + ex);
@@ -130,8 +128,8 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
     }
 
     @Override
-    public ResponseDto<MaintenanceTireUpdateResponse> updateMaintenanceTire(MaintenanceTireDto maintenanceTireDto) {
-        ResponseDto<MaintenanceTireUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<MaintenanceTireResponse> updateMaintenanceTire(MaintenanceTireDto maintenanceTireDto) {
+        ResponseDto<MaintenanceTireResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -148,7 +146,7 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
             maintenanceTireRepository.save(maintenanceTireMapping.model(maintenanceTireDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_MAINTENANCETIRE_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new MaintenanceTireUpdateResponse().maintenanceTire(maintenanceTireDto));
+            response.setDatos(new MaintenanceTireResponse().maintenanceTire(maintenanceTireDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_MAINTENANCETIRE_WARN + ": " + ex);

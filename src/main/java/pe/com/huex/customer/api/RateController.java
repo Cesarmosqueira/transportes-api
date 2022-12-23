@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.com.huex.customer.domain.service.IRateService;
 import pe.com.huex.customer.services.resources.dto.RateDto;
 import pe.com.huex.customer.services.resources.response.RateListResponse;
-import pe.com.huex.customer.services.resources.response.RateRegisterResponse;
-import pe.com.huex.customer.services.resources.response.RateRetrieveResponse;
-import pe.com.huex.customer.services.resources.response.RateUpdateResponse;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.customer.services.resources.response.RateResponse;
+import pe.com.huex.util.ResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,17 +30,17 @@ public class RateController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<RateRetrieveResponse> retrieveRate(@PathVariable Long id) throws Exception {
+    public ResponseDto<RateResponse> retrieveRate(@PathVariable Long id) throws Exception {
         return rateService.retrieveRate(id);
     }
 
     @PostMapping
-    public ResponseDto<RateRegisterResponse> registerRate(@RequestBody RateDto rateDto) throws Exception {
+    public ResponseDto<RateResponse> registerRate(@RequestBody RateDto rateDto) throws Exception {
         return rateService.registerRate(rateDto);
     }
 
     @PutMapping
-    public ResponseDto<RateUpdateResponse> updateRate(@RequestBody RateDto rateDto)
+    public ResponseDto<RateResponse> updateRate(@RequestBody RateDto rateDto)
             throws Exception {
         return rateService.updateRate(rateDto);
     }

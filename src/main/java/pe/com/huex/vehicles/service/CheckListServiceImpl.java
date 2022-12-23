@@ -1,31 +1,25 @@
 package pe.com.huex.vehicles.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.CheckList;
+import pe.com.huex.vehicles.domain.entities.CheckList;
 import pe.com.huex.vehicles.domain.persistence.ICheckListRepository;
 import pe.com.huex.vehicles.domain.service.ICheckListService;
 import pe.com.huex.vehicles.mapping.CheckListMapping;
 import pe.com.huex.vehicles.service.resources.dto.CheckListDto;
 import pe.com.huex.vehicles.service.resources.response.CheckListListResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.CheckListUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.CheckListResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Service
 @Slf4j
@@ -85,8 +79,8 @@ public class CheckListServiceImpl implements ICheckListService {
     }
 
     @Override
-    public ResponseDto<CheckListRetrieveResponse> retrieveCheckList(Long id) {
-        ResponseDto<CheckListRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<CheckListResponse> retrieveCheckList(Long id) {
+        ResponseDto<CheckListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -100,7 +94,7 @@ public class CheckListServiceImpl implements ICheckListService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_CHECKLIST_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new CheckListRetrieveResponse().checkList(checkListMapping.modelDto(checkListList.get())));
+            response.setDatos(new CheckListResponse().checkList(checkListMapping.modelDto(checkListList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_CHECKLIST_WARN + ": " + ex);
@@ -111,15 +105,15 @@ public class CheckListServiceImpl implements ICheckListService {
     }
 
     @Override
-    public ResponseDto<CheckListRegisterResponse> registerCheckList(CheckListDto checkListDto) throws IOException {
-        ResponseDto<CheckListRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<CheckListResponse> registerCheckList(CheckListDto checkListDto) throws IOException {
+        ResponseDto<CheckListResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
             CheckList checkListResponse = checkListRepository.save(checkListMapping.model(checkListDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_CHECKLIST_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new CheckListRegisterResponse().checkList(checkListMapping.modelDto(checkListResponse)));
+            response.setDatos(new CheckListResponse().checkList(checkListMapping.modelDto(checkListResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_CHECKLIST_WARN + ": " + ex);
             throw ex;
@@ -129,8 +123,8 @@ public class CheckListServiceImpl implements ICheckListService {
     }
 
     @Override
-    public ResponseDto<CheckListUpdateResponse> updateCheckList(CheckListDto checkListDto) throws IOException {
-        ResponseDto<CheckListUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<CheckListResponse> updateCheckList(CheckListDto checkListDto) throws IOException {
+        ResponseDto<CheckListResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -145,7 +139,7 @@ public class CheckListServiceImpl implements ICheckListService {
 
             CheckList checkListResponse = checkListRepository.save(checkListMapping.model(checkListDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_CHECKLIST_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new CheckListUpdateResponse().checkList(checkListMapping.modelDto(checkListResponse)));
+            response.setDatos(new CheckListResponse().checkList(checkListMapping.modelDto(checkListResponse)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_CHECKLIST_WARN + ": " + ex);

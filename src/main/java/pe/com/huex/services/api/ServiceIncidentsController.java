@@ -2,7 +2,7 @@ package pe.com.huex.services.api;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.services.domain.service.IServiceIncidentsService;
 import pe.com.huex.services.service.resources.dto.ServiceIncidentsDto;
 import pe.com.huex.services.service.resources.response.*;
@@ -20,23 +20,23 @@ public class ServiceIncidentsController {
     }
 
     @GetMapping
-    public ResponseDto<ServiceIncidentsListResponse> listServiceIncident() throws Exception {
+    public ResponseDto<ServiceIncidentListResponse> listServiceIncident() throws Exception {
         return serviceIncidentsService.listServiceIncidents();
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<ServiceIncidentsRetrieveResponse> retrieveServiceIncident(@PathVariable Long id) throws Exception {
+    public ResponseDto<ServiceIncidentResponse> retrieveServiceIncident(@PathVariable Long id) throws Exception {
         return serviceIncidentsService.retrieveServiceIncidents(id);
     }
 
     @PostMapping
-    public ResponseDto<ServiceIncidentsRegisterResponse> registerServiceIncident(@RequestBody ServiceIncidentsDto serviceIncidentsDto)
+    public ResponseDto<ServiceIncidentResponse> registerServiceIncident(@RequestBody ServiceIncidentsDto serviceIncidentsDto)
             throws Exception {
         return serviceIncidentsService.registerServiceIncidents(serviceIncidentsDto);
     }
 
     @PutMapping
-    public ResponseDto<ServiceIncidentsUpdateResponse> updateServiceIncident(@RequestBody ServiceIncidentsDto serviceIncidentsDto)
+    public ResponseDto<ServiceIncidentResponse> updateServiceIncident(@RequestBody ServiceIncidentsDto serviceIncidentsDto)
             throws Exception {
         return serviceIncidentsService.updateServiceIncidents(serviceIncidentsDto);
     }

@@ -2,17 +2,15 @@ package pe.com.huex.vehicles.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.KardexFuel;
+import pe.com.huex.vehicles.domain.entities.KardexFuel;
 import pe.com.huex.vehicles.domain.persistence.IKardexFuelRepository;
 import pe.com.huex.vehicles.domain.service.IKardexFuelService;
 import pe.com.huex.vehicles.mapping.KardexFuelMapping;
 import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
 import pe.com.huex.vehicles.service.resources.response.KardexFuelListResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.KardexFuelResponse;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,8 +18,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -82,8 +80,8 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
     }
 
     @Override
-    public ResponseDto<KardexFuelRetrieveResponse> retrieveKardexFuel(Long id) {
-        ResponseDto<KardexFuelRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<KardexFuelResponse> retrieveKardexFuel(Long id) {
+        ResponseDto<KardexFuelResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -97,7 +95,7 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_KARDEXFUEL_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new KardexFuelRetrieveResponse().kardexFuel(kardexFuelMapping.modelDto(kardexFuelList.get())));
+            response.setDatos(new KardexFuelResponse().kardexFuel(kardexFuelMapping.modelDto(kardexFuelList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_KARDEXFUEL_WARN+ ": " + ex);
@@ -108,14 +106,14 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
     }
 
     @Override
-    public ResponseDto<KardexFuelRegisterResponse> registerKardexFuel(KardexFuelDto kardexFuelDto) {
-        ResponseDto<KardexFuelRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<KardexFuelResponse> registerKardexFuel(KardexFuelDto kardexFuelDto) {
+        ResponseDto<KardexFuelResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             KardexFuel kardexFuel = kardexFuelRepository.save(kardexFuelMapping.model(kardexFuelDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_KARDEXFUEL_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new KardexFuelRegisterResponse().kardexFuel(kardexFuelMapping.modelDto(kardexFuel)));
+            response.setDatos(new KardexFuelResponse().kardexFuel(kardexFuelMapping.modelDto(kardexFuel)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_KARDEXFUEL_WARN + ": " + ex);
             throw ex;
@@ -125,8 +123,8 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
     }
 
     @Override
-    public ResponseDto<KardexFuelUpdateResponse> updateKardexFuel(KardexFuelDto kardexFuelDto) {
-        ResponseDto<KardexFuelUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<KardexFuelResponse> updateKardexFuel(KardexFuelDto kardexFuelDto) {
+        ResponseDto<KardexFuelResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -141,7 +139,7 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
             kardexFuelRepository.save( kardexFuelMapping.model(kardexFuelDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_KARDEXFUEL_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new KardexFuelUpdateResponse().kardexFuel(kardexFuelDto));
+            response.setDatos(new KardexFuelResponse().kardexFuel(kardexFuelDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_KARDEXFUEL_WARN + ": " + ex);

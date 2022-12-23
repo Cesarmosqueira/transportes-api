@@ -1,18 +1,12 @@
 package pe.com.huex.providers.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import pe.com.huex.vehicles.domain.model.entity.TruckFleet;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
+@Data
 @Entity
-@Getter
-@Setter
-@With
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "providers")
 public class Provider {

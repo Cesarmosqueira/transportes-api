@@ -5,17 +5,14 @@ import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class ProviderListResponse {
 
-    private List<ProviderDto> providerDtoList = null;
+    private List<ProviderDto> providers = null;
 
     public ProviderListResponse providerList(List<ProviderDto> providerDtoList) {
-        this.providerDtoList = providerDtoList;
+        this.providers = providerDtoList;
         return this;
     }
 

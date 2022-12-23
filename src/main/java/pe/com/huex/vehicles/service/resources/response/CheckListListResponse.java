@@ -5,16 +5,12 @@ import pe.com.huex.vehicles.service.resources.dto.CheckListDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class CheckListListResponse {
-    private List<CheckListDto> checkListDtoList = null;
+    private List<CheckListDto> checkLists = null;
 
     public CheckListListResponse checkList(List<CheckListDto> checkListDtoList) {
-        this.checkListDtoList = checkListDtoList;
+        this.checkLists = checkListDtoList;
         return this;
     }
 }

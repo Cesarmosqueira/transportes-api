@@ -2,14 +2,9 @@ package pe.com.huex.vehicles.service.resources.dto;
 
 import lombok.*;
 
-import java.time.Instant;
 import java.util.Date;
 
-@Getter
-@Setter
-@With
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class DocumentUnitDto {
     private Long id;
     private Long idTruckFleet;

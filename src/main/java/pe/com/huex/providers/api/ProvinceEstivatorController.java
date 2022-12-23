@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
 import pe.com.huex.providers.service.resouces.dto.ProvinceEstivatorDto;
 import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorListResponse;
-import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorRegisterResponse;
-import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorRetrieveResponse;
-import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorUpdateResponse;
+import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -32,19 +30,19 @@ public class ProvinceEstivatorController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<ProvinceEstivatorRetrieveResponse> retrieveProvinceEstivator(@PathVariable Long id)
+    public ResponseDto<ProvinceEstivatorResponse> retrieveProvinceEstivator(@PathVariable Long id)
             throws Exception {
         return provinceEstivatorService.retrieveProvinceEstivator(id);
     }
 
     @PostMapping
-    public ResponseDto<ProvinceEstivatorRegisterResponse> registerProvinceEstivator(
+    public ResponseDto<ProvinceEstivatorResponse> registerProvinceEstivator(
             @RequestBody ProvinceEstivatorDto provinceEstivatorDto) throws Exception {
         return provinceEstivatorService.registerProvinceEstivator(provinceEstivatorDto);
     }
 
     @PutMapping
-    public ResponseDto<ProvinceEstivatorUpdateResponse> updateProvinceEstivator(
+    public ResponseDto<ProvinceEstivatorResponse> updateProvinceEstivator(
             @RequestBody ProvinceEstivatorDto provinceEstivatorDto)
             throws Exception {
         return provinceEstivatorService.updateProvinceEstivator(provinceEstivatorDto);

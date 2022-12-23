@@ -4,11 +4,7 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@With
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class MaintenanceTireDto {
     private Long id;
     private Long idTruckFleet;

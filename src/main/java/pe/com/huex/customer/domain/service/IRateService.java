@@ -2,18 +2,16 @@ package pe.com.huex.customer.domain.service;
 
 import pe.com.huex.customer.services.resources.dto.RateDto;
 import pe.com.huex.customer.services.resources.response.RateListResponse;
-import pe.com.huex.customer.services.resources.response.RateRegisterResponse;
-import pe.com.huex.customer.services.resources.response.RateRetrieveResponse;
-import pe.com.huex.customer.services.resources.response.RateUpdateResponse;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.customer.services.resources.response.RateResponse;
+import pe.com.huex.util.ResponseDto;
 
 public interface IRateService {
 
     ResponseDto<RateListResponse> listRate();
 
-    ResponseDto<RateRetrieveResponse> retrieveRate(Long id);
+    ResponseDto<RateResponse> retrieveRate(Long id);
 
-    ResponseDto<RateRegisterResponse> registerRate(RateDto rateDto);
+    ResponseDto<RateResponse> registerRate(RateDto rateDto);
 
-    ResponseDto<RateUpdateResponse> updateRate(RateDto rateDto);
+    ResponseDto<RateResponse> updateRate(RateDto rateDto);
 }

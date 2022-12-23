@@ -5,16 +5,13 @@ import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class TrackingServiceListResponse {
-    private List<TrackingServiceDto> trackingServiceDtos = null;
+    private List<TrackingServiceDto> trackingsService = null;
 
     public TrackingServiceListResponse trackingServiceList(List<TrackingServiceDto> trackingServiceDtos) {
-        this.trackingServiceDtos = trackingServiceDtos;
+        this.trackingsService = trackingServiceDtos;
         return this;
     }
 }

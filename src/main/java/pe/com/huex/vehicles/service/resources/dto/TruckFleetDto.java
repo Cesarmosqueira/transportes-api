@@ -1,15 +1,10 @@
 package pe.com.huex.vehicles.service.resources.dto;
 
 import lombok.*;
-import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class TruckFleetDto {
 
     private Long id;

@@ -1,7 +1,7 @@
 package pe.com.huex.vehicles.mapping;
 
 import org.modelmapper.ModelMapper;
-import pe.com.huex.vehicles.domain.model.entity.TruckFleet;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 
 import java.io.Serializable;

@@ -5,16 +5,12 @@ import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class KardexFuelListResponse {
-    private List<KardexFuelDto> kardexFuelDtoList = null;
+    private List<KardexFuelDto> kardexFuels = null;
 
     public KardexFuelListResponse kardexFuelList(List<KardexFuelDto> kardexFuelDtoList) {
-        this.kardexFuelDtoList = kardexFuelDtoList;
+        this.kardexFuels = kardexFuelDtoList;
         return this;
     }
 }

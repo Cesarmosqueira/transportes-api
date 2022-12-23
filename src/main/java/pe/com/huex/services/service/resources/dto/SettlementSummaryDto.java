@@ -1,16 +1,10 @@
 package pe.com.huex.services.service.resources.dto;
 
 import lombok.*;
-import pe.com.huex.services.domain.model.entity.ExpenseType;
-import pe.com.huex.services.domain.model.entity.TrackingService;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class SettlementSummaryDto {
 
     private Long id;

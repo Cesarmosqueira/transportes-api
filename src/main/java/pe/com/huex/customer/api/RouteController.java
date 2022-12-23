@@ -15,10 +15,8 @@ import pe.com.huex.customer.domain.service.IRouteService;
 import pe.com.huex.customer.services.resources.dto.RouteDto;
 import pe.com.huex.customer.services.resources.response.RouteDeleteResponse;
 import pe.com.huex.customer.services.resources.response.RouteListResponse;
-import pe.com.huex.customer.services.resources.response.RouteRegisterResponse;
-import pe.com.huex.customer.services.resources.response.RouteRetrieveResponse;
-import pe.com.huex.customer.services.resources.response.RouteUpdateResponse;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.customer.services.resources.response.RouteResponse;
+import pe.com.huex.util.ResponseDto;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -34,17 +32,17 @@ public class RouteController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<RouteRetrieveResponse> retrieveRoute(@PathVariable Long id) throws Exception {
+    public ResponseDto<RouteResponse> retrieveRoute(@PathVariable Long id) throws Exception {
         return routeService.retrieveRoute(id);
     }
 
     @PostMapping
-    public ResponseDto<RouteRegisterResponse> registerRoute(@RequestBody RouteDto routeDto) throws Exception {
+    public ResponseDto<RouteResponse> registerRoute(@RequestBody RouteDto routeDto) throws Exception {
         return routeService.registerRoute(routeDto);
     }
 
     @PutMapping
-    public ResponseDto<RouteUpdateResponse> updateRoute(@RequestBody RouteDto routeDto)
+    public ResponseDto<RouteResponse> updateRoute(@RequestBody RouteDto routeDto)
             throws Exception {
         return routeService.updateRoute(routeDto);
     }

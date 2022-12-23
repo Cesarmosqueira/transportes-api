@@ -1,7 +1,7 @@
 package pe.com.huex.employees.services;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,16 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.employees.domain.entities.Employee;
 import pe.com.huex.employees.domain.entities.EmployeeAttendance;
 import pe.com.huex.employees.domain.persistence.AttendanceRepository;
 import pe.com.huex.employees.domain.persistence.EmployeeRepository;
-import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceDeleteDto;
-import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceListDto;
-import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.attendance.AttendanceUpdateDto;
-import pe.com.huex.employees.services.resources.response.AttendanceResponseDto;
+import pe.com.huex.employees.services.resources.response.attendance.AttendanceDeleteDto;
+import pe.com.huex.employees.services.resources.response.attendance.AttendanceListDto;
+import pe.com.huex.employees.services.resources.response.attendance.AttendanceRegisterDto;
+import pe.com.huex.employees.services.resources.response.attendance.AttendanceUpdateDto;
+import pe.com.huex.employees.services.resources.dtos.AttendanceResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional

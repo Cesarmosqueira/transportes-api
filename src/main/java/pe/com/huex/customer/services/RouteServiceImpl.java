@@ -1,7 +1,7 @@
 package pe.com.huex.customer.services;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +20,8 @@ import pe.com.huex.customer.mapping.RouteMapping;
 import pe.com.huex.customer.services.resources.dto.RouteDto;
 import pe.com.huex.customer.services.resources.response.RouteDeleteResponse;
 import pe.com.huex.customer.services.resources.response.RouteListResponse;
-import pe.com.huex.customer.services.resources.response.RouteRegisterResponse;
-import pe.com.huex.customer.services.resources.response.RouteRetrieveResponse;
-import pe.com.huex.customer.services.resources.response.RouteUpdateResponse;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.customer.services.resources.response.RouteResponse;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional
@@ -70,7 +68,7 @@ public class RouteServiceImpl implements IRouteService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_RUTE_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(routeList.size()));
-            response.setDatos(new RouteListResponse().routeListResponse(routeMapping.modelList(routeList)));
+            response.setDatos(new RouteListResponse().routes(routeMapping.modelList(routeList)));
 
         } catch (Exception ex) {
             log.error("error al consultar rutas" + ex);
@@ -81,8 +79,8 @@ public class RouteServiceImpl implements IRouteService {
     }
 
     @Override
-    public ResponseDto<RouteRetrieveResponse> retrieveRoute(Long id) {
-        ResponseDto<RouteRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<RouteResponse> retrieveRoute(Long id) {
+        ResponseDto<RouteResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -97,7 +95,7 @@ public class RouteServiceImpl implements IRouteService {
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_RUTE_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
             response.setDatos(
-                    new RouteRetrieveResponse().routeRetrieveResponse(routeMapping.modelDto(routeList.get())));
+                    new RouteResponse().route(routeMapping.modelDto(routeList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar ruta" + ex);
@@ -108,16 +106,16 @@ public class RouteServiceImpl implements IRouteService {
     }
 
     @Override
-    public ResponseDto<RouteRegisterResponse> registerRoute(RouteDto routeDto) {
+    public ResponseDto<RouteResponse> registerRoute(RouteDto routeDto) {
 
-        ResponseDto<RouteRegisterResponse> response = new ResponseDto<>();
+        ResponseDto<RouteResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             Route routeResponse = routeRepository.save(routeMapping.model(routeDto));
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_RUTE_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new RouteRegisterResponse().routeRegisterResponse(routeMapping.modelDto(routeResponse)));
+            response.setDatos(new RouteResponse().route(routeMapping.modelDto(routeResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_RUTE_WARN + ": " + ex);
             throw ex;
@@ -127,9 +125,9 @@ public class RouteServiceImpl implements IRouteService {
     }
 
     @Override
-    public ResponseDto<RouteUpdateResponse> updateRoute(RouteDto routeDto) {
+    public ResponseDto<RouteResponse> updateRoute(RouteDto routeDto) {
 
-        ResponseDto<RouteUpdateResponse> response = new ResponseDto<>();
+        ResponseDto<RouteResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -144,7 +142,7 @@ public class RouteServiceImpl implements IRouteService {
 
             routeRepository.save(routeMapping.model(routeDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_RUTE_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new RouteUpdateResponse().routeUpdateResponse(routeDto));
+            response.setDatos(new RouteResponse().route(routeDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_RUTE_WARN + ": " + ex);

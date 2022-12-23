@@ -5,17 +5,13 @@ import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class TruckFleetListResponse {
 
-    private List<TruckFleetDto> truckFleetDtoList = null;
+    private List<TruckFleetDto> truckFleets = null;
 
     public TruckFleetListResponse truckFleetList(List<TruckFleetDto> truckFleetDtoList) {
-        this.truckFleetDtoList = truckFleetDtoList;
+        this.truckFleets = truckFleetDtoList;
         return this;
     }
 

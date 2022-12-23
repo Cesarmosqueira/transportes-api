@@ -3,7 +3,7 @@ package pe.com.huex.providers.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 import pe.com.huex.providers.domain.persistence.ProvinceEstivatorRepository;
 import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -76,8 +76,8 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
     }
 
     @Override
-    public ResponseDto<ProvinceEstivatorRetrieveResponse> retrieveProvinceEstivator(Long id) {
-        ResponseDto<ProvinceEstivatorRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<ProvinceEstivatorResponse> retrieveProvinceEstivator(Long id) {
+        ResponseDto<ProvinceEstivatorResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -93,7 +93,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
             response.meta(MetaDatosUtil
                     .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVINCE_ESTIVATOR_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new ProvinceEstivatorRetrieveResponse().provinceEstivatorRetrieveResponse(
+            response.setDatos(new ProvinceEstivatorResponse().provinceEstivator(
                     provinceEstivatorMapping.modelDto(provinceEstivatorsList.get())));
 
         } catch (Exception ex) {
@@ -105,9 +105,9 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
     }
 
     @Override
-    public ResponseDto<ProvinceEstivatorRegisterResponse> registerProvinceEstivator(
+    public ResponseDto<ProvinceEstivatorResponse> registerProvinceEstivator(
             ProvinceEstivatorDto provinceEstivatorDto) {
-        ResponseDto<ProvinceEstivatorRegisterResponse> response = new ResponseDto<>();
+        ResponseDto<ProvinceEstivatorResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -115,8 +115,8 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
                     .save(provinceEstivatorMapping.model(provinceEstivatorDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVINCE_ESTIVATOR_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new ProvinceEstivatorRegisterResponse()
-                    .provinceEstivatorRegisterResponse(provinceEstivatorMapping.modelDto(provinceEstivatorsResponse)));
+            response.setDatos(new ProvinceEstivatorResponse()
+                    .provinceEstivator(provinceEstivatorMapping.modelDto(provinceEstivatorsResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_PROVINCE_ESTIVATOR_WARN + ": " + ex);
             throw ex;
@@ -126,9 +126,9 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
     }
 
     @Override
-    public ResponseDto<ProvinceEstivatorUpdateResponse> updateProvinceEstivator(
+    public ResponseDto<ProvinceEstivatorResponse> updateProvinceEstivator(
             ProvinceEstivatorDto provinceEstivatorDto) {
-        ResponseDto<ProvinceEstivatorUpdateResponse> response = new ResponseDto<>();
+        ResponseDto<ProvinceEstivatorResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -147,7 +147,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVINCE_ESTIVATOR_SUCCESS, INFO,
                     idTransaccion));
             response.setDatos(
-                    new ProvinceEstivatorUpdateResponse().provinceEstivatorUpdateResponse(provinceEstivatorDto));
+                    new ProvinceEstivatorResponse().provinceEstivator(provinceEstivatorDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_PROVINCE_ESTIVATOR_WARN + ": " + ex);

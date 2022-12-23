@@ -3,18 +3,15 @@ package pe.com.huex.providers.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.Provider;
 import pe.com.huex.providers.domain.persistence.ProviderRepository;
 import pe.com.huex.providers.domain.service.IProviderService;
 import pe.com.huex.providers.mapping.ProviderMapping;
 import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 import pe.com.huex.providers.service.resouces.response.ProviderListResponse;
-import pe.com.huex.providers.service.resouces.response.ProviderRegisterResponse;
-import pe.com.huex.providers.service.resouces.response.ProviderRetrieveResponse;
-import pe.com.huex.providers.service.resouces.response.ProviderUpdateResponse;
+import pe.com.huex.providers.service.resouces.response.ProviderResponse;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.TruckFleet;
 import pe.com.huex.vehicles.mapping.TruckFleetMapping;
 
 import javax.transaction.Transactional;
@@ -22,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -81,8 +78,8 @@ public class ProviderServiceImpl implements IProviderService {
     }
 
     @Override
-    public ResponseDto<ProviderRetrieveResponse> retrieveProvider(Long id) {
-        ResponseDto<ProviderRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<ProviderResponse> retrieveProvider(Long id) {
+        ResponseDto<ProviderResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -96,7 +93,7 @@ public class ProviderServiceImpl implements IProviderService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVIDERS_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new ProviderRetrieveResponse().provider(providerMapping.modelDto(providerList.get())));
+            response.setDatos(new ProviderResponse().provider(providerMapping.modelDto(providerList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar proveedor" + ex);
@@ -107,14 +104,14 @@ public class ProviderServiceImpl implements IProviderService {
     }
 
     @Override
-    public ResponseDto<ProviderRegisterResponse> registerProvider(ProviderDto providerDto) {
-        ResponseDto<ProviderRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<ProviderResponse> registerProvider(ProviderDto providerDto) {
+        ResponseDto<ProviderResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             Provider providerResponse = providerRepository.save(providerMapping.model(providerDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVIDERS_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new ProviderRegisterResponse().provider(providerMapping.modelDto(providerResponse)));
+            response.setDatos(new ProviderResponse().provider(providerMapping.modelDto(providerResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_PROVIDERS_WARN + ": " + ex);
             throw ex;
@@ -124,8 +121,8 @@ public class ProviderServiceImpl implements IProviderService {
     }
 
     @Override
-    public ResponseDto<ProviderUpdateResponse> updateProvider(ProviderDto providerDto) {
-        ResponseDto<ProviderUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<ProviderResponse> updateProvider(ProviderDto providerDto) {
+        ResponseDto<ProviderResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -140,7 +137,7 @@ public class ProviderServiceImpl implements IProviderService {
 
             providerRepository.save(providerMapping.model(providerDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVIDERS_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new ProviderUpdateResponse().provider(providerDto));
+            response.setDatos(new ProviderResponse().provider(providerDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_PROVIDERS_WARN + ": " + ex);

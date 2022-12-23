@@ -3,11 +3,11 @@ package pe.com.huex.services.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.services.domain.model.entity.SettlementSummary;
+import pe.com.huex.util.ResponseDto;
+import pe.com.huex.services.domain.entities.SettlementSummary;
 import pe.com.huex.services.domain.persistence.SettlementSummaryRepository;
 import pe.com.huex.services.domain.service.ISettlementSummaryService;
-import pe.com.huex.exception.mapping.SettlementSummaryMapping;
+import pe.com.huex.services.mapping.SettlementSummaryMapping;
 import pe.com.huex.services.service.resources.dto.SettlementSummaryDto;
 import pe.com.huex.services.service.resources.response.*;
 import pe.com.huex.util.MetaDatosUtil;
@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -82,8 +82,8 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
     }
 
     @Override
-    public ResponseDto<SettlementSummaryRetrieveResponse> retrieveSettlementSummary(Long id) {
-        ResponseDto<SettlementSummaryRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<SettlementSummaryResponse> retrieveSettlementSummary(Long id) {
+        ResponseDto<SettlementSummaryResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -99,8 +99,8 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
             response.meta(MetaDatosUtil
                     .buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SETTLEMENT_SUMMARY_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new SettlementSummaryRetrieveResponse()
-                    .settlementSummaryRetrieveResponse(settlementSummaryMapping.modelDto(settlementSummaryList.get())));
+            response.setDatos(new SettlementSummaryResponse()
+                    .settlementSummary(settlementSummaryMapping.modelDto(settlementSummaryList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar resumen de liquidacion" + ex);
@@ -111,16 +111,16 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
     }
 
     @Override
-    public ResponseDto<SettlementSummaryRegisterResponse> registerSettlementSummary(SettlementSummaryDto settlementSummaryDto) {
-        ResponseDto<SettlementSummaryRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<SettlementSummaryResponse> registerSettlementSummary(SettlementSummaryDto settlementSummaryDto) {
+        ResponseDto<SettlementSummaryResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             SettlementSummary settlementSummaryResponse = settlementSummaryRepository.save(settlementSummaryMapping.model(settlementSummaryDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_SETTLEMENT_SUMMARY_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new SettlementSummaryRegisterResponse()
-                    .settlementSummaryRegisterResponse(settlementSummaryMapping.modelDto(settlementSummaryResponse)));
+            response.setDatos(new SettlementSummaryResponse()
+                    .settlementSummary(settlementSummaryMapping.modelDto(settlementSummaryResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_SETTLEMENT_SUMMARY_WARN + ": " + ex);
             throw ex;
@@ -130,8 +130,8 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
     }
 
     @Override
-    public ResponseDto<SettlementSummaryUpdateResponse> updateSettlementSummary(SettlementSummaryDto settlementSummaryDto) {
-        ResponseDto<SettlementSummaryUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<SettlementSummaryResponse> updateSettlementSummary(SettlementSummaryDto settlementSummaryDto) {
+        ResponseDto<SettlementSummaryResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -148,7 +148,7 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
             settlementSummaryRepository.save(settlementSummaryMapping.model(settlementSummaryDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_SETTLEMENT_SUMMARY_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new SettlementSummaryUpdateResponse().settlementSummaryUpdateResponse(settlementSummaryDto));
+            response.setDatos(new SettlementSummaryResponse().settlementSummary(settlementSummaryDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_SETTLEMENT_SUMMARY_WARN + ": " + ex);

@@ -5,16 +5,12 @@ import pe.com.huex.vehicles.service.resources.dto.MaintenanceOilDto;
 
 import java.util.List;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class MaintenanceOilListResponse {
-    private List<MaintenanceOilDto> maintenanceOilDtoList = null;
+    private List<MaintenanceOilDto> maintenancesOil = null;
 
     public MaintenanceOilListResponse maintenanceOilList(List<MaintenanceOilDto> maintenanceOilDtoList) {
-        this.maintenanceOilDtoList = maintenanceOilDtoList;
+        this.maintenancesOil = maintenanceOilDtoList;
         return this;
     }
 }

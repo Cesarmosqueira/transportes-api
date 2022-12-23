@@ -2,7 +2,7 @@ package pe.com.huex.services.domain.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pe.com.huex.services.domain.model.entity.TrackingService;
+import pe.com.huex.services.domain.entities.TrackingService;
 
 import java.util.List;
 

@@ -2,24 +2,17 @@ package pe.com.huex.customer.services.resources.response;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.With;
+import lombok.*;
 import pe.com.huex.customer.services.resources.dto.RouteDto;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class RouteListResponse {
 
-    private List<RouteDto> routeDtoList = null;
+    private List<RouteDto> routes = null;
 
-    public RouteListResponse routeListResponse(List<RouteDto> routeDtoList) {
-        this.routeDtoList = routeDtoList;
+    public RouteListResponse routes(List<RouteDto> routeDtoList) {
+        this.routes = routeDtoList;
         return this;
     }
 }

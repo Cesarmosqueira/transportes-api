@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.service.ITireReplacementService;
 import pe.com.huex.providers.service.resouces.dto.TireReplacementDto;
 import pe.com.huex.providers.service.resouces.response.TireReplacementListResponse;
-import pe.com.huex.providers.service.resouces.response.TireReplacementRegisterResponse;
-import pe.com.huex.providers.service.resouces.response.TireReplacementRetrieveResponse;
-import pe.com.huex.providers.service.resouces.response.TireReplacementUpdateResponse;
+import pe.com.huex.providers.service.resouces.response.TireReplacementResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -35,19 +33,19 @@ public class TireReplacementController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<TireReplacementRetrieveResponse> retrieveTireReplacement(@PathVariable Long id)
+    public ResponseDto<TireReplacementResponse> retrieveTireReplacement(@PathVariable Long id)
             throws Exception {
         return tiredReplacementService.retrieveTireReplacement(id);
     }
 
     @PostMapping
-    public ResponseDto<TireReplacementRegisterResponse> registerTireReplacement(
+    public ResponseDto<TireReplacementResponse> registerTireReplacement(
             @RequestBody TireReplacementDto tireReplacementDto) throws Exception {
         return tiredReplacementService.registerTireReplacement(tireReplacementDto);
     }
 
     @PutMapping
-    public ResponseDto<TireReplacementUpdateResponse> updateTireReplacement(
+    public ResponseDto<TireReplacementResponse> updateTireReplacement(
             @RequestBody TireReplacementDto tireReplacementDto)
             throws Exception {
         return tiredReplacementService.updateTireReplacement(tireReplacementDto);

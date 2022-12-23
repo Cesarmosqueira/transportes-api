@@ -2,13 +2,11 @@ package pe.com.huex.services.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.services.domain.service.IExpenseTypeService;
 import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 import pe.com.huex.services.service.resources.response.ExpenseTypeListResponse;
-import pe.com.huex.services.service.resources.response.ExpenseTypeRegisterResponse;
-import pe.com.huex.services.service.resources.response.ExpenseTypeRetrieveResponse;
-import pe.com.huex.services.service.resources.response.ExpenseTypeUpdateResponse;
+import pe.com.huex.services.service.resources.response.ExpenseTypeResponse;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,18 +22,18 @@ public class ExpenseTypeController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<ExpenseTypeRetrieveResponse> retrieveExpenseType(@PathVariable Long id) throws Exception {
+    public ResponseDto<ExpenseTypeResponse> retrieveExpenseType(@PathVariable Long id) throws Exception {
         return expenseTypeService.retrieveExpenseType(id);
     }
 
     @PostMapping
-    public ResponseDto<ExpenseTypeRegisterResponse> registerExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
+    public ResponseDto<ExpenseTypeResponse> registerExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
             throws Exception {
         return expenseTypeService.registerExpenseType(expenseTypeDto);
     }
 
     @PutMapping
-    public ResponseDto<ExpenseTypeUpdateResponse> updateExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
+    public ResponseDto<ExpenseTypeResponse> updateExpenseType(@RequestBody ExpenseTypeDto expenseTypeDto)
             throws Exception {
         return expenseTypeService.updateExpenseType(expenseTypeDto);
     }

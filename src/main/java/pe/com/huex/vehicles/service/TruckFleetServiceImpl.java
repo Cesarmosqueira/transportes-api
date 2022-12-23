@@ -3,28 +3,24 @@ package pe.com.huex.vehicles.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
-import pe.com.huex.providers.domain.model.entity.Provider;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.mapping.ProviderMapping;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.model.entity.TruckFleet;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 import pe.com.huex.vehicles.domain.persistence.ITruckFleetRepository;
 import pe.com.huex.vehicles.domain.service.ITruckFleetService;
 import pe.com.huex.vehicles.mapping.TruckFleetMapping;
 import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 import pe.com.huex.vehicles.service.resources.response.TruckFleetListResponse;
-import pe.com.huex.vehicles.service.resources.response.TruckFleetRegisterResponse;
-import pe.com.huex.vehicles.service.resources.response.TruckFleetRetrieveResponse;
-import pe.com.huex.vehicles.service.resources.response.TruckFleetUpdateResponse;
+import pe.com.huex.vehicles.service.resources.response.TruckFleetResponse;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -84,8 +80,8 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
     }
 
     @Override
-    public ResponseDto<TruckFleetRetrieveResponse> retrieveTruckFleet(Long id) {
-        ResponseDto<TruckFleetRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<TruckFleetResponse> retrieveTruckFleet(Long id) {
+        ResponseDto<TruckFleetResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -102,7 +98,7 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRUCKFLEET_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(1));
             response.setDatos(
-                    new TruckFleetRetrieveResponse().truckFleet(truckFleetMapping.modelDto(truckFleetList.get())));
+                    new TruckFleetResponse().truckFleet(truckFleetMapping.modelDto(truckFleetList.get())));
 
         } catch (Exception ex) {
             log.error(MESSAGE_RETRIEVE_TRUCKFLEET_WARN + ": " + ex);
@@ -113,15 +109,15 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
     }
 
     @Override
-    public ResponseDto<TruckFleetRegisterResponse> registerTruckFleet(TruckFleetDto truckFleetDto) {
-        ResponseDto<TruckFleetRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<TruckFleetResponse> registerTruckFleet(TruckFleetDto truckFleetDto) {
+        ResponseDto<TruckFleetResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             TruckFleet truckFleet = truckFleetRepository.save(truckFleetMapping.model(truckFleetDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TRUCKFLEET_SUCCESS, INFO,
                     idTransaccion));
-            response.setDatos(new TruckFleetRegisterResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
+            response.setDatos(new TruckFleetResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_TRUCKFLEET_WARN + ": " + ex);
             throw ex;
@@ -131,8 +127,8 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
     }
 
     @Override
-    public ResponseDto<TruckFleetUpdateResponse> updateTruckFleet(TruckFleetDto truckFleetDto) {
-        ResponseDto<TruckFleetUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<TruckFleetResponse> updateTruckFleet(TruckFleetDto truckFleetDto) {
+        ResponseDto<TruckFleetResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -149,7 +145,7 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
             TruckFleet truckFleet = truckFleetRepository.save(truckFleetMapping.model(truckFleetDto));
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TRUCKFLEET_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new TruckFleetUpdateResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
+            response.setDatos(new TruckFleetResponse().truckFleet(truckFleetMapping.modelDto(truckFleet)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_TRUCKFLEET_WARN + ": " + ex);

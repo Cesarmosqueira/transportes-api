@@ -2,7 +2,7 @@ package pe.com.huex.providers.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
 import pe.com.huex.providers.domain.persistence.FuelSupplyRepository;
 import pe.com.huex.providers.domain.service.IFuelSupplyService;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.dto.Response.MensajeServicio.TipoEnum.WARN;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
@@ -77,8 +77,8 @@ public class FuelSupplyImpl implements IFuelSupplyService {
     }
 
     @Override
-    public ResponseDto<FuelSupplyRetrieveResponse> retrieveFuelSupply(Long id) {
-        ResponseDto<FuelSupplyRetrieveResponse> response = new ResponseDto<>();
+    public ResponseDto<FuelSupplyResponse> retrieveFuelSupply(Long id) {
+        ResponseDto<FuelSupplyResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
@@ -92,7 +92,7 @@ public class FuelSupplyImpl implements IFuelSupplyService {
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_FUEL_SUPPLY_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(1));
-            response.setDatos(new FuelSupplyRetrieveResponse().fuelSupplyRetrieveResponse(fuelSupplyMapping.modelDto(fuelSupplyList.get())));
+            response.setDatos(new FuelSupplyResponse().fuelSupply(fuelSupplyMapping.modelDto(fuelSupplyList.get())));
 
         } catch (Exception ex) {
             log.error("error al consultar Abastecimiento combustible" + ex);
@@ -103,14 +103,14 @@ public class FuelSupplyImpl implements IFuelSupplyService {
     }
 
     @Override
-    public ResponseDto<FuelSupplyRegisterResponse> registerFuelSupply(FuelSupplyDto fuelSupplyDto) {
-        ResponseDto<FuelSupplyRegisterResponse> response = new ResponseDto<>();
+    public ResponseDto<FuelSupplyResponse> registerFuelSupply(FuelSupplyDto fuelSupplyDto) {
+        ResponseDto<FuelSupplyResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
             FuelSupply fuelSupplyResponse = fuelSupplyRepository.save(fuelSupplyMapping.model(fuelSupplyDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_FUEL_SUPPLY_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new FuelSupplyRegisterResponse().fuelSupplyRegisterResponse(fuelSupplyMapping.modelDto(fuelSupplyResponse)));
+            response.setDatos(new FuelSupplyResponse().fuelSupply(fuelSupplyMapping.modelDto(fuelSupplyResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_FUEL_SUPPLY_WARN + ": " + ex);
             throw ex;
@@ -120,8 +120,8 @@ public class FuelSupplyImpl implements IFuelSupplyService {
     }
 
     @Override
-    public ResponseDto<FuelSupplyUpdateResponse> updateFuelSupply(FuelSupplyDto fuelSupplyDto) {
-        ResponseDto<FuelSupplyUpdateResponse> response = new ResponseDto<>();
+    public ResponseDto<FuelSupplyResponse> updateFuelSupply(FuelSupplyDto fuelSupplyDto) {
+        ResponseDto<FuelSupplyResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
@@ -136,7 +136,7 @@ public class FuelSupplyImpl implements IFuelSupplyService {
 
             fuelSupplyRepository.save(fuelSupplyMapping.model(fuelSupplyDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_FUEL_SUPPLY_SUCCESS, INFO, idTransaccion));
-            response.setDatos(new FuelSupplyUpdateResponse().fuelSupplyUpdateResponse(fuelSupplyDto));
+            response.setDatos(new FuelSupplyResponse().fuelSupply(fuelSupplyDto));
 
         } catch (Exception ex) {
             log.error(MESSAGE_UPDATE_FUEL_SUPPLY_WARN + ": " + ex);

@@ -6,11 +6,7 @@ import javax.persistence.Entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Getter
-@Setter
-@With
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class TrackingServiceDto {
     private Long id;
     private Date dateService;

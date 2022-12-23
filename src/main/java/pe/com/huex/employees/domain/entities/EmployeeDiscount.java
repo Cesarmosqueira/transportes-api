@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.com.huex.employees.services.resources.response.DiscountResponseDto;
+import pe.com.huex.employees.services.resources.dtos.DiscountResponseDto;
 
 @Data
 @Entity

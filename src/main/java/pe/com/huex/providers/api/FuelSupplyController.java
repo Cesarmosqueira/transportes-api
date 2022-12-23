@@ -2,10 +2,9 @@ package pe.com.huex.providers.api;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pe.com.huex.dto.Response.ResponseDto;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.service.IFuelSupplyService;
 import pe.com.huex.providers.service.resouces.dto.FuelSupplyDto;
-import pe.com.huex.providers.service.resouces.dto.TireReplacementDto;
 import pe.com.huex.providers.service.resouces.response.*;
 
 @CrossOrigin(origins = "*")
@@ -25,17 +24,17 @@ public class FuelSupplyController {
     }
 
     @GetMapping(path = "{id}")
-    public ResponseDto<FuelSupplyRetrieveResponse> retrieveFuelSupply(@PathVariable Long id) throws Exception {
+    public ResponseDto<FuelSupplyResponse> retrieveFuelSupply(@PathVariable Long id) throws Exception {
         return fuelSupplyService.retrieveFuelSupply(id);
     }
 
     @PostMapping
-    public ResponseDto<FuelSupplyRegisterResponse> registerFuelSupply(@RequestBody FuelSupplyDto fuelSupplyDto) throws Exception {
+    public ResponseDto<FuelSupplyResponse> registerFuelSupply(@RequestBody FuelSupplyDto fuelSupplyDto) throws Exception {
         return fuelSupplyService.registerFuelSupply(fuelSupplyDto);
     }
 
     @PutMapping
-    public ResponseDto<FuelSupplyUpdateResponse> updateFuelSupply(@RequestBody FuelSupplyDto fuelSupplyDto)
+    public ResponseDto<FuelSupplyResponse> updateFuelSupply(@RequestBody FuelSupplyDto fuelSupplyDto)
             throws Exception {
         return fuelSupplyService.updateFuelSupply(fuelSupplyDto);
     }
