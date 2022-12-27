@@ -19,7 +19,6 @@ import pe.com.huex.employees.services.resources.response.discount.DiscountListDt
 import pe.com.huex.employees.services.resources.response.discount.DiscountRegisterDto;
 import pe.com.huex.employees.services.resources.dtos.DiscountResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("discounts")
 public class DiscountController {

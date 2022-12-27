@@ -25,7 +25,6 @@ import pe.com.huex.employees.services.resources.response.implement.ImplementRetr
 import pe.com.huex.employees.services.resources.response.implement.ImplementUpdateDto;
 import pe.com.huex.employees.services.resources.dtos.EmployeeImplementResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("implements")
 public class ImplementController {

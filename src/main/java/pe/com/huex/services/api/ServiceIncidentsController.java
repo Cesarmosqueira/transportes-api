@@ -7,7 +7,6 @@ import pe.com.huex.services.domain.service.IServiceIncidentsService;
 import pe.com.huex.services.service.resources.dto.ServiceIncidentsDto;
 import pe.com.huex.services.service.resources.response.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "service_incident", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ServiceIncidentsController {

@@ -6,8 +6,6 @@ import pe.com.huex.util.ResponseDto;
 import pe.com.huex.services.domain.service.ISettlementSummaryService;
 import pe.com.huex.services.service.resources.dto.SettlementSummaryDto;
 import pe.com.huex.services.service.resources.response.*;
-
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "settlement_summary", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SettlementSummaryController {

@@ -10,7 +10,6 @@ import pe.com.huex.security.service.resources.UserResponse;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "security/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {

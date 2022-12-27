@@ -10,8 +10,6 @@ import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 import pe.com.huex.providers.service.resouces.response.ProviderListResponse;
 import pe.com.huex.providers.service.resouces.response.ProviderResponse;
 
-@EnableWebSecurity
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "provider", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProviderController {

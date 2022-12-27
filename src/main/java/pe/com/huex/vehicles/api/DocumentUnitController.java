@@ -8,7 +8,6 @@ import pe.com.huex.vehicles.domain.service.IDocumentUnitService;
 import pe.com.huex.vehicles.service.resources.dto.DocumentUnitDto;
 import pe.com.huex.vehicles.service.resources.response.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/documentUnit", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DocumentUnitController {

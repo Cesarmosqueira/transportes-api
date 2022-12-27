@@ -21,7 +21,6 @@ import pe.com.huex.employees.services.resources.response.employees.EmployeeRegis
 import pe.com.huex.employees.services.resources.response.employees.EmployeeRetrieveDto;
 import pe.com.huex.employees.services.resources.response.employees.EmployeeUpdateDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("employees")
 public class EmployeeController {

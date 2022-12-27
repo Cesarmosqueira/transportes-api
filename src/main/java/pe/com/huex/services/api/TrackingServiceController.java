@@ -9,7 +9,6 @@ import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 import pe.com.huex.services.service.resources.response.TrackingServiceListResponse;
 import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "service/trackingService", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TrackingServiceController {

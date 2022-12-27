@@ -9,7 +9,6 @@ import pe.com.huex.vehicles.service.resources.response.*;
 
 import java.io.IOException;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/checkList", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CheckListController {

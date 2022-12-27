@@ -18,7 +18,6 @@ import pe.com.huex.customer.services.resources.response.RouteListResponse;
 import pe.com.huex.customer.services.resources.response.RouteResponse;
 import pe.com.huex.util.ResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "routes")
 public class RouteController {

@@ -9,7 +9,6 @@ import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 import pe.com.huex.vehicles.service.resources.response.TruckFleetListResponse;
 import pe.com.huex.vehicles.service.resources.response.TruckFleetResponse;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/truckFleet", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TruckFleetController {

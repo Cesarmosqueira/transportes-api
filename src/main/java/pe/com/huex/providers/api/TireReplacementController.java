@@ -16,7 +16,6 @@ import pe.com.huex.providers.service.resouces.dto.TireReplacementDto;
 import pe.com.huex.providers.service.resouces.response.TireReplacementListResponse;
 import pe.com.huex.providers.service.resouces.response.TireReplacementResponse;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "tireReplacement", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TireReplacementController {

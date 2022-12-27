@@ -20,7 +20,6 @@ import pe.com.huex.employees.services.resources.response.attendance.AttendanceRe
 import pe.com.huex.employees.services.resources.response.attendance.AttendanceUpdateDto;
 import pe.com.huex.employees.services.resources.dtos.AttendanceResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("attendances")
 public class AttendanceController {

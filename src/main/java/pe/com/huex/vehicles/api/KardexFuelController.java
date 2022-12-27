@@ -8,7 +8,6 @@ import pe.com.huex.vehicles.domain.service.IKardexFuelService;
 import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
 import pe.com.huex.vehicles.service.resources.response.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/kardexFuel", produces = MediaType.APPLICATION_JSON_VALUE)
 public class KardexFuelController {

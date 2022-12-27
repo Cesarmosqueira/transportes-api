@@ -7,7 +7,6 @@ import pe.com.huex.providers.domain.service.IFuelSupplyService;
 import pe.com.huex.providers.service.resouces.dto.FuelSupplyDto;
 import pe.com.huex.providers.service.resouces.response.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "fuelSupply",produces = MediaType.APPLICATION_JSON_VALUE)
 public class FuelSupplyController {

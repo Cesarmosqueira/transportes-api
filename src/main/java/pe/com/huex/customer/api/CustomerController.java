@@ -21,7 +21,6 @@ import pe.com.huex.customer.services.resources.customer.dtos.CustomerUpdateDto;
 import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
 import pe.com.huex.util.ResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("customers")
 public class CustomerController {

@@ -8,7 +8,6 @@ import pe.com.huex.vehicles.domain.service.IMaintenanceTireService;
 import pe.com.huex.vehicles.service.resources.dto.MaintenanceTireDto;
 import pe.com.huex.vehicles.service.resources.response.*;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "vehicle/maintenanceTire", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MaintenanceTireController {

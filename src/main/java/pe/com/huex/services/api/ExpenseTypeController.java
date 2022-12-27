@@ -8,7 +8,6 @@ import pe.com.huex.services.service.resources.dto.ExpenseTypeDto;
 import pe.com.huex.services.service.resources.response.ExpenseTypeListResponse;
 import pe.com.huex.services.service.resources.response.ExpenseTypeResponse;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("expense_type")
 public class ExpenseTypeController {

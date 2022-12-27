@@ -16,7 +16,6 @@ import pe.com.huex.customer.services.resources.response.RateListResponse;
 import pe.com.huex.customer.services.resources.response.RateResponse;
 import pe.com.huex.util.ResponseDto;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("rates")
 public class RateController {

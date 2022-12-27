@@ -16,7 +16,6 @@ import pe.com.huex.providers.service.resouces.dto.ProvinceEstivatorDto;
 import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorListResponse;
 import pe.com.huex.providers.service.resouces.response.ProvinceEstivatorResponse;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("provinceEstivators")
 public class ProvinceEstivatorController {
