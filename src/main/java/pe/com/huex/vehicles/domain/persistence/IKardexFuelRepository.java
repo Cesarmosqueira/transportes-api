@@ -1,19 +1,18 @@
 package pe.com.huex.vehicles.domain.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 import pe.com.huex.vehicles.domain.entities.KardexFuel;
 
 import java.util.List;
 
-@Repository
 public interface IKardexFuelRepository extends JpaRepository<KardexFuel, Long> {
-
     List<KardexFuel> findAll();
 
     KardexFuel findById(int id);
 
     KardexFuel save(KardexFuel kardexFuel);
 
+    @Query(value = "SELECT * FROM kardex_fuel k WHERE id_truck_fleet = ? 1 ", nativeQuery = true)
     List<KardexFuel> findByIdTruckFleet(Long id);
 }

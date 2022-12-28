@@ -3,28 +3,22 @@ package pe.com.huex.employees.services.resources.response.discount;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pe.com.huex.employees.domain.entities.EmployeeDiscount;
 import pe.com.huex.employees.services.resources.dtos.DiscountResponseDto;
 
+@Data
+@NoArgsConstructor
 public class DiscountListDto {
-	public DiscountListDto() {
-	}
 
-	private List<DiscountResponseDto> discountList = null;
+	private List<DiscountResponseDto> discounts = null;
 
 	public DiscountListDto discountList(List<EmployeeDiscount> discountList) {
-		this.discountList = new ArrayList<DiscountResponseDto>();
+		this.discounts = new ArrayList<DiscountResponseDto>();
 		for (EmployeeDiscount emp : discountList) {
-			this.discountList.add(new DiscountResponseDto(emp));
+			this.discounts.add(new DiscountResponseDto(emp));
 		}
 		return this;
-	}
-
-	public void setDiscountList(List<DiscountResponseDto> discountList) {
-		this.discountList = discountList;
-	}
-
-	public List<DiscountResponseDto> getDiscountList() {
-		return discountList;
 	}
 }

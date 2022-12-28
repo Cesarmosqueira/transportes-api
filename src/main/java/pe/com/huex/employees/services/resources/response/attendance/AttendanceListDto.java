@@ -11,12 +11,12 @@ import pe.com.huex.employees.services.resources.dtos.AttendanceResponseDto;
 @NoArgsConstructor
 public class AttendanceListDto {
 
-    private List<AttendanceResponseDto> attendanceList = null;
+    private List<AttendanceResponseDto> attendances = null;
 
     public AttendanceListDto attendanceList(List<EmployeeAttendance> attendanceList) {
-        this.attendanceList = new ArrayList<>();
+        this.attendances = new ArrayList<>();
         for (EmployeeAttendance emp : attendanceList) {
-            this.attendanceList.add(new AttendanceResponseDto(emp));
+            this.attendances.add(new AttendanceResponseDto(emp));
         }
         return this;
     }

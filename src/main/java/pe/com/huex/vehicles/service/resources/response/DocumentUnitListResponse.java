@@ -7,10 +7,10 @@ import java.util.List;
 
 @Data
 public class DocumentUnitListResponse {
-    private List<DocumentUnitDto> documentsUnitDto = null;
+    private List<DocumentUnitDto> documentsUnit = null;
 
     public DocumentUnitListResponse documentUnitList(List<DocumentUnitDto> documentUnitDtoList) {
-        this.documentsUnitDto = documentUnitDtoList;
+        this.documentsUnit = documentUnitDtoList;
         return this;
     }
 }

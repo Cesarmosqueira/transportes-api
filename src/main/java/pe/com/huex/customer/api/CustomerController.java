@@ -2,7 +2,6 @@ package pe.com.huex.customer.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.huex.customer.services.CustomerService;
-import pe.com.huex.customer.services.resources.customer.dtos.CustomerDeleteDto;
-import pe.com.huex.customer.services.resources.customer.dtos.CustomerListDto;
-import pe.com.huex.customer.services.resources.customer.dtos.CustomerRegisterDto;
-import pe.com.huex.customer.services.resources.customer.dtos.CustomerRetrieveDto;
-import pe.com.huex.customer.services.resources.customer.dtos.CustomerUpdateDto;
+import pe.com.huex.customer.services.resources.response.CustomerDeleteDto;
+import pe.com.huex.customer.services.resources.response.CustomerListDto;
+import pe.com.huex.customer.services.resources.response.CustomerRegisterDto;
+import pe.com.huex.customer.services.resources.response.CustomerRetrieveDto;
+import pe.com.huex.customer.services.resources.response.CustomerUpdateDto;
 import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
 import pe.com.huex.util.ResponseDto;
 

@@ -34,4 +34,5 @@ public class MappingConfiguration {
     public MaintenanceTireMapping maintenanceTireMapping() {
         return new MaintenanceTireMapping();
     }
+
 }

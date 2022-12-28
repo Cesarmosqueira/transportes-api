@@ -1,7 +1,6 @@
-package pe.com.huex.customer.services.resources.customer.dtos;
+package pe.com.huex.customer.services.resources.response;
 
 import pe.com.huex.customer.domain.entities.Customer;
-import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
 
 public class CustomerRetrieveDto {
 

@@ -1,6 +1,4 @@
-package pe.com.huex.customer.services.resources.customer.dtos;
-
-import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
+package pe.com.huex.customer.services.resources.response;
 
 public class CustomerUpdateDto {
 	private CustomerResponseDto customer = null;

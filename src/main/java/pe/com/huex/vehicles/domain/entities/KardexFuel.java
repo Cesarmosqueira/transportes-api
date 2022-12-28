@@ -1,6 +1,9 @@
 package pe.com.huex.vehicles.domain.entities;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import pe.com.huex.providers.domain.model.entity.FuelSupply;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -16,19 +19,25 @@ public class KardexFuel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "id_truck_fleet")
-    private Long idTruckFleet;
+    @ManyToOne
+    @JoinColumn(name = "id_truck_fleet", nullable = false)
+    @JsonIgnore
+    private TruckFleet truckFleet;
+
+    @ManyToOne
+    @JoinColumn(name = "id_fuel_supply", nullable = false)
+    @JsonIgnore
+    private FuelSupply fuelSupply;
 
     @Column(name = "date", nullable = false)
     private Date date;
 
     @Column(name = "amount_fuel", nullable = false)
-    private Integer amountFuel;
+    private Long amountFuel;
 
     @Column(name = "mileage")
-    private Integer mileage;
+    private Long mileage;
 
     @Column(name = "duty_manager", length = 40)
     private String dutyManager;
-
 }

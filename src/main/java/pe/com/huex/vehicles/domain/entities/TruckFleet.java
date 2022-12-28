@@ -5,6 +5,7 @@ import lombok.*;
 import pe.com.huex.providers.domain.model.entity.Provider;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,4 +50,7 @@ public class TruckFleet {
 
     @Column(name = "fleet_type", length = 30)
     private String fleetType;
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<KardexFuel> kardexFuels = new ArrayList<>();
 }

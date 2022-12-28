@@ -3,30 +3,22 @@ package pe.com.huex.employees.services.resources.response.employeeImplement;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import pe.com.huex.employees.domain.entities.EmployeeImplement;
 import pe.com.huex.employees.services.resources.dtos.EmployeeImplementRelationDto;
 
+@Data
+@NoArgsConstructor
 public class EmployeeImplementListDto {
 
-	public EmployeeImplementListDto() {
-	}
-
-	private List<EmployeeImplementRelationDto> employeeImplementList = null;
+	private List<EmployeeImplementRelationDto> employeeImplements = null;
 
 	public EmployeeImplementListDto employeeImplementList(List<EmployeeImplement> employeeImplementList) {
-		this.employeeImplementList = new ArrayList<EmployeeImplementRelationDto>();
+		this.employeeImplements = new ArrayList<EmployeeImplementRelationDto>();
 		for (EmployeeImplement emp : employeeImplementList) {
-			this.employeeImplementList.add(new EmployeeImplementRelationDto(emp));
+			this.employeeImplements.add(new EmployeeImplementRelationDto(emp));
 		}
 		return this;
 	}
-
-	public void setEmployeeImplementList(List<EmployeeImplementRelationDto> employeeImplementList) {
-		this.employeeImplementList = employeeImplementList;
-	}
-
-	public List<EmployeeImplementRelationDto> getEmployeeImplementList() {
-		return employeeImplementList;
-	}
-
 }

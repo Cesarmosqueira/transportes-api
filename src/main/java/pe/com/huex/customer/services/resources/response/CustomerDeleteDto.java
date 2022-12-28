@@ -1,4 +1,4 @@
-package pe.com.huex.customer.services.resources.customer.dtos;
+package pe.com.huex.customer.services.resources.response;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,9 +1,12 @@
 package pe.com.huex.providers.domain.model.entity;
 
 import lombok.*;
+import pe.com.huex.vehicles.domain.entities.KardexFuel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -34,5 +37,6 @@ public class FuelSupply {
     @Column(name = "observation", length = 200)
     private String observation;
 
-
+    @OneToMany(mappedBy = "fuelSupply", cascade = CascadeType.ALL)
+    private List<KardexFuel> kardexFuels = new ArrayList<>();
 }

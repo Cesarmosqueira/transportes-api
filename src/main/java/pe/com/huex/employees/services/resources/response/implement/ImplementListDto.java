@@ -11,22 +11,22 @@ public class ImplementListDto {
     public ImplementListDto() {
     }
 
-    private List<ImplementResponseDto> relationList = null;
+    private List<ImplementResponseDto> implementList = null;
 
     public ImplementListDto relationList(List<Implement> relationList) {
-        this.relationList = new ArrayList<ImplementResponseDto>();
+        this.implementList = new ArrayList<ImplementResponseDto>();
         for (Implement emp : relationList) {
-            this.relationList.add(new ImplementResponseDto(emp));
+            this.implementList.add(new ImplementResponseDto(emp));
         }
         return this;
     }
 
     public void setImplementResponseDtoList(List<ImplementResponseDto> relationList) {
-        this.relationList = relationList;
+        this.implementList = relationList;
     }
 
     public List<ImplementResponseDto> getImplementResponseDtoList() {
-        return relationList;
+        return implementList;
     }
 
 }
