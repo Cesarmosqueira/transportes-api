@@ -1,8 +1,6 @@
 package pe.com.huex.vehicles.domain.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import pe.com.huex.providers.domain.model.entity.Provider;
 
 import javax.persistence.*;
 import java.util.ArrayList;

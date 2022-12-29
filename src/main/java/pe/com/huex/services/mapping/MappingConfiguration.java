@@ -26,4 +26,9 @@ public class MappingConfiguration {
         return new ServiceIncidentsMapping();
     }
 
+    @Bean
+    public ServiceMonitoringMapping serviceMonitoringMapping() {
+        return new ServiceMonitoringMapping();
+    }
+
 }
