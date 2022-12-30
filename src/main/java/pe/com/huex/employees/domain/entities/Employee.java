@@ -113,9 +113,6 @@ public class Employee {
 	private List<EmployeeDiscount> discounts = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	private List<CustomerEmployee> customers = new ArrayList<>();
-
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<User> users = new ArrayList<>();
 
 }

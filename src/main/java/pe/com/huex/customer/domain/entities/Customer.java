@@ -41,8 +41,6 @@ public class Customer {
 	@Column(nullable = false)
 	private Date registerDate;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<CustomerEmployee> employees = new ArrayList<>();
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();

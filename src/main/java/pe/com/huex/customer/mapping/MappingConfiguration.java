@@ -16,4 +16,9 @@ public class MappingConfiguration {
     public RateMapping rateMapping() {
         return new RateMapping();
     }
+
+    @Bean
+    public CustomerEmployeeMapping customerEmployeeMapping() {
+        return new CustomerEmployeeMapping();
+    }
 }
