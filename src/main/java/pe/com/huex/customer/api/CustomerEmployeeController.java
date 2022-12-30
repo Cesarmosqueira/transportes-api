@@ -9,7 +9,7 @@ import pe.com.huex.customer.services.resources.response.*;
 import pe.com.huex.util.ResponseDto;
 
 @RestController
-@RequestMapping(value = "employee_service")
+@RequestMapping(value = "customer_employee")
 public class CustomerEmployeeController {
 
     @Autowired
