@@ -13,4 +13,7 @@ public interface IProviderService {
     ResponseDto<ProviderResponse> registerProvider(ProviderDto providerDto);
 
     ResponseDto<ProviderResponse> updateProvider(ProviderDto providerDto);
+
+    ResponseDto deleteProvider(Long id);
+
 }

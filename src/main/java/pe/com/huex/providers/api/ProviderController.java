@@ -37,4 +37,9 @@ public class ProviderController {
 			throws Exception {
 		return providerService.updateProvider(providerDto);
 	}
+
+	@DeleteMapping("{id}")
+	public ResponseDto deleteProvider(@PathVariable Long id) {
+		return providerService.deleteProvider(id);
+	}
 }

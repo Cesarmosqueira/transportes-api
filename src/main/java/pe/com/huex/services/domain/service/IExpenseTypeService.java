@@ -14,4 +14,7 @@ public interface IExpenseTypeService {
     ResponseDto<ExpenseTypeResponse> registerExpenseType(ExpenseTypeDto expenseTypeDto);
 
     ResponseDto<ExpenseTypeResponse> updateExpenseType(ExpenseTypeDto expenseTypeDto);
+
+    ResponseDto deleteExpenseType(Long id);
+
 }

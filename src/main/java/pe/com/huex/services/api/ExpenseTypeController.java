@@ -37,4 +37,9 @@ public class ExpenseTypeController {
         return expenseTypeService.updateExpenseType(expenseTypeDto);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseDto deleteExpenseType(@PathVariable Long id) {
+        return expenseTypeService.deleteExpenseType(id);
+    }
+
 }

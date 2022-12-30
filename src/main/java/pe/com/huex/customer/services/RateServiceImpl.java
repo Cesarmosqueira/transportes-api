@@ -146,4 +146,24 @@ public class RateServiceImpl implements IRateService {
         return response;
     }
 
+    @Override
+    public ResponseDto deleteRate(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            rateRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_RATE_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_RATE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

@@ -13,4 +13,7 @@ public interface ISettlementSummaryService {
     ResponseDto<SettlementSummaryResponse> registerSettlementSummary(SettlementSummaryDto settlementSummaryDto);
 
     ResponseDto<SettlementSummaryResponse> updateSettlementSummary(SettlementSummaryDto settlementSummaryDto);
+    ResponseDto deleteSettlementSummary(Long id);
+
 }
+

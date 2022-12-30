@@ -154,4 +154,24 @@ public class ExpenseTypeService implements IExpenseTypeService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteExpenseType(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            expenseTypeRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_EXPENSETYPE_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_EXPENSETYPE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

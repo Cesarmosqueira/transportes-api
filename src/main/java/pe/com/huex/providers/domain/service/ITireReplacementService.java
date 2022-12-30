@@ -14,4 +14,7 @@ public interface ITireReplacementService {
 
     ResponseDto<TireReplacementResponse> updateTireReplacement(TireReplacementDto tireReplacementDto);
 
+    ResponseDto deleteTireReplacement(Long id);
+
+
 }

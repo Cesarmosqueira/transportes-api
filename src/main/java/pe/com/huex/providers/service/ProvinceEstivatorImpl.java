@@ -156,4 +156,24 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteProvinceEstivator(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            provinceEstivatorRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVINCE_ESTIVATOR_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_PROVINCE_ESTIVATOR_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

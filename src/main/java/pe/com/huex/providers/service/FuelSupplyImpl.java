@@ -145,4 +145,24 @@ public class FuelSupplyImpl implements IFuelSupplyService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteFuelSupply(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            fuelSupplyRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_FUEL_SUPPLY_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_FUEL_SUPPLY_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

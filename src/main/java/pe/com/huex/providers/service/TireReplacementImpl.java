@@ -156,4 +156,24 @@ public class TireReplacementImpl implements ITireReplacementService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteTireReplacement(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            tireReplacementRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_UPDATE_TIRE_REPLACEMENT_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

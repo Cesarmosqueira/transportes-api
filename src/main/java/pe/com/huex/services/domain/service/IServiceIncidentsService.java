@@ -13,4 +13,7 @@ public interface IServiceIncidentsService {
     ResponseDto<ServiceIncidentResponse> registerServiceIncidents(ServiceIncidentsDto serviceIncidentsDto);
 
     ResponseDto<ServiceIncidentResponse> updateServiceIncidents(ServiceIncidentsDto serviceIncidentsDto);
+
+    ResponseDto deleteServiceIncidents(Long id);
+
 }

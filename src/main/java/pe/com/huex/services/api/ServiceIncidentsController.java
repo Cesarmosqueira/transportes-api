@@ -39,4 +39,9 @@ public class ServiceIncidentsController {
             throws Exception {
         return serviceIncidentsService.updateServiceIncidents(serviceIncidentsDto);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseDto deleteServiceIncidents(@PathVariable Long id) {
+        return serviceIncidentsService.deleteServiceIncidents(id);
+    }
 }

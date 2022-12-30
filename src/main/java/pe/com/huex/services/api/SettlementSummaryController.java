@@ -37,4 +37,9 @@ public class SettlementSummaryController {
             throws Exception {
         return settlementSummaryService.updateSettlementSummary(settlementSummaryDto);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseDto deleteSettlementSummary(@PathVariable Long id) {
+        return settlementSummaryService.deleteSettlementSummary(id);
+    }
 }

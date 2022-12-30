@@ -13,4 +13,7 @@ public interface IFuelSupplyService {
     ResponseDto<FuelSupplyResponse> registerFuelSupply(FuelSupplyDto fuelSupplyDto);
 
     ResponseDto<FuelSupplyResponse> updateFuelSupply(FuelSupplyDto fuelSupplyDto);
+
+    ResponseDto deleteFuelSupply(Long id);
+
 }

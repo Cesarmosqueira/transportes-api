@@ -147,4 +147,24 @@ public class ProviderServiceImpl implements IProviderService {
         return response;
     }
 
+    @Override
+    public ResponseDto deleteProvider(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            providerRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVIDERS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_PROVIDERS_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

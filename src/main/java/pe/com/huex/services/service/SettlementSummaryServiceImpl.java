@@ -157,4 +157,24 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteSettlementSummary(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            settlementSummaryRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SETTLEMENT_SUMMARY_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_SETTLEMENT_SUMMARY_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

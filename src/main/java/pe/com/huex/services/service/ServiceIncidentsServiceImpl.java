@@ -157,4 +157,24 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteServiceIncidents(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            serviceIncidentsRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_SERVICE_INCIDENTS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_SERVICE_INCIDENTS_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

@@ -14,4 +14,7 @@ public interface IRateService {
     ResponseDto<RateResponse> registerRate(RateDto rateDto);
 
     ResponseDto<RateResponse> updateRate(RateDto rateDto);
+
+    ResponseDto deleteRate(Long id);
+
 }

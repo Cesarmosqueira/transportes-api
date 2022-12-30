@@ -1,14 +1,7 @@
 package pe.com.huex.providers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
@@ -45,6 +38,11 @@ public class ProvinceEstivatorController {
             @RequestBody ProvinceEstivatorDto provinceEstivatorDto)
             throws Exception {
         return provinceEstivatorService.updateProvinceEstivator(provinceEstivatorDto);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseDto deleteProvinceEstivator(@PathVariable Long id) {
+        return provinceEstivatorService.deleteProvinceEstivator(id);
     }
 
 }

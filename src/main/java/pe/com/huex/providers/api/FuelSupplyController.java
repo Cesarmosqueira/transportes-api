@@ -37,5 +37,10 @@ public class FuelSupplyController {
             throws Exception {
         return fuelSupplyService.updateFuelSupply(fuelSupplyDto);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseDto deleteFuelSupply(@PathVariable Long id) {
+        return fuelSupplyService.deleteFuelSupply(id);
+    }
     
 }

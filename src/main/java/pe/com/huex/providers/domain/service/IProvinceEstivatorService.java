@@ -13,4 +13,7 @@ public interface IProvinceEstivatorService {
     ResponseDto<ProvinceEstivatorResponse> registerProvinceEstivator(ProvinceEstivatorDto provinceEstivatorDto);
 
     ResponseDto<ProvinceEstivatorResponse> updateProvinceEstivator(ProvinceEstivatorDto provinceEstivatorDto);
+
+    ResponseDto deleteProvinceEstivator(Long id);
+
 }
