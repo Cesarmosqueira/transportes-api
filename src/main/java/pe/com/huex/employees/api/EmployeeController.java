@@ -2,58 +2,49 @@ package pe.com.huex.employees.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import pe.com.huex.employees.domain.service.IEmployeeService;
+import pe.com.huex.employees.services.resources.dtos.EmployeeDto;
+import pe.com.huex.employees.services.resources.response.EmployeeListResponse;
+import pe.com.huex.employees.services.resources.response.EmployeeResponse;
 import pe.com.huex.util.ResponseDto;
-import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.employees.services.EmployeeImplementService;
-import pe.com.huex.employees.services.EmployeeService;
-import pe.com.huex.employees.services.resources.response.employeeImplement.EmployeeImplementListDto;
-import pe.com.huex.employees.services.resources.response.employees.EmployeeListDto;
-import pe.com.huex.employees.services.resources.response.employees.EmployeeRegisterDto;
-import pe.com.huex.employees.services.resources.response.employees.EmployeeRetrieveDto;
-import pe.com.huex.employees.services.resources.response.employees.EmployeeUpdateDto;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("employees")
 public class EmployeeController {
-	@Autowired
-	EmployeeService employeeService;
 
 	@Autowired
-	EmployeeImplementService employeeImplementService;
+	IEmployeeService employeeService;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeListDto> listEmployees() throws Exception {
+	@GetMapping
+	public ResponseDto<EmployeeListResponse> listCheckLists() {
 		return employeeService.listEmployees();
 	}
 
-	@GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeRetrieveDto> retrieveEmployees(@PathVariable Long id) throws Exception {
-		return employeeService.retrieveEmployees(id);
+	@GetMapping("{id}")
+	public ResponseDto<EmployeeResponse> retrieveCheckList(@PathVariable Long id) {
+		return employeeService.retrieveEmployee(id);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeRegisterDto> registerEmployees(@RequestBody Employee employee) throws Exception {
-		return employeeService.registerEmployees(employee);
-	}
-
-	@PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeUpdateDto> updateEmployees(@PathVariable Long id, @RequestBody Employee employee)
+	public ResponseDto<EmployeeResponse> registerEmployee(
+			@RequestBody EmployeeDto employee)
 			throws Exception {
-		return employeeService.updateEmployees(id, employee);
+		return employeeService.registerEmployee(employee);
 	}
 
-	@GetMapping(path = "assigned/{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<EmployeeImplementListDto> listImplements(@PathVariable Long employeeId) {
-		return employeeImplementService.listEmployeeAssignments(employeeId);
+	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<EmployeeResponse> updateEmployee(
+			@RequestBody EmployeeDto employeeDto) throws IOException {
+		return employeeService.updateEmployee(employeeDto);
 	}
+
+	@DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto deleteEmployee(@PathVariable Long id) {
+		return employeeService.deleteEmployee(id);
+	}
+
 
 }

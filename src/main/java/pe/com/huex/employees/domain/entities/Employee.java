@@ -104,7 +104,7 @@ public class Employee {
 
 	// Relations
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<EmployeeAttendance> attendance = new ArrayList<>();
+	private List<EmployeeAttendance> attendances = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<EmployeeImplement> currentImplements = new ArrayList<>();

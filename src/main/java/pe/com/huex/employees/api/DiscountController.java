@@ -2,59 +2,48 @@ package pe.com.huex.employees.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import pe.com.huex.employees.domain.service.IDiscountService;
+import pe.com.huex.employees.services.resources.dtos.DiscountDto;
+import pe.com.huex.employees.services.resources.response.DiscountListResponse;
+import pe.com.huex.employees.services.resources.response.DiscountResponse;
 import pe.com.huex.util.ResponseDto;
-import pe.com.huex.employees.services.DiscountService;
-import pe.com.huex.employees.services.resources.response.discount.DiscountDeleteDto;
-import pe.com.huex.employees.services.resources.response.discount.DiscountListDto;
-import pe.com.huex.employees.services.resources.response.discount.DiscountRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.DiscountResponseDto;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("discounts")
 public class DiscountController {
 
 	@Autowired
-	DiscountService discountService;
+	IDiscountService discountService;
 
-	// Get all
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<DiscountListDto> retrieveEmployeesDiscount() throws Exception {
+	@GetMapping
+	public ResponseDto<DiscountListResponse> listCheckLists() {
 		return discountService.listDiscounts();
 	}
 
-	// Get by employee
-	@GetMapping(path = "{employeeId}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<DiscountListDto> retrieveDiscountsByEmployee(@PathVariable Long employeeId) throws Exception {
-		return discountService.listDiscountsByEmployee(employeeId);
+	@GetMapping("{id}")
+	public ResponseDto<DiscountResponse> retrieveCheckList(@PathVariable Long id) {
+		return discountService.retrieveDiscount(id);
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<DiscountRegisterDto> registerEmployeesDiscount(
-			@RequestBody DiscountResponseDto discount)
+	public ResponseDto<DiscountResponse> registerDiscount(
+			@RequestBody DiscountDto discount)
 			throws Exception {
-		return discountService.registerDiscounts(discount);
+		return discountService.registerDiscount(discount);
 	}
 
-	@PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<DiscountRegisterDto> updateEmployeesDiscount(@PathVariable Long id,
-			@RequestBody DiscountResponseDto discount)
-			throws Exception {
-		return discountService.updateDiscounts(id, discount);
+	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<DiscountResponse> updateDiscount(
+			@RequestBody DiscountDto discountDto) throws IOException {
+		return discountService.updateDiscount(discountDto);
 	}
 
 	@DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<DiscountDeleteDto> deleteDiscount(@PathVariable Long id)
-			throws Exception {
-		return discountService.deleteDiscounts(id);
+	public ResponseDto deleteDiscount(@PathVariable Long id) {
+		return discountService.deleteDiscount(id);
 	}
+
 }

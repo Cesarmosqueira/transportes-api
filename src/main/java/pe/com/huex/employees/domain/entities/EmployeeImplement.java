@@ -27,7 +27,7 @@ public class EmployeeImplement {
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
-	Employee employee;
+	private Employee employee;
 
 	@ManyToOne
 	@JoinColumn(name = "implement_id")

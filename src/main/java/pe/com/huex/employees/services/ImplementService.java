@@ -13,224 +13,161 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.util.ResponseDto;
-import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.employees.domain.entities.EmployeeImplement;
 import pe.com.huex.employees.domain.entities.Implement;
-import pe.com.huex.employees.domain.persistence.EmployeeImplementRepository;
-import pe.com.huex.employees.domain.persistence.EmployeeRepository;
-import pe.com.huex.employees.domain.persistence.ImplementRepository;
-import pe.com.huex.employees.services.resources.response.employeeImplement.EmployeeImplementRegisterDto;
-import pe.com.huex.employees.services.resources.response.implement.ImplementDeleteDto;
-import pe.com.huex.employees.services.resources.response.implement.ImplementListDto;
-import pe.com.huex.employees.services.resources.response.implement.ImplementRegisterDto;
-import pe.com.huex.employees.services.resources.response.implement.ImplementRetrieveDto;
-import pe.com.huex.employees.services.resources.response.implement.ImplementUpdateDto;
-import pe.com.huex.employees.services.resources.dtos.EmployeeImplementResponseDto;
+import pe.com.huex.employees.domain.persistence.IImplementRepository;
+import pe.com.huex.employees.domain.service.IImplementService;
+import pe.com.huex.employees.mapping.ImplementMapping;
+import pe.com.huex.employees.services.resources.dtos.ImplementDto;
+import pe.com.huex.employees.services.resources.response.ImplementListResponse;
+import pe.com.huex.employees.services.resources.response.ImplementResponse;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional
 @Service
 @Slf4j
-public class ImplementService {
-	private static final String MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
-	private static final String MESSAGE_INQUIRY_IMPLEMENTS_WARN = "No se encontró ningún implemento registrado";
+public class ImplementService implements IImplementService {
+	private static final String MESSAGE_INQUIRY_IMPLEMENT_SUCCESS = "La consulta de implementos fue exitoso";
+	private static final String MESSAGE_INQUIRY_IMPLEMENT_WARN = "No se encontró ningún implemento registrado";
 
-	private static final String MESSAGE_REGISTER_IMPLEMENTS_SUCCESS = "El registro del implemento fue exitoso";
-	private static final String MESSAGE_REGISTER_IMPLEMENTS_WARN = "Ocurrió un error al registrar al implemento";
+	private static final String MESSAGE_REGISTER_IMPLEMENT_SUCCESS = "El registro del implemento fue exitoso";
+	private static final String MESSAGE_REGISTER_IMPLEMENT_WARN = "Ocurrió un error al registrar el implemento";
 
-	private static final String MESSAGE_UPDATE_IMPLEMENTS_SUCCESS = "La consulta de implementos fue exitoso";
-	private static final String MESSAGE_UPDATE_IMPLEMENTS_WARN = "Ocurrió un error al actualizar los datos del implemento";
+	private static final String MESSAGE_UPDATE_IMPLEMENT_SUCCESS = "La actualización de datos del implemento fue exitoso";
+	private static final String MESSAGE_UPDATE_IMPLEMENT_WARN = "Ocurrió un error al actualizar los datos del implemento";
 
-	private static final String MESSAGE_DELETE_IMPLEMENTS_SUCCESS = "La eliminación del implemento fue exitosa";
-	private static final String MESSAGE_DELETE_IMPLEMENTS_WARN = "Ocurrió un error al eliminar el implemento";
+	private static final String MESSAGE_RETRIEVE_IMPLEMENT_SUCCESS = "La consulta del implemento fue exitoso";
+	private static final String MESSAGE_RETRIEVE_IMPLEMENT_WARN = "No se encontró los datos del implemento";
 
-	private static final String MESSAGE_RETRIEVE_IMPLEMENTS_SUCCESS = "La consulta del implemento fue exitoso";
-	private static final String MESSAGE_RETRIEVE_IMPLEMENTS_WARN = "No se encontró los datos del implemento";
+	private static final String MESSAGE_DELETE_IMPLEMENT_SUCCESS = "Se eliminó correctamente el implemento";
+
+	private static final String MESSAGE_DELETE_IMPLEMENT_WARN = "Ocurrió un error al eliminar el implemento";
 
 	private static final String CODE_SUCCESS = "0";
 
 	private static final String CODE_WARN = "1";
 
 	@Autowired
-	ImplementRepository implementRepository;
+	IImplementRepository implementRepository;
 
 	@Autowired
-	EmployeeRepository employeeRepository;
+	ImplementMapping implementMapping;
 
-	@Autowired
-	EmployeeImplementRepository employeeImplementRepository;
-
-	public ResponseDto<ImplementListDto> listImplements() {
-		ResponseDto<ImplementListDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<ImplementListResponse> listImplements() {
+		ResponseDto<ImplementListResponse> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<Implement> relationList = implementRepository.findAll();
+			List<Implement> implementList = implementRepository.findAll();
 
-			if (relationList.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_IMPLEMENTS_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
+			if (implementList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_IMPLEMENT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
-							.totalRegistros(relationList.size()));
-			response.setDatos(new ImplementListDto().relationList(relationList));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_IMPLEMENT_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(implementList.size()));
+			response.setDatos(new ImplementListResponse().implementss(implementMapping.modelList(implementList)));
 
 		} catch (Exception ex) {
-			log.error("error al consultar implementos" + ex);
+			log.error(MESSAGE_INQUIRY_IMPLEMENT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<ImplementRetrieveDto> retrieveImplements(Long id) {
-		ResponseDto<ImplementRetrieveDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<ImplementResponse> retrieveImplement(Long id) {
+		ResponseDto<ImplementResponse> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Implement> relationList = implementRepository.findById(id);
+			Optional<Implement> implementList = implementRepository.findById(id);
 
-			if (relationList.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
+			if (implementList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_IMPLEMENTS_SUCCESS, INFO, idTransaccion)
-							.totalRegistros(1));
-			response.setDatos(new ImplementRetrieveDto().implement(relationList.get()));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_IMPLEMENT_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(1));
+			response.setDatos(new ImplementResponse().implement(implementMapping.modelDto(implementList.get())));
 
 		} catch (Exception ex) {
-			log.error("error al consultar implemento" + ex);
+			log.error(MESSAGE_RETRIEVE_IMPLEMENT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<ImplementRegisterDto> registerImplements(Implement implement) {
-		ResponseDto<ImplementRegisterDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<ImplementResponse> registerImplement(ImplementDto implementDto) {
+		ResponseDto<ImplementResponse> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
-			Implement implementResponse = implementRepository.save(implement);
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_IMPLEMENTS_SUCCESS, INFO,
-					idTransaccion));
-			response.setDatos(new ImplementRegisterDto().implement(implementResponse));
+
+			Implement implementResponse = implementRepository.save(implementMapping.model(implementDto));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_IMPLEMENT_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new ImplementResponse().implement(implementMapping.modelDto(implementResponse)));
 		} catch (Exception ex) {
-			log.error(MESSAGE_REGISTER_IMPLEMENTS_WARN + ": " + ex);
+			log.error(MESSAGE_REGISTER_IMPLEMENT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<ImplementUpdateDto> updateImplements(Long id, Implement implement) {
-		ResponseDto<ImplementUpdateDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<ImplementResponse> updateImplement(ImplementDto implementDto) {
+		ResponseDto<ImplementResponse> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Implement> implementResponse = implementRepository.findById(id);
+			Optional<Implement> implementList = implementRepository.findById(implementDto.getId());
 
-			if (implementResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
+			if (implementList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			implement.setId(id);
-			implementRepository.save(implement);
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_IMPLEMENTS_SUCCESS, INFO, idTransaccion));
-			response.setDatos(new ImplementUpdateDto().implement(implement));
+			Implement implementResponse = implementRepository.save(implementMapping.model(implementDto));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_IMPLEMENT_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new ImplementResponse().implement(implementMapping.modelDto(implementResponse)));
 
 		} catch (Exception ex) {
-			log.error("error al actualizar implemento: " + ex);
+			log.error(MESSAGE_UPDATE_IMPLEMENT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<ImplementDeleteDto> deleteImplements(Long id) {
-		ResponseDto<ImplementDeleteDto> response = new ResponseDto<>();
-
+	@Override
+	public ResponseDto deleteImplement(Long id) {
+		ResponseDto response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
-
-			Optional<Implement> implementResponse = implementRepository.findById(id);
-
-			if (implementResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_DELETE_IMPLEMENTS_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
 
 			implementRepository.deleteById(id);
+
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_IMPLEMENTS_SUCCESS, INFO, idTransaccion));
-			response.setDatos(new ImplementDeleteDto().implement(id));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_IMPLEMENT_SUCCESS, INFO, idTransaccion)
+							.totalRegistros(1));
 
 		} catch (Exception ex) {
-			log.error("error al actualizar implemento: " + ex);
+			log.error(MESSAGE_DELETE_IMPLEMENT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
-	}
-
-	public ResponseDto<EmployeeImplementRegisterDto> assignImplements(
-			EmployeeImplementResponseDto employeeImplementResponseDto) {
-		ResponseDto<EmployeeImplementRegisterDto> response = new ResponseDto<>();
-		String idTransaccion = UUID.randomUUID().toString();
-
-		Optional<Employee> employeeResponse = employeeRepository.findById(employeeImplementResponseDto.getEmployeeId());
-		Optional<Implement> implementResponse = implementRepository
-				.findById(employeeImplementResponseDto.getImplementId());
-
-		if (employeeResponse.isEmpty()) {
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_WARN, "No se encontro al trabajador", WARN, idTransaccion)
-							.totalRegistros(0));
-			return response;
-		}
-		if (implementResponse.isEmpty()) {
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_IMPLEMENTS_WARN, WARN, idTransaccion)
-							.totalRegistros(0));
-			return response;
-		}
-
-		try {
-			EmployeeImplement employeeImplement = new EmployeeImplement();
-			employeeImplement.setDate(employeeImplementResponseDto.getDate());
-			employeeImplement.setObservations(employeeImplement.getObservations());
-			employeeImplement.setEmployee(employeeResponse.get());
-			employeeImplement.setImplement(implementResponse.get());
-
-			employeeImplement = employeeImplementRepository.save(employeeImplement);
-
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, "La asignacion del implemento fue exitosa", INFO,
-							idTransaccion));
-			response.setDatos(new EmployeeImplementRegisterDto().employeeImplement(employeeImplement));
-			return response;
-
-		} catch (Exception ex) {
-			log.error("Error al asignar al implemento" + ex);
-			throw ex;
-
-		}
 	}
 
 }

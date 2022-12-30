@@ -1,227 +1,167 @@
 package pe.com.huex.employees.services;
 
-import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
-import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pe.com.huex.employees.domain.entities.EmployeeDiscount;
+import pe.com.huex.employees.domain.persistence.IDiscountRepository;
+import pe.com.huex.employees.domain.service.IDiscountService;
+import pe.com.huex.employees.mapping.DiscountMapping;
+import pe.com.huex.employees.services.resources.dtos.DiscountDto;
+import pe.com.huex.employees.services.resources.response.DiscountListResponse;
+import pe.com.huex.employees.services.resources.response.DiscountResponse;
+import pe.com.huex.util.MetaDatosUtil;
+import pe.com.huex.util.ResponseDto;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
-import pe.com.huex.util.ResponseDto;
-import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.employees.domain.entities.EmployeeDiscount;
-import pe.com.huex.employees.domain.persistence.DiscountRepository;
-import pe.com.huex.employees.domain.persistence.EmployeeRepository;
-import pe.com.huex.employees.services.resources.response.discount.DiscountDeleteDto;
-import pe.com.huex.employees.services.resources.response.discount.DiscountListDto;
-import pe.com.huex.employees.services.resources.response.discount.DiscountRegisterDto;
-import pe.com.huex.employees.services.resources.dtos.DiscountResponseDto;
-import pe.com.huex.util.MetaDatosUtil;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
+import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
 
 @Transactional
 @Service
 @Slf4j
-public class DiscountService {
-	private static final String MESSAGE_REGISTER_ATTENDANCES_SUCCESS = "El registro de asistencia fue exitoso";
-	private static final String MESSAGE_REGISTER_ATTENDANCES_WARN = "Ocurrió un error al registrar la asistencia";
+public class DiscountService implements IDiscountService {
+	private static final String MESSAGE_INQUIRY_DISCOUNT_SUCCESS = "La consulta de los descuentos fue exitoso";
+	private static final String MESSAGE_INQUIRY_DISCOUNT_WARN = "No se encontró ningúna descuento registrado";
 
-	private static final String MESSAGE_UPDATE_ATTENDANCES_SUCCESS = "La actualizacion de asistencia fue exitosa";
-	private static final String MESSAGE_UPDATE_ATTENDANCES_WARN = "Ocurrió un error al actualizar la asistencia";
+	private static final String MESSAGE_REGISTER_DISCOUNT_SUCCESS = "El registro del descuento fue exitoso";
+	private static final String MESSAGE_REGISTER_DISCOUNT_WARN = "Ocurrió un error al registrar el descuento";
+
+	private static final String MESSAGE_UPDATE_DISCOUNT_SUCCESS = "La actualización de datos del descuento fue exitoso";
+	private static final String MESSAGE_UPDATE_DISCOUNT_WARN = "Ocurrió un error al actualizar los datos del descuento";
+
+	private static final String MESSAGE_RETRIEVE_DISCOUNT_SUCCESS = "La consulta del descuento fue exitoso";
+	private static final String MESSAGE_RETRIEVE_DISCOUNT_WARN = "No se encontró los datos del descuento";
+
+	private static final String MESSAGE_DELETE_DISCOUNT_SUCCESS = "Se eliminó correctamente el descuento";
+
+	private static final String MESSAGE_DELETE_DISCOUNT_WARN = "Ocurrió un error al eliminar el descuento";
 
 	private static final String CODE_SUCCESS = "0";
 
 	private static final String CODE_WARN = "1";
 
 	@Autowired
-	DiscountRepository discountRepository;
+	IDiscountRepository discountRepository;
 
 	@Autowired
-	EmployeeRepository employeeRepository;
+	DiscountMapping discountMapping;
 
-	public ResponseDto<DiscountRegisterDto> registerDiscounts(
-			DiscountResponseDto discountRequestDto) throws Exception {
-		ResponseDto<DiscountRegisterDto> response = new ResponseDto<>();
-
-		// save the constructed attendance
-		String idTransaccion = UUID.randomUUID().toString();
-
-		Optional<Employee> employee = employeeRepository.findById(discountRequestDto.getEmployeeId());
-		if (employee.isEmpty()) {
-
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, "trabajador no existe", INFO, idTransaccion));
-			return response;
-
-		}
-
-		EmployeeDiscount discount = new EmployeeDiscount(discountRequestDto, employee.get());
-		try {
-
-			EmployeeDiscount discountResponse = discountRepository.saveAndFlush(discount);
-			discountRepository.save(discount);
-
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_ATTENDANCES_SUCCESS, INFO,
-					idTransaccion));
-			response.setDatos(new DiscountRegisterDto().discount(discountResponse));
-
-		} catch (Exception ex) {
-			String actualMessage = ex.getMessage();
-			System.out
-					.println("\n == Actual message == \n" + actualMessage + "\n\n" + ex.getLocalizedMessage() + "\n\n");
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS,
-					MESSAGE_REGISTER_ATTENDANCES_WARN, INFO,
-					idTransaccion));
-			return response;
-
-			// log.error(MESSAGE_REGISTER_ATTENDANCES_WARN + ": " + ex);
-			// throw ex;
-		}
-
-		return response;
-	}
-
-	public ResponseDto<DiscountRegisterDto> updateDiscounts(Long id, DiscountResponseDto discount) {
-		ResponseDto<DiscountRegisterDto> response = new ResponseDto<>();
-
-		String idTransaccion = UUID.randomUUID().toString();
-		try {
-			Optional<EmployeeDiscount> discountResponse = discountRepository.findById(id);
-
-			if (discountResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil
-								.buildMetadatos(CODE_WARN, "El descuento especificado no existe", WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
-
-			Optional<Employee> employeeResponse = employeeRepository.findById(discount.getEmployeeId());
-			if (employeeResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, "trabajador no existe", WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
-
-			EmployeeDiscount employeeDiscount = discountResponse.get();
-			employeeDiscount.setDate(discount.getDate());
-			employeeDiscount.setCharge(discount.getCharge());
-			employeeDiscount.setEmployee(employeeResponse.get());
-			employeeDiscount.setObservations(discount.getObservations());
-			employeeDiscount = discountRepository.saveAndFlush(employeeDiscount);
-			discountRepository.save(employeeDiscount);
-
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_ATTENDANCES_SUCCESS, INFO,
-					idTransaccion));
-			response.setDatos(new DiscountRegisterDto().discount(employeeDiscount));
-
-		} catch (Exception ex) {
-			String actualMessage = ex.getMessage();
-			System.out
-					.println("\n == Actual message == \n" + actualMessage + "\n\n" + ex.getLocalizedMessage() + "\n\n");
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS,
-					MESSAGE_REGISTER_ATTENDANCES_WARN, INFO,
-					idTransaccion));
-			return response;
-
-		}
-
-		return response;
-	}
-
-	public ResponseDto<DiscountListDto> listDiscounts() {
-		ResponseDto<DiscountListDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<DiscountListResponse> listDiscounts() {
+		ResponseDto<DiscountListResponse> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
 			List<EmployeeDiscount> discountList = discountRepository.findAll();
 
 			if (discountList.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, "No se encontraron descuentos", WARN, idTransaccion)
-								.totalRegistros(0));
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_DISCOUNT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			response.meta(
-					MetaDatosUtil
-							.buildMetadatos(CODE_SUCCESS, "Se realizo la consulta exitosamente", INFO, idTransaccion)
-							.totalRegistros(discountList.size()));
-			response.setDatos(new DiscountListDto().discountList(discountList));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_DISCOUNT_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(discountList.size()));
+			response.setDatos(new DiscountListResponse().discounts(discountMapping.modelList(discountList)));
 
 		} catch (Exception ex) {
-			log.error("error al consultar descuentos" + ex);
+			log.error(MESSAGE_INQUIRY_DISCOUNT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<DiscountListDto> listDiscountsByEmployee(Long employeeId) {
-		ResponseDto<DiscountListDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<DiscountResponse> retrieveDiscount(Long id) {
+		ResponseDto<DiscountResponse> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Employee> employeeResponse = employeeRepository.findById(employeeId);
-			if (employeeResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, "trabajador no existe", WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
-
-			List<EmployeeDiscount> discountList = discountRepository.findByEmployee(employeeId);
+			Optional<EmployeeDiscount> discountList = discountRepository.findById(id);
 
 			if (discountList.isEmpty()) {
-				response.meta(
-						MetaDatosUtil
-								.buildMetadatos(CODE_WARN, "Este trabajador no presenta descuentos", WARN,
-										idTransaccion)
-								.totalRegistros(0));
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_DISCOUNT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			response.meta(
-					MetaDatosUtil
-							.buildMetadatos(CODE_SUCCESS, "Se realizo la consulta exitosamente", INFO, idTransaccion)
-							.totalRegistros(discountList.size()));
-			response.setDatos(new DiscountListDto().discountList(discountList));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_DISCOUNT_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(1));
+			response.setDatos(new DiscountResponse().discount(discountMapping.modelDto(discountList.get())));
 
 		} catch (Exception ex) {
-			log.error("error al consultar descuentos" + ex);
+			log.error(MESSAGE_RETRIEVE_DISCOUNT_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<DiscountDeleteDto> deleteDiscounts(Long id) {
-		ResponseDto<DiscountDeleteDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<DiscountResponse> registerDiscount(DiscountDto discountDto) {
+		ResponseDto<DiscountResponse> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<EmployeeDiscount> discountResponse = discountRepository.findById(id);
+			EmployeeDiscount discountResponse = discountRepository.save(discountMapping.model(discountDto));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_DISCOUNT_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new DiscountResponse().discount(discountMapping.modelDto(discountResponse)));
+		} catch (Exception ex) {
+			log.error(MESSAGE_REGISTER_DISCOUNT_WARN + ": " + ex);
+			throw ex;
+		}
 
-			if (discountResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, "El descuento no existe", WARN, idTransaccion)
-								.totalRegistros(0));
+		return response;
+	}
+
+	@Override
+	public ResponseDto<DiscountResponse> updateDiscount(DiscountDto discountDto) {
+		ResponseDto<DiscountResponse> response = new ResponseDto<>();
+
+		try {
+			String idTransaccion = UUID.randomUUID().toString();
+
+			Optional<EmployeeDiscount> discountList = discountRepository.findById(discountDto.getId());
+
+			if (discountList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_DISCOUNT_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			discountRepository.deleteById(id);
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, "Se elimino el descuento", INFO, idTransaccion));
-			response.setDatos(new DiscountDeleteDto().discount(discountResponse.get()));
+			EmployeeDiscount discountResponse = discountRepository.save(discountMapping.model(discountDto));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_DISCOUNT_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new DiscountResponse().discount(discountMapping.modelDto(discountResponse)));
 
 		} catch (Exception ex) {
-			log.error("error al actualizar discounto: " + ex);
+			log.error(MESSAGE_UPDATE_DISCOUNT_WARN + ": " + ex);
+			throw ex;
+		}
+
+		return response;
+	}
+
+	@Override
+	public ResponseDto deleteDiscount(Long id) {
+		ResponseDto response = new ResponseDto<>();
+		try {
+			String idTransaccion = UUID.randomUUID().toString();
+
+			discountRepository.deleteById(id);
+
+			response.meta(
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_DISCOUNT_SUCCESS, INFO, idTransaccion)
+							.totalRegistros(1));
+
+		} catch (Exception ex) {
+			log.error(MESSAGE_DELETE_DISCOUNT_WARN + ": " + ex);
 			throw ex;
 		}
 
