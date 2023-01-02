@@ -12,11 +12,11 @@ import javax.persistence.*;
 public class ServiceIncidents {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tracking_service", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "tracking_service_id", nullable = false)
     private TrackingService trackingService;
 
     @Column(name = "grt")

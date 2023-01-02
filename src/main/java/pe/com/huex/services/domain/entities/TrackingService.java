@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -95,4 +97,13 @@ public class TrackingService {
 
     @Column(name = "photo_insurance")
     private Long photoInsurance;
+
+    @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
+    private List<SettlementSummary> settlementSummaries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
+    private List<ServiceIncidents> serviceIncidents = new ArrayList<>();
+
+    @OneToMany(mappedBy = "TrackingService", cascade = CascadeType.ALL)
+    private List<ServiceMonitoring> serviceMonitoring = new ArrayList<>();
 }

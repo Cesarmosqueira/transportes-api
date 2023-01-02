@@ -2,16 +2,12 @@ package pe.com.huex.customer.domain.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.domain.entities.Implement;
 
 @Data
 @Entity
@@ -21,12 +17,14 @@ public class CustomerEmployee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
 
-	@Column(name = "id_customer")
-	private Long idCustomer;
-
-	@Column(name = "id_employee")
-	private Long idEmployee;
+	@ManyToOne
+	@JoinColumn(name = "employee_id")
+	private Employee employee;
 
 	@Column(name = "status", length = 50)
 	private String status;

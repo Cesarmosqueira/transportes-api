@@ -14,15 +14,15 @@ import java.util.Date;
 public class SettlementSummary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tracking_service", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "tracking_service_id", nullable = false)
     private TrackingService trackingService;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "expense_type", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "expense_type_id", nullable = false)
     private ExpenseType expenseType;
 
     @Column(name = "settlement_date",nullable = false)

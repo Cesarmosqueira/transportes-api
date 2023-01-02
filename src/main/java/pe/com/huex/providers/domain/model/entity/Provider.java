@@ -3,7 +3,9 @@ package pe.com.huex.providers.domain.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -40,4 +42,8 @@ public class Provider {
 
     @Column(name = "observation", length = 200)
     private String observation;
+
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
+    private List<ProvinceEstivators> provinceEstivators = new ArrayList<>();
+
 }

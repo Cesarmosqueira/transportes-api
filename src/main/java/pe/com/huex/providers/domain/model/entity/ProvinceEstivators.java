@@ -21,14 +21,14 @@ import pe.com.huex.customer.domain.entities.Route;
 public class ProvinceEstivators {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "route_id", nullable = false)
     private Route route;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "provider_id", nullable = false)
     private Provider provider;
 

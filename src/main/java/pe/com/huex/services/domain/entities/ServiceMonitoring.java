@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.sound.midi.Track;
 import java.util.Date;
 
 @Data
@@ -16,8 +17,10 @@ public class ServiceMonitoring {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_tracking_service")
-    private Long idTrackingService;
+    @ManyToOne
+    @JoinColumn(name = "tracking_service_id", nullable = false)
+    private TrackingService TrackingService;
+
 
     @Column(name = "date_hour")
     private Date dateHour;

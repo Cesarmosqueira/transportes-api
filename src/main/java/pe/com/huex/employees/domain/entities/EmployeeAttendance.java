@@ -25,8 +25,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmployeeAttendance {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id", nullable = false)
+	private Employee employee;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
@@ -36,7 +40,5 @@ public class EmployeeAttendance {
 	@Column(nullable = false, length = 32)
 	private String state;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id", nullable = false)
-	private Employee employee;
+
 }

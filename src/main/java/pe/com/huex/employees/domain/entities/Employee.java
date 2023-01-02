@@ -107,12 +107,15 @@ public class Employee {
 	private List<EmployeeAttendance> attendances = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	private List<EmployeeImplement> currentImplements = new ArrayList<>();
+	private List<EmployeeImplement> employeeImplements = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<EmployeeDiscount> discounts = new ArrayList<>();
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<User> users = new ArrayList<>();
+
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
 }

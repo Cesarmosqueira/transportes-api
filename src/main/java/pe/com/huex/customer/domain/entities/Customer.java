@@ -25,7 +25,7 @@ import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
 @Table(name = "customer")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false, length = 16)
@@ -41,6 +41,8 @@ public class Customer {
 	@Column(nullable = false)
 	private Date registerDate;
 
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();
