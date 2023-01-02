@@ -12,9 +12,10 @@ public class AttendanceDto {
 
 	private Long id;
 
+	private Long employeeId;
+
 	private Date date;
 
 	private String state;
 
-	private Employee employee;
 }

@@ -13,13 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "implement")
 public class Implement {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(nullable = false, length = 32)
@@ -28,11 +30,6 @@ public class Implement {
 	@Column(nullable = true, length = 1024)
 	private String description;
 
-	@Column(nullable = false)
-	private boolean available;
-
-	@Column(nullable = true)
-	private int stock;
 
 	@OneToMany(mappedBy = "implement", cascade = CascadeType.ALL)
 	private List<EmployeeImplement> employeeImplements = new ArrayList<>();

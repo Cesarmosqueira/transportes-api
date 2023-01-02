@@ -29,8 +29,7 @@ public class ImplementController {
 	}
 
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<ImplementResponse> registerImplement(
-			@RequestBody ImplementDto implement)
+	public ResponseDto<ImplementResponse> registerImplement(@RequestBody ImplementDto implement)
 			throws Exception {
 		return implementService.registerImplement(implement);
 	}
