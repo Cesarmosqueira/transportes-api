@@ -35,7 +35,7 @@ public class EmployeeAttendance {
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date date;
+	private Date attendanceDate;
 
 	@Column(nullable = false, length = 32)
 	private String state;

@@ -19,25 +19,23 @@ public class AttendanceController {
 	IAttendanceService attendanceService;
 
 	@GetMapping
-	public ResponseDto<AttendanceListResponse> listCheckLists() {
+	public ResponseDto<AttendanceListResponse> listAttendance() {
 		return attendanceService.listAttendances();
 	}
 
 	@GetMapping("{id}")
-	public ResponseDto<AttendanceResponse> retrieveCheckList(@PathVariable Long id) {
+	public ResponseDto<AttendanceResponse> retrieveAttendance(@PathVariable Long id) {
 		return attendanceService.retrieveAttendance(id);
 	}
 	
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<AttendanceResponse> registerAttendance(
-			@RequestBody AttendanceDto attendance)
+	public ResponseDto<AttendanceResponse> registerAttendance(@RequestBody AttendanceDto attendance)
 			throws Exception {
 		return attendanceService.registerAttendance(attendance);
 	}
 
 	@PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseDto<AttendanceResponse> updateAttendance(
-			@RequestBody AttendanceDto attendanceDto) throws IOException {
+	public ResponseDto<AttendanceResponse> updateAttendance(@RequestBody AttendanceDto attendanceDto) throws IOException {
 		return attendanceService.updateAttendance(attendanceDto);
 	}
 

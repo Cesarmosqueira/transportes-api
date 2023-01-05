@@ -14,7 +14,7 @@ public class AttendanceDto {
 
 	private Long employeeId;
 
-	private Date date;
+	private Date attendanceDate;
 
 	private String state;
 
