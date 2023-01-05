@@ -12,7 +12,7 @@ import pe.com.huex.employees.domain.entities.EmployeeAttendance;
 
 @Repository
 public interface IAttendanceRepository extends JpaRepository<EmployeeAttendance, Long> {
-/*
+
 	@Query(value = "SELECT * FROM employee_attendance e WHERE e.date = ?1 AND e.employee_id = ?2", nativeQuery = true)
 	Optional<EmployeeAttendance> findByDate(Date date, Long employeeId);
 
@@ -28,5 +28,5 @@ public interface IAttendanceRepository extends JpaRepository<EmployeeAttendance,
 	// 0 means that is ready to be registered and 1 means that it cant
 	@Query(value = "select * from employee_attendance where employee_id = ?1 and date = ?2", nativeQuery = true)
 	Optional<EmployeeAttendance> findByDate(long employeeId, Date date);
-*/
+
 }
