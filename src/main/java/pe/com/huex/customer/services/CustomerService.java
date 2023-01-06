@@ -7,27 +7,27 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import pe.com.huex.customer.domain.entities.Customer;
-import pe.com.huex.customer.domain.persistence.CustomerEmployeeRepository;
+import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.customer.domain.persistence.CustomerRepository;
-import pe.com.huex.customer.services.resources.response.CustomerDeleteDto;
-import pe.com.huex.customer.services.resources.response.CustomerListDto;
-import pe.com.huex.customer.services.resources.response.CustomerRegisterDto;
-import pe.com.huex.customer.services.resources.response.CustomerRetrieveDto;
-import pe.com.huex.customer.services.resources.response.CustomerUpdateDto;
-import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
+import pe.com.huex.customer.domain.service.ICustomerService;
+import pe.com.huex.customer.mapping.CustomerMapping;
+import pe.com.huex.customer.services.resources.response.CustomerEmployeeListResponse;
+import pe.com.huex.customer.services.resources.response.CustomerEmployeeResponse;
+import pe.com.huex.customer.services.resources.response.CustomerListResponse;
+import pe.com.huex.customer.services.resources.dto.CustomerDto;
+import pe.com.huex.customer.services.resources.response.CustomerResponse;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 
 @Transactional
 @Service
 @Slf4j
-public class CustomerService {
+public class CustomerService implements ICustomerService {
 	private static final String MESSAGE_REGISTER_CUSTOMER_SUCCESS = "El registro del cliente fue exitoso";
 	private static final String MESSAGE_REGISTER_CUSTOMER_WARN = "Ocurrió un error al registrar al cliente";
 
@@ -47,14 +47,19 @@ public class CustomerService {
 
 	private static final String CODE_WARN = "1";
 
-	@Autowired
-	CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
-	@Autowired
-	CustomerEmployeeRepository customerEmployeeRepository;
+	private final CustomerMapping customerMapping;
 
-	public ResponseDto<CustomerListDto> listCustomers() {
-		ResponseDto<CustomerListDto> response = new ResponseDto<>();
+	public CustomerService(CustomerRepository customerRepository, CustomerMapping customerMapping) {
+		this.customerRepository = customerRepository;
+		this.customerMapping = customerMapping;
+	}
+
+
+	@Override
+	public ResponseDto<CustomerListResponse> listCustomer() {
+		ResponseDto<CustomerListResponse> response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
@@ -70,7 +75,33 @@ public class CustomerService {
 			response.meta(
 					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_CUSTOMER_SUCCESS, INFO, idTransaccion)
 							.totalRegistros(customerList.size()));
-			response.setDatos(new CustomerListDto().customerList(customerList));
+			response.setDatos(new CustomerListResponse().customer(customerMapping.modelList(customerList)));
+
+		} catch (Exception ex) {
+			log.error(MESSAGE_INQUIRY_CUSTOMER_WARN + ": " + ex);
+			throw ex;
+		}
+
+		return response;
+	}
+
+	@Override
+	public ResponseDto<CustomerResponse> retrieveCustomer(Long id) {
+		ResponseDto<CustomerResponse> response = new ResponseDto<>();
+		try {
+			String idTransaccion = UUID.randomUUID().toString();
+
+			Optional<Customer> customerList = customerRepository.findById(id);
+
+			if (customerList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_CUSTOMER_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
+				return response;
+			}
+
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_CUSTOMER_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(1));
+			response.setDatos(new CustomerResponse().customer(customerMapping.modelDto(customerList.get())));
 
 		} catch (Exception ex) {
 			log.error("error al consultar clientes" + ex);
@@ -80,42 +111,16 @@ public class CustomerService {
 		return response;
 	}
 
-	public ResponseDto<CustomerRetrieveDto> retrieveCustomers(Long id) {
-		ResponseDto<CustomerRetrieveDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<CustomerResponse> registerCustomer(CustomerDto customerDto) {
+		ResponseDto<CustomerResponse> response = new ResponseDto<>();
+
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
-
-			Optional<Customer> customerList = customerRepository.findById(id);
-
-			if (customerList.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_CUSTOMER_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
-
+			Customer customerResponse = customerRepository.save(customerMapping.model(customerDto));
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_CUSTOMER_SUCCESS, INFO, idTransaccion)
-							.totalRegistros(1));
-			response.setDatos(new CustomerRetrieveDto().customer(customerList.get()));
-
-		} catch (Exception ex) {
-			log.error("error al consultar cliente" + ex);
-			throw ex;
-		}
-
-		return response;
-	}
-
-	public ResponseDto<CustomerRegisterDto> registerCustomers(CustomerResponseDto customer) {
-		ResponseDto<CustomerRegisterDto> response = new ResponseDto<>();
-
-		try {
-			String idTransaccion = UUID.randomUUID().toString();
-			Customer customerResponse = customerRepository.save(new Customer(customer));
-			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_CUSTOMER_SUCCESS, INFO,
-					idTransaccion));
-			response.setDatos(new CustomerRegisterDto().customer(customerResponse));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_CUSTOMER_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new CustomerResponse().customer(customerMapping.modelDto(customerResponse)));
 		} catch (Exception ex) {
 			log.error(MESSAGE_REGISTER_CUSTOMER_WARN + ": " + ex);
 			throw ex;
@@ -124,61 +129,49 @@ public class CustomerService {
 		return response;
 	}
 
-	public ResponseDto<CustomerUpdateDto> updateCustomers(Long id, CustomerResponseDto customer) {
-		ResponseDto<CustomerUpdateDto> response = new ResponseDto<>();
+	@Override
+	public ResponseDto<CustomerResponse> updateCustomer(CustomerDto customerDto) {
+		ResponseDto<CustomerResponse> response = new ResponseDto<>();
 
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Customer> customerResponse = customerRepository.findById(id);
+			Optional<Customer> customerResponse = customerRepository.findById(customerDto.getId());
 
 			if (customerResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_UPDATE_CUSTOMER_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_CUSTOMER_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
 				return response;
 			}
 
-			Customer customerInDb = new Customer(customer);
-			customer.setId(id);
-			customerRepository.saveAndFlush(customerInDb);
-			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_CUSTOMER_SUCCESS, INFO, idTransaccion));
-			response.setDatos(new CustomerUpdateDto().customer(customer));
+			customerRepository.save(customerMapping.model(customerDto));
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_CUSTOMER_SUCCESS, INFO, idTransaccion));
+			response.setDatos(new CustomerResponse().customer(customerDto));
 
 		} catch (Exception ex) {
-			log.error("error al actualizar cliente: " + ex);
+			log.error(MESSAGE_UPDATE_CUSTOMER_WARN + ": " + ex);
 			throw ex;
 		}
 
 		return response;
 	}
 
-	public ResponseDto<CustomerDeleteDto> deleteCustomers(Long id) {
-		ResponseDto<CustomerDeleteDto> response = new ResponseDto<>();
-
+	@Override
+	public ResponseDto deleteCustomer(Long id) {
+		ResponseDto response = new ResponseDto<>();
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			Optional<Customer> customerResponse = customerRepository.findById(id);
-
-			if (customerResponse.isEmpty()) {
-				response.meta(
-						MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_DELETE_CUSTOMER_WARN, WARN, idTransaccion)
-								.totalRegistros(0));
-				return response;
-			}
-
 			customerRepository.deleteById(id);
+
 			response.meta(
-					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_CUSTOMER_SUCCESS, INFO, idTransaccion));
-			response.setDatos(new CustomerDeleteDto().customer(id));
+					MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_CUSTOMER_SUCCESS, INFO, idTransaccion)
+							.totalRegistros(1));
 
 		} catch (Exception ex) {
-			log.error("error al actualizar cliente: " + ex);
+			log.error(MESSAGE_RETRIEVE_CUSTOMER_WARN + ": " + ex);
 			throw ex;
 		}
-
 		return response;
 	}
 }

@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
+import pe.com.huex.customer.services.resources.dto.CustomerDto;
 
 @Data
 @Entity
@@ -47,10 +47,10 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();
 
-	public Customer(CustomerResponseDto customerResponseDto) {
-		this.ruc = customerResponseDto.getRuc();
-		this.socialReason = customerResponseDto.getSocialReason();
-		this.bankAccount = customerResponseDto.getBankAccount();
-		this.registerDate = customerResponseDto.getRegisterDate();
+	public Customer(CustomerDto customerDto) {
+		this.ruc = customerDto.getRuc();
+		this.socialReason = customerDto.getSocialReason();
+		this.bankAccount = customerDto.getBankAccount();
+		this.registerDate = customerDto.getRegisterDate();
 	}
 }

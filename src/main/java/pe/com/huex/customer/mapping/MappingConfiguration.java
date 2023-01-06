@@ -21,4 +21,9 @@ public class MappingConfiguration {
     public CustomerEmployeeMapping customerEmployeeMapping() {
         return new CustomerEmployeeMapping();
     }
+
+    @Bean
+    public CustomerMapping customerMapping() {
+        return new CustomerMapping();
+    }
 }
