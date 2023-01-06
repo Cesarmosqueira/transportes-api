@@ -1,11 +1,13 @@
-package pe.com.huex.vehicles.api;
+package pe.com.huex.providers.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pe.com.huex.providers.service.resouces.response.KardexFuelListResponse;
+import pe.com.huex.providers.service.resouces.response.KardexFuelResponse;
 import pe.com.huex.util.ResponseDto;
-import pe.com.huex.vehicles.domain.service.IKardexFuelService;
-import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
+import pe.com.huex.providers.domain.service.IKardexFuelService;
+import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
 import pe.com.huex.vehicles.service.resources.response.*;
 
 @RestController

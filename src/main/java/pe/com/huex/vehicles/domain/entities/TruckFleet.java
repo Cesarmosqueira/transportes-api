@@ -1,13 +1,17 @@
 package pe.com.huex.vehicles.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import pe.com.huex.providers.domain.model.entity.KardexFuel;
+import pe.com.huex.providers.domain.model.entity.Provider;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "truck_fleet")
@@ -16,8 +20,10 @@ public class TruckFleet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "id_Provider")
-    private Long idProvider;
+    @ManyToOne
+    @JoinColumn(name = "id_Provider", nullable = false)
+    @JsonIgnore
+    private Provider provider;
 
     @Column(name = "tract_plate", nullable = false, length = 6)
     private String tractPlate;
@@ -51,4 +57,16 @@ public class TruckFleet {
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
     private List<KardexFuel> kardexFuels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<CheckList> checkLists = new ArrayList<>();
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<MaintenanceOil> maintenanceOils = new ArrayList<>();
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<MaintenanceTire> maintenanceTires = new ArrayList<>();
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<DocumentUnit> documentUnits = new ArrayList<>();
 }

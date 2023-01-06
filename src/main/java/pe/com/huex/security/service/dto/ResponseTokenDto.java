@@ -7,10 +7,8 @@ import lombok.Data;
 public class ResponseTokenDto {
 
     private String accessToken;
-
     private String refreshToken;
-
     private String tokenType;
-
     private Long expiryDuration;
+    private UserDto user;
 }

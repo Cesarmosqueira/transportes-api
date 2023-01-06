@@ -1,13 +1,15 @@
 package pe.com.huex.vehicles.service.resources.dto;
 
 import lombok.*;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class DocumentUnitDto {
     private Long id;
-    private Long idTruckFleet;
+    private TruckFleet truckFleet;
     private Date fireExtinguisherExpiration;
     private Date firstAidKitExpiration;
     private Date technicalReviewExpiration;

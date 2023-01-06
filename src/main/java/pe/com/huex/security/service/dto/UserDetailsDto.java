@@ -34,6 +34,11 @@ public class UserDetailsDto extends User implements UserDetails {
     }
 
     @Override
+    public Long getId() {
+        return user.getId();
+    }
+
+    @Override
     public Boolean getActive() {
         return user.getActive();
     }

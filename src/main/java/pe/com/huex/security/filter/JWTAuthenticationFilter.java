@@ -57,7 +57,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ResponseTokenDto responseTokenDto = new ResponseTokenDto();
         responseTokenDto.setAccessToken(token);
         responseTokenDto.setExpiryDuration(JwtTokenProvider.getExpiryDuration());
-
+        UserDto userDto = new UserDto();
+        userDto.setId(userDetailsDto.getId());
+        userDto.setUserName(userDetailsDto.getUserName());
+        responseTokenDto.setUser(userDto);
         ObjectMapper objectMapper= new ObjectMapper();
         String responseTokenDtoJson = objectMapper.writeValueAsString(responseTokenDto);
 

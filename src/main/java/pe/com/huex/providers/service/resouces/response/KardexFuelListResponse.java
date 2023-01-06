@@ -1,7 +1,7 @@
-package pe.com.huex.vehicles.service.resources.response;
+package pe.com.huex.providers.service.resouces.response;
 
 import lombok.*;
-import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
+import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
 
 import java.util.List;
 

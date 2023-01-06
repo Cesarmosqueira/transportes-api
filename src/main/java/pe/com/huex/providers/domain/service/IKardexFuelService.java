@@ -1,8 +1,9 @@
-package pe.com.huex.vehicles.domain.service;
+package pe.com.huex.providers.domain.service;
 
+import pe.com.huex.providers.service.resouces.response.KardexFuelListResponse;
+import pe.com.huex.providers.service.resouces.response.KardexFuelResponse;
 import pe.com.huex.util.ResponseDto;
-import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
-import pe.com.huex.vehicles.service.resources.response.*;
+import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
 
 public interface IKardexFuelService {
 

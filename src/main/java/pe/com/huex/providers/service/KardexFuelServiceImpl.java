@@ -1,16 +1,16 @@
-package pe.com.huex.vehicles.service;
+package pe.com.huex.providers.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
-import pe.com.huex.vehicles.domain.entities.KardexFuel;
-import pe.com.huex.vehicles.domain.persistence.IKardexFuelRepository;
-import pe.com.huex.vehicles.domain.service.IKardexFuelService;
-import pe.com.huex.vehicles.mapping.KardexFuelMapping;
-import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelListResponse;
-import pe.com.huex.vehicles.service.resources.response.KardexFuelResponse;
+import pe.com.huex.providers.domain.model.entity.KardexFuel;
+import pe.com.huex.providers.domain.persistence.IKardexFuelRepository;
+import pe.com.huex.providers.domain.service.IKardexFuelService;
+import pe.com.huex.providers.mapping.KardexFuelMapping;
+import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
+import pe.com.huex.providers.service.resouces.response.KardexFuelListResponse;
+import pe.com.huex.providers.service.resouces.response.KardexFuelResponse;
 
 import javax.transaction.Transactional;
 import java.util.List;

@@ -16,11 +16,6 @@ public class MappingConfiguration {
     }
 
     @Bean
-    public KardexFuelMapping kardexFuelMapping() {
-        return new KardexFuelMapping();
-    }
-
-    @Bean
     public MaintenanceOilMapping maintenanceOilMapping() {
         return new MaintenanceOilMapping();
     }
