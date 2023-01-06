@@ -35,7 +35,7 @@ public class EmployeeImplement {
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
-	private Date date;
+	private Date deliveryDate;
 
 	@Column(nullable = true, length = 1024)
 	private String observations;

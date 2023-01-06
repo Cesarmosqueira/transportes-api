@@ -22,4 +22,8 @@ public class MappingConfiguration {
     public ImplementMapping implementMapping() {
         return new ImplementMapping();
     }
+    @Bean
+    public EmployeeImplementMapping employeeImplementMapping() {
+        return new EmployeeImplementMapping();
+    }
 }

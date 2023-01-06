@@ -2,7 +2,8 @@ package pe.com.huex.employees.services.resources.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.com.huex.employees.services.resources.dtos.EmployeeImplementRelationDto;
+import pe.com.huex.employees.services.resources.dtos.EmployeeImplementDto;
+import pe.com.huex.employees.services.resources.dtos.ImplementDto;
 
 import java.util.List;
 
@@ -10,10 +11,10 @@ import java.util.List;
 @NoArgsConstructor
 public class EmployeeImplementListResponse {
 
-	private List<EmployeeImplementRelationDto> employeeImplements = null;
+	private List<EmployeeImplementDto> employeeImplement = null;
 
-	public EmployeeImplementListResponse employeeImplements(List<EmployeeImplementRelationDto> employeeImplements) {
-		this.employeeImplements = employeeImplements;
+	public EmployeeImplementListResponse employeeImplement(List<EmployeeImplementDto> employeeImplement) {
+		this.employeeImplement = employeeImplement;
 		return this;
 	}
 }

@@ -28,17 +28,17 @@ public class EmployeeAttendance {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "employee_id", nullable = false)
 	private Employee employee;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd")
-	private Date date;
+	private Date attendanceDate;
 
 	@Column(nullable = false, length = 32)
-	private String state;
+	private String status;
 
 
 }

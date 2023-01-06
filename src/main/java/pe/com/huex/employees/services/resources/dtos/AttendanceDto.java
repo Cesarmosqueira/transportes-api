@@ -1,21 +1,23 @@
 package pe.com.huex.employees.services.resources.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 import pe.com.huex.employees.domain.entities.Employee;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@With
 @AllArgsConstructor
+@NoArgsConstructor
 public class AttendanceDto {
 
 	private Long id;
 
 	private Long employeeId;
 
-	private Date date;
+	private Date attendanceDate;
 
-	private String state;
+	private String status;
 
 }
