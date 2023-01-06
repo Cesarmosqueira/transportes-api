@@ -1,6 +1,7 @@
 package pe.com.huex.vehicles.domain.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pe.com.huex.vehicles.domain.entities.MaintenanceTire;
 
@@ -15,5 +16,6 @@ public interface IMaintenanceTireRepository extends JpaRepository<MaintenanceTir
 
     MaintenanceTire save(MaintenanceTire maintenanceTire);
 
+    @Query(value = "SELECT * FROM maintenance_tire k WHERE id_truck_fleet = ? 1 ", nativeQuery = true)
     List<MaintenanceTire> findByIdTruckFleet(Long id);
 }

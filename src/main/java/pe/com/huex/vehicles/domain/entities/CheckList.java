@@ -1,11 +1,13 @@
 package pe.com.huex.vehicles.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "check_list")
@@ -15,8 +17,10 @@ public class CheckList {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "id_truck_fleet")
-    private Long idTruckFleet;
+    @ManyToOne
+    @JoinColumn(name = "id_truck_fleet", nullable = false)
+    @JsonIgnore
+    private TruckFleet truckFleet;
 
     @Column(name = "date")
     private Date date;

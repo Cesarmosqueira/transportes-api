@@ -1,8 +1,8 @@
-package pe.com.huex.vehicles.domain.persistence;
+package pe.com.huex.providers.domain.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import pe.com.huex.vehicles.domain.entities.KardexFuel;
+import pe.com.huex.providers.domain.model.entity.KardexFuel;
 
 import java.util.List;
 

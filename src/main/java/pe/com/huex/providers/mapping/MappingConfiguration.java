@@ -25,4 +25,9 @@ public class MappingConfiguration {
     public FuelSupplyMapping fuelSupplyMapping() {
         return new FuelSupplyMapping();
     }
+
+    @Bean
+    public KardexFuelMapping kardexFuelMapping() {
+        return new KardexFuelMapping();
+    }
 }

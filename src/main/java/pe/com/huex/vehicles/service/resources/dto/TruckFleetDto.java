@@ -1,14 +1,20 @@
 package pe.com.huex.vehicles.service.resources.dto;
 
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import pe.com.huex.providers.domain.model.entity.Provider;
+import pe.com.huex.providers.service.resouces.dto.ProviderDto;
 
 import java.util.Date;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class TruckFleetDto {
 
     private Long id;
-    private Long idProvider;
+    private Provider provider;
     private String tractPlate;
     private String vanPlate;
     private String brand;
@@ -19,4 +25,6 @@ public class TruckFleetDto {
     private String model;
     private String highWideLong;
     private String fleetType;
+    private List<CheckListDto> checkLists;
+    private List<DocumentUnitDto> documentUnits;
 }

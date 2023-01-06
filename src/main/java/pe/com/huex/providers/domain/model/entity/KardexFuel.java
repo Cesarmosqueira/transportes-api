@@ -1,9 +1,10 @@
-package pe.com.huex.vehicles.domain.entities;
+package pe.com.huex.providers.domain.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
 import java.time.Instant;

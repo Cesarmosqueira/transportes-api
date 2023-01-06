@@ -1,12 +1,15 @@
-package pe.com.huex.vehicles.service.resources.dto;
+package pe.com.huex.providers.service.resouces.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class KardexFuelDto {
     private Long id;
     private TruckFleet truckFleet;

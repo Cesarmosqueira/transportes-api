@@ -3,13 +3,14 @@ package pe.com.huex.vehicles.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
+import pe.com.huex.util.ResponseDto;
 import pe.com.huex.vehicles.domain.entities.CheckList;
 import pe.com.huex.vehicles.domain.persistence.ICheckListRepository;
 import pe.com.huex.vehicles.domain.service.ICheckListService;
 import pe.com.huex.vehicles.mapping.CheckListMapping;
 import pe.com.huex.vehicles.service.resources.dto.CheckListDto;
+import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 import pe.com.huex.vehicles.service.resources.response.CheckListListResponse;
 import pe.com.huex.vehicles.service.resources.response.CheckListResponse;
 

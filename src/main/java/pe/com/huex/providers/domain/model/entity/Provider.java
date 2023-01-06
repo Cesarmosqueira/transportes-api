@@ -1,13 +1,15 @@
 package pe.com.huex.providers.domain.model.entity;
 
 import lombok.*;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "providers")
@@ -46,4 +48,6 @@ public class Provider {
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     private List<ProvinceEstivators> provinceEstivators = new ArrayList<>();
 
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
+    private List<TruckFleet> truckFleets = new ArrayList<>();
 }

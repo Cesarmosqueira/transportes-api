@@ -1,7 +1,6 @@
 package pe.com.huex.providers.domain.model.entity;
 
 import lombok.*;
-import pe.com.huex.vehicles.domain.entities.KardexFuel;
 
 import javax.persistence.*;
 import java.util.ArrayList;

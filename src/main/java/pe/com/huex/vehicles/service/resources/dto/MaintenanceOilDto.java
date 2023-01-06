@@ -1,13 +1,15 @@
 package pe.com.huex.vehicles.service.resources.dto;
 
 import lombok.*;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class MaintenanceOilDto {
     private Long id;
-    private Long idTruckFleet;
+    private TruckFleet truckFleet;
     private String changeType;
     private String place;
     private Date dateChange;

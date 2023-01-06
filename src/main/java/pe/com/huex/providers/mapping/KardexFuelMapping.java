@@ -1,8 +1,8 @@
-package pe.com.huex.vehicles.mapping;
+package pe.com.huex.providers.mapping;
 
 import org.modelmapper.ModelMapper;
-import pe.com.huex.vehicles.domain.entities.KardexFuel;
-import pe.com.huex.vehicles.service.resources.dto.KardexFuelDto;
+import pe.com.huex.providers.domain.model.entity.KardexFuel;
+import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
 
 import java.io.Serializable;
 import java.util.List;

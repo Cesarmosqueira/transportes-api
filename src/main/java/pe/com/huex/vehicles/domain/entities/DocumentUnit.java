@@ -1,5 +1,6 @@
 package pe.com.huex.vehicles.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,8 +18,10 @@ public class DocumentUnit {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "id_truck_fleet")
-    private Long idTruckFleet;
+    @ManyToOne
+    @JoinColumn(name = "id_truck_fleet", nullable = false)
+    @JsonIgnore
+    private TruckFleet truckFleet;
 
     @Column(name = "fire_extinguisher_expiration")
     private Date fireExtinguisherExpiration;
