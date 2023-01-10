@@ -16,10 +16,14 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "employee_attendance")
 @NoArgsConstructor
@@ -30,6 +34,7 @@ public class EmployeeAttendance {
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id", nullable = false)
+	@JsonIgnore
 	private Employee employee;
 
 	@Temporal(TemporalType.DATE)

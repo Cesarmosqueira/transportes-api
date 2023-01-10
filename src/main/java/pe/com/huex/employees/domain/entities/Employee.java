@@ -7,12 +7,15 @@ import java.util.List;
 import javax.persistence.*;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.security.domain.entities.User;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "employee")
 @NoArgsConstructor

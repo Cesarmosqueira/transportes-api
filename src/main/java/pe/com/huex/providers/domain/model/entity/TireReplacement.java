@@ -1,11 +1,13 @@
 package pe.com.huex.providers.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "tire_replacement")
@@ -17,6 +19,7 @@ public class TireReplacement {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "provider_id", nullable = false)
+    @JsonIgnore
     private Provider provider;
 
     @Column(name = "replacement_date", nullable = false)

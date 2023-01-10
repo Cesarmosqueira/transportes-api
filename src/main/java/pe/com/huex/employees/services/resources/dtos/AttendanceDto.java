@@ -14,7 +14,7 @@ public class AttendanceDto {
 
 	private Long id;
 
-	private Long employeeId;
+	private Employee employee;
 
 	private Date attendanceDate;
 

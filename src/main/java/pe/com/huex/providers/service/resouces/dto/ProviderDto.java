@@ -4,7 +4,11 @@ import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@With
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProviderDto {
     private Long id;
 

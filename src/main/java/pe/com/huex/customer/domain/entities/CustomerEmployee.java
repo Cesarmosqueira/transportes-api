@@ -4,12 +4,16 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pe.com.huex.employees.domain.entities.Employee;
 import pe.com.huex.employees.domain.entities.Implement;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "customer_employee")
@@ -20,10 +24,12 @@ public class CustomerEmployee {
 	
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
+	@JsonIgnore
 	private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
+	@JsonIgnore
 	private Employee employee;
 
 	@Column(name = "status", length = 50)

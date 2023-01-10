@@ -1,5 +1,6 @@
 package pe.com.huex.providers.domain.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "fuel_supply")
@@ -17,8 +19,9 @@ public class FuelSupply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "provider_id", nullable = false)
+    @JsonIgnore
     private Provider provider;
 
     @Column(name = "date_fuel", nullable = false)
