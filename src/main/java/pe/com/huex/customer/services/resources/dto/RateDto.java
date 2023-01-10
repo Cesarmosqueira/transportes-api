@@ -16,8 +16,8 @@ import pe.com.huex.customer.domain.entities.Route;
 public class RateDto {
 
     private Long id;
-    private Long customerId;
-    private Long routeId;
+    private Customer customer;
+    private Route route;
     private String leadTime;
     private int volume;
     private double cost;
