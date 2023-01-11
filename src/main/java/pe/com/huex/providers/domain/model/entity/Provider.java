@@ -53,4 +53,7 @@ public class Provider {
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     private List<TireReplacement> tireReplacement = new ArrayList<>();
+
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
+    private List<FuelSupply> fuelSupply = new ArrayList<>();
 }
