@@ -15,6 +15,6 @@ public interface ICustomerEmployeeService {
 
     ResponseDto<CustomerEmployeeResponse> updateCustomerEmployee(CustomerEmployeeDto customerEmployeeDto);
 
-    ResponseDto deleteRate(Long id);
+    ResponseDto deleteCustomerEmployee(Long id);
 
 }

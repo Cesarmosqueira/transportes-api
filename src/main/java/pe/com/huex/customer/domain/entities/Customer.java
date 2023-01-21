@@ -16,10 +16,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pe.com.huex.customer.services.resources.response.CustomerResponseDto;
+import lombok.Setter;
+import pe.com.huex.customer.services.resources.dto.CustomerDto;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "customer")
@@ -34,7 +37,7 @@ public class Customer {
 	@Column(nullable = false, length = 32)
 	private String socialReason;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = true, length = 32)
 	private String bankAccount;
 
 	@Temporal(TemporalType.DATE)
@@ -47,10 +50,10 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();
 
-	public Customer(CustomerResponseDto customerResponseDto) {
-		this.ruc = customerResponseDto.getRuc();
-		this.socialReason = customerResponseDto.getSocialReason();
-		this.bankAccount = customerResponseDto.getBankAccount();
-		this.registerDate = customerResponseDto.getRegisterDate();
+	public Customer(CustomerDto customerDto) {
+		this.ruc = customerDto.getRuc();
+		this.socialReason = customerDto.getSocialReason();
+		this.bankAccount = customerDto.getBankAccount();
+		this.registerDate = customerDto.getRegisterDate();
 	}
 }

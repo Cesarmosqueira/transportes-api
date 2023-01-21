@@ -1,13 +1,17 @@
 package pe.com.huex.services.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.sound.midi.Track;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "service_monitoring")
@@ -19,6 +23,7 @@ public class ServiceMonitoring {
 
     @ManyToOne
     @JoinColumn(name = "tracking_service_id", nullable = false)
+    @JsonIgnore
     private TrackingService TrackingService;
 
 

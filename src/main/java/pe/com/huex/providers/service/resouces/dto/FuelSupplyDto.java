@@ -1,15 +1,20 @@
 package pe.com.huex.providers.service.resouces.dto;
 
 import lombok.*;
+import pe.com.huex.providers.domain.model.entity.Provider;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
+@With
+@AllArgsConstructor
+@NoArgsConstructor
 public class FuelSupplyDto {
 
     private Long id;
 
-    private Long providerId;
+    private Provider provider;
 
     private Date dateFuel;
 

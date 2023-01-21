@@ -39,6 +39,6 @@ public class CustomerEmployeeController {
     @DeleteMapping(path = "{id}")
     public ResponseDto<CustomerEmployeeResponse> deleteCustomerEmployee(@PathVariable Long id)
             throws Exception {
-        return customerEmployeeService.deleteRate(id);
+        return customerEmployeeService.deleteCustomerEmployee(id);
     }
 }

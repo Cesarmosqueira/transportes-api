@@ -152,10 +152,11 @@ public class CustomerEmployeeServiceImpl implements ICustomerEmployeeService {
             throw ex;
         }
 
-        return response;    }
+        return response;
+    }
 
     @Override
-    public ResponseDto deleteRate(Long id) {
+    public ResponseDto deleteCustomerEmployee(Long id) {
         ResponseDto response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();

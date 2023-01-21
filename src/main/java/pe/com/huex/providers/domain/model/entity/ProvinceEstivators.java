@@ -10,11 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pe.com.huex.customer.domain.entities.Route;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "province_estivators")
@@ -26,10 +30,12 @@ public class ProvinceEstivators {
 
     @ManyToOne
     @JoinColumn(name = "route_id", nullable = false)
+    @JsonIgnore
     private Route route;
 
     @ManyToOne
     @JoinColumn(name = "provider_id", nullable = false)
+    @JsonIgnore
     private Provider provider;
 
     @Column(nullable = false)

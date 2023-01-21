@@ -13,25 +13,31 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "employee_implement")
 @NoArgsConstructor
 public class EmployeeImplement {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
+	@JsonIgnore
 	private Employee employee;
 
 	@ManyToOne
 	@JoinColumn(name = "implement_id")
-	Implement implement;
+	@JsonIgnore
+	private Implement implement;
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)

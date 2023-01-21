@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.employees.domain.entities.Employee;
 import pe.com.huex.employees.domain.entities.EmployeeAttendance;
@@ -17,7 +16,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
-@Data
+@Getter
+@Setter
+@With
+@AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeDto {
 	private Long id;

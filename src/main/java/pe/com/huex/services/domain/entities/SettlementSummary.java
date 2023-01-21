@@ -1,13 +1,17 @@
 package pe.com.huex.services.domain.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "settlement_summary")
@@ -19,10 +23,12 @@ public class SettlementSummary {
 
     @ManyToOne
     @JoinColumn(name = "tracking_service_id", nullable = false)
+    @JsonIgnore
     private TrackingService trackingService;
 
     @ManyToOne
     @JoinColumn(name = "expense_type_id", nullable = false)
+    @JsonIgnore
     private ExpenseType expenseType;
 
     @Column(name = "settlement_date",nullable = false)

@@ -3,6 +3,8 @@ package pe.com.huex.providers.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.com.huex.customer.domain.entities.Rate;
+import pe.com.huex.customer.services.resources.response.RateResponse;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 import pe.com.huex.providers.domain.persistence.ProvinceEstivatorRepository;
@@ -105,23 +107,20 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
     }
 
     @Override
-    public ResponseDto<ProvinceEstivatorResponse> registerProvinceEstivator(
-            ProvinceEstivatorDto provinceEstivatorDto) {
+    public ResponseDto<ProvinceEstivatorResponse> registerProvinceEstivator(ProvinceEstivatorDto provinceEstivatorDto) {
+
         ResponseDto<ProvinceEstivatorResponse> response = new ResponseDto<>();
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            ProvinceEstivators provinceEstivatorsResponse = provinceEstivatorRepository
-                    .save(provinceEstivatorMapping.model(provinceEstivatorDto));
-            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVINCE_ESTIVATOR_SUCCESS, INFO,
-                    idTransaccion));
-            response.setDatos(new ProvinceEstivatorResponse()
-                    .provinceEstivator(provinceEstivatorMapping.modelDto(provinceEstivatorsResponse)));
+            ProvinceEstivators provinceEstivatorsResponse = provinceEstivatorRepository.save(provinceEstivatorMapping.model(provinceEstivatorDto));
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVINCE_ESTIVATOR_SUCCESS, INFO, idTransaccion));
+            response.setDatos(new ProvinceEstivatorResponse().provinceEstivator(provinceEstivatorMapping.modelDto(provinceEstivatorsResponse)));
         } catch (Exception ex) {
             log.error(MESSAGE_REGISTER_PROVINCE_ESTIVATOR_WARN + ": " + ex);
             throw ex;
         }
-
         return response;
     }
 

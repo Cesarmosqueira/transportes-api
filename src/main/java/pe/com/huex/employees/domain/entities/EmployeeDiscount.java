@@ -1,13 +1,13 @@
 package pe.com.huex.employees.domain.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "employee_discount")
 @AllArgsConstructor
@@ -15,11 +15,12 @@ import java.util.Date;
 public class EmployeeDiscount {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
+	@JsonIgnore
 	private Employee employee;
 
 	@Temporal(TemporalType.DATE)
