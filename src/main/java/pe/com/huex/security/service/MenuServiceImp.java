@@ -55,9 +55,24 @@ public class MenuServiceImp implements IMenuService {
                 return response;
             }
 
+            List<MenuDto> menuDtos = menuMapping.modelList(menuList);
+
+            Map<Long, List<MenuDto>> studlistGrouped = menuDtos.stream().collect(Collectors.groupingBy(w -> w.getIdParent()));
+
+            List<MenuDto> menuListResponse = new ArrayList<>();
+            studlistGrouped.forEach((key, val) -> {
+                Optional<MenuDto> menuDtoOptional = val.stream()
+                        .filter(p -> p.getIdChild() == 0).findFirst();
+                MenuDto menuDto = menuDtoOptional.get();
+                var lista  = val.stream()
+                        .filter(p -> p.getIdChild() != 0).collect(Collectors.toList());
+                menuDto.setSubItems(lista);
+                menuListResponse.add(menuDto);
+            });
+
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_MENU_SUCCESS, INFO, idTransaccion)
                     .totalRegistros(menuList.size()));
-            response.setDatos(new MenuListResponse().menu(menuMapping.modelList(menuList)));
+            response.setDatos(new MenuListResponse().menu(menuListResponse));
 
         } catch (Exception ex) {
             log.error(MESSAGE_INQUIRY_MENU_WARN + ": " + ex);

@@ -29,11 +29,6 @@ public class UserDetailsDto extends User implements UserDetails {
     }
 
     @Override
-    public Long getRole() {
-        return user.getRole();
-    }
-
-    @Override
     public Long getId() {
         return user.getId();
     }
@@ -62,4 +57,6 @@ public class UserDetailsDto extends User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public User getUser() { return user;}
 }

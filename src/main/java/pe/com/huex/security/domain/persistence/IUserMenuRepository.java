@@ -10,4 +10,7 @@ public interface IUserMenuRepository extends JpaRepository<UserMenu, Long> {
 
     @Query(value = "SELECT * FROM user_menu k WHERE id_user = ?1", nativeQuery = true)
     List<UserMenu> findByIdUser(Long idUser);
+
+    @Query(value = "DELETE user_menu k WHERE id_user = ?1", nativeQuery = true)
+    int deleteByIdUser(Long idUser);
 }

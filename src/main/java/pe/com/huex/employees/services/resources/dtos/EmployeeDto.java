@@ -47,5 +47,5 @@ public class EmployeeDto {
 	private String licenseCategory;
 	private Date licenseExpirationDate;
 	private Date dniExpirationDate;
-	private String photoUrl;
+	private byte[] photoUrl;
 }

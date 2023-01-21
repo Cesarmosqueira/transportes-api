@@ -4,6 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pe.com.huex.security.domain.entities.UserMenu;
+import pe.com.huex.security.domain.persistence.IMenuRepository;
+import pe.com.huex.security.domain.persistence.IUserMenuRepository;
+import pe.com.huex.security.service.dto.MenuDto;
+import pe.com.huex.security.service.dto.UserMenuDto;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.security.domain.entities.User;
 import pe.com.huex.security.domain.persistence.IUserRepository;
@@ -14,6 +19,7 @@ import pe.com.huex.security.service.resources.UserListResponse;
 import pe.com.huex.security.service.resources.UserResponse;
 import pe.com.huex.util.MetaDatosUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -53,6 +59,9 @@ public class UserServiceImp implements IUserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    IUserMenuRepository userMenuRepository;
 
     @Override
     public ResponseDto<UserListResponse> listUsers() {
@@ -114,6 +123,13 @@ public class UserServiceImp implements IUserService {
             String idTransaccion = UUID.randomUUID().toString();
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             User userResponse = userRepository.save(userMapping.model(userDto));
+            for (MenuDto menu: userDto.getMenus()) {
+                UserMenu userMenu = new UserMenu();
+                userMenu.setUser(userResponse);
+                userMenu.setIdChild(menu.getIdChild());
+                userMenu.setIdParent(menu.getIdParent());
+                userMenuRepository.save(userMenu);
+            }
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_USER_SUCCESS, INFO, idTransaccion));
             response.setDatos(new UserResponse().user(userMapping.modelDto(userResponse)));
         } catch (Exception ex) {
@@ -156,9 +172,8 @@ public class UserServiceImp implements IUserService {
         ResponseDto response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-
+            userMenuRepository.deleteByIdUser(id);
             userRepository.deleteById(id);
-
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_USER_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(1));

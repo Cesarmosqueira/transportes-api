@@ -35,5 +35,5 @@ public class TrackingServiceDto {
     private String operation;
     private String condition;
     private String monitoring;
-    private Long photoInsurance;
+    private byte[] photoInsurance;
 }

@@ -33,9 +33,6 @@ public class User {
     @Type(type = "org.hibernate.type.TextType")
     private String password;
 
-    @Column(name = "role", nullable = false)
-    private Long role;
-
     @Column(name = "active", nullable = false)
     private Boolean active = false;
 }

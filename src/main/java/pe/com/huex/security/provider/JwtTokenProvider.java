@@ -29,7 +29,6 @@ public class JwtTokenProvider {
     public static String generateToken(UserDetailsDto userDetailsDto) {
         Instant expiryDate = Instant.now().plusMillis(jwtExpirationInMs);
         Map<String, Object> dataAditional = new HashMap<>();
-        dataAditional.put("role", userDetailsDto.getRole());
         dataAditional.put("status", userDetailsDto.getActive());
 
         return Jwts.builder()

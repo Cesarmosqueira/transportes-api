@@ -244,91 +244,100 @@ create table user_menu(
 
 ALTER TABLE user_menu
     ADD CONSTRAINT fk_user_menu_users FOREIGN KEY (id_user) REFERENCES users(id);	
-	
-	
+
+create sequence user_menu_id_seq;
+
+alter sequence user_menu_id_seq owner to localhost;
+
+alter sequence user_menu_id_seq owned by user_menu.id;
+
+ALTER TABLE user_menu ALTER COLUMN id SET DEFAULT nextval('user_menu_id_seq');
 
 ********Data************************************************
 
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (1, 1, 0, 'Administración', '', 'A', 'mdi-tune-vertical', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (2, 1, 1, 'Usuarios', '', 'A', '', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (3, 2, 0, 'Trabajadores', '', 'A', 'mdi-account-hard-hat', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (4, 2, 1, 'Trabajadores', '/employees/employee', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (5, 2, 2, 'Implementos', '/employees/implement', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (6, 2, 3, 'Entrega Implementos', '/employees/employee-implement', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (7, 2, 4, 'Asistencia trabajador', '/employees/employee-attendance', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (8, 2, 5, 'Descuento trabajador', '/employees/employee-discount', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (9, 3, 0, 'Vehículos', '', 'A', 'mdi-truck', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (10, 3, 1, 'Flota de camiones', '/vehicles/truck-fleet', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (11, 3, 2, 'Mantenimiento Aceite', '/vehicles/maintenance-oil', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (12, 3, 3, 'Mantenimiento LLantas', '/vehicles/maintenance-tire', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (13, 4, 0, 'Clientes', '', 'A', 'mdi-account-group', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (14, 4, 1, 'Rutas clientes', '/customers/route', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (15, 4, 2, 'Tarifas clientes', '/customers/rate', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (16, 4, 3, 'Clientes', '/customers/customer', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (17, 4, 4, 'Choferes Aptos', '/customers/customer-employees', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (18, 5, 0, 'Servicios', '', 'A', 'mdi-highway', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (19, 5, 1, 'Tipo gasto', '/services/expenseType', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (20, 5, 2, 'Incidente servicio', '/services/serviceIncidents', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (21, 5, 3, 'Liquidacion servicio', '/services/settlementSummary', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (22, 6, 0, 'Proveedores', '', 'A', 'mdi-dolly', false, false, false);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (23, 6, 1, 'Proveedor', '/providers/providers', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (24, 6, 2, 'Proveedor estivador', '/providers/province-estivators', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (25, 6, 3, 'Proveedor llanta', '/providers/tire-replacement', 'A', '', true, true, true);
-insert into menu (id, id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
-values (26, 6, 4, 'Proveedor combustible', '/providers/fuel-supply', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (1, 0, 'Administración', '', 'A', 'mdi-tune-vertical', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (1, 1, 'Usuarios', '/administrator/user', 'A', '', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 0, 'Trabajadores', '', 'A', 'mdi-account-hard-hat', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 1, 'Trabajadores', '/employees/employee', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 2, 'Implementos', '/employees/implement', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 3, 'Entrega Implementos', '/employees/employee-implement', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 4, 'Asistencia trabajador', '/employees/employee-attendance', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (2, 5, 'Descuento trabajador', '/employees/employee-discount', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (3, 0, 'Vehículos', '', 'A', 'mdi-truck', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (3, 1, 'Flota de camiones', '/vehicles/truck-fleet', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (3, 2, 'Mantenimiento Aceite', '/vehicles/maintenance-oil', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (3, 3, 'Mantenimiento LLantas', '/vehicles/maintenance-tire', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (4, 0, 'Clientes', '', 'A', 'mdi-account-group', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (4, 1, 'Rutas clientes', '/customers/route', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (4, 2, 'Tarifas clientes', '/customers/rate', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (4, 3, 'Clientes', '/customers/customer', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (4, 4, 'Choferes Aptos', '/customers/customer-employees', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (5, 0, 'Servicios', '', 'A', 'mdi-highway', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (5, 1, 'Tracking', '/services/tracking', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (5, 2, 'Tipo gasto', '/services/expenseType', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (5, 3, 'Incidente servicio', '/services/serviceIncidents', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (5, 4, 'Liquidacion servicio', '/services/settlementSummary', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (6, 0, 'Proveedores', '', 'A', 'mdi-dolly', false, false, false);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (6, 1, 'Proveedor', '/providers/providers', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (6, 2, 'Proveedor estivador', '/providers/province-estivators', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (6, 3, 'Proveedor llanta', '/providers/tire-replacement', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (6, 4, 'Proveedor combustible', '/providers/fuel-supply', 'A', '', true, true, true);
 
 ************************************************************
-insert into user_menu (id, id_parent, id_child, id_user) values (1, 1, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (2, 1, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (3, 2, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (4, 2, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (5, 2, 2, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (6, 2, 3, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (7, 2, 4, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (8, 2, 5, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (9, 3, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (10, 3, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (11, 3, 2, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (12, 3, 3, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (13, 4, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (14, 4, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (15, 4, 2, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (16, 4, 3, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (17, 4, 4, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (18, 5, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (19, 5, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (20, 5, 2, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (21, 5, 3, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (22, 6, 0, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (23, 6, 1, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (24, 6, 2, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (25, 6, 3, 1);
-insert into user_menu (id, id_parent, id_child, id_user) values (26, 6, 4, 1);
+insert into user_menu (id_parent, id_child, id_user) values (1, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (1, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 2, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 4, 1);
+insert into user_menu (id_parent, id_child, id_user) values (2, 5, 1);
+insert into user_menu (id_parent, id_child, id_user) values (3, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (3, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (3, 2, 1);
+insert into user_menu (id_parent, id_child, id_user) values (3, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (4, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (4, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (4, 2, 1);
+insert into user_menu (id_parent, id_child, id_user) values (4, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (4, 4, 1);
+insert into user_menu (id_parent, id_child, id_user) values (5, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (5, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (5, 2, 1);
+insert into user_menu (id_parent, id_child, id_user) values (5, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (5, 4, 1);
+insert into user_menu (id_parent, id_child, id_user) values (6, 0, 1);
+insert into user_menu (id_parent, id_child, id_user) values (6, 1, 1);
+insert into user_menu (id_parent, id_child, id_user) values (6, 2, 1);
+insert into user_menu (id_parent, id_child, id_user) values (6, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (6, 4, 1);
 
 
 
@@ -336,11 +345,11 @@ Optional<User> findByUserName(String name);
 	
 $2a$10$gIzVbaRU1nEIny/tZbUfaOBlt1g4kmWLbN7BegNwYfsbGjEgr8lM6
 
-insert into employee (id, academic_qualification, address, bank_account, birth_date, cease_date, childrens, contract_type, criminal_records, current_state, dni, dni_expiration_date, document_type, email, full_name, join_date, kin_full_name, kin_phone_number, kinhood, license_category, license_expiration_date, marital_status, pension_system, phone_number, photo_url, place_of_birth, role, salary) values (1, '1', '1', '1', '2022-12-22 02:15:18.000000', '2022-12-22 02:15:25.000000', 1, '1', '1', '1', '1', '2022-12-22 02:15:41.000000', '1', '1', '1', '2022-12-22 02:15:48.000000', '1', '1', '1', '1', '2022-12-22 02:15:56.000000', '1', '1', '1', '1', '1', '1', 1);
+insert into employee (academic_qualification, address, bank_account, birth_date, cease_date, childrens, contract_type, criminal_records, current_state, dni, dni_expiration_date, document_type, email, full_name, join_date, kin_full_name, kin_phone_number, kinhood, license_category, license_expiration_date, marital_status, pension_system, phone_number, photo_url, place_of_birth, role, salary) values ('1', '1', '1', '2022-12-22 02:15:18.000000', '2022-12-22 02:15:25.000000', 1, '1', '1', '1', '1', '2022-12-22 02:15:41.000000', '1', '1', '1', '2022-12-22 02:15:48.000000', '1', '1', '1', '1', '2022-12-22 02:15:56.000000', '1', '1', '1', '1', '1', '1', 1);
 
 
-insert into users (id,active, id_employee, user_name, password, role)
-values (1,true,1,'jgala','$2a$10$gIzVbaRU1nEIny/tZbUfaOBlt1g4kmWLbN7BegNwYfsbGjEgr8lM6',1);
+insert into users (active, id_employee, user_name, password)
+values (true,1,'jgala','$2a$10$gIzVbaRU1nEIny/tZbUfaOBlt1g4kmWLbN7BegNwYfsbGjEgr8lM6');
 
 
 

@@ -10,7 +10,7 @@ import pe.com.huex.services.service.resources.response.TrackingServiceListRespon
 import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 
 @RestController
-@RequestMapping(value = "service/trackingService", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "service/tracking", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TrackingServiceController {
 
     @Autowired

@@ -19,4 +19,5 @@ public class MenuDto {
     private Boolean delete;
     private Boolean create;
     private List<MenuDto> subItems;
+    private Boolean check = false;
 }
