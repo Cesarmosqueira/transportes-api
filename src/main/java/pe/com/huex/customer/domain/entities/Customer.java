@@ -37,7 +37,7 @@ public class Customer {
 	@Column(nullable = false, length = 32)
 	private String socialReason;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = true, length = 32)
 	private String bankAccount;
 
 	@Temporal(TemporalType.DATE)

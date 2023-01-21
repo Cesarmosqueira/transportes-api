@@ -28,14 +28,14 @@ public class CustomerEmployee {
 	private Customer customer;
 
 	@ManyToOne
-	@JoinColumn(name = "employee_id")
+	@JoinColumn(name = "employee_id",nullable = false)
 	@JsonIgnore
 	private Employee employee;
 
-	@Column(name = "status", length = 50)
+	@Column(name = "status", length = 50,nullable = false)
 	private String status;
 
-	@Column(name = "register_date")
+	@Column(name = "register_date",nullable = false)
 	private Date registerDate;
 
 	@Column(name = "observations", length = 200)
