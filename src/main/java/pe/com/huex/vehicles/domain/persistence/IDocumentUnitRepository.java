@@ -16,6 +16,6 @@ public interface IDocumentUnitRepository extends JpaRepository<DocumentUnit, Lon
 
     DocumentUnit save(DocumentUnit documentUnit);
 
-    @Query(value = "SELECT * FROM document_unit k WHERE id_truck_fleet = ? 1 ", nativeQuery = true)
+    @Query(value = "SELECT * FROM documents_units k WHERE id_truck_fleet = ?1", nativeQuery = true)
     List<DocumentUnit> findByIdTruckFleet(Long id);
 }

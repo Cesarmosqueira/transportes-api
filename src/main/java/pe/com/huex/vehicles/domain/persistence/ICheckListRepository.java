@@ -16,6 +16,6 @@ public interface ICheckListRepository extends JpaRepository<CheckList, Long> {
 
     CheckList save(CheckList checkList);
 
-    @Query(value = "SELECT * FROM checkList k WHERE id_truck_fleet = ? 1 ", nativeQuery = true)
+    @Query(value = "SELECT * FROM check_list WHERE id_truck_fleet = ?1", nativeQuery = true)
     List<CheckList> findByIdTruckFleet(Long id);
 }
