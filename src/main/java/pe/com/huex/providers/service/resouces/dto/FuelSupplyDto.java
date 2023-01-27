@@ -22,7 +22,7 @@ public class FuelSupplyDto {
 
     private Double gallonPrice;
 
-    private Double totalPrice;
+
 
     private String observation;
 

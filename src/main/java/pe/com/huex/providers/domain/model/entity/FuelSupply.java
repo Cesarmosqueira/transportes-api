@@ -33,8 +33,6 @@ public class FuelSupply {
     @Column(name = "gallon_price",nullable = false)
     private Double gallonPrice;
 
-    @Column(name = "total_price",nullable = false)
-    private Double totalPrice;
 
     @Column(name = "observation", length = 200)
     private String observation;

@@ -11,11 +11,9 @@ public class TrackingServiceDto {
     private Long id;
     private Date dateService;
     private Long idTruckFleet;
-    private Long volume;
     private Long requestedVolume;
     private String bill;
     private String destinationDetail;
-    private String zone;
     private Long numberPoints;
     private String serviceType;
     private String additionalCost;

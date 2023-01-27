@@ -17,7 +17,6 @@ public class TireReplacementDto {
     private Date replacementDate;
     private Integer tireQuantity;
     private Double unitPrice;
-    private  Double totalPrice;
     private String brand;
     private String model;
     private String observation;

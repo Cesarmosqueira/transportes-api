@@ -14,7 +14,8 @@ public class ProvinceEstivatorDto {
     private Long id;
     private Route route;
     private Provider provider;
-    private double costM3;
+    private String costType;
+    private double cost;
     private String observation;
 
 }

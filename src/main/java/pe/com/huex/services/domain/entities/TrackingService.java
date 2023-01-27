@@ -23,8 +23,6 @@ public class TrackingService {
     @Column(name = "id_truck_fleet", nullable = false)
     private Long idTruckFleet;
 
-    @Column(name = "volume")
-    private Long volume;
 
     @Column(name = "requested_volume")
     private Long requestedVolume;
@@ -35,8 +33,6 @@ public class TrackingService {
     @Column(name = "destination_detail", nullable = false, length = 30)
     private String destinationDetail;
 
-    @Column(name = "zone", length = 20)
-    private String zone;
 
     @Column(name = "number_points")
     private Long numberPoints;

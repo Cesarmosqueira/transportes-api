@@ -31,8 +31,6 @@ public class TireReplacement {
     @Column(name = "unit_price",nullable = false)
     private Double unitPrice;
 
-    @Column(name = "total_price",nullable = false)
-    private  Double totalPrice;
 
     @Column(name = "brand", length = 64)
     private String brand;
