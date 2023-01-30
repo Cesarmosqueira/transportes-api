@@ -1,6 +1,10 @@
 package pe.com.huex.services.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import pe.com.huex.customer.domain.entities.Rate;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -8,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "tracking_services")
@@ -20,9 +25,10 @@ public class TrackingService {
     @Column(name = "date_service", nullable = false)
     private Date dateService;
 
-    @Column(name = "id_truck_fleet", nullable = false)
-    private Long idTruckFleet;
-
+    @ManyToOne
+    @JoinColumn(name = "id_truck_fleet",nullable = false)
+    @JsonIgnore
+    private TruckFleet truckFleet;
 
     @Column(name = "requested_volume")
     private Long requestedVolume;
@@ -32,7 +38,6 @@ public class TrackingService {
 
     @Column(name = "destination_detail", nullable = false, length = 30)
     private String destinationDetail;
-
 
     @Column(name = "number_points")
     private Long numberPoints;
@@ -58,17 +63,25 @@ public class TrackingService {
     @Column(name = "scheduled_appointment")
     private Date scheduledAppointment;
 
-    @Column(name = "id_rates", nullable = false)
-    private Long idRates;
+    @ManyToOne
+    @JoinColumn(name = "id_rate",nullable = false)
+    @JsonIgnore
+    private Rate rate;
 
-    @Column(name = "id_driver", nullable = false)
-    private Long idDriver;
+    @ManyToOne
+    @JoinColumn(name = "id_driver",nullable = false)
+    @JsonIgnore
+    private Employee driver;
 
-    @Column(name = "id_copilot")
-    private Long idCopilot;
+    @ManyToOne
+    @JoinColumn(name = "id_copilot",nullable = false)
+    @JsonIgnore
+    private Employee copilot;
 
-    @Column(name = "id_stevedore")
-    private Long idStevedore;
+    @ManyToOne
+    @JoinColumn(name = "id_stevedore",nullable = false)
+    @JsonIgnore
+    private Employee stevedore;
 
     @Column(name = "date_time_completion")
     private Date dateTimeCompletion;
@@ -91,8 +104,8 @@ public class TrackingService {
     @Column(name = "monitoring", length = 50)
     private String monitoring;
 
-    @Column(name = "photo_insurance")
-    private Long photoInsurance;
+    @Column(nullable = true, length = 256)
+    private byte[] photoInsurance;
 
     @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
     private List<SettlementSummary> settlementSummaries = new ArrayList<>();

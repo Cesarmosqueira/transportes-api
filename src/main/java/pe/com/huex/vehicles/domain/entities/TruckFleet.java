@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import pe.com.huex.providers.domain.model.entity.KardexFuel;
 import pe.com.huex.providers.domain.model.entity.Provider;
+import pe.com.huex.services.domain.entities.TrackingService;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -69,4 +70,7 @@ public class TruckFleet {
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
     private List<DocumentUnit> documentUnits = new ArrayList<>();
+
+    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    private List<TrackingService> trackingServices = new ArrayList<>();
 }

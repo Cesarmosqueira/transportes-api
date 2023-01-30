@@ -5,8 +5,11 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pe.com.huex.services.domain.entities.TrackingService;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -40,5 +43,9 @@ public class Rate {
 
     @Column(nullable = true, length = 200)
     private String observationRate;
+
+
+    @OneToMany(mappedBy = "rate", cascade = CascadeType.ALL)
+    private List<TrackingService> trackingServices = new ArrayList<>();
 
 }

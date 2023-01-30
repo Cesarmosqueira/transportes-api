@@ -13,6 +13,7 @@ import lombok.Setter;
 import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.security.domain.entities.User;
+import pe.com.huex.services.domain.entities.TrackingService;
 
 @Getter
 @Setter
@@ -120,5 +121,14 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
+
+	@OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+	private List<TrackingService> driverList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "copilot", cascade = CascadeType.ALL)
+	private List<TrackingService> copilotList = new ArrayList<>();
+
+	@OneToMany(mappedBy = "stevedore", cascade = CascadeType.ALL)
+	private List<TrackingService> stevedoreList = new ArrayList<>();
 
 }
