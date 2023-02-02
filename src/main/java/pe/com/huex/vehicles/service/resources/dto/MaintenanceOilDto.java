@@ -16,7 +16,7 @@ public class MaintenanceOilDto {
     private Integer kmLast;
     private Integer kmCurrent;
     private Integer kmNext;
-    private Integer status;
+    private String status;
     private Date dateCurrent;
     private Integer differences;
 }

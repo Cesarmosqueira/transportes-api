@@ -41,7 +41,7 @@ public class MaintenanceOil {
     private Integer kmNext;
 
     @Column(name = "status")
-    private Integer status;
+    private String status;
 
     @Column(name = "date_current")
     private Date dateCurrent;
