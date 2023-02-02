@@ -20,6 +20,7 @@ import java.util.List;
 public class TrackingService {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "date_service", nullable = false)
