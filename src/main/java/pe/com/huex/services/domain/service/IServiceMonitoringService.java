@@ -16,4 +16,6 @@ public interface IServiceMonitoringService {
     ResponseDto<ServiceMonitoringResponse> updateServiceMonitoring(ServiceMonitoringDto serviceMonitoringDto);
 
     ResponseDto deleteServiceMonitoring(Long id);
+
+    ResponseDto<ServiceMonitoringListResponse> listServiceMonitoringByIdTracking(Long id);
 }

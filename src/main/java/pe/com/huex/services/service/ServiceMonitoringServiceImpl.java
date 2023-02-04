@@ -179,4 +179,33 @@ public class ServiceMonitoringServiceImpl implements IServiceMonitoringService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto<ServiceMonitoringListResponse> listServiceMonitoringByIdTracking(Long id) {
+        ResponseDto<ServiceMonitoringListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<ServiceMonitoring> serviceMonitoringList = serviceMonitoringRepository.findByIdTracking(id);
+
+            if (serviceMonitoringList.isEmpty()) {
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SERVICESMONITORING_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SERVICESMONITORING_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(serviceMonitoringList.size()));
+            response.setDatos(new ServiceMonitoringListResponse().serviceMonitoringList(serviceMonitoringMapping.modelList(serviceMonitoringList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_SERVICESMONITORING_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

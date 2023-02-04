@@ -177,4 +177,32 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto<ServiceIncidentListResponse> listServiceIncidentByIdTracking(Long id) {
+        ResponseDto<ServiceIncidentListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+            List<ServiceIncidents> serviceIncidentsList = serviceIncidentsRepository.findByIdTracking(id);
+
+            if (serviceIncidentsList.isEmpty()) {
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SERVICE_INCIDENTS_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SERVICE_INCIDENTS_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(serviceIncidentsList.size()));
+            response.setDatos(new ServiceIncidentListResponse()
+                    .serviceIncidentsList(serviceIncidentsMapping.modelList(serviceIncidentsList)));
+
+        } catch (Exception ex) {
+            log.error("error al consultar incidente servicio" + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

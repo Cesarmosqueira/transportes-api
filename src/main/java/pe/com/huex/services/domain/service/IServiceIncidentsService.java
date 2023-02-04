@@ -16,4 +16,5 @@ public interface IServiceIncidentsService {
 
     ResponseDto deleteServiceIncidents(Long id);
 
+    ResponseDto<ServiceIncidentListResponse> listServiceIncidentByIdTracking(Long id);
 }

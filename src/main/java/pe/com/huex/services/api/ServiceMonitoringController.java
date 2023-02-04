@@ -46,4 +46,9 @@ public class ServiceMonitoringController {
         return serviceMonitoringService.deleteServiceMonitoring(id);
     }
 
+    @GetMapping("tracking/{id}")
+    public ResponseDto<ServiceMonitoringListResponse> listServiceMonitoringByIdTracking(@PathVariable Long id) {
+        return serviceMonitoringService.listServiceMonitoringByIdTracking(id);
+    }
+
 }

@@ -42,4 +42,9 @@ public class SettlementSummaryController {
     public ResponseDto deleteSettlementSummary(@PathVariable Long id) {
         return settlementSummaryService.deleteSettlementSummary(id);
     }
+
+    @GetMapping("tracking/{id}")
+    public ResponseDto listSettlementSummaryByIdTracking(@PathVariable Long id) {
+        return settlementSummaryService.listSettlementSummaryByIdTracking(id);
+    }
 }

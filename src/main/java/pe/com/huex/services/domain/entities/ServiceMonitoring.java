@@ -37,7 +37,7 @@ public class ServiceMonitoring {
     private String observation;
 
     @Column(name = "photo_monitoring")
-    private String photoMonitoring;
+    private byte[] photoMonitoring;
 
 
 }

@@ -2,7 +2,9 @@ package pe.com.huex.providers.domain.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
@@ -10,7 +12,8 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "kardex_fuel")

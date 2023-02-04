@@ -1,6 +1,7 @@
 package pe.com.huex.services.service.resources.dto;
 
 import lombok.Data;
+import pe.com.huex.services.domain.entities.TrackingService;
 
 import java.util.Date;
 
@@ -9,7 +10,7 @@ public class ServiceMonitoringDto {
 
     private Long id;
 
-    private Long idTrackingService;
+    private TrackingService trackingService;
 
     private Date dateHour;
 
@@ -17,5 +18,5 @@ public class ServiceMonitoringDto {
 
     private String observation;
 
-    private String photoMonitoring;
+    private byte[] photoMonitoring;
 }

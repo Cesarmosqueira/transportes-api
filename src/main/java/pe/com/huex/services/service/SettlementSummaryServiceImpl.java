@@ -177,4 +177,32 @@ public class SettlementSummaryServiceImpl implements ISettlementSummaryService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto<SettlementSummaryListResponse> listSettlementSummaryByIdTracking(Long id) {
+        ResponseDto<SettlementSummaryListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+            List<SettlementSummary> settlementSummaryList = settlementSummaryRepository.findByIdTracking(id);
+
+            if (settlementSummaryList.isEmpty()) {
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_SETTLEMENT_SUMMARY_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_SETTLEMENT_SUMMARY_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(settlementSummaryList.size()));
+            response.setDatos(new SettlementSummaryListResponse()
+                    .settlementSummaryList(settlementSummaryMapping.modelList(settlementSummaryList)));
+
+        } catch (Exception ex) {
+            log.error("error al consultar resumen de liquidacion" + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }
