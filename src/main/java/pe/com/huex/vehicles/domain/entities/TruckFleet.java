@@ -35,7 +35,7 @@ public class TruckFleet {
     @Column(name = "brand", length = 10)
     private String brand;
 
-    @Column(name = "volume")
+    @Column(name = "volume",nullable = false)
     private Double volume;
 
     @Column(name = "fabrication_date")
@@ -53,7 +53,7 @@ public class TruckFleet {
     @Column(name = "high_wide_long", length = 30)
     private String highWideLong;
 
-    @Column(name = "fleet_type", length = 30)
+    @Column(name = "fleet_type", length = 30,nullable = false)
     private String fleetType;
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)

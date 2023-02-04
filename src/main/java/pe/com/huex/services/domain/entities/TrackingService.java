@@ -34,9 +34,6 @@ public class TrackingService {
     @Column(name = "requested_volume")
     private Long requestedVolume;
 
-    @Column(name = "bill", nullable = false, length = 30)
-    private String bill;
-
     @Column(name = "destination_detail", nullable = false, length = 30)
     private String destinationDetail;
 
@@ -102,11 +99,15 @@ public class TrackingService {
     @Column(name = "condition", length = 50)
     private String condition;
 
-    @Column(name = "monitoring", length = 50)
-    private String monitoring;
 
     @Column(nullable = true, length = 256)
     private byte[] photoInsurance;
+
+    @Column(name = "charge", length = 50)
+    private String charge;
+
+    @Column(name = "invoiced", length = 50)
+    private String invoiced;
 
     @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
     private List<SettlementSummary> settlementSummaries = new ArrayList<>();

@@ -16,7 +16,6 @@ public class TrackingServiceDto {
     private Date dateService;
     private TruckFleet truckFleet;
     private Long requestedVolume;
-    private String bill;
     private String destinationDetail;
     private Long numberPoints;
     private String serviceType;
@@ -36,8 +35,9 @@ public class TrackingServiceDto {
     private String detailMoney;
     private String operation;
     private String condition;
-    private String monitoring;
     private byte[] photoInsurance;
+    private String invoiced;
+    private String charge;
     private List<SettlementSummaryDto> settlementSummary;
     private List<ServiceMonitoringDto> serviceMonitoring;
     private List<ServiceIncidentsDto> serviceIncidents;
