@@ -21,13 +21,13 @@ public class MaintenanceTire {
     @JsonIgnore
     private TruckFleet truckFleet;
 
-    @Column(name = "date_review")
+    @Column(name = "date_review",nullable = false)
     private Date dateReview;
 
-    @Column(name = "date_renewal")
+    @Column(name = "date_renewal",nullable = false)
     private Date dateRenewal;
 
-    @Column(name = "status_tire", length = 30)
+    @Column(name = "status_tire", length = 30,nullable = false)
     private String statusTire;
 
 }

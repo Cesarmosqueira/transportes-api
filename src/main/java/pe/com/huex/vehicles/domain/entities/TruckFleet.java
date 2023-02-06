@@ -37,7 +37,7 @@ public class TruckFleet {
 
     @Column(name = "volume",nullable = false)
     private Double volume;
-
+    
     @Column(name = "fabrication_date")
     private Date fabricationDate;
 

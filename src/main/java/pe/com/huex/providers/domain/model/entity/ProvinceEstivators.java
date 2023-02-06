@@ -44,6 +44,6 @@ public class ProvinceEstivators {
     @Column(nullable = false)
     private double cost;
 
-    @Column(nullable = true, length = 250)
+    @Column( length = 250)
     private String observation;
 }

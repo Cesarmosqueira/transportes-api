@@ -22,22 +22,22 @@ public class MaintenanceOil {
     @JsonIgnore
     private TruckFleet truckFleet;
 
-    @Column(name = "change_type", length = 30)
+    @Column(name = "change_type", length = 30,nullable = false)
     private String changeType;
 
-    @Column(name = "place", length = 30)
+    @Column(name = "place", length = 30,nullable = false)
     private String place;
 
-    @Column(name = "date_change")
+    @Column(name = "date_change",nullable = false)
     private Date dateChange;
 
-    @Column(name = "km_last")
+    @Column(name = "km_last",nullable = false)
     private Integer kmLast;
 
-    @Column(name = "km_current")
+    @Column(name = "km_current",nullable = false)
     private Integer kmCurrent;
 
-    @Column(name = "km_next")
+    @Column(name = "km_next",nullable = false)
     private Integer kmNext;
 
     @Column(name = "status")
