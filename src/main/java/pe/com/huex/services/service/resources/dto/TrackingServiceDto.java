@@ -1,11 +1,11 @@
 package pe.com.huex.services.service.resources.dto;
 
 import lombok.*;
-import pe.com.huex.customer.domain.entities.Rate;
-import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.vehicles.domain.entities.TruckFleet;
+import pe.com.huex.customer.services.resources.dto.RateDto;
+import pe.com.huex.employees.services.resources.dtos.EmployeeDto;
+import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 
-import javax.persistence.Entity;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 public class TrackingServiceDto {
     private Long id;
     private Date dateService;
-    private TruckFleet truckFleet;
+    private TruckFleetDto truckFleet;
     private Long requestedVolume;
     private String destinationDetail;
     private Long numberPoints;
@@ -25,10 +25,10 @@ public class TrackingServiceDto {
     private Date datePrecharge;
     private String preloadStatus;
     private Date scheduledAppointment;
-    private Rate rate;
-    private Employee driver;
-    private Employee copilot;
-    private Employee stevedore;
+    private RateDto rate;
+    private EmployeeDto driver;
+    private EmployeeDto copilot;
+    private EmployeeDto stevedore;
     private Date dateTimeCompletion;
     private Long weightLoad;
     private BigDecimal moneyDelivered;

@@ -50,6 +50,8 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Rate> rates = new ArrayList<>();
 
+
+
 	public Customer(CustomerDto customerDto) {
 		this.ruc = customerDto.getRuc();
 		this.socialReason = customerDto.getSocialReason();
