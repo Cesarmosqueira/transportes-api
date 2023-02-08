@@ -36,11 +36,20 @@ public class Provider {
     @Column(name = "address", length = 64)
     private String address;
 
-    @Column(name = "admission_date", nullable = false)
+    @Column(name = "admission_date")
     private Date admissionDate;
 
-    @Column(name = "bank_account", length = 30)
+    @Column(name = "bank_name", length = 64)
+    private String bankName;
+
+    @Column(name = "bank_account", length = 32)
     private String bankAccount;
+
+    @Column(name = "interbank_account", length = 32)
+    private String interbankAccount;
+
+    @Column(name = "provider_type", length = 64)
+    private String providerType;
 
     @Column(name = "observation", length = 200)
     private String observation;

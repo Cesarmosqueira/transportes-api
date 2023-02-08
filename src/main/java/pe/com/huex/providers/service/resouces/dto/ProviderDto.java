@@ -26,7 +26,13 @@ public class ProviderDto {
 
     private Date admissionDate;
 
+    private String bankName;
+
     private String bankAccount;
+
+    private String interbankAccount;
+
+    private String providerType;
 
     private String observation;
 
