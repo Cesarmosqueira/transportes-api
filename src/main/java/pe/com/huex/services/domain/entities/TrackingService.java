@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "tracking_services")
 public class TrackingService {
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,7 @@ public class TrackingService {
     @Column(name = "requested_volume")
     private Long requestedVolume;
 
-    @Column(name = "destination_detail", nullable = false, length = 30)
+    @Column(name = "destination_detail", length = 30)
     private String destinationDetail;
 
     @Column(name = "number_points")
@@ -72,12 +73,12 @@ public class TrackingService {
     private Employee driver;
 
     @ManyToOne
-    @JoinColumn(name = "id_copilot",nullable = false)
+    @JoinColumn(name = "id_copilot")
     @JsonIgnore
     private Employee copilot;
 
     @ManyToOne
-    @JoinColumn(name = "id_stevedore",nullable = false)
+    @JoinColumn(name = "id_stevedore")
     @JsonIgnore
     private Employee stevedore;
 
