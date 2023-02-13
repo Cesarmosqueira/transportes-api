@@ -27,7 +27,7 @@ public class Implement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = 64)
 	private String name;
 
 	@Column(nullable = true, length = 1024)

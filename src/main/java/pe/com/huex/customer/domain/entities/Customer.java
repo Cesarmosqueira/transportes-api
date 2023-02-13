@@ -31,13 +31,13 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 16)
+	@Column(nullable = false, length = 32)
 	private String ruc;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = 64)
 	private String socialReason;
 
-	@Column(nullable = true, length = 32)
+	@Column(nullable = true, length = 64)
 	private String bankAccount;
 
 	@Temporal(TemporalType.DATE)

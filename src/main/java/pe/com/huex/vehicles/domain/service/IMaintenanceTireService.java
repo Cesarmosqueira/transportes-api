@@ -15,4 +15,6 @@ public interface IMaintenanceTireService {
     ResponseDto<MaintenanceTireResponse> updateMaintenanceTire(MaintenanceTireDto maintenanceTireDto);
 
     ResponseDto<MaintenanceTireListResponse> listMaintenanceTiresByIdTruckFleet(Long id);
+
+    ResponseDto deleteMaintenanceTire(Long id);
 }

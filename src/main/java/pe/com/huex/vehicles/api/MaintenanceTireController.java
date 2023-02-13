@@ -34,6 +34,11 @@ public class MaintenanceTireController {
         return maintenanceTireService.updateMaintenanceTire(maintenanceTireDto);
     }
 
+    @DeleteMapping("{id}")
+    public  ResponseDto deleteMaintenanceTire( @PathVariable Long id){
+        return maintenanceTireService.deleteMaintenanceTire(id);
+    }
+
     @GetMapping("truckFleet/{id}")
     public ResponseDto listMaintenanceTiresByIdTruckFleet(@PathVariable Long id) {
         return maintenanceTireService.listMaintenanceTiresByIdTruckFleet(id);

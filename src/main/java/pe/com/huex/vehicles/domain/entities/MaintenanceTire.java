@@ -27,7 +27,7 @@ public class MaintenanceTire {
     @Column(name = "date_renewal",nullable = false)
     private Date dateRenewal;
 
-    @Column(name = "status_tire", length = 30,nullable = false)
+    @Column(name = "status_tire", length = 128,nullable = false)
     private String statusTire;
 
 }

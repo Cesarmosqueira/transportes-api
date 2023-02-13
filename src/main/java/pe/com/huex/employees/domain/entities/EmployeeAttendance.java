@@ -42,7 +42,7 @@ public class EmployeeAttendance {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date attendanceDate;
 
-	@Column(nullable = false, length = 32)
+	@Column(nullable = false, length = 64)
 	private String status;
 
 

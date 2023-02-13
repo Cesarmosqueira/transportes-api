@@ -18,19 +18,19 @@ public class Provider {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ruc", nullable = false, length = 12)
+    @Column(name = "ruc", nullable = false, length = 16)
     private String ruc;
 
-    @Column(name = "business_name", nullable = false, length = 30)
+    @Column(name = "business_name", nullable = false, length = 64)
     private String businessName;
 
-    @Column(name = "contact_name", nullable = false, length = 30)
+    @Column(name = "contact_name", nullable = false, length = 32)
     private String contactName;
 
     @Column(name = "email", length = 64)
     private String email;
 
-    @Column(name = "phone_number", length = 16)
+    @Column(name = "phone_number", length = 32)
     private String phoneNumber;
 
     @Column(name = "address", length = 64)

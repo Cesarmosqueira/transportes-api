@@ -185,4 +185,24 @@ public class MaintenanceTireServiceImpl implements IMaintenanceTireService {
         return response;
     }
 
+    @Override
+    public ResponseDto deleteMaintenanceTire(Long id) {
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            maintenanceTireRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_MAINTENANCETIRE_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_MAINTENANCETIRE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
 }

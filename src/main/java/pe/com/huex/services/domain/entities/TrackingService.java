@@ -35,28 +35,28 @@ public class TrackingService {
     @Column(name = "requested_volume")
     private Long requestedVolume;
 
-    @Column(name = "destination_detail", length = 30)
+    @Column(name = "destination_detail", length = 64)
     private String destinationDetail;
 
     @Column(name = "number_points")
     private Long numberPoints;
 
-    @Column(name = "service_type", length = 30)
+    @Column(name = "service_type", length = 32)
     private String serviceType;
 
-    @Column(name = "additional_cost", length = 20)
+    @Column(name = "additional_cost", length = 32)
     private String additionalCost;
 
-    @Column(name = "observations", length = 30)
+    @Column(name = "observations", length = 128)
     private String observations;
 
-    @Column(name = "guide_number", length = 20)
+    @Column(name = "guide_number", length = 32)
     private String guideNumber;
 
     @Column(name = "date_precharge")
     private Date datePrecharge;
 
-    @Column(name = "preload_status", length = 20)
+    @Column(name = "preload_status", length = 32)
     private String preloadStatus;
 
     @Column(name = "scheduled_appointment")
@@ -94,10 +94,10 @@ public class TrackingService {
     @Column(name = "detail_money", length = 250)
     private String detailMoney;
 
-    @Column(name = "operation", length = 50)
+    @Column(name = "operation", length = 128)
     private String operation;
 
-    @Column(name = "condition", length = 50)
+    @Column(name = "condition", length = 128)
     private String condition;
 
 
