@@ -35,4 +35,8 @@ public class TrackingServiceController {
     public ResponseDto<TrackingServiceResponse> updateTrackingService(@RequestBody TrackingServiceDto truckFleetDto) {
         return trackingService.updateTrackingService(truckFleetDto);
     }
+    @DeleteMapping("{id}")
+    public ResponseDto deleteTrackingService(@PathVariable Long id){
+        return  trackingService.deleteTrackingService(id);
+    }
 }

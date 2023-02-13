@@ -154,4 +154,25 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
 
         return response;
     }
+
+    @Override
+    public ResponseDto deleteTrackingService(Long id) {
+
+        ResponseDto response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            trackingServiceRepository.deleteById(id);
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_TRACKINGSERVICE_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(1));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_RETRIEVE_TRACKINGSERVICE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
 }

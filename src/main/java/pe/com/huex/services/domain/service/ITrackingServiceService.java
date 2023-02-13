@@ -14,4 +14,6 @@ public interface ITrackingServiceService {
     ResponseDto<TrackingServiceResponse> registerTrackingService(TrackingServiceDto trackingServiceDto);
 
     ResponseDto<TrackingServiceResponse> updateTrackingService(TrackingServiceDto trackingServiceDto);
+
+    ResponseDto deleteTrackingService(Long id);
 }
