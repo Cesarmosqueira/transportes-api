@@ -42,6 +42,6 @@ public class KardexFuel {
     @Column(name = "mileage")
     private Long mileage;
 
-    @Column(name = "duty_manager", length = 40)
+    @Column(name = "duty_manager", length = 128)
     private String dutyManager;
 }

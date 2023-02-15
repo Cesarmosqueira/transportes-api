@@ -35,28 +35,28 @@ public class TrackingService {
     @Column(name = "requested_volume")
     private Long requestedVolume;
 
-    @Column(name = "destination_detail", length = 64)
+    @Column(name = "destination_detail", length = 256)
     private String destinationDetail;
 
     @Column(name = "number_points")
     private Long numberPoints;
 
-    @Column(name = "service_type", length = 32)
+    @Column(name = "service_type", length = 64)
     private String serviceType;
 
-    @Column(name = "additional_cost", length = 32)
+    @Column(name = "additional_cost", length = 256)
     private String additionalCost;
 
-    @Column(name = "observations", length = 128)
+    @Column(name = "observations", length = 256)
     private String observations;
 
-    @Column(name = "guide_number", length = 32)
+    @Column(name = "guide_number", length = 128)
     private String guideNumber;
 
     @Column(name = "date_precharge")
     private Date datePrecharge;
 
-    @Column(name = "preload_status", length = 32)
+    @Column(name = "preload_status", length = 64)
     private String preloadStatus;
 
     @Column(name = "scheduled_appointment")
@@ -109,6 +109,9 @@ public class TrackingService {
 
     @Column(name = "invoiced", length = 50)
     private String invoiced;
+
+    @Column(name = "documentary_status", length = 128)
+    private String documentaryStatus;
 
     @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
     private List<SettlementSummary> settlementSummaries = new ArrayList<>();

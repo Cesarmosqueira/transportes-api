@@ -34,7 +34,7 @@ public class Customer {
 	@Column(nullable = false, length = 32)
 	private String ruc;
 
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 128)
 	private String socialReason;
 
 	@Column(nullable = true, length = 64)

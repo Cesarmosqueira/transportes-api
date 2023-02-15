@@ -30,7 +30,7 @@ public class ServiceMonitoring {
     @Column(name = "date_hour")
     private Date dateHour;
 
-    @Column(name = "status", length = 50)
+    @Column(name = "status", length = 128)
     private String status;
 
     @Column(name = "Observation", length = 200)

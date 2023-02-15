@@ -21,25 +21,25 @@ public class Provider {
     @Column(name = "ruc", nullable = false, length = 16)
     private String ruc;
 
-    @Column(name = "business_name", nullable = false, length = 64)
+    @Column(name = "business_name", nullable = false, length = 128)
     private String businessName;
 
-    @Column(name = "contact_name", nullable = false, length = 32)
+    @Column(name = "contact_name", nullable = false, length = 128)
     private String contactName;
 
-    @Column(name = "email", length = 64)
+    @Column(name = "email", length = 128)
     private String email;
 
     @Column(name = "phone_number", length = 32)
     private String phoneNumber;
 
-    @Column(name = "address", length = 64)
+    @Column(name = "address", length = 128)
     private String address;
 
     @Column(name = "admission_date")
     private Date admissionDate;
 
-    @Column(name = "bank_name", length = 64)
+    @Column(name = "bank_name", length = 128)
     private String bankName;
 
     @Column(name = "bank_account", length = 32)
@@ -48,7 +48,7 @@ public class Provider {
     @Column(name = "interbank_account", length = 32)
     private String interbankAccount;
 
-    @Column(name = "provider_type", length = 64)
+    @Column(name = "provider_type", length = 128)
     private String providerType;
 
     @Column(name = "observation", length = 200)

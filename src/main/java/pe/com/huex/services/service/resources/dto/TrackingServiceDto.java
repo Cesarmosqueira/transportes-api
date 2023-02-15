@@ -42,6 +42,7 @@ public class TrackingServiceDto {
     private byte[] photoInsurance;
     private String invoiced;
     private String charge;
+    private String documentaryStatus;
     private List<SettlementSummaryDto> settlementSummary;
     private List<ServiceMonitoringDto> serviceMonitoring;
     private List<ServiceIncidentsDto> serviceIncidents;

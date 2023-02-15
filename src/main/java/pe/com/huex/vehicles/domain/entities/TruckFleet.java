@@ -32,7 +32,7 @@ public class TruckFleet {
     @Column(name = "van_plate", length = 6)
     private String vanPlate;
 
-    @Column(name = "brand", length = 12)
+    @Column(name = "brand", length = 64)
     private String brand;
 
     @Column(name = "volume",nullable = false)
@@ -47,13 +47,13 @@ public class TruckFleet {
     @Column(name = "axes")
     private Integer axes;
 
-    @Column(name = "model", length = 32)
+    @Column(name = "model", length = 64)
     private String model;
 
-    @Column(name = "high_wide_long", length = 32)
+    @Column(name = "high_wide_long", length = 64)
     private String highWideLong;
 
-    @Column(name = "fleet_type", length = 32,nullable = false)
+    @Column(name = "fleet_type", length = 64,nullable = false)
     private String fleetType;
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)

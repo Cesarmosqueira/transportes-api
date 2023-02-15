@@ -28,7 +28,7 @@ public class Employee {
 	@Column(nullable = false, length = 256)
 	private String fullName;
 
-	@Column(nullable = false, length = 16)
+	@Column(nullable = false, length = 32)
 	private String documentType;
 
 	@Column(nullable = false, length = 16)
@@ -37,19 +37,19 @@ public class Employee {
 	@Column(nullable = false, length = 16)
 	private String currentState;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true, length = 128)
 	private String placeOfBirth;
 
 	@Column(nullable = true)
 	private Date birthDate;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true, length = 128)
 	private String address;
 
-	@Column(nullable = false, length = 16)
+	@Column(nullable = false, length = 32)
 	private String phoneNumber;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true, length = 128)
 	private String email;
 
 	@Column(nullable = false, length = 64)
@@ -73,19 +73,19 @@ public class Employee {
 	@Column(nullable = true)
 	private int childrens;
 
-	@Column(nullable = true, length = 32)
+	@Column(nullable = true, length = 64)
 	private String academicQualification;
 
 	@Column(nullable = true, length = 64)
 	private String criminalRecords;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true, length = 128)
 	private String kinhood;
 
-	@Column(nullable = true, length = 64)
+	@Column(nullable = true, length = 128)
 	private String kinFullName;
 
-	@Column(nullable = true, length = 16)
+	@Column(nullable = true, length = 32)
 	private String kinPhoneNumber;
 
 	@Column(nullable = true)
@@ -94,7 +94,7 @@ public class Employee {
 	@Column(nullable = false, length = 32)
 	private String role;
 
-	@Column(nullable = true, length = 16)
+	@Column(nullable = true, length = 32)
 	private String licenseCategory;
 
 	@Column(nullable = true, length = 16)

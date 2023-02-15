@@ -18,10 +18,10 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     private String routeStart;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 128)
     private String routeEnd;
 
     @Column(nullable = false, length = 32)
