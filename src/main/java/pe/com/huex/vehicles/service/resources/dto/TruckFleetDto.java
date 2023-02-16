@@ -14,7 +14,7 @@ import java.util.List;
 public class TruckFleetDto {
 
     private Long id;
-    private Provider provider;
+    private ProviderDto provider;
     private String tractPlate;
     private String vanPlate;
     private String brand;

@@ -15,8 +15,8 @@ import pe.com.huex.employees.domain.entities.Implement;
 public class EmployeeImplementDto {
 
 	private Long id;
-	private Employee employee;
-	private Implement implement;
+	private EmployeeDto employee;
+	private ImplementDto implement;
 	private Date deliveryDate;
 	private String observations;
 

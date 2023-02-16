@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class CheckListDto {
     private Long id;
-    private TruckFleet truckFleet;
+    private TruckFleetDto truckFleet;
     private Date date;
     private String namePhoto;
     private byte[] photo;

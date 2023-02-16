@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class MaintenanceOilDto {
     private Long id;
-    private TruckFleet truckFleet;
+    private TruckFleetDto truckFleet;
     private String changeType;
     private String place;
     private Date dateChange;

@@ -10,8 +10,8 @@ import java.util.Date;
 public class SettlementSummaryDto {
 
     private Long id;
-    private TrackingService trackingService;
-    private ExpenseType expenseType;
+    private TrackingServiceDto trackingService;
+    private ExpenseTypeDto expenseType;
     private Date settlementDate;
     private String detail;
     private double totalExpense;

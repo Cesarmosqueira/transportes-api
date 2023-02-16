@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class DocumentUnitDto {
     private Long id;
-    private TruckFleet truckFleet;
+    private TruckFleetDto truckFleet;
     private Date fireExtinguisherExpiration;
     private Date firstAidKitExpiration;
     private Date technicalReviewExpiration;

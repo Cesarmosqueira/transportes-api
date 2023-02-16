@@ -10,7 +10,7 @@ public class ServiceMonitoringDto {
 
     private Long id;
 
-    private TrackingService trackingService;
+    private TrackingServiceDto trackingService;
 
     private Date dateHour;
 

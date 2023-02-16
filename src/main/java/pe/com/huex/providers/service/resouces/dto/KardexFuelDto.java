@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pe.com.huex.providers.domain.model.entity.FuelSupply;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
+import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
 
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 public class KardexFuelDto {
     private Long id;
-    private TruckFleet truckFleet;
+    private TruckFleetDto truckFleet;
     private Date date;
     private Integer amountFuel;
     private Integer mileage;

@@ -13,7 +13,7 @@ import java.util.Date;
 public class DiscountDto {
 
 	private Long id;
-	private Employee employee;
+	private EmployeeDto employee;
 	private Date date;
 	private String observations;
 	private double charge;

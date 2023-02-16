@@ -2,6 +2,7 @@ package pe.com.huex.customer.services.resources.dto;
 import lombok.*;
 import pe.com.huex.customer.domain.entities.Customer;
 import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.employees.services.resources.dtos.EmployeeDto;
 
 import java.util.Date;
 
@@ -14,9 +15,9 @@ public class CustomerEmployeeDto {
 
     private Long id;
 
-    private Customer customer;
+    private CustomerDto customer;
 
-    private Employee employee;
+    private EmployeeDto employee;
 
     private String status;
 

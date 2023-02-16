@@ -14,7 +14,7 @@ public class FuelSupplyDto {
 
     private Long id;
 
-    private Provider provider;
+    private ProviderDto provider;
 
     private Date dateFuel;
 

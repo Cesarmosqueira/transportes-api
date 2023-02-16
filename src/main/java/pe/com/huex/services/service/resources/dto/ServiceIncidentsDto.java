@@ -7,7 +7,7 @@ import pe.com.huex.services.domain.entities.TrackingService;
 public class ServiceIncidentsDto {
 
     private Long id;
-    private TrackingService trackingService;
+    private TrackingServiceDto trackingService;
     private String grt;
     private String grr;
     private String order;
