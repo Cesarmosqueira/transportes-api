@@ -18,6 +18,7 @@ public class RateDto {
     private CustomerDto customer;
     private RouteDto route;
     private String leadTime;
+    private String tonNumber;
     private int volume;
     private double cost;
     private String observationRate;

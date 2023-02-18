@@ -36,6 +36,9 @@ public class Rate {
     private String leadTime;
 
     @Column(nullable = true)
+    private String tonNumber;
+
+    @Column(nullable = true)
     private int volume;
 
     @Column(nullable = false)

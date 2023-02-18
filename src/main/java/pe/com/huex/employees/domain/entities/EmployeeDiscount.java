@@ -30,6 +30,9 @@ public class EmployeeDiscount {
 	@Column(nullable = true, length = 512)
 	private String observations;
 
+	@Column(nullable = true, length = 64)
+	private String status;
+
 	@Column(nullable = true)
 	private double charge;
 

@@ -16,6 +16,7 @@ public class DiscountDto {
 	private EmployeeDto employee;
 	private Date date;
 	private String observations;
+	private String status;
 	private double charge;
 
 }
