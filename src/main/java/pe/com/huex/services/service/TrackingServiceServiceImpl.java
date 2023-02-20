@@ -57,7 +57,7 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            List<TrackingService> trackingServiceList = trackingServiceRepository.findAll();
+            List<TrackingService> trackingServiceList = trackingServiceRepository.listTrackingServiceById();
 
             if (trackingServiceList.isEmpty()) {
                 response.meta(
