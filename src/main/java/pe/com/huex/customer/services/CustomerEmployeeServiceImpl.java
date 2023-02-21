@@ -62,7 +62,7 @@ public class CustomerEmployeeServiceImpl implements ICustomerEmployeeService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            List<CustomerEmployee> customerEmployeesList = customerEmployeeRepository.findAll();
+            List<CustomerEmployee> customerEmployeesList = customerEmployeeRepository.listCustomerEmployeeDesc();
 
             if (customerEmployeesList.isEmpty()) {
                 response.meta(

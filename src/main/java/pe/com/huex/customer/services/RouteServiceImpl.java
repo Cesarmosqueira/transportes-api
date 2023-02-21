@@ -58,7 +58,7 @@ public class RouteServiceImpl implements IRouteService {
         ResponseDto<RouteListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<Route> routeList = routeRepository.findAll();
+            List<Route> routeList = routeRepository.listRouteAsc();
 
             if (routeList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_RUTE_WARN, WARN, idTransaccion)

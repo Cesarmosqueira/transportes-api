@@ -58,7 +58,7 @@ public class AttendanceService implements IAttendanceService {
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<EmployeeAttendance> attendanceList = attendanceRepository.findAll();
+			List<EmployeeAttendance> attendanceList = attendanceRepository.listEmployeeAttendanceDesc();
 
 			if (attendanceList.isEmpty()) {
 				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_ATTENDANCE_WARN, WARN, idTransaccion)

@@ -57,7 +57,7 @@ public class DiscountService implements IDiscountService {
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<EmployeeDiscount> discountList = discountRepository.findAll();
+			List<EmployeeDiscount> discountList = discountRepository.listEmployeeDiscountDesc();
 
 			if (discountList.isEmpty()) {
 				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_DISCOUNT_WARN, WARN, idTransaccion)

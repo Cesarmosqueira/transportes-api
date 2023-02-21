@@ -57,7 +57,7 @@ public class TruckFleetServiceImpl implements ITruckFleetService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            List<TruckFleet> truckFleetList = truckFleetRepository.findAll();
+            List<TruckFleet> truckFleetList = truckFleetRepository.listTruckFleetAsc();
 
             if (truckFleetList.isEmpty()) {
                 response.meta(

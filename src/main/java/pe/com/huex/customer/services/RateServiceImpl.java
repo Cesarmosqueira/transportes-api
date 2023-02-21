@@ -55,7 +55,7 @@ public class RateServiceImpl implements IRateService {
         ResponseDto<RateListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<Rate> rateList = rateRepository.findAll();
+            List<Rate> rateList = rateRepository.listRateAsc();
 
             if (rateList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_RATE_WARN, WARN, idTransaccion)

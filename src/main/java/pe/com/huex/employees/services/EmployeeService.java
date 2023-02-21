@@ -57,7 +57,7 @@ public class EmployeeService implements IEmployeeService {
 		try {
 			String idTransaccion = UUID.randomUUID().toString();
 
-			List<Employee> employeeList = employeeRepository.findAll();
+			List<Employee> employeeList = employeeRepository.listEmployeeDesc();
 
 			if (employeeList.isEmpty()) {
 				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_EMPLOYEE_WARN, WARN, idTransaccion)
