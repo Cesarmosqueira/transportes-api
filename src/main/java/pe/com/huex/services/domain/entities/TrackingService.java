@@ -32,8 +32,6 @@ public class TrackingService {
     @JsonIgnore
     private TruckFleet truckFleet;
 
-
-
     @Column(name = "destination_detail", length = 256)
     private String destinationDetail;
 

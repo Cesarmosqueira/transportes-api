@@ -19,12 +19,12 @@ public class DiscountController {
 	IDiscountService discountService;
 
 	@GetMapping
-	public ResponseDto<DiscountListResponse> listCheckLists() {
+	public ResponseDto<DiscountListResponse> listDiscount() {
 		return discountService.listDiscounts();
 	}
 
 	@GetMapping("{id}")
-	public ResponseDto<DiscountResponse> retrieveCheckList(@PathVariable Long id) {
+	public ResponseDto<DiscountResponse> retrieveDiscount(@PathVariable Long id) {
 		return discountService.retrieveDiscount(id);
 	}
 

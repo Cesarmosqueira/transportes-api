@@ -15,6 +15,10 @@ public class MappingConfiguration {
         return new DiscountMapping();
     }
     @Bean
+    public ProviderDiscountMapping providerDiscountMapping() {
+        return new ProviderDiscountMapping();
+    }
+    @Bean
     public EmployeeMapping employeeMapping() {
         return new EmployeeMapping();
     }
