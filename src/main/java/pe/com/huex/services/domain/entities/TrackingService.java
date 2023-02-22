@@ -32,8 +32,7 @@ public class TrackingService {
     @JsonIgnore
     private TruckFleet truckFleet;
 
-    @Column(name = "requested_volume")
-    private Long requestedVolume;
+
 
     @Column(name = "destination_detail", length = 256)
     private String destinationDetail;
@@ -84,9 +83,6 @@ public class TrackingService {
 
     @Column(name = "date_time_completion")
     private Date dateTimeCompletion;
-
-    @Column(name = "weight_load")
-    private Long weightLoad;
 
     @Column(name = "money_delivered")
     private BigDecimal moneyDelivered;
