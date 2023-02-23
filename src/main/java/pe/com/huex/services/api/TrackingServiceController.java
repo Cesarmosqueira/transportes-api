@@ -1,6 +1,7 @@
 package pe.com.huex.services.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pe.com.huex.util.ResponseDto;
@@ -9,6 +10,8 @@ import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 import pe.com.huex.services.service.resources.response.TrackingServiceListResponse;
 import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 
+import java.util.Date;
+
 @RestController
 @RequestMapping(value = "service/tracking", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TrackingServiceController {
@@ -16,10 +19,19 @@ public class TrackingServiceController {
     @Autowired
     ITrackingServiceService trackingService;
 
+
+    @GetMapping("/findByRangeDate")
+    public ResponseDto<TrackingServiceListResponse> listTrackingServicesFindByRangeDate(
+            @RequestParam(name = "dateStart") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateStart,
+    @RequestParam(name = "dateEnd") @DateTimeFormat(pattern="yyyy-MM-dd") Date dateEnd ) {
+        return trackingService.listTrackingServicesFindByRangeDate(dateStart,dateEnd);
+    }
+
     @GetMapping
     public ResponseDto<TrackingServiceListResponse> listTrackingServices() {
         return trackingService.listTrackingServices();
     }
+
 
     @GetMapping("{id}")
     public ResponseDto<TrackingServiceResponse> retrieveTrackingService(@PathVariable Long id) {

@@ -5,9 +5,14 @@ import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
 import pe.com.huex.services.service.resources.response.TrackingServiceListResponse;
 import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 
+import java.util.Date;
+
 public interface ITrackingServiceService {
 
     ResponseDto<TrackingServiceListResponse> listTrackingServices();
+
+    ResponseDto<TrackingServiceListResponse> listTrackingServicesFindByRangeDate(Date dateStart, Date dateEnd);
+
 
     ResponseDto<TrackingServiceResponse> retrieveTrackingService(Long id);
 

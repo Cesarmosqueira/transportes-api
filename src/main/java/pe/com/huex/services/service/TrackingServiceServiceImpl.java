@@ -15,6 +15,7 @@ import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 import pe.com.huex.util.MetaDatosUtil;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -58,6 +59,35 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
             String idTransaccion = UUID.randomUUID().toString();
 
             List<TrackingService> trackingServiceList = trackingServiceRepository.listTrackingServiceById();
+
+            if (trackingServiceList.isEmpty()) {
+                response.meta(
+                        MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_TRACKINGSERVICE_WARN, WARN, idTransaccion)
+                                .totalRegistros(0));
+                return response;
+            }
+
+            response.meta(
+                    MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TRACKINGSERVICE_SUCCESS, INFO, idTransaccion)
+                            .totalRegistros(trackingServiceList.size()));
+            response.setDatos(new TrackingServiceListResponse().trackingServiceList(trackingServiceMapping.modelList(trackingServiceList)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_TRACKINGSERVICE_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+
+    @Override
+    public ResponseDto<TrackingServiceListResponse> listTrackingServicesFindByRangeDate(Date dateStart, Date dateEnd) {
+        ResponseDto<TrackingServiceListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<TrackingService> trackingServiceList = trackingServiceRepository.listTrackingServiceFindByRangeDate(dateStart,dateEnd);
 
             if (trackingServiceList.isEmpty()) {
                 response.meta(
