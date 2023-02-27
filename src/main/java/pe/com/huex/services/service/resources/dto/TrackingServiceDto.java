@@ -17,7 +17,7 @@ public class TrackingServiceDto {
     private Long id;
     private Date dateService;
 
-    private TruckFleetDto truckFleet;
+    private TrackingServiceTruckFleetDto truckFleet;
     private String destinationDetail;
     private Long numberPoints;
     private String serviceType;
@@ -29,14 +29,10 @@ public class TrackingServiceDto {
     private String preloadStatus;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date scheduledAppointment;
-
-    private RateDto rate;
-
-    private EmployeeDto driver;
-    @JsonIgnore
-    private EmployeeDto copilot;
-    @JsonIgnore
-    private EmployeeDto stevedore;
+    private TrackingServiceRateDto rate;
+    private TrackingServiceEmployeeDto driver;
+    private TrackingServiceEmployeeDto copilot;
+    private TrackingServiceEmployeeDto stevedore;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateTimeCompletion;
     private BigDecimal moneyDelivered;
