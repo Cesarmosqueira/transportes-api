@@ -1,7 +1,9 @@
 package pe.com.huex.services.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.employees.domain.entities.Employee;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
@@ -24,6 +26,8 @@ public class TrackingService {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "date_service", nullable = false)
     private Date dateService;
 

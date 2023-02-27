@@ -14,9 +14,10 @@ import java.util.List;
 
 @Data
 public class TrackingServiceDto {
-    private Long id;
-    private Date dateService;
 
+    private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private Date dateService;
     private TrackingServiceTruckFleetDto truckFleet;
     private String destinationDetail;
     private Long numberPoints;
