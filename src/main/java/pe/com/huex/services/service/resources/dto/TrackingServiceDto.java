@@ -1,6 +1,7 @@
 package pe.com.huex.services.service.resources.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import pe.com.huex.customer.services.resources.dto.RateDto;
 import pe.com.huex.employees.services.resources.dtos.EmployeeDto;
@@ -15,6 +16,7 @@ import java.util.List;
 public class TrackingServiceDto {
     private Long id;
     private Date dateService;
+
     private TruckFleetDto truckFleet;
     private String destinationDetail;
     private Long numberPoints;
@@ -27,9 +29,13 @@ public class TrackingServiceDto {
     private String preloadStatus;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date scheduledAppointment;
+
     private RateDto rate;
+
     private EmployeeDto driver;
+    @JsonIgnore
     private EmployeeDto copilot;
+    @JsonIgnore
     private EmployeeDto stevedore;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateTimeCompletion;

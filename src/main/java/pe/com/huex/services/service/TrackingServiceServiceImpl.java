@@ -49,9 +49,6 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
     @Autowired
     TrackingServiceMapping trackingServiceMapping;
 
-    @Autowired
-    ProviderMapping providerMapping;
-
     @Override
     public ResponseDto<TrackingServiceListResponse> listTrackingServices() {
         ResponseDto<TrackingServiceListResponse> response = new ResponseDto<>();

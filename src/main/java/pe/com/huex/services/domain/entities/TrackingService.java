@@ -28,7 +28,7 @@ public class TrackingService {
     private Date dateService;
 
     @ManyToOne
-    @JoinColumn(name = "id_truck_fleet",nullable = false)
+    @JoinColumn(name = "id_truck_fleet")
     @JsonIgnore
     private TruckFleet truckFleet;
 
@@ -60,12 +60,12 @@ public class TrackingService {
     private Date scheduledAppointment;
 
     @ManyToOne
-    @JoinColumn(name = "id_rate",nullable = false)
+    @JoinColumn(name = "id_rate")
     @JsonIgnore
     private Rate rate;
 
     @ManyToOne
-    @JoinColumn(name = "id_driver",nullable = false)
+    @JoinColumn(name = "id_driver")
     @JsonIgnore
     private Employee driver;
 
