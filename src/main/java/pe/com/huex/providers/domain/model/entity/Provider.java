@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "providers")
 public class Provider {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,6 +51,11 @@ public class Provider {
 
     @Column(name = "provider_type", length = 128)
     private String providerType;
+
+    @Column(name = "detraction",length =64)
+    private String detraction;
+    @Column(name = "operation_place",length = 128)
+    private String operationPlace;
 
     @Column(name = "observation", length = 200)
     private String observation;

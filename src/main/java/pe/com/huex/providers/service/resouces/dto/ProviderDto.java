@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProviderDto {
+
     private Long id;
 
     private String ruc;
@@ -33,6 +34,10 @@ public class ProviderDto {
     private String interbankAccount;
 
     private String providerType;
+
+    private String detraction;
+
+    private String operationPlace;
 
     private String observation;
 
