@@ -48,7 +48,7 @@ public class Rate {
     private String observationRate;
 
 
-    @OneToMany(mappedBy = "rate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rate", cascade = {CascadeType.PERSIST,CascadeType.PERSIST},fetch = FetchType.LAZY)
     private List<TrackingService> trackingServices = new ArrayList<>();
 
 }

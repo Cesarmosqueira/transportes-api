@@ -71,6 +71,6 @@ public class TruckFleet {
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
     private List<DocumentUnit> documentUnits = new ArrayList<>();
 
-    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "truckFleet", cascade = {CascadeType.PERSIST,CascadeType.PERSIST},fetch = FetchType.LAZY)
     private List<TrackingService> trackingServices = new ArrayList<>();
 }

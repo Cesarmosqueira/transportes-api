@@ -4,16 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.Getter;
@@ -44,10 +35,10 @@ public class Customer {
 	@Column(nullable = false)
 	private Date registerDate;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.LAZY)
 	private List<Rate> rates = new ArrayList<>();
 
 

@@ -34,9 +34,9 @@ public class Route {
     private double gallons;
 
     // Relations
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<ProvinceEstivators> provinceEstivators = new ArrayList<>();
 
-    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "route", cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.LAZY)
     private List<Rate> rates = new ArrayList<>();
 }

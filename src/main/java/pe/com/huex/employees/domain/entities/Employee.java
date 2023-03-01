@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.profile.Fetch;
 import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.security.domain.entities.User;
@@ -110,25 +111,25 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<EmployeeAttendance> attendances = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<EmployeeImplement> employeeImplements = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<EmployeeDiscount> discounts = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<User> users = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
-	@OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "driver", cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
 	private List<TrackingService> driverList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "copilot", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "copilot", cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
 	private List<TrackingService> copilotList = new ArrayList<>();
 
-	@OneToMany(mappedBy = "stevedore", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "stevedore", cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
 	private List<TrackingService> stevedoreList = new ArrayList<>();
 
 }

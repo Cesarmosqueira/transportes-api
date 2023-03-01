@@ -64,7 +64,7 @@ public class Provider {
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     private List<ProvinceEstivators> provinceEstivators = new ArrayList<>();
 
-    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "provider", cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.LAZY)
     private List<TruckFleet> truckFleets = new ArrayList<>();
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
