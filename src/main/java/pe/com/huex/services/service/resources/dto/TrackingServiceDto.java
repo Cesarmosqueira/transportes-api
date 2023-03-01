@@ -16,7 +16,7 @@ import java.util.List;
 public class TrackingServiceDto {
 
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
     private Date dateService;
     private TrackingServiceTruckFleetDto truckFleet;
     private String destinationDetail;
