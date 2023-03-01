@@ -19,7 +19,7 @@ public class ServiceIncidents {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tracking_service_id", nullable = false)
     @JsonIgnore
     private TrackingService trackingService;

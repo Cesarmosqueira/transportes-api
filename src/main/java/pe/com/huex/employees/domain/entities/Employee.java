@@ -119,7 +119,7 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<User> users = new ArrayList<>();
 
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "employee", cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
 	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
 
 	@OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)

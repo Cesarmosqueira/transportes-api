@@ -18,7 +18,7 @@ public class EmployeeDiscount {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
 	@JsonIgnore
 	private Employee employee;

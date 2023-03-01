@@ -31,7 +31,7 @@ public class TrackingService {
     @Column(name = "date_service", nullable = false)
     private Date dateService;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_truck_fleet")
     @JsonIgnore
     private TruckFleet truckFleet;
@@ -63,22 +63,22 @@ public class TrackingService {
     @Column(name = "scheduled_appointment")
     private Date scheduledAppointment;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rate")
     @JsonIgnore
     private Rate rate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_driver")
     @JsonIgnore
     private Employee driver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_copilot")
     @JsonIgnore
     private Employee copilot;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stevedore")
     @JsonIgnore
     private Employee stevedore;

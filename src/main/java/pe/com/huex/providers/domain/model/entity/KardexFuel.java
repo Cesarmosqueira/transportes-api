@@ -23,7 +23,7 @@ public class KardexFuel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_truck_fleet", nullable = false)
     @JsonIgnore
     private TruckFleet truckFleet;

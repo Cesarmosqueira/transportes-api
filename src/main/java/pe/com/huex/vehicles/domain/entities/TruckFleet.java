@@ -21,7 +21,7 @@ public class TruckFleet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_Provider", nullable = false)
     @JsonIgnore
     private Provider provider;

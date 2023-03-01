@@ -32,7 +32,7 @@ public class EmployeeAttendance {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id", nullable = false)
 	@JsonIgnore
 	private Employee employee;

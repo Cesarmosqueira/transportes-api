@@ -21,12 +21,12 @@ public class SettlementSummary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tracking_service_id", nullable = false)
     @JsonIgnore
     private TrackingService trackingService;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "expense_type_id", nullable = false)
     @JsonIgnore
     private ExpenseType expenseType;
