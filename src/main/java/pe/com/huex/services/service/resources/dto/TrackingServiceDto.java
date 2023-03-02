@@ -46,5 +46,4 @@ public class TrackingServiceDto {
     private String documentaryStatus;
     private List<SettlementSummaryDto> settlementSummary;
     private List<ServiceMonitoringDto> serviceMonitoring;
-    private List<ServiceIncidentsDto> serviceIncidents;
 }

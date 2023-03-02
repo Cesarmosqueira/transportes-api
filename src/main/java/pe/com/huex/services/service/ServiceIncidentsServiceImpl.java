@@ -42,7 +42,6 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
 
     private static final String CODE_WARN = "1";
 
-
     private final ServiceIncidentsRepository serviceIncidentsRepository;
 
     private final ServiceIncidentsMapping serviceIncidentsMapping;

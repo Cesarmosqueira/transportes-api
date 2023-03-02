@@ -45,8 +45,5 @@ public class ServiceIncidentsController {
         return serviceIncidentsService.deleteServiceIncidents(id);
     }
 
-    @GetMapping("tracking/{id}")
-    public ResponseDto<ServiceIncidentListResponse> listServiceIncidentByIdTracking(@PathVariable Long id) throws Exception {
-        return serviceIncidentsService.listServiceIncidentByIdTracking(id);
-    }
+
 }
