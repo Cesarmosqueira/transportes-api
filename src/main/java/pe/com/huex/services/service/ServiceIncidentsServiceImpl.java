@@ -57,7 +57,7 @@ public class ServiceIncidentsServiceImpl implements IServiceIncidentsService {
         ResponseDto<ServiceIncidentListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<ServiceIncidents> serviceIncidentsList = serviceIncidentsRepository.findAll();
+            List<ServiceIncidents> serviceIncidentsList = serviceIncidentsRepository.listIncidentService();
 
             if (serviceIncidentsList.isEmpty()) {
                 response.meta(

@@ -10,7 +10,7 @@ import java.util.Date;
 public class ServiceIncidentsDto {
 
     private Long id;
-    private TrackingServiceDto trackingService;
+    private ServiceIncidentsTrackingDto trackingService;
     private String folio;
     private String sku;
     private String nameProduct;
