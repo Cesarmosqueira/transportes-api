@@ -28,5 +28,6 @@ public class ServiceIncidentsDto {
     private String order;
     private String status;
     private Double price;
+    private String chargeIncident;
 
 }

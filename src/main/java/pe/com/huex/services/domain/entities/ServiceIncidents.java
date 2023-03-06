@@ -76,5 +76,8 @@ public class ServiceIncidents {
     @Column(name = "price")
     private Double price;
 
+    @Column(name = "charge_incident",length = 64)
+    private String chargeIncident;
+
 
 }
