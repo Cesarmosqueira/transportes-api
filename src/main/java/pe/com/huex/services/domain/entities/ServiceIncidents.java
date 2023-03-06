@@ -43,7 +43,7 @@ public class ServiceIncidents {
     @Column(name = "damage_type",length = 128)
     private String damageType;
 
-    @Column(name = "motive",length = 128)
+    @Column(name = "motive",length = 255)
     private String motive;
 
     @Column(name = "responsible",length = 128)
@@ -69,6 +69,12 @@ public class ServiceIncidents {
 
     @Column(name = "order",length = 64)
     private String order;
+
+    @Column(name = "status",length = 64)
+    private String status;
+
+    @Column(name = "price")
+    private Double price;
 
 
 }

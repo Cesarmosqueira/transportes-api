@@ -26,4 +26,7 @@ public class ServiceIncidentsDto {
     private String grt;
     private String grr;
     private String order;
+    private String status;
+    private Double price;
+
 }
