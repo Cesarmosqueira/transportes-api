@@ -1,11 +1,8 @@
 package pe.com.huex.services.service.resources.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import pe.com.huex.customer.services.resources.dto.RateDto;
-import pe.com.huex.employees.services.resources.dtos.EmployeeDto;
-import pe.com.huex.vehicles.service.resources.dto.TruckFleetDto;
+
 
 
 import java.math.BigDecimal;
