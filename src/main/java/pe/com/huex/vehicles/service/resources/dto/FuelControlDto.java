@@ -12,7 +12,7 @@ public class FuelControlDto {
 
     private Long id;
 
-    private TrackingServiceDto trackingService;
+    private FuelControlTrackingDto trackingService;
 
     private String firstPlace;
     private Double firstQuantity;
@@ -37,4 +37,6 @@ public class FuelControlDto {
     private Double target;
 
     private Double difference;
+
+    private String observation;
 }

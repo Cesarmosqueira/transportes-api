@@ -62,4 +62,7 @@ public class FuelControl {
     @Column(name = "difference")
     private Double difference;
 
+    @Column(name="observation",length = 255)
+    private String observation;
+
 }
