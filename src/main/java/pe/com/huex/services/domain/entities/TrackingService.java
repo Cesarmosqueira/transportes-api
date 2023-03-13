@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.vehicles.domain.entities.FuelControl;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
@@ -119,4 +120,7 @@ public class TrackingService {
 
     @OneToMany(mappedBy = "TrackingService", cascade = CascadeType.ALL)
     private List<ServiceMonitoring> serviceMonitoring = new ArrayList<>();
+
+    @OneToMany(mappedBy = "trackingService",cascade = CascadeType.ALL)
+    private List<FuelControl> fuelControls=new ArrayList<>();
 }

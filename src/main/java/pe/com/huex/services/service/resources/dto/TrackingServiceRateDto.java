@@ -14,4 +14,5 @@ public class TrackingServiceRateDto {
     private TrackingServiceRouteDto route;
     private String tonNumber;
     private int volume;
+    private String routeDetail;
 }

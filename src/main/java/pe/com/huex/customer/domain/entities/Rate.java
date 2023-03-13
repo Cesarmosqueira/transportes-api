@@ -32,6 +32,9 @@ public class Rate {
     @JsonIgnore
     private Route route;
 
+    @Column(name = "route_detail",length = 128)
+    private String routeDetail;
+
     @Column(nullable = true, length = 64)
     private String leadTime;
 

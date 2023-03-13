@@ -30,4 +30,9 @@ public class MappingConfiguration {
         return new MaintenanceTireMapping();
     }
 
+    @Bean
+    public FuelControlMapping fuelControlMapping(){
+        return new FuelControlMapping();
+    }
+
 }
