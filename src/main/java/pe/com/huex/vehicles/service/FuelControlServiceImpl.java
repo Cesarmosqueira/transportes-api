@@ -55,7 +55,7 @@ public class FuelControlServiceImpl implements IFuelControlService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            List<FuelControl> fuelControlList = fuelControlRepository.findAll();
+            List<FuelControl> fuelControlList = fuelControlRepository.listFuelControlDesc();
 
             if (fuelControlList.isEmpty()) {
                 response.meta(
