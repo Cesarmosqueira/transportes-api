@@ -2,6 +2,7 @@ package pe.com.huex.services.service.resources.response;
 
 import lombok.*;
 import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
+import pe.com.huex.services.service.resources.dto.TrackingServiceLightDto;
 
 import java.util.List;
 

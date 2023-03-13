@@ -3,8 +3,9 @@ package pe.com.huex.services.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.com.huex.services.domain.entities.TrackingServiceLight;
+import pe.com.huex.services.service.resources.response.TrackingServiceListLightResponse;
 import pe.com.huex.util.ResponseDto;
-import pe.com.huex.providers.mapping.ProviderMapping;
 import pe.com.huex.services.domain.entities.TrackingService;
 import pe.com.huex.services.domain.persistence.ITrackingServiceRepository;
 import pe.com.huex.services.domain.service.ITrackingServiceService;
@@ -14,6 +15,9 @@ import pe.com.huex.services.service.resources.response.TrackingServiceListRespon
 import pe.com.huex.services.service.resources.response.TrackingServiceResponse;
 import pe.com.huex.util.MetaDatosUtil;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
@@ -49,13 +53,20 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
     @Autowired
     TrackingServiceMapping trackingServiceMapping;
 
+    @PersistenceContext
+    EntityManager em;
+
+
     @Override
-    public ResponseDto<TrackingServiceListResponse> listTrackingServices() {
-        ResponseDto<TrackingServiceListResponse> response = new ResponseDto<>();
+    @Transactional
+    public ResponseDto<TrackingServiceListLightResponse> listTrackingServices() {
+        ResponseDto<TrackingServiceListLightResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
+            StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("tracking.GetAllTrackingServices");
+            spq.execute();
 
-            List<TrackingService> trackingServiceList = trackingServiceRepository.listTrackingServiceById();
+            List<TrackingServiceLight> trackingServiceList = spq.getResultList();
 
             if (trackingServiceList.isEmpty()) {
                 response.meta(
@@ -67,7 +78,7 @@ public class TrackingServiceServiceImpl implements ITrackingServiceService {
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_TRACKINGSERVICE_SUCCESS, INFO, idTransaccion)
                             .totalRegistros(trackingServiceList.size()));
-            response.setDatos(new TrackingServiceListResponse().trackingServiceList(trackingServiceMapping.modelList(trackingServiceList)));
+            response.setDatos(new TrackingServiceListLightResponse().trackingServiceList(trackingServiceMapping.modelListEspecial(trackingServiceList)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_INQUIRY_TRACKINGSERVICE_WARN + ": " + ex);
