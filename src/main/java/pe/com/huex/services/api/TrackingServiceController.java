@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pe.com.huex.services.service.resources.response.TrackingServiceListLightResponse;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.services.domain.service.ITrackingServiceService;
 import pe.com.huex.services.service.resources.dto.TrackingServiceDto;
@@ -29,7 +30,7 @@ public class TrackingServiceController {
     }
 
     @GetMapping
-    public ResponseDto<TrackingServiceListResponse> listTrackingServices() {
+    public ResponseDto<TrackingServiceListLightResponse> listTrackingServices() {
         return trackingService.listTrackingServices();
     }
 

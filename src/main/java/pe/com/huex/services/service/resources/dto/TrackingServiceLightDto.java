@@ -8,13 +8,13 @@ import java.util.Date;
 
 @Data
 public class TrackingServiceLightDto {
-
     private Long id;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date dateService;
     private String tractPlate;
     private String socialReason;
     private String routeStart;
+    private String routeDetail;
     private String routeEnd;
     private String destinationDetail;
     private Long numberPoints;

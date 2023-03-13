@@ -34,6 +34,8 @@ public class TrackingServiceLight {
     private String routeStart;
     @Column(name = "route_end")
     private String routeEnd;
+    @Column(name = "route_detail")
+    private String routeDetail;
     @Column(name = "destination_detail")
     private String destinationDetail;
     @Column(name = "number_points")
