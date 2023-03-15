@@ -11,4 +11,9 @@ public class MappingConfiguration {
         return new TollMapping();
     }
 
+    @Bean
+    public RouteTollMapping routeTollMapping() {
+        return new RouteTollMapping();
+    }
+
 }
