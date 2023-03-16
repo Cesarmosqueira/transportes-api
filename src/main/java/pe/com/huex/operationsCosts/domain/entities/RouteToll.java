@@ -29,8 +29,8 @@ public class RouteToll {
     @JsonIgnore
     private Toll toll;
 
-    @Column(name = "place",length = 128)
-    private String place;
+    @Column(name = "journey",length = 128)
+    private String journey;
 
 
 

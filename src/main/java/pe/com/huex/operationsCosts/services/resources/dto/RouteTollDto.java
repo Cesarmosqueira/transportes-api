@@ -17,5 +17,5 @@ public class RouteTollDto {
 
     private TollDto toll;
 
-    private String place;
+    private String journey;
 }
