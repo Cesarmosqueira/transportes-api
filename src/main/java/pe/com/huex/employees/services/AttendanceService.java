@@ -14,6 +14,10 @@ import pe.com.huex.util.MetaDatosUtil;
 import pe.com.huex.util.ResponseDto;
 
 import javax.transaction.Transactional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -163,6 +167,34 @@ public class AttendanceService implements IAttendanceService {
 
 		} catch (Exception ex) {
 			log.error(MESSAGE_DELETE_ATTENDANCE_WARN + ": " + ex);
+			throw ex;
+		}
+
+		return response;
+	}
+
+	@Override
+	public ResponseDto<AttendanceListResponse> listEmployeeAttendanceByDate(String startDate, String endDate) throws ParseException {
+		ResponseDto<AttendanceListResponse> response = new ResponseDto<>();
+		try {
+			String idTransaccion = UUID.randomUUID().toString();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDateLocal = formatter.parse(startDate);
+			Date endDateLocal = formatter.parse(endDate);
+			List<EmployeeAttendance> attendanceList = attendanceRepository.listEmployeeAttendanceByDate(startDateLocal, endDateLocal);
+
+			if (attendanceList.isEmpty()) {
+				response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_ATTENDANCE_WARN, WARN, idTransaccion)
+						.totalRegistros(0));
+				return response;
+			}
+
+			response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_ATTENDANCE_SUCCESS, INFO, idTransaccion)
+					.totalRegistros(attendanceList.size()));
+			response.setDatos(new AttendanceListResponse().attendances(attendanceMapping.modelList(attendanceList)));
+
+		} catch (Exception ex) {
+			log.error(MESSAGE_INQUIRY_ATTENDANCE_WARN + ": " + ex);
 			throw ex;
 		}
 

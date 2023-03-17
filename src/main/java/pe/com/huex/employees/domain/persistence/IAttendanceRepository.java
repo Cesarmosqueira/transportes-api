@@ -33,4 +33,7 @@ public interface IAttendanceRepository extends JpaRepository<EmployeeAttendance,
 	@Query(value = "select * from employee_attendance where employee_id = ?1 and date = ?2", nativeQuery = true)
 	Optional<EmployeeAttendance> findByDate(long employeeId, Date date);
 
+	@Query(value = "SELECT * FROM employee_attendance ea WHERE ea.attendance_date BETWEEN ?1 AND ?2 order by ea.attendance_date desc", nativeQuery = true)
+	List<EmployeeAttendance> listEmployeeAttendanceByDate(Date startDate, Date endDate);
+
 }

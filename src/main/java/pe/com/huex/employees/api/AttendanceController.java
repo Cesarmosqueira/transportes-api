@@ -10,6 +10,8 @@ import pe.com.huex.employees.services.resources.response.AttendanceResponse;
 import pe.com.huex.util.ResponseDto;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
 
 @RestController
 @RequestMapping("attendances")
@@ -44,4 +46,8 @@ public class AttendanceController {
 		return attendanceService.deleteAttendance(id);
 	}
 
+	@GetMapping(path = "{startDate}/{endDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseDto<AttendanceListResponse> listEmployeeAttendanceByDate(@PathVariable String startDate, @PathVariable String endDate) throws ParseException {
+		return attendanceService.listEmployeeAttendanceByDate(startDate, endDate);
+	}
 }
