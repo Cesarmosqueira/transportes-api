@@ -33,8 +33,9 @@ public class ServiceIncidents {
     @Column(name = "sku",length = 128)
     private String sku;
 
-    @Column(name = "name_product",length = 255)
+    @Column(name = "name_product",length = 510)
     private String nameProduct;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     @Column(name = "observation_date")

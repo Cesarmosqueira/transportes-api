@@ -30,5 +30,9 @@ public class MappingConfiguration {
     public ServiceMonitoringMapping serviceMonitoringMapping() {
         return new ServiceMonitoringMapping();
     }
+    @Bean
+    public AdditionalServicesMapping additionalServicesMapping() {
+        return new AdditionalServicesMapping();
+    }
 
 }

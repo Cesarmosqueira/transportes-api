@@ -10,5 +10,4 @@ import lombok.*;
 public class TrackingServiceCustomerDto {
     private Long id;
     private String socialReason;
-
 }
