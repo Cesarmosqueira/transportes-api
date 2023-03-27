@@ -2,6 +2,9 @@ package pe.com.huex.providers.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pe.com.huex.providers.domain.model.entity.FuelSupply;
+import pe.com.huex.providers.domain.model.entity.KardexFuelPojo;
+import pe.com.huex.providers.domain.persistence.IFuelSupplyRepository;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.util.MetaDatosUtil;
 import pe.com.huex.providers.domain.model.entity.KardexFuel;
@@ -12,6 +15,9 @@ import pe.com.huex.providers.service.resouces.dto.KardexFuelDto;
 import pe.com.huex.providers.service.resouces.response.KardexFuelListResponse;
 import pe.com.huex.providers.service.resouces.response.KardexFuelResponse;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +46,8 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
     private static final String MESSAGE_DELETE_KARDEXFUEL_SUCCESS = "Se eliminó correctamente el registro combustible";
     private static final String MESSAGE_DELETE_KARDEXFUEL_WARN = "Ocurrió un error al eliminar el registro de combustible";
+
+    private static final String MESSAGE_KARDEXFUEL_SUPPLY_WARN = "La cantidad solicitada excede al disponible";
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -48,9 +56,16 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
     private final KardexFuelMapping kardexFuelMapping;
 
-    public KardexFuelServiceImpl(IKardexFuelRepository kardexFuelRepository, KardexFuelMapping kardexFuelMapping) {
+    private final IFuelSupplyRepository iFuelSupplyRepository;
+
+    @PersistenceContext
+    EntityManager em;
+
+    public KardexFuelServiceImpl(IKardexFuelRepository kardexFuelRepository, KardexFuelMapping kardexFuelMapping,
+                                 IFuelSupplyRepository iFuelSupplyRepository) {
         this.kardexFuelRepository = kardexFuelRepository;
         this.kardexFuelMapping = kardexFuelMapping;
+        this.iFuelSupplyRepository = iFuelSupplyRepository;
     }
 
     @Override
@@ -58,18 +73,20 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
         ResponseDto<KardexFuelListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
+            StoredProcedureQuery spq = em.createNamedStoredProcedureQuery("kardex.getAllKardexFuel");
+            spq.execute();
 
-            List<KardexFuel> kardexFuelList = kardexFuelRepository.findAll();
+            List<KardexFuelPojo> kardexFuelPojoList = spq.getResultList();
 
-            if (kardexFuelList.isEmpty()) {
+            if (kardexFuelPojoList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_KARDEXFUEL_WARN, WARN, idTransaccion)
                         .totalRegistros(0));
                 return response;
             }
 
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_KARDEXFUEL_SUCCESS, INFO, idTransaccion)
-                    .totalRegistros(kardexFuelList.size()));
-            response.setDatos(new KardexFuelListResponse().kardexFuelList(kardexFuelMapping.modelList(kardexFuelList)));
+                    .totalRegistros(kardexFuelPojoList.size()));
+            response.setDatos(new KardexFuelListResponse().kardexFuelList(kardexFuelMapping.modelListPojo(kardexFuelPojoList)));
 
         } catch (Exception ex) {
             log.error(MESSAGE_INQUIRY_KARDEXFUEL_WARN + ": " + ex);
@@ -111,6 +128,20 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
+
+            FuelSupply fuelSupply = iFuelSupplyRepository.getReferenceById(kardexFuelDto.getFuelSupply().getId());
+
+            if (fuelSupply.getFuelQuantity() < kardexFuelDto.getAmountFuel()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_KARDEXFUEL_SUPPLY_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            if ((fuelSupply.getFuelQuantity() - kardexFuelDto.getAmountFuel()) == 0) {
+                fuelSupply.setStatus("T");
+                iFuelSupplyRepository.save(fuelSupply);
+            }
+
             KardexFuel kardexFuel = kardexFuelRepository.save(kardexFuelMapping.model(kardexFuelDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_KARDEXFUEL_SUCCESS, INFO, idTransaccion));
             response.setDatos(new KardexFuelResponse().kardexFuel(kardexFuelMapping.modelDto(kardexFuel)));

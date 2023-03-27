@@ -37,6 +37,14 @@ public class FuelSupply {
     @Column(name = "observation", length = 200)
     private String observation;
 
+    @Column(name = "status", length = 1)
+    private String status;
+
+    @Column(name = "mileage", length = 1)
+    private Long mileage;
+
+    private String name;
+
     @OneToMany(mappedBy = "fuelSupply", cascade = CascadeType.ALL)
     private List<KardexFuel> kardexFuels = new ArrayList<>();
 }

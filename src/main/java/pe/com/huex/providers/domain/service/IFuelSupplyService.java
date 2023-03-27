@@ -7,7 +7,7 @@ import pe.com.huex.providers.service.resouces.response.*;
 public interface IFuelSupplyService {
 
     ResponseDto<FuelSupplyListResponse> listFuelSupply();
-
+    ResponseDto<FuelSupplyListResponse> lisFuelSupplyAvailable();
     ResponseDto<FuelSupplyResponse> retrieveFuelSupply(Long id);
 
     ResponseDto<FuelSupplyResponse> registerFuelSupply(FuelSupplyDto fuelSupplyDto);

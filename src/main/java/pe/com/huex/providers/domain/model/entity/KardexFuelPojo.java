@@ -1,35 +1,35 @@
 package pe.com.huex.providers.domain.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pe.com.huex.providers.domain.model.entity.FuelSupply;
-import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Date;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "kardex_fuel")
-public class KardexFuel {
+@NamedStoredProcedureQuery(
+        name = "kardex.getAllKardexFuel",
+        procedureName = "getAllKardexFuel",
+        resultClasses = {KardexFuelPojo.class},
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, type = void.class)
+        })
+public class KardexFuelPojo {
+
     @Id
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "tractPlate", nullable = false)
     private String tractPlate;
 
-    @ManyToOne
-    @JoinColumn(name = "id_fuel_supply", nullable = false)
-    @JsonIgnore
-    private FuelSupply fuelSupply;
+    @Column(name = "id_fuel_supply", nullable = false)
+    private Long id_fuel_supply;
 
     @Column(name = "date", nullable = false)
     private Date date;
@@ -48,4 +48,7 @@ public class KardexFuel {
 
     @Column(name = "unitPrice", nullable = false)
     private Double unitPrice;
+
+    @Column(name = "balances", nullable = false)
+    private Double balances;
 }

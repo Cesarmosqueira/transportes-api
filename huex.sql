@@ -280,6 +280,8 @@ values (3, 2, 'Mantenimiento Aceite', '/vehicles/maintenance-oil', 'A', '', true
 insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
 values (3, 3, 'Mantenimiento LLantas', '/vehicles/maintenance-tire', 'A', '', true, true, true);
 insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
+values (3, 4, 'Kardex Combustible', '/vehicles/kardex-fuel', 'A', '', true, true, true);
+insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
 values (4, 0, 'Clientes', '', 'A', 'mdi-account-group', false, false, false);
 insert into menu (id_parent, id_child, menu_label, menu_link, menu_status, menu_icon, menu_update, menu_delete, menu_create) 
 values (4, 1, 'Rutas clientes', '/customers/route', 'A', '', true, true, true);
@@ -323,6 +325,7 @@ insert into user_menu (id_parent, id_child, id_user) values (3, 0, 1);
 insert into user_menu (id_parent, id_child, id_user) values (3, 1, 1);
 insert into user_menu (id_parent, id_child, id_user) values (3, 2, 1);
 insert into user_menu (id_parent, id_child, id_user) values (3, 3, 1);
+insert into user_menu (id_parent, id_child, id_user) values (3, 4, 1);
 insert into user_menu (id_parent, id_child, id_user) values (4, 0, 1);
 insert into user_menu (id_parent, id_child, id_user) values (4, 1, 1);
 insert into user_menu (id_parent, id_child, id_user) values (4, 2, 1);
@@ -339,7 +342,36 @@ insert into user_menu (id_parent, id_child, id_user) values (6, 2, 1);
 insert into user_menu (id_parent, id_child, id_user) values (6, 3, 1);
 insert into user_menu (id_parent, id_child, id_user) values (6, 4, 1);
 
+INSERT INTO employee (id, academic_qualification, address, bank_account, birth_date, cease_date, childrens, contract_type, criminal_records, current_state, dni, dni_expiration_date, document_type, email, full_name, join_date, kin_full_name, kin_phone_number, kinhood, license_category, license_expiration_date, marital_status, pension_system, phone_number,photo_url ,place_of_birth, role, salary) VALUES ('1', 'UNIVERSIDAD', 'las americas', '12346578', '2023-01-05 19:00:00.000000', '2023-01-11 19:00:00.000000', '0', 'LOCADOR', 'NO REGISTRA', 'LABORANDO', '71535781', '2023-01-13 19:00:00.000000', 'DNI', 'luis.huarcaya@huarcayaexpress.com', 'SUSAN HUARCAYA ILIZARBE', '2023-01-13 19:00:00.000000', 'JUAN HUARCAYA', '9648721', 'PADRE', 'A1', '2023-01-06 19:00:00.000000', 'SOLTERO', 'AFP', '9648741212','123' ,'LIMA', 'ADMINISTRATIVO', '2000');
+INSERT INTO employee (id, academic_qualification, address, bank_account, birth_date, cease_date, childrens, contract_type, criminal_records, current_state, dni, dni_expiration_date, document_type, email, full_name, join_date, kin_full_name, kin_phone_number, kinhood, license_category, license_expiration_date, marital_status, pension_system, phone_number,photo_url ,place_of_birth, role, salary) VALUES ('2', 'UNIVERSIDAD', 'las americas', '12346578', '2023-01-05 19:00:00.000000', '2023-01-11 19:00:00.000000', '0', 'LOCADOR', 'NO REGISTRA', 'LABORANDO', '71535781', '2023-01-13 19:00:00.000000', 'DNI', 'luis.huarcaya@huarcayaexpress.com', 'FRANK HUARCAYA ILIZARBE', '2023-01-13 19:00:00.000000', 'JUAN HUARCAYA', '9648721', 'PADRE', 'A1', '2023-01-06 19:00:00.000000', 'SOLTERO', 'AFP', '9648741212','123' ,'LIMA', 'ADMINISTRATIVO', '2000');
+INSERT INTO employee (id, academic_qualification, address, bank_account, birth_date, cease_date, childrens, contract_type, criminal_records, current_state, dni, dni_expiration_date, document_type, email, full_name, join_date, kin_full_name, kin_phone_number, kinhood, license_category, license_expiration_date, marital_status, pension_system, phone_number,photo_url ,place_of_birth, role, salary) VALUES ('3', 'UNIVERSIDAD', 'las americas', '12346578', '2023-01-05 19:00:00.000000', '2023-01-11 19:00:00.000000', '0', 'LOCADOR', 'NO REGISTRA', 'LABORANDO', '71535781', '2023-01-13 19:00:00.000000', 'DNI', 'luis.huarcaya@huarcayaexpress.com', 'LUIS HUARCAYA ILIZARBE', '2023-01-13 19:00:00.000000', 'JUAN HUARCAYA', '9648721', 'PADRE', 'A1', '2023-01-06 19:00:00.000000', 'SOLTERO', 'AFP', '9648741212','123' ,'LIMA', 'ADMINISTRATIVO', '2000');
 
+INSERT INTO implement (id, description, name) VALUES ('1', 'Tottus', 'casco');
+INSERT INTO implement (id, description, name) VALUES ('2', 'saga', 'pantalon jean');
+INSERT INTO implement (id, description, name) VALUES ('3', 'tottus', 'Zapato de seguridad');
+
+INSERT INTO customer ( bank_account, register_date,ruc, social_reason) VALUES ( 'Conecta', '2023-01-19','123154', 'Conecta');
+INSERT INTO customer (bank_account, register_date,ruc, social_reason) VALUES ( 'Saga falabella', '2023-01-19', '201564561', 'Saga falabella');
+INSERT INTO customer ( bank_account, register_date,ruc, social_reason) VALUES ( 'Tottus', '2023-01-19', '123154','Tottus');
+
+INSERT INTO route (id, distancekm, gallons, route_end, route_start, zone) VALUES ('1', '80', '80', 'trujillo', 'lima', 'norte');
+INSERT INTO route (id, distancekm, gallons, route_end, route_start, zone) VALUES ('2', '120', '120', 'chiclayo', 'lima', 'norte');
+INSERT INTO route (id, distancekm, gallons, route_end, route_start, zone) VALUES ('3', '40', '45', 'ica', 'lima', 'sur');
+
+INSERT INTO rate (id, cost, lead_time, observation_rate, volume, customer_id, route_id) VALUES ('1', '2600', '3', 'na', '80', '1', '1');
+INSERT INTO rate (id, cost, lead_time, observation_rate, volume, customer_id, route_id) VALUES ('2', '3000', '4', 'na', '90', '1', '2');
+INSERT INTO rate (id, cost, lead_time, observation_rate, volume, customer_id, route_id) VALUES ('3', '3400', '4', 'na', '90', '3', '3');
+
+INSERT INTO providers (id, address, admission_date, bank_account, business_name, contact_name, email, observation, phone_number, ruc) VALUES ('1', 'lima', '2023-01-24 19:00:00.000000', '2015485', 'Grupo romero', 'jose romero', 'jose romero', 'na', '954848', '20154848');
+INSERT INTO providers (id, address, admission_date, bank_account, business_name, contact_name, email, observation, phone_number, ruc) VALUES ('2', 'lima', '2023-01-24 19:00:00.000000	', '201548415', 'Grupo Huarcaya', 'Cesar Huarcaya', 'cesar huarcaya', 'na', '9564841', '201542');
+INSERT INTO providers (id, address, admission_date, bank_account, business_name, contact_name, email, observation, phone_number, ruc) VALUES ('3', 'lima', '2023-01-24 19:00:00.000000	', '2154548', 'Kadilsa', 'juan huarcaya', 'juan huarcaya', 'na', '9526489', '20123484');
+
+INSERT INTO truck_fleet (id, axes, brand, fabrication_date, fleet_type, high_wide_long, model, ton_number, tract_plate, van_plate, volume, id_provider) VALUES ('1', '4', 'HINO', '2023-01-25 19:00:00.000000', 'Frio', '219548', 'GH', '14', 'ANE820', 'NA', '90', '2');
+INSERT INTO truck_fleet (id, axes, brand, fabrication_date, fleet_type, high_wide_long, model, ton_number, tract_plate, van_plate, volume, id_provider) VALUES ('2', '4', 'HINO', '2023-01-25 19:00:00.000000', 'Frio', '219548', 'GH', '10', 'B6T705', 'NA', '80', '3');
+INSERT INTO truck_fleet (id, axes, brand, fabrication_date, fleet_type, high_wide_long, model, ton_number, tract_plate, van_plate, volume, id_provider) VALUES ('3', '4', 'HINO', '2023-01-25 19:00:00.000000', 'Frio', '219548', 'GH', '30', 'BAW897', 'AMR987', '120', '1');
+
+insert into users ( id_employee, user_name, password,active)
+values (1,'jgala','$2a$10$gIzVbaRU1nEIny/tZbUfaOBlt1g4kmWLbN7BegNwYfsbGjEgr8lM6',true);
 
 Optional<User> findByUserName(String name);
 	
