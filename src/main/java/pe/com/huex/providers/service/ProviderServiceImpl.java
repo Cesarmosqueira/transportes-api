@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.Provider;
-import pe.com.huex.providers.domain.persistence.ProviderRepository;
+import pe.com.huex.providers.domain.persistence.IProviderRepository;
 import pe.com.huex.providers.domain.service.IProviderService;
 import pe.com.huex.providers.mapping.ProviderMapping;
 import pe.com.huex.providers.service.resouces.dto.ProviderDto;
@@ -44,7 +44,7 @@ public class ProviderServiceImpl implements IProviderService {
     private static final String CODE_WARN = "1";
 
     @Autowired
-    ProviderRepository providerRepository;
+    IProviderRepository IProviderRepository;
 
     @Autowired
     ProviderMapping providerMapping;
@@ -57,7 +57,7 @@ public class ProviderServiceImpl implements IProviderService {
         ResponseDto<ProviderListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<Provider> providerList = providerRepository.findAll();
+            List<Provider> providerList = IProviderRepository.findAll();
 
             if (providerList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_PROVIDERS_WARN, WARN, idTransaccion)
@@ -83,7 +83,7 @@ public class ProviderServiceImpl implements IProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<Provider> providerList = providerRepository.findById(id);
+            Optional<Provider> providerList = IProviderRepository.findById(id);
 
             if (providerList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
@@ -109,7 +109,7 @@ public class ProviderServiceImpl implements IProviderService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            Provider providerResponse = providerRepository.save(providerMapping.model(providerDto));
+            Provider providerResponse = IProviderRepository.save(providerMapping.model(providerDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVIDERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderResponse().provider(providerMapping.modelDto(providerResponse)));
         } catch (Exception ex) {
@@ -127,7 +127,7 @@ public class ProviderServiceImpl implements IProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<Provider> providerResponse = providerRepository.findById(providerDto.getId());
+            Optional<Provider> providerResponse = IProviderRepository.findById(providerDto.getId());
 
             if (providerResponse.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_RETRIEVE_PROVIDERS_WARN, WARN, idTransaccion)
@@ -135,7 +135,7 @@ public class ProviderServiceImpl implements IProviderService {
                 return response;
             }
 
-            providerRepository.save(providerMapping.model(providerDto));
+            IProviderRepository.save(providerMapping.model(providerDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVIDERS_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProviderResponse().provider(providerDto));
 
@@ -153,7 +153,7 @@ public class ProviderServiceImpl implements IProviderService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            providerRepository.deleteById(id);
+            IProviderRepository.deleteById(id);
 
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVIDERS_SUCCESS, INFO, idTransaccion)

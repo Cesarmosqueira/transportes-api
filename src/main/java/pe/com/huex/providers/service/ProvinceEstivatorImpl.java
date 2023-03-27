@@ -3,11 +3,9 @@ package pe.com.huex.providers.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.com.huex.customer.domain.entities.Rate;
-import pe.com.huex.customer.services.resources.response.RateResponse;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
-import pe.com.huex.providers.domain.persistence.ProvinceEstivatorRepository;
+import pe.com.huex.providers.domain.persistence.IProvinceEstivatorRepository;
 import pe.com.huex.providers.domain.service.IProvinceEstivatorService;
 import pe.com.huex.providers.mapping.ProvinceEstivatorMapping;
 import pe.com.huex.providers.service.resouces.dto.ProvinceEstivatorDto;
@@ -44,7 +42,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
     private static final String CODE_WARN = "1";
 
     @Autowired
-    ProvinceEstivatorRepository provinceEstivatorRepository;
+    IProvinceEstivatorRepository IProvinceEstivatorRepository;
 
     @Autowired
     ProvinceEstivatorMapping provinceEstivatorMapping;
@@ -54,7 +52,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
         ResponseDto<ProvinceEstivatorListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<ProvinceEstivators> provinceEstivatorsList = provinceEstivatorRepository.findAll();
+            List<ProvinceEstivators> provinceEstivatorsList = IProvinceEstivatorRepository.findAll();
 
             if (provinceEstivatorsList.isEmpty()) {
                 response.meta(MetaDatosUtil
@@ -83,7 +81,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<ProvinceEstivators> provinceEstivatorsList = provinceEstivatorRepository.findById(id);
+            Optional<ProvinceEstivators> provinceEstivatorsList = IProvinceEstivatorRepository.findById(id);
 
             if (provinceEstivatorsList.isEmpty()) {
                 response.meta(MetaDatosUtil
@@ -113,7 +111,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            ProvinceEstivators provinceEstivatorsResponse = provinceEstivatorRepository.save(provinceEstivatorMapping.model(provinceEstivatorDto));
+            ProvinceEstivators provinceEstivatorsResponse = IProvinceEstivatorRepository.save(provinceEstivatorMapping.model(provinceEstivatorDto));
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_PROVINCE_ESTIVATOR_SUCCESS, INFO, idTransaccion));
             response.setDatos(new ProvinceEstivatorResponse().provinceEstivator(provinceEstivatorMapping.modelDto(provinceEstivatorsResponse)));
@@ -132,7 +130,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<ProvinceEstivators> provinceEstivatorsResponse = provinceEstivatorRepository
+            Optional<ProvinceEstivators> provinceEstivatorsResponse = IProvinceEstivatorRepository
                     .findById(provinceEstivatorDto.getId());
 
             if (provinceEstivatorsResponse.isEmpty()) {
@@ -142,7 +140,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
                 return response;
             }
 
-            provinceEstivatorRepository.save(provinceEstivatorMapping.model(provinceEstivatorDto));
+            IProvinceEstivatorRepository.save(provinceEstivatorMapping.model(provinceEstivatorDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_PROVINCE_ESTIVATOR_SUCCESS, INFO,
                     idTransaccion));
             response.setDatos(
@@ -162,7 +160,7 @@ public class ProvinceEstivatorImpl implements IProvinceEstivatorService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            provinceEstivatorRepository.deleteById(id);
+            IProvinceEstivatorRepository.deleteById(id);
 
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_RETRIEVE_PROVINCE_ESTIVATOR_SUCCESS, INFO, idTransaccion)

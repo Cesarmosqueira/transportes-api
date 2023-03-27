@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pe.com.huex.providers.domain.model.entity.ProvinceEstivators;
 
 @Repository
-public interface ProvinceEstivatorRepository extends JpaRepository<ProvinceEstivators,Long> {
+public interface IProvinceEstivatorRepository extends JpaRepository<ProvinceEstivators,Long> {
 }

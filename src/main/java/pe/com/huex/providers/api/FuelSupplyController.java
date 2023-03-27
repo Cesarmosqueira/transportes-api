@@ -42,5 +42,9 @@ public class FuelSupplyController {
     public ResponseDto deleteFuelSupply(@PathVariable Long id) {
         return fuelSupplyService.deleteFuelSupply(id);
     }
-    
+
+    @GetMapping(path = "available")
+    public ResponseDto<FuelSupplyListResponse> lisFuelSupplyAvailable() {
+        return fuelSupplyService.lisFuelSupplyAvailable();
+    }
 }

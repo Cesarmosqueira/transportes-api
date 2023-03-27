@@ -7,7 +7,7 @@ import pe.com.huex.providers.domain.model.entity.Provider;
 import java.util.List;
 
 @Repository
-public interface ProviderRepository extends JpaRepository<Provider, Long> {
+public interface IProviderRepository extends JpaRepository<Provider, Long> {
     List<Provider> findAll();
 
     Provider findById(int id);

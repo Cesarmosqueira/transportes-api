@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pe.com.huex.util.ResponseDto;
 import pe.com.huex.providers.domain.model.entity.TireReplacement;
-import pe.com.huex.providers.domain.persistence.TireReplacementRepository;
+import pe.com.huex.providers.domain.persistence.ITireReplacementRepository;
 import pe.com.huex.providers.domain.service.ITireReplacementService;
 import pe.com.huex.providers.mapping.TireReplacementMapping;
 import pe.com.huex.providers.service.resouces.dto.TireReplacementDto;
@@ -42,12 +42,12 @@ public class TireReplacementImpl implements ITireReplacementService {
 
     private final TireReplacementMapping tireReplacementMapping;
 
-    private final TireReplacementRepository tireReplacementRepository;
+    private final ITireReplacementRepository ITireReplacementRepository;
 
     public TireReplacementImpl(TireReplacementMapping tireReplacementMapping,
-            TireReplacementRepository tireReplacementRepository) {
+            ITireReplacementRepository ITireReplacementRepository) {
         this.tireReplacementMapping = tireReplacementMapping;
-        this.tireReplacementRepository = tireReplacementRepository;
+        this.ITireReplacementRepository = ITireReplacementRepository;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class TireReplacementImpl implements ITireReplacementService {
         ResponseDto<TireReplacementListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<TireReplacement> tireReplacementList = tireReplacementRepository.findAll();
+            List<TireReplacement> tireReplacementList = ITireReplacementRepository.findAll();
 
             if (tireReplacementList.isEmpty()) {
                 response.meta(MetaDatosUtil
@@ -84,7 +84,7 @@ public class TireReplacementImpl implements ITireReplacementService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<TireReplacement> tireReplacementList = tireReplacementRepository.findById(id);
+            Optional<TireReplacement> tireReplacementList = ITireReplacementRepository.findById(id);
 
             if (tireReplacementList.isEmpty()) {
                 response.meta(MetaDatosUtil
@@ -113,7 +113,7 @@ public class TireReplacementImpl implements ITireReplacementService {
 
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            TireReplacement tireReplacementResponse = tireReplacementRepository
+            TireReplacement tireReplacementResponse = ITireReplacementRepository
                     .save(tireReplacementMapping.model(tireReplacementDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_REGISTER_TIRE_REPLACEMENT_SUCCESS, INFO,
                     idTransaccion));
@@ -134,7 +134,7 @@ public class TireReplacementImpl implements ITireReplacementService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            Optional<TireReplacement> tireReplacementResponse = tireReplacementRepository
+            Optional<TireReplacement> tireReplacementResponse = ITireReplacementRepository
                     .findById(tireReplacementDto.getId());
 
             if (tireReplacementResponse.isEmpty()) {
@@ -144,7 +144,7 @@ public class TireReplacementImpl implements ITireReplacementService {
                 return response;
             }
 
-            tireReplacementRepository.save(tireReplacementMapping.model(tireReplacementDto));
+            ITireReplacementRepository.save(tireReplacementMapping.model(tireReplacementDto));
             response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO,
                     idTransaccion));
             response.setDatos(new TireReplacementResponse().tireReplacement(tireReplacementDto));
@@ -163,7 +163,7 @@ public class TireReplacementImpl implements ITireReplacementService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            tireReplacementRepository.deleteById(id);
+            ITireReplacementRepository.deleteById(id);
 
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_UPDATE_TIRE_REPLACEMENT_SUCCESS, INFO, idTransaccion)

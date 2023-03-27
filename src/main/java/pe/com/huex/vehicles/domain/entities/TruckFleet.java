@@ -57,9 +57,6 @@ public class TruckFleet {
     private String fleetType;
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
-    private List<KardexFuel> kardexFuels = new ArrayList<>();
-
-    @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)
     private List<CheckList> checkLists = new ArrayList<>();
 
     @OneToMany(mappedBy = "truckFleet", cascade = CascadeType.ALL)

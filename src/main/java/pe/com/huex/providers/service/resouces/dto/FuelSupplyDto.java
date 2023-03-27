@@ -22,9 +22,13 @@ public class FuelSupplyDto {
 
     private Double gallonPrice;
 
-
-
     private String observation;
 
+    private String status;
 
+    private Long mileage;
+
+    private String dutyManager;
+
+    private String name;
 }
