@@ -42,4 +42,6 @@ public class TrackingServiceLightDto {
     private String documentaryStatus;
     private String tonNumber;
     private int volume;
+    private String expenseStatus;
+
 }

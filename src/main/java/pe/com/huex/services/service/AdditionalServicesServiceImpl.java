@@ -58,7 +58,7 @@ public class AdditionalServicesServiceImpl  implements IAdditionalServicesServic
         ResponseDto<AdditionalServicesListResponse> response = new ResponseDto<>();
         try {
             String idTransaccion = UUID.randomUUID().toString();
-            List<AdditionalServices> additionalServicesList = additionalServicesRepository.findAll();
+            List<AdditionalServices> additionalServicesList = additionalServicesRepository.listAdditionalServiceDesc();
 
             if (additionalServicesList.isEmpty()) {
                 response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_ADDITIONAL_SERVICES_WARN, WARN, idTransaccion)

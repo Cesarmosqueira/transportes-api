@@ -41,6 +41,8 @@ public class TrackingServiceDto {
     private String invoiced;
     private String charge;
     private String documentaryStatus;
+    private String expenseStatus;
+
     private List<SettlementSummaryDto> settlementSummary;
     private List<ServiceMonitoringDto> serviceMonitoring;
 }

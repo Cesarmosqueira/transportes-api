@@ -80,4 +80,6 @@ public class TrackingServiceLight {
     private String tonNumber;
     @Column(name = "volume")
     private int volume;
+    @Column(name = "expense_status")
+    private String expenseStatus;
 }

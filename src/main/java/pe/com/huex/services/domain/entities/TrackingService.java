@@ -112,6 +112,9 @@ public class TrackingService {
     @Column(name = "documentary_status", length = 128)
     private String documentaryStatus;
 
+    @Column(name = "expense_status",length = 128)
+    private String expenseStatus;
+
     @OneToMany(mappedBy = "trackingService", cascade = CascadeType.ALL)
     private List<SettlementSummary> settlementSummaries = new ArrayList<>();
 
