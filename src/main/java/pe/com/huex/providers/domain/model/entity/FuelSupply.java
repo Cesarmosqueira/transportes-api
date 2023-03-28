@@ -37,10 +37,10 @@ public class FuelSupply {
     @Column(name = "observation", length = 200)
     private String observation;
 
-    @Column(name = "status", length = 1)
+    @Column(name = "status", length = 128)
     private String status;
 
-    @Column(name = "mileage", length = 1)
+    @Column(name = "mileage")
     private Long mileage;
 
     private String name;

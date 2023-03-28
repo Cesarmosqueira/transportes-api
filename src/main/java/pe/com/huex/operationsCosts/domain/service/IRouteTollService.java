@@ -5,6 +5,8 @@ import pe.com.huex.operationsCosts.services.resources.response.RouteTollListResp
 import pe.com.huex.operationsCosts.services.resources.response.RouteTollResponse;
 import pe.com.huex.util.ResponseDto;
 
+import java.util.List;
+
 public interface IRouteTollService {
 
     ResponseDto<RouteTollListResponse> RouteTollList();
@@ -14,5 +16,7 @@ public interface IRouteTollService {
     ResponseDto<RouteTollResponse> registerRouteToll(RouteTollDto routeTollDto);
     ResponseDto<RouteTollResponse> updateRouteToll(RouteTollDto routeTollDto);
     ResponseDto deleteRouteToll(Long id);
+
+    List<Object[]>costTollRoute(String route,String configuration);
 
 }

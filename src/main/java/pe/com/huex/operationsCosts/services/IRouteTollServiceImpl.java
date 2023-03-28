@@ -175,4 +175,10 @@ public class IRouteTollServiceImpl implements IRouteTollService {
         }
         return response;
     }
+
+    @Override
+    public List<Object[]> costTollRoute(String route, String configuration) {
+        return routeTollRepository.costTollRoute(route,configuration);
+    }
+
 }
