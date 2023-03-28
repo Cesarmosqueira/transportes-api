@@ -14,9 +14,8 @@ import pe.com.huex.vehicles.service.resources.response.DocumentUnitListResponse;
 import pe.com.huex.vehicles.service.resources.response.DocumentUnitResponse;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static pe.com.huex.util.MensajeServicio.TipoEnum.INFO;
 import static pe.com.huex.util.MensajeServicio.TipoEnum.WARN;
@@ -185,6 +184,76 @@ public class DocumentUnitServiceImp implements IDocumentUnitService {
 
         } catch (Exception ex) {
             log.error(MESSAGE_DELETE_DOCUMENTUNIT_WARN + ": " + ex);
+            throw ex;
+        }
+
+        return response;
+    }
+
+    public ResponseDto<DocumentUnitListResponse> listDocumentUnitsExpiration() {
+        ResponseDto<DocumentUnitListResponse> response = new ResponseDto<>();
+        try {
+            String idTransaccion = UUID.randomUUID().toString();
+
+            List<DocumentUnit> documentUnitList = documentsUnitRepository.findAll();
+
+            if (documentUnitList.isEmpty()) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_INQUIRY_DOCUMENTUNIT_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
+            List<DocumentUnit> documentUnitListExpiration = new ArrayList<>();
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, 1);
+            Date actualDate = cal.getTime();
+
+            documentUnitList.forEach(doc -> {
+                DocumentUnit documentUnit = new DocumentUnit();
+                documentUnit.setTruckFleet(doc.getTruckFleet());
+                boolean register = false;
+                if(doc.getExpirationPolicy().before(actualDate)){
+                    documentUnit.setExpirationPolicy(doc.getExpirationPolicy());
+                    register = true;
+                }
+
+                if(doc.getFireExtinguisherExpiration().before(actualDate)){
+                    documentUnit.setFireExtinguisherExpiration(doc.getFireExtinguisherExpiration());
+                    register = true;
+                }
+
+                if(doc.getFirstAidKitExpiration().before(actualDate)){
+                    documentUnit.setFirstAidKitExpiration(doc.getFirstAidKitExpiration());
+                    register = true;
+                }
+
+                if(doc.getMtcExpiration().before(actualDate)){
+                    documentUnit.setMtcExpiration(doc.getMtcExpiration());
+                    register = true;
+                }
+
+                if(doc.getSoatExpiration().before(actualDate)){
+                    documentUnit.setSoatExpiration(doc.getSoatExpiration());
+                    register = true;
+                }
+
+                if(doc.getTechnicalReviewExpiration().before(actualDate)){
+                    documentUnit.setTechnicalReviewExpiration(doc.getTechnicalReviewExpiration());
+                    register = true;
+                }
+
+                if(register){
+                    documentUnitListExpiration.add(documentUnit);
+                }
+            } );
+
+            response.meta(MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_INQUIRY_DOCUMENTUNIT_SUCCESS, INFO, idTransaccion)
+                    .totalRegistros(documentUnitList.size()));
+            response.setDatos(new DocumentUnitListResponse().documentUnitList(documentUnitMapping.modelList(documentUnitListExpiration)));
+
+        } catch (Exception ex) {
+            log.error(MESSAGE_INQUIRY_DOCUMENTUNIT_WARN + ": " + ex);
             throw ex;
         }
 

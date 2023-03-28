@@ -20,4 +20,6 @@ public interface IDocumentUnitService {
     ResponseDto<DocumentUnitResponse> updateDocumentUnit(DocumentUnitDto documentUnitDto) throws IOException;
 
     ResponseDto deleteDocumentUnit(Long id);
+
+    ResponseDto<DocumentUnitListResponse> listDocumentUnitsExpiration();
 }

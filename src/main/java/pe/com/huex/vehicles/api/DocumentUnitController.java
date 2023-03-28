@@ -44,4 +44,10 @@ public class DocumentUnitController {
     public ResponseDto listDocumentUnitsByIdTruckFleet(@PathVariable Long id) {
         return documentUnitService.listDocumentUnitsByIdTruckFleet(id);
     }
+
+    @GetMapping(path = "expiration")
+    public ResponseDto<DocumentUnitListResponse> listDocumentUnitsExpiration() {
+        return documentUnitService.listDocumentUnitsExpiration();
+    }
+
 }
