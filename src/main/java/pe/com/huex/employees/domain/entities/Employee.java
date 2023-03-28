@@ -15,6 +15,7 @@ import pe.com.huex.customer.domain.entities.CustomerEmployee;
 import pe.com.huex.customer.domain.entities.Rate;
 import pe.com.huex.security.domain.entities.User;
 import pe.com.huex.services.domain.entities.TrackingService;
+import pe.com.huex.vehicles.domain.entities.MaintenanceOil;
 
 @Getter
 @Setter
@@ -122,6 +123,9 @@ public class Employee {
 
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<CustomerEmployee> customerEmployees = new ArrayList<>();
+
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<MaintenanceOil> maintenanceOil = new ArrayList<>();
 
 	@OneToMany(mappedBy = "driver", cascade = {CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
 	private List<TrackingService> driverList = new ArrayList<>();

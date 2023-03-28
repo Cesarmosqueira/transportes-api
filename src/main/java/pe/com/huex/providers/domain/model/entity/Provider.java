@@ -2,6 +2,7 @@ package pe.com.huex.providers.domain.model.entity;
 
 import lombok.*;
 import pe.com.huex.employees.domain.entities.ProviderDiscount;
+import pe.com.huex.vehicles.domain.entities.MaintenanceOil;
 import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import javax.persistence.*;
@@ -72,6 +73,9 @@ public class Provider {
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     private List<FuelSupply> fuelSupply = new ArrayList<>();
+
+    @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<MaintenanceOil> maintenanceOil = new ArrayList<>();
 
     @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
     private List<ProviderDiscount> providerDiscount = new ArrayList<>();

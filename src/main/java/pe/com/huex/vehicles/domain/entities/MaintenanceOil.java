@@ -2,20 +2,31 @@ package pe.com.huex.vehicles.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import pe.com.huex.employees.domain.entities.Employee;
+import pe.com.huex.providers.domain.model.entity.Provider;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "maintenance_oil")
 public class MaintenanceOil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_provider")
+    @JsonIgnore
+    private Provider provider;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_employee")
+    @JsonIgnore
+    private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_truck_fleet", nullable = false)
@@ -48,5 +59,8 @@ public class MaintenanceOil {
 
     @Column(name = "differences")
     private Integer differences;
+
+    @Column(name = "change_km")
+    private Double changeKm;
 
 }
