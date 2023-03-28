@@ -7,7 +7,8 @@ import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "documents_units")

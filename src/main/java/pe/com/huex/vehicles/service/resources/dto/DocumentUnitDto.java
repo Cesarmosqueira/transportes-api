@@ -5,8 +5,7 @@ import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 public class DocumentUnitDto {
     private Long id;
     private TruckFleetDto truckFleet;
