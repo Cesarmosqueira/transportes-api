@@ -48,6 +48,9 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
     private static final String MESSAGE_DELETE_KARDEXFUEL_WARN = "Ocurrió un error al eliminar el registro de combustible";
 
     private static final String MESSAGE_KARDEXFUEL_SUPPLY_WARN = "La cantidad solicitada excede al disponible";
+
+    private static final String MESSAGE_DELETE_ADD_WARN = "No se puede eliminar un ingreso de combustible";
+
     private static final String CODE_SUCCESS = "0";
 
     private static final String CODE_WARN = "1";
@@ -186,7 +189,21 @@ public class KardexFuelServiceImpl implements IKardexFuelService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
+            KardexFuel kardexFuel = kardexFuelRepository.findById(id).get();
+
+            if ("I".equals(kardexFuel.getOperation())) {
+                response.meta(MetaDatosUtil.buildMetadatos(CODE_WARN, MESSAGE_DELETE_ADD_WARN, WARN, idTransaccion)
+                        .totalRegistros(0));
+                return response;
+            }
+
             kardexFuelRepository.deleteById(id);
+
+            FuelSupply fuelSupply = iFuelSupplyRepository.findById(kardexFuel.getFuelSupply().getId()).get();
+
+            fuelSupply.setStatus("D");
+
+            iFuelSupplyRepository.save(fuelSupply);
 
             response.meta(
                     MetaDatosUtil.buildMetadatos(CODE_SUCCESS, MESSAGE_DELETE_KARDEXFUEL_SUCCESS, INFO, idTransaccion)
