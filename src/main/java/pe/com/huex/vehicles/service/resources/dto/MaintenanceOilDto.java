@@ -30,4 +30,6 @@ public class MaintenanceOilDto {
     private Date dateCurrent;
     private Integer differences;
     private Double changeKm;
+    private Double kmChangeMade;
+
 }

@@ -62,5 +62,7 @@ public class MaintenanceOil {
 
     @Column(name = "change_km")
     private Double changeKm;
+    @Column(name = "km_change_made")
+    private Double kmChangeMade;
 
 }
