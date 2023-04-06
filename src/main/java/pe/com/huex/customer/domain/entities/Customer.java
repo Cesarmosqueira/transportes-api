@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pe.com.huex.customer.services.resources.dto.CustomerDto;
+import pe.com.huex.warehouse.domain.model.entity.InvoicedProduct;
 
 @Getter
 @Setter
@@ -40,6 +41,9 @@ public class Customer {
 
 	@OneToMany(mappedBy = "customer", cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.LAZY)
 	private List<Rate> rates = new ArrayList<>();
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<InvoicedProduct> invoicedProducts = new ArrayList<>();
 
 
 

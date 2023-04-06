@@ -18,6 +18,7 @@ public class TruckFleetController {
 
     @GetMapping
     public ResponseDto<TruckFleetListResponse> listTruckFleets() {
+
         return truckFleetService.listTruckFleets();
     }
 

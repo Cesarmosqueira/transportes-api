@@ -1,20 +1,10 @@
 package pe.com.huex.employees.services.resources.dtos;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import pe.com.huex.customer.domain.entities.CustomerEmployee;
-import pe.com.huex.employees.domain.entities.Employee;
-import pe.com.huex.employees.domain.entities.EmployeeAttendance;
-import pe.com.huex.employees.domain.entities.EmployeeDiscount;
-import pe.com.huex.employees.domain.entities.EmployeeImplement;
-import pe.com.huex.security.domain.entities.User;
 
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 
 @Getter
 @Setter
@@ -33,6 +23,7 @@ public class EmployeeDto {
 	private String phoneNumber;
 	private String email;
 	private Date joinDate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
 	private Date ceaseDate;
 	private String bankAccount;
 	private String contractType;
