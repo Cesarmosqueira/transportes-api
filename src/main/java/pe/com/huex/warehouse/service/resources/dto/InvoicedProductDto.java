@@ -14,7 +14,6 @@ import java.util.Date;
 public class InvoicedProductDto {
 
     private Long id;
-
     private CustomerDto customer;
     private String productDescription;
     private Double unitsStock;

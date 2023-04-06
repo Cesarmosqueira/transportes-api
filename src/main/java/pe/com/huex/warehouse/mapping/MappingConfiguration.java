@@ -9,4 +9,11 @@ public class MappingConfiguration {
     public InvoicedProductMapping invoicedProductMapping() {
         return new InvoicedProductMapping();
     }
+
+    @Bean
+    public OrderDetailMapping orderDetailMapping() {
+        return new OrderDetailMapping();
+    }
+
+
 }

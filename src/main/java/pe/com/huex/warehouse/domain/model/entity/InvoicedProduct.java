@@ -15,16 +15,16 @@ import java.util.Date;
 @Entity
 @Table(name = "invoiced_product")
 public class InvoicedProduct {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id",nullable = false)
     @JsonIgnore
     private Customer customer;
 
-    @Column(name = "product_description",length = 128,nullable = false)
+    @Column(name = "product_description",length = 128)
     private String productDescription;
 
     @Column(name = "units_stock")
@@ -32,10 +32,13 @@ public class InvoicedProduct {
 
     @Column(name = "grr",length = 128)
     private String grr;
+
     @Column(name = "invoice",length = 128)
     private String invoice;
+
     @Column(name = "admission_date")
     private Date admissionDate;
+
     @Column(name = "price_sale")
     private Double priceSale;
 
