@@ -58,7 +58,7 @@ public class MaintenanceOilServiceImpl implements IMaintenanceOilService {
         try {
             String idTransaccion = UUID.randomUUID().toString();
 
-            List<MaintenanceOil> maintenanceOilList = maintenanceOilRepository.findAll();
+            List<MaintenanceOil> maintenanceOilList = maintenanceOilRepository.listMaintenanceOilDesc();
 
             if (maintenanceOilList.isEmpty()) {
                 response.meta(MetaDatosUtil

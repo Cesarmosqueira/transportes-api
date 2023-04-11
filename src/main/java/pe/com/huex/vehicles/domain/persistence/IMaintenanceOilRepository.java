@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pe.com.huex.vehicles.domain.entities.MaintenanceOil;
+import pe.com.huex.vehicles.domain.entities.TruckFleet;
 
 import java.util.List;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public interface IMaintenanceOilRepository extends JpaRepository<MaintenanceOil, Long> {
 
     List<MaintenanceOil> findAll();
+
+    @Query(value = "SELECT * FROM maintenance_oil mo  order by mo.date_change desc", nativeQuery = true)
+    List<MaintenanceOil> listMaintenanceOilDesc();
 
     MaintenanceOil findById(int id);
 
